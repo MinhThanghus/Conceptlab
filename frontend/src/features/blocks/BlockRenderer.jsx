@@ -1,7 +1,7 @@
 import { Component, Suspense } from 'react'
 import { MessageCircleQuestion } from 'lucide-react'
 import { useT } from '../../i18n/index.jsx'
-import { AIBadge, Alert, LoadingBlock } from '../../components/ui/index.js'
+import { AIBadge, Alert, InlineText, LoadingBlock } from '../../components/ui/index.js'
 import { BLOCK_REGISTRY } from './registry.js'
 import { useBlockEnv } from './BlockEnv.jsx'
 import { SourceRefChips } from '../sources/SourceRefChips.jsx'
@@ -88,7 +88,7 @@ export function BlockFrame({ block, children, actions, headingLevel = 2 }) {
           </div>
         ) : null}
       </div>
-      {block.description ? <p className="blk-desc">{block.description}</p> : null}
+      {block.description ? <p className="blk-desc"><InlineText text={block.description} /></p> : null}
       {children}
       {block.source_refs?.length && !env.sourcesAtTop ? (
         <div className="blk-sources">

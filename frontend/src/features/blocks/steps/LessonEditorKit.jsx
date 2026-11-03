@@ -2,7 +2,7 @@ import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 import { ArrowDown, ArrowUp, BookOpen, ChevronDown, Pencil, Plus, Search, Trash2 } from 'lucide-react'
 import { useT } from '../../../i18n/index.jsx'
 import { post } from '../../../lib/api.js'
-import { AIBadge, Button, Checkbox, ErrorMessage, IconButton, LocatedBadge, SelectField, TextArea, TextField } from '../../../components/ui/index.js'
+import { AIBadge, Button, Checkbox, ErrorMessage, IconButton, InlineText, LocatedBadge, SelectField, TextArea, TextField } from '../../../components/ui/index.js'
 import { useBlockEnv } from '../BlockEnv.jsx'
 import { LIMITS, clamp, cut, formatClock, manualLocated, parseClock, parseDecimal, pictureOptions, pictureValue, unionBox } from './lessonKit.js'
 import './lesson.css'
@@ -128,7 +128,7 @@ export function EditorItem({ id, index, count, title, emptyTitle, open, onToggle
           <span className="lk-num" aria-hidden="true">
             {index + 1}
           </span>
-          <span className={['lk-item-title', title ? '' : 'is-empty'].join(' ')}>{title || emptyTitle}</span>
+          <span className={['lk-item-title', title ? '' : 'is-empty'].join(' ')}>{title ? <InlineText text={title} /> : emptyTitle}</span>
           <ChevronDown size={18} aria-hidden="true" />
         </button>
         {flags ? <span className="lk-flags">{flags}</span> : null}

@@ -78,6 +78,11 @@ function renderInline(text, opts = {}, keyBase = 'i') {
   })
 }
 
+/** One line of rich text inside a sentence (a byline, a caption): **bold**, $math$, `code`, no blocks. */
+export function InlineText({ text, className }) {
+  return <span className={className}>{renderInline(String(text || '').replace(/\s*\n\s*/g, ' '))}</span>
+}
+
 /**
  * Safe "markdown-lite" renderer for AI and teacher text: paragraphs, bullet/numbered
  * lists, ### headings, **bold**, *italic*, `code`, $inline math$, $$display math$$,

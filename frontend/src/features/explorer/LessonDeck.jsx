@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, Expand, List, MessageCircle, MessageCircleQuestion, MessageSquareHeart, Minimize, RotateCcw } from 'lucide-react'
-import { AIBadge, Button, Dialog, LoadingBlock, ProvenanceBadge, RichText } from '../../components/ui/index.js'
+import { AIBadge, Button, Dialog, InlineText, LoadingBlock, ProvenanceBadge, RichText } from '../../components/ui/index.js'
 import { useT } from '../../i18n/index.jsx'
 import { BlockRenderer } from '../blocks/BlockRenderer.jsx'
 import { useBlockEnv } from '../blocks/BlockEnv.jsx'
@@ -459,7 +459,7 @@ export default function LessonDeck({ lab, blocks, intro, introAside = null, intr
                   <Beads count={heading.beads.count} current={heading.beads.index} visited={heading.beads.visited} />
                   <span className="deck-byline-count">{heading.beads.label}</span>
                 </> : null}
-                {heading.lead ? <span className="deck-byline-text" lang={heading.content ? contentLang : undefined}>{heading.lead}</span> : null}
+                {heading.lead ? <span className="deck-byline-text" lang={heading.content ? contentLang : undefined}><InlineText text={heading.lead} /></span> : null}
                 {heading.hint ? <span className="deck-byline-text">{heading.hint}</span> : null}
                 {heading.ai ? <span className="deck-byline-ai"><AIBadge /></span> : null}
               </p>

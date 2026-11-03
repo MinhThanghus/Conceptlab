@@ -46,4 +46,19 @@ describe('TutorPanel', () => {
     expect(h.get).toHaveBeenLastCalledWith('/api/share/BBB234/chat', expect.anything())
     expect(screen.queryByText('Question about lesson A')).toBeNull()
   })
+
+  it('names a cited source by its title in the lesson’s current language', async () => {
+    h.get = vi.fn(async () => [
+      { id: 'm1', role: 'user', content: 'Does a heavier ball swing more slowly?' },
+      { id: 'm2', role: 'assistant', content: 'No, the period depends on L and g [1].', citations: [{ n: 1, source_id: 's1', title: 'Vật lý 10, Bài 12', located: 'exact' }] },
+    ])
+    render(
+      <I18nProvider>
+        <TutorPanel endpoint="/api/share/AAA234/chat" available keywords={[]} sourceTitles={{ s1: 'Physics 10, Lesson 12' }} />
+      </I18nProvider>,
+    )
+    await act(async () => {})
+    expect(screen.getByRole('button', { name: /Physics 10, Lesson 12/ })).toBeTruthy()
+    expect(screen.queryByText('Vật lý 10, Bài 12')).toBeNull()
+  })
 })

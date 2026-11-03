@@ -15,10 +15,10 @@ function formatClock(seconds) {
 }
 
 /** One citation chip under an answer: opens the source at the cited page/region, or says honestly that the location is unknown. */
-function CitationChip({ citation, onOpen }) {
+function CitationChip({ citation, onOpen, title }) {
   const { t } = useT()
   const located = citation.located || 'none'
-  const parts = [citation.title || t('common.sourceKinds.pdf')]
+  const parts = [title || citation.title || t('common.sourceKinds.pdf')]
   if (citation.page) parts.push(t('tutor.page', { page: citation.page }))
   if (citation.time !== null && citation.time !== undefined) parts.push(formatClock(citation.time))
   const label = parts.join(', ')
@@ -50,7 +50,7 @@ function CitationChip({ citation, onOpen }) {
   )
 }
 
-function AssistantMessage({ message, onOpenSource, onRetry, errorText }) {
+function AssistantMessage({ message, onOpenSource, onRetry, errorText, sourceTitles }) {
   const { t } = useT()
   const citations = message.citations || []
   const streaming = message.status === 'streaming'
@@ -85,7 +85,7 @@ function AssistantMessage({ message, onOpenSource, onRetry, errorText }) {
               <span className="tutor-cites-label">{t('tutor.sources')}</span>
               <div className="tutor-cites-list">
                 {citations.map((c) => (
-                  <CitationChip key={`${c.n}-${c.source_id || 'x'}`} citation={c} onOpen={onOpenSource} />
+                  <CitationChip key={`${c.n}-${c.source_id || 'x'}`} citation={c} onOpen={onOpenSource} title={sourceTitles?.[c.source_id]} />
                 ))}
               </div>
             </div>
@@ -122,6 +122,7 @@ function AssistantMessage({ message, onOpenSource, onRetry, errorText }) {
  *   getReportedStates() live states reported by blocks (blockId → state)
  *   openSource(ref)     open the Sources tab at a citation
  *   keywords            glossary terms to bias speech recognition
+ *   sourceTitles        source id → title in the lesson's current language (citations carry the original title)
  */
 export default function TutorPanel({
   endpoint,
@@ -134,6 +135,7 @@ export default function TutorPanel({
   getReportedStates,
   openSource,
   keywords,
+  sourceTitles,
   suggestions = DEFAULT_SUGGESTIONS,
 }) {
   const { t, lang } = useT()
@@ -439,7 +441,7 @@ export default function TutorPanel({
               </div>
             </div>
           ) : (
-            <AssistantMessage key={message.id} message={message} onOpenSource={openSource} onRetry={retry} errorText={errorText} />
+            <AssistantMessage key={message.id} message={message} onOpenSource={openSource} onRetry={retry} errorText={errorText} sourceTitles={sourceTitles} />
           ),
         )}
       </div>

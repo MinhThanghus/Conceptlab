@@ -291,7 +291,11 @@ export function questionLevel(question) {
 /** Prompt as a one-line title for lists. */
 export function questionTitle(question, max = 140) {
   const text = String(question?.prompt ?? '').replace(/\s+/g, ' ').trim()
-  return text.length > max ? `${text.slice(0, max - 1)}…` : text
+  if (text.length <= max) return text
+  let cut = text.slice(0, max - 1)
+  // never end inside $math$: the title is rendered with its formulas
+  if ((cut.match(/\$/g) || []).length % 2) cut = cut.slice(0, cut.lastIndexOf('$')).trimEnd()
+  return `${cut}…`
 }
 
 /**

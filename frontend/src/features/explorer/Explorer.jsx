@@ -90,6 +90,7 @@ export default function Explorer({ lab, mode = 'shared', headerActions = null, i
   const objectives = useMemo(() => (spec.objectives || []).filter((o) => String(o || '').trim()), [spec.objectives])
   const assumptions = useMemo(() => (spec.assumptions || []).filter((a) => a && String(a.text || '').trim()), [spec.assumptions])
   const sources = useMemo(() => (lab?.sources || []).filter((s) => !s.status || s.status === 'ready'), [lab?.sources])
+  const sourceTitles = useMemo(() => Object.fromEntries(sources.map((s) => [s.id, s.title])), [sources])
   const assets = useMemo(() => lab?.assets || [], [lab?.assets])
   const storeKey = shared ? lab?.share_code : null
   const smallScreen = useMediaQuery('(max-width: 1200px)')
@@ -754,6 +755,7 @@ export default function Explorer({ lab, mode = 'shared', headerActions = null, i
             getReportedStates={getReportedStates}
             openSource={(ref) => openSource(ref, 'tutor')}
             keywords={keywords}
+            sourceTitles={sourceTitles}
             suggestions={suggestions}
           />
         ) : (
