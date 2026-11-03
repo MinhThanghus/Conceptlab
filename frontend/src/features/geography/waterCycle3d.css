@@ -1,0 +1,18 @@
+/* The water cycle cutaway: a studio well (styles/stage3d.css), the five processes as pills, the
+   chosen one explained in a paper-2 well, the view tools as ghost buttons. Tokens only. */
+.water-cycle-host, .water-cycle-fallback { position: absolute; inset: 0; }
+.water-cycle-host canvas { display: block; inline-size: 100%; block-size: 100%; touch-action: pan-y; }
+.water-cycle-fallback { display: grid; place-items: center; padding: var(--space-md); }
+.water-cycle-fallback svg { inline-size: 100%; max-block-size: 100%; }
+.water-cycle-content { display: grid; gap: var(--space-sm); }
+/* the 2D drawing in the same inks as the model */
+.water-cycle-drawing .wc-soil { fill: var(--color-kraft-deep); }
+.water-cycle-drawing .wc-land { fill: var(--color-leaf); }
+.water-cycle-drawing .wc-snow { fill: var(--color-card); }
+.water-cycle-drawing .wc-sea { fill: var(--color-accent-2); }
+.water-cycle-drawing .wc-cloud { fill: var(--color-paper-3); }
+.water-cycle-drawing .wc-rain, .water-cycle-drawing .wc-vapour, .water-cycle-drawing .wc-river, .water-cycle-drawing .wc-seep { fill: none; stroke-linecap: round; }
+.water-cycle-drawing .wc-rain { stroke: var(--color-accent-2); stroke-width: 5; }
+.water-cycle-drawing .wc-vapour { stroke: var(--color-card); stroke-width: 5; }
+.water-cycle-drawing .wc-river { stroke: var(--color-sugar); stroke-width: 8; }
+.water-cycle-drawing .wc-seep { stroke: var(--color-sugar); stroke-width: 5; stroke-dasharray: 5 5; }

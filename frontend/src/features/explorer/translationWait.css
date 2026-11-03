@@ -1,0 +1,26 @@
+/* First machine translation of a shared lesson: one card on the paper, a mint progress line
+   (progress is mint, DESIGN.md), the elapsed time and a way to read the original at once. */
+.tw-page { display: grid; place-items: center; min-block-size: calc(100dvh - var(--cl-header-h) - var(--space-3xl)); }
+.tw-card {
+  inline-size: min(100%, 34rem);
+  display: flex; flex-direction: column; gap: var(--space-md);
+  padding: clamp(var(--space-lg), 4vw, var(--space-xl));
+  border-radius: var(--radius-card);
+  background: var(--grain), var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+.tw-title { margin: 0; font-size: var(--app-h2); font-weight: 600; line-height: 1.25; text-wrap: balance; }
+.tw-body { margin: 0; color: var(--color-ink-2); line-height: 1.55; text-wrap: pretty; }
+.tw-track { position: relative; block-size: 6px; overflow: hidden; border-radius: var(--radius-pill); background: var(--color-paper-3); }
+.tw-track > span {
+  position: absolute; inset-block: 0; inset-inline-start: 0; inline-size: 36%;
+  border-radius: inherit; background: var(--color-mint-deep);
+  animation: tw-run 1.6s var(--ease-in-out) infinite;
+}
+@keyframes tw-run { from { translate: -100% 0; } to { translate: 280% 0; } }
+.tw-elapsed { margin: 0; font-size: var(--text-sm); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.tw-slow { margin: 0; padding: var(--space-sm) var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); color: var(--color-ink-2); line-height: 1.5; }
+.tw-actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+@media (prefers-reduced-motion: reduce) {
+  .tw-track > span { animation: none; inline-size: 100%; opacity: 0.45; }
+}

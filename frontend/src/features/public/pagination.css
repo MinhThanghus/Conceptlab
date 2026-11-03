@@ -1,0 +1,29 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · theme: Hum (locked, DESIGN.md) · built: the project · redesign: full */
+/* Pagination (gallery, My labs, admin tables): a summary, two card-stock steps, the page numbers.
+   The current page is ink with paper type. */
+.pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-sm) var(--space-lg); margin-block-start: var(--space-lg); }
+.pager-summary { margin: 0; font-variant-numeric: tabular-nums; }
+.pager-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+.pager-pages { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs); }
+.pager-step svg { display: none; }
+.pager-page {
+  display: inline-grid; place-items: center; min-inline-size: 2.5rem; min-block-size: 2.5rem; padding: 0 var(--space-xs);
+  border: 0; border-radius: var(--radius-small); background: transparent; color: var(--color-ink-2);
+  font-weight: 600; font-variant-numeric: tabular-nums;
+  transition: background-color var(--dur-micro) var(--ease-snap), color var(--dur-micro) var(--ease-snap);
+}
+.pager-page:hover { background: var(--color-paper-2); color: var(--color-ink); }
+.pager-page:active { background: var(--color-paper-3); }
+.pager-page:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.pager-page.current, .pager-page.current:hover { background: var(--color-ink); color: var(--color-paper); }
+.pager-gap { padding-inline: var(--space-2xs); color: var(--color-muted); }
+@media (max-width: 520px) {
+  .pager { justify-content: center; }
+  .pager-summary { inline-size: 100%; text-align: center; }
+  .pager-text { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .pager-step svg { display: block; }
+  .pager-step { min-inline-size: var(--cl-control-h); padding-inline: 0; }
+}
+@media (pointer: coarse), (max-width: 520px) {
+  .pager-page, .pager-controls .btn-sm { min-inline-size: var(--cl-control-h); min-block-size: var(--cl-control-h); }
+}

@@ -1,0 +1,171 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · system: DESIGN.md (Hum, adapted)
+ * built: the project · redesign: full · video block: card stock controls readable on a classroom projector */
+
+/* Video block (spec §8.3): custom player, observation markers, SAM highlights, compare panel.
+   The stage is ink (letterbox), the controls are card stock, the one pear field is "look at this now". */
+
+.vb-layout { display: grid; gap: var(--space-md); grid-template-columns: minmax(0, 1fr); align-items: start; }
+.vb-layout.has-compare { grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+
+/* ---------------------------------------------------------------- player */
+.vb-player { display: flex; flex-direction: column; gap: var(--space-xs); min-inline-size: 0; }
+.vb-stage {
+  position: relative; inline-size: 100%; max-block-size: min(70dvh, 36rem);
+  background: var(--color-ink); border-radius: var(--radius-stock); overflow: hidden; cursor: pointer;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.vb-stage:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.vb-stage video { display: block; inline-size: 100%; block-size: 100%; object-fit: contain; background: var(--color-ink); }
+.vb-stage.picking { cursor: crosshair; }
+.vb-overlay { position: absolute; pointer-events: none; }
+.vb-stage-hint { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.vb-stage-hint > span {
+  display: grid; place-items: center; inline-size: 4rem; block-size: 4rem; border-radius: 50%;
+  background: var(--color-card); color: var(--color-ink); box-shadow: var(--shadow-card);
+}
+.vb-stage-hint svg { inline-size: 1.75rem; block-size: 1.75rem; margin-inline-start: var(--space-3xs); }
+.vb-stage-chip {
+  position: absolute; inset-block-start: var(--space-xs); inset-inline-start: var(--space-xs); z-index: var(--z-base);
+  display: inline-flex; align-items: center; gap: var(--space-2xs); padding: var(--space-3xs) var(--space-xs); border-radius: var(--radius-small);
+  background: color-mix(in oklab, var(--color-ink) 82%, transparent); color: var(--color-paper);
+  font-size: var(--text-sm); font-weight: 600; font-variant-numeric: tabular-nums; pointer-events: none;
+}
+.vb-stage-chip svg { inline-size: 1rem; block-size: 1rem; }
+.vb-stage-chip.end { inset-inline-start: auto; inset-inline-end: var(--space-xs); }
+.vb-stage-msg {
+  position: absolute; inset: 0; display: grid; place-items: center; padding: var(--space-md); text-align: center;
+  color: var(--color-paper); background: color-mix(in oklab, var(--color-ink) 62%, transparent); pointer-events: none;
+}
+.vb-stage-msg.interactive { pointer-events: auto; }
+.vb-stage-msg .stack-sm { align-items: center; }
+
+/* seek bar: an ink run over a paper groove, marker ticks as pear diamonds above it */
+.vb-seek-wrap { position: relative; padding-block-start: var(--space-md); }
+.vb-seek {
+  --p: 0%;
+  -webkit-appearance: none; appearance: none; display: block; inline-size: 100%; block-size: var(--cl-control-h);
+  margin: 0; background: transparent; cursor: pointer;
+}
+.vb-seek:focus { outline: none; }
+.vb-seek::-webkit-slider-runnable-track {
+  block-size: 0.5rem; border-radius: var(--radius-pill);
+  background: linear-gradient(to right, var(--color-ink-2) 0 var(--p), var(--color-paper-3) var(--p) 100%);
+}
+.vb-seek::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; inline-size: 1.375rem; block-size: 1.375rem; margin-block-start: -0.4375rem;
+  border-radius: 50%; background: var(--color-card); border: 3px solid var(--color-ink); box-shadow: var(--cl-shadow-1);
+}
+.vb-seek::-moz-range-track { block-size: 0.5rem; border-radius: var(--radius-pill); background: var(--color-paper-3); }
+.vb-seek::-moz-range-progress { block-size: 0.5rem; border-radius: var(--radius-pill); background: var(--color-ink-2); }
+.vb-seek::-moz-range-thumb { inline-size: 1rem; block-size: 1rem; border-radius: 50%; background: var(--color-card); border: 3px solid var(--color-ink); box-shadow: var(--cl-shadow-1); }
+.vb-seek:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 2px var(--color-card), 0 0 0 4px var(--color-focus); }
+.vb-seek:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 2px var(--color-card), 0 0 0 4px var(--color-focus); }
+.vb-seek:active::-webkit-slider-thumb { background: var(--color-paper-2); }
+.vb-seek:disabled { cursor: not-allowed; opacity: 0.55; }
+.vb-ticks { position: absolute; inset-block-start: var(--space-xs); inset-inline: 0.6875rem; block-size: 1.125rem; pointer-events: none; }
+.vb-tick {
+  position: absolute; inset-block-start: var(--space-3xs); inset-inline-start: calc(var(--x) * 100%);
+  inline-size: 0.875rem; block-size: 0.875rem; margin-inline-start: -0.4375rem; padding: 0;
+  border: 1.5px solid var(--color-ink); border-radius: 2px; background: var(--color-accent);
+  transform: rotate(45deg); pointer-events: auto; cursor: pointer;
+}
+.vb-tick:hover { box-shadow: 0 0 0 3px var(--color-accent-soft); }
+.vb-tick:active { background: var(--color-accent-deep); }
+.vb-tick.selected { background: var(--color-ink); border-color: var(--color-ink); inline-size: 1rem; block-size: 1rem; margin-inline-start: -0.5rem; }
+.vb-tick.pending { background: var(--color-card); border-style: dashed; border-color: var(--color-accent-2); }
+
+.vb-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-sm); }
+.vb-controls .vb-grow { flex: 1 1 0; min-inline-size: 0; }
+.vb-time { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 1.0625rem; white-space: nowrap; }
+.vb-time .muted { font-weight: 400; }
+.vb-speed { display: flex; align-items: center; gap: var(--space-xs); }
+.vb-speed .segmented button { min-inline-size: var(--cl-control-h); min-block-size: 2.25rem; font-variant-numeric: tabular-nums; }
+/* a pressed toggle (loop) is ink with paper type */
+.btn.vb-toggle[aria-pressed='true'] { --btn-bg: var(--color-ink); --btn-fg: var(--color-paper); --btn-line: transparent; --btn-edge: var(--color-ink-2); }
+.btn.vb-toggle:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.btn.vb-toggle:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* ---------------------------------------------------------------- learner panels */
+/* "look at this now": the one pear field on the screen, a tinted sheet with no border or stripe */
+.vb-observe { border-radius: var(--radius-stock); background: var(--color-accent-soft); padding: var(--space-md); display: flex; flex-direction: column; gap: var(--space-xs); }
+.vb-observe h3 { margin: 0; font-size: var(--app-h4); }
+.vb-observe p { margin: 0; }
+.vb-observe .vb-observe-meta { font-size: var(--text-sm); color: var(--color-ink-2); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+/* the markers: a ruled list, not a stack of cards; the current row is a well with an ink time */
+.vb-markers { list-style: none; margin: 0; padding: 0; border-block-start: 1px solid var(--color-rule); }
+.vb-markers > li { border-block-end: 1px solid var(--color-rule); }
+.vb-marker {
+  display: flex; gap: var(--space-md); align-items: flex-start; inline-size: 100%; text-align: start;
+  padding: var(--space-sm) var(--space-xs); min-block-size: var(--cl-control-h); border: 0; border-radius: var(--radius-small);
+  background: transparent; color: var(--color-ink);
+  transition: background-color var(--dur-micro) var(--ease-out);
+}
+.vb-marker:hover { background: var(--color-paper-2); }
+.vb-marker:active { background: var(--color-paper-3); }
+.vb-marker:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
+.vb-marker[aria-current='true'] { background: var(--color-paper-2); }
+.vb-marker-time {
+  flex: none; min-inline-size: 3.75rem; text-align: center; font-variant-numeric: tabular-nums; font-weight: 600; font-size: var(--text-sm);
+  color: var(--color-ink-2); background: var(--color-paper-3); border-radius: 6px; padding: var(--space-3xs) var(--space-xs); margin-block-start: var(--space-3xs);
+}
+.vb-marker[aria-current='true'] .vb-marker-time { background: var(--color-ink); color: var(--color-paper); }
+.vb-marker-body { display: flex; flex-direction: column; min-inline-size: 0; }
+.vb-marker-body strong { font-weight: 600; overflow-wrap: anywhere; }
+.vb-marker-body span { font-size: 0.9375rem; color: var(--color-muted); overflow-wrap: anywhere; }
+.vb-swatch { display: inline-block; inline-size: 0.875rem; block-size: 0.875rem; border-radius: 3px; box-shadow: inset 0 0 0 1.5px var(--color-ink); flex: none; }
+.vb-tracks { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-md); }
+.vb-limits { font-size: 0.9375rem; }
+.vb-limits p { margin: 0; }
+.vb-limits p + p { margin-block-start: var(--space-2xs); }
+.vb-help summary {
+  cursor: pointer; font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-2); display: inline-flex; align-items: center; gap: var(--space-xs);
+  min-block-size: var(--cl-control-h); padding-inline: var(--space-xs); margin-inline-start: calc(-1 * var(--space-xs)); border-radius: var(--radius-small);
+}
+.vb-help summary:hover { background: var(--color-paper-2); color: var(--color-ink); }
+.vb-help summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.vb-help summary svg { inline-size: 1.125rem; block-size: 1.125rem; }
+.vb-help ul { margin: var(--space-2xs) 0 0; padding-inline-start: 1.125rem; font-size: 0.9375rem; display: grid; gap: var(--space-2xs); }
+
+/* ---------------------------------------------------------------- compare: the textbook page beside the video */
+.vb-compare { display: flex; flex-direction: column; gap: var(--space-xs); margin: 0; min-inline-size: 0; }
+.vb-compare figcaption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-xs); }
+.vb-compare-title { display: flex; flex-direction: column; min-inline-size: 0; overflow-wrap: anywhere; }
+.vb-compare-heading { font-weight: 600; }
+.vb-compare-source { font-size: var(--text-sm); color: var(--color-muted); }
+.vb-compare-media { border-radius: var(--radius-stock); overflow: hidden; background: var(--color-paper-2); box-shadow: inset 0 0 0 1px var(--color-rule); }
+.vb-compare-media img { display: block; inline-size: 100%; block-size: auto; max-block-size: min(70dvh, 36rem); object-fit: contain; background: var(--color-card); }
+.vb-compare-media video { display: block; inline-size: 100%; max-block-size: min(70dvh, 36rem); background: var(--color-ink); }
+.vb-zoom-img { display: block; inline-size: 100%; block-size: auto; }
+
+/* ---------------------------------------------------------------- editor: ruled rows, no boxes inside the card */
+.vb-editor .vb-section { display: flex; flex-direction: column; gap: var(--space-sm); }
+.vb-editor .vb-section > h3, .vb-editor .vb-section > h4 { margin: 0; }
+.vb-tabpanel { padding-block-start: var(--space-md); display: flex; flex-direction: column; gap: var(--space-md); }
+.vb-mlist { display: flex; flex-direction: column; border-block-start: 1px solid var(--color-rule); }
+.vb-mrow { display: grid; gap: var(--space-xs); padding: var(--space-sm) 0; border-block-end: 1px solid var(--color-rule); }
+/* an AI marker still waiting for the teacher: a blue well, the AI badge says why */
+.vb-mrow.pending { background: var(--color-accent-2-soft); padding-inline: var(--space-sm); border-radius: var(--radius-small); border-block-end-color: transparent; margin-block: var(--space-2xs); }
+.vb-mrow-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+.vb-mrow-head .vb-label-input { flex: 1 1 12rem; min-inline-size: 0; }
+.vb-num { display: inline-block; min-inline-size: 1.5rem; text-align: end; color: var(--color-muted); font-weight: 600; font-size: 0.9375rem; font-variant-numeric: tabular-nums; flex: none; }
+.vb-time-input { inline-size: 6.25rem; flex: none; font-variant-numeric: tabular-nums; }
+.vb-suggest { display: flex; flex-direction: column; border-block-start: 1px solid var(--color-rule-2); }
+.vb-suggest-item { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-sm); align-items: flex-start; padding-block: var(--space-sm); border-block-end: 1px solid var(--color-rule-2); }
+.vb-suggest-item .vb-marker-body { flex: 1 1 14rem; }
+.vb-suggest-item .vb-marker-time { margin-block-start: 0; }
+.vb-tracklist { display: flex; flex-direction: column; border-block-start: 1px solid var(--color-rule); }
+.vb-track-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-sm); padding-block: var(--space-sm); border-block-end: 1px solid var(--color-rule); }
+.vb-track-row .vb-grow { flex: 1 1 10rem; min-inline-size: 0; }
+.vb-inline-form { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-xs); }
+.vb-inline-form .field { flex: 1 1 14rem; }
+.vb-thumb { inline-size: min(100%, 14rem); border-radius: var(--radius-small); box-shadow: inset 0 0 0 1px var(--color-rule); }
+
+@media (prefers-reduced-motion: reduce) {
+  .vb-marker { transition: none; }
+  .vb-tick:hover { box-shadow: none; }
+}
+@media (forced-colors: active) {
+  .vb-tick { forced-color-adjust: none; border-color: CanvasText; }
+  .vb-marker[aria-current='true'] { outline: 2px solid Highlight; }
+}

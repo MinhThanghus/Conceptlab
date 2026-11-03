@@ -1,0 +1,52 @@
+/* Circulation: the 3D heart or the flow diagram, chosen with two pills; the diagram stands in a
+   studio well (styles/stage3d.css), its six stations below as numbered pills, the chosen station
+   explained in a paper-2 well. Blue is oxygen-poor blood, coral oxygen-rich. Tokens only. */
+.circulation3d-shell { display: grid; gap: var(--space-md); margin-block: var(--space-md) var(--space-xs); }
+.circulation3d-host, .circulation3d-fallback { position: absolute; inset: 0; }
+.circulation3d-host canvas, .circulation3d-fallback svg { display: block; inline-size: 100%; block-size: 100%; }
+.circulation3d-host canvas { touch-action: pan-y; }
+.circulation3d-fallback { padding: var(--space-md) var(--space-md) var(--space-xl); }
+.circulation3d-stage-note { text-align: center; }
+.circulation3d-legend { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs) var(--space-sm); color: var(--color-ink-2); font-size: var(--text-sm); }
+.circulation3d-key { display: inline-block; inline-size: 0.75rem; block-size: 0.75rem; border-radius: var(--radius-pill); }
+.circulation3d-key.is-poor { background: var(--color-accent-2); }
+.circulation3d-key.is-rich { background: var(--color-accent-3); margin-inline-start: var(--space-xs); }
+.circulation3d-controls { display: grid; gap: var(--space-sm); }
+.circulation3d-controls > p:first-child { font-weight: 600; }
+.circulation3d-controls ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-xs); list-style: none; padding: 0; margin: 0; }
+.circulation3d-controls li { min-inline-size: 0; }
+.circulation3d-controls ol button {
+  display: flex; inline-size: 100%; align-items: center; gap: var(--space-xs);
+  min-block-size: var(--cl-control-h); padding: var(--space-2xs) var(--space-sm) var(--space-2xs) var(--space-2xs);
+  border: 0; border-radius: var(--radius-pill); box-shadow: inset 0 0 0 1px var(--color-rule-2);
+  background: var(--color-card); color: var(--color-ink); font: inherit; font-size: var(--text-sm); font-weight: 500; text-align: start; cursor: pointer;
+  transition: background-color var(--dur-micro) var(--ease-snap);
+}
+.circulation3d-controls ol button span {
+  display: grid; flex: 0 0 2rem; block-size: 2rem; place-items: center; border-radius: var(--radius-pill);
+  background: var(--color-ink); color: var(--color-paper); font-size: var(--text-sm); font-weight: 600;
+}
+.circulation3d-controls ol button:hover { background: var(--color-paper-2); }
+.circulation3d-controls ol button[aria-pressed='true'] { background: var(--color-ink); color: var(--color-paper); box-shadow: none; }
+.circulation3d-controls ol button[aria-pressed='true'] span { background: var(--color-accent); color: var(--color-accent-ink); }
+.circulation3d-controls ol button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+/* the 2D diagram in the same inks */
+.circulation3d-drawing .cd-heart { fill: var(--color-accent-3-soft); stroke: var(--color-accent-3); stroke-width: 3; }
+.circulation3d-drawing .cd-body { fill: var(--color-rule-2); }
+.circulation3d-drawing .cd-lung { fill: var(--color-accent-3-soft); stroke: var(--color-accent-3); stroke-width: 2; }
+.circulation3d-drawing .cd-airway { stroke: var(--color-card); stroke-width: 6; stroke-linecap: round; }
+.circulation3d-drawing .cd-poor-fill { fill: var(--color-accent-2); }
+.circulation3d-drawing .cd-rich-fill { fill: var(--color-accent-3); }
+.circulation3d-drawing .cd-path { fill: none; stroke-linecap: round; }
+.circulation3d-drawing .cd-poor { stroke: var(--color-accent-2); }
+.circulation3d-drawing .cd-rich { stroke: var(--color-accent-3); }
+.circulation3d-drawing .cd-bead { fill: var(--color-ink); stroke: var(--color-card); stroke-width: 2; }
+.circulation3d-drawing .cd-bead-text { fill: var(--color-paper); font-size: 12px; font-weight: 600; }
+.circulation3d-drawing .cd-caption { fill: var(--color-ink-2); font-size: 13px; font-weight: 600; }
+@media (max-width: 36rem) {
+  .circulation3d-controls ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) { .circulation3d-controls ol button { transition: none; } }
+/* on a lesson slide: the key beside the model, one swatch a colour of blood */
+.circulation3d-key-row i.is-poor { background: var(--color-accent-2); box-shadow: none; }
+.circulation3d-key-row i.is-rich { background: var(--color-accent-3); box-shadow: none; }

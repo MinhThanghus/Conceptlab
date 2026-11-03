@@ -1,0 +1,9 @@
+/* Hallmark · checked: 2026-11-02 · genre: playful · shape: app screen · theme: Hum (DESIGN.md, locked) · posture: full-palette
+ * built: the project · redesign: full · v2.1.0 */
+
+/* Lab cover base, loaded with LabCover (gallery, home rail, student home, My labs first run, the
+   lesson deck's first page): a box its parent may size freely, filled by its child. The cover's
+   own look (picture crops, the booklet cover, a thumbnail's letter) lives in
+   features/public/cover.css. */
+.lab-cover { position: relative; overflow: hidden; inline-size: 100%; background: var(--color-paper-2); }
+.lab-cover img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }

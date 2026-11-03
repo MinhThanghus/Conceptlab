@@ -1,0 +1,18 @@
+export default {
+  home: 'My learning',
+  welcome: 'Hi {name}, what would you like to explore today?',
+  lead: 'Choose a lesson, change a few things, and discover the answer for yourself.',
+  browse: 'Explore lessons',
+  join: 'Enter a class code',
+  joinHint: 'Open a lesson shared by your teacher.',
+  visual: 'Explore by topic',
+  visualHint: 'Explore simulations, maps and algorithms.',
+  featured: 'Start with a lesson',
+  featuredHint: 'Choose a lesson to observe and experiment.',
+  allLessons: 'See all lessons',
+  openLesson: 'Open lesson',
+  unavailable: 'Lessons could not be loaded. You can still open the gallery.',
+  manage: 'Manage my lessons',
+  lesson: 'Learning space',
+  resources: 'Help and sources',
+}

@@ -1,0 +1,459 @@
+/* Hallmark · checked: 2026-11-02 · genre: playful · shape: app screen · theme: Hum (DESIGN.md, locked) · posture: full-palette · built: the project · redesign: full · v2.1.0 */
+/* Quiz block: learner view and editor extras. Answers are card stock you press; the one you
+   chose is ink; a right answer is mint, a wrong one the error ink; a situation, a hint and the
+   explanation are wells. The beads beside the question number are the only progress. Tokens only. */
+
+/* ================================================================ learner view */
+.qz { --qz-gap: var(--space-md); display: flex; flex-direction: column; gap: var(--qz-gap); min-inline-size: 0; container: qz / inline-size; }
+
+.qz-intro { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs) var(--space-sm); font-size: 0.9375rem; color: var(--color-muted); }
+.qz-phase { color: var(--color-ink); font-weight: 600; }
+.qz-resumed { flex-basis: 100%; font-size: var(--text-sm); font-weight: 600; color: var(--color-ink-2); }
+
+/* the question's own line: number, kind and level, then the beads; under a hairline */
+.qz-top {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-sm) var(--space-lg);
+  padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule);
+  scroll-margin-block-start: calc(var(--cl-header-h) + var(--space-md));
+}
+.qz-qhead-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); min-inline-size: 0; }
+.qz-qhead { margin: 0 var(--space-2xs) 0 0; font-size: var(--app-h4); font-weight: 600; line-height: 1.3; font-variant-numeric: tabular-nums; }
+.qz-qhead:focus { outline: none; }
+.qz-qhead:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; border-radius: var(--space-2xs); }
+/* kind and level: two quiet tags, never joined by a dot */
+.qz-kind, .qz-level {
+  display: inline-flex; align-items: center; gap: var(--space-2xs); min-block-size: 1.75rem; padding: 0 var(--space-sm);
+  border-radius: var(--radius-pill); background: var(--color-paper-2); color: var(--color-ink-2); font-size: var(--text-sm); line-height: 1.2;
+}
+.qz-level svg { flex: none; inline-size: 1rem; block-size: 1rem; color: var(--color-muted); }
+
+/* the beads: card stock to press; answered ones are pressed flat; the current one is ink */
+.qz-dots { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+/* after checking, each bead wears a small mark on its corner: leave it room */
+.qz-dots:has(.qz-dot-mark) { padding-block-start: var(--space-xs); padding-inline-end: var(--space-xs); }
+.qz-dot {
+  --edge: 2px;
+  position: relative; display: inline-grid; place-items: center;
+  min-inline-size: var(--cl-control-h); block-size: var(--cl-control-h); padding: 0 var(--space-sm);
+  border: 0; border-radius: var(--radius-pill); background: var(--grain), var(--color-card); color: var(--color-ink-2);
+  box-shadow: inset 0 0 0 1px var(--color-rule-2), 0 var(--edge) 0 0 var(--color-edge);
+  font: inherit; font-size: var(--text-sm); font-weight: 600; font-variant-numeric: tabular-nums; cursor: pointer;
+  transition: translate var(--dur-micro) var(--ease-snap), box-shadow var(--dur-micro) var(--ease-snap), background-color var(--dur-micro) var(--ease-snap);
+}
+.qz-dot:hover { --edge: 3px; translate: 0 -1px; }
+.qz-dot:active { --edge: 0px; translate: 0 2px; }
+.qz-dot:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.qz-dot.is-done { --edge: 0px; translate: 0 2px; background: var(--color-paper-3); color: var(--color-ink); box-shadow: var(--shadow-inset), inset 0 0 0 1px var(--color-rule-2); }
+.qz-dot.is-done:hover { --edge: 0px; translate: 0 1px; }
+.qz-dot.is-right { background: var(--color-mint); color: var(--color-ink); box-shadow: 0 var(--edge) 0 0 var(--color-mint-deep); }
+.qz-dot.is-wrong { background: var(--color-error-soft); color: var(--color-error-ink); box-shadow: inset 0 0 0 1px var(--color-error), 0 var(--edge) 0 0 var(--color-error); }
+.qz-dot.is-unscored { color: var(--color-muted); box-shadow: inset 0 0 0 1px var(--color-rule-2); }
+.qz-dot[aria-current='step'] { --edge: 2px; translate: none; background: var(--color-ink); color: var(--color-paper); box-shadow: 0 var(--edge) 0 0 var(--color-ink-2); }
+.qz-dot-mark {
+  position: absolute; inset-block-start: calc(-1 * var(--space-xs)); inset-inline-end: calc(-1 * var(--space-xs));
+  inline-size: 1.25rem; block-size: 1.25rem; border-radius: 50%; background: var(--color-card);
+}
+.qz-dot.is-right .qz-dot-mark { color: var(--color-mint-ink); }
+.qz-dot.is-wrong .qz-dot-mark { color: var(--color-error-ink); }
+
+/* the question: a situation in a well, then the stem, calm and a step bigger. The wrappers only
+   matter on a slide (lesson deck): on a page they step aside and the parts stack as one column. */
+.qz-head, .qz-card-main, .qz-ask { display: contents; }
+.qz-card { display: flex; flex-direction: column; gap: var(--space-sm); min-inline-size: 0; }
+.qz-context {
+  padding: var(--space-sm) var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2);
+  color: var(--color-ink-2); font-size: 1.0625rem; line-height: 1.55;
+}
+.qz-context .prose { max-inline-size: 64ch; text-wrap: pretty; }
+.qz-context .prose p { margin: 0 0 var(--space-2xs); }
+.qz-prompt { min-inline-size: 0; color: var(--color-ink); font-size: var(--app-h3); font-weight: 600; line-height: 1.4; }
+.qz-prompt .prose { max-inline-size: 40em; text-wrap: pretty; }
+.qz-prompt .prose p { margin: 0 0 var(--space-2xs); }
+.qz-how { margin: calc(-1 * var(--space-2xs)) 0 0; font-size: var(--text-sm); color: var(--color-muted); }
+
+/* multiple choice and true/false: card stock you press (native radios, styled) */
+.qz-options { display: grid; gap: var(--space-xs); }
+.qz-options.is-tf { grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); }
+.qz-option {
+  --edge: 3px;
+  position: relative; display: flex; align-items: flex-start; gap: var(--space-sm);
+  min-block-size: 3.5rem; padding: var(--space-sm) var(--space-md) var(--space-sm) var(--space-sm);
+  border-radius: var(--radius-stock); background: var(--grain), var(--color-card); cursor: pointer;
+  box-shadow: inset 0 0 0 1px var(--color-rule-2), 0 var(--edge) 0 0 var(--color-edge);
+  transition: translate var(--dur-micro) var(--ease-snap), box-shadow var(--dur-micro) var(--ease-snap), background-color var(--dur-micro) var(--ease-snap);
+}
+.qz-option:hover { --edge: 4px; translate: 0 -1px; }
+.qz-option:active { --edge: 1px; translate: 0 2px; }
+/* the hidden radio covers its card, so reaching it by Tab brings the whole card into view */
+.qz-option input { position: absolute; inset: 0; opacity: 0; inline-size: 100%; block-size: 100%; margin: 0; pointer-events: none; }
+.qz-option:focus-within { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+/* where :has() exists, ring only for keyboard focus (not after a tap or click) */
+@supports selector(:has(*)) {
+  .qz-option:focus-within { outline: none; }
+  .qz-option:has(input:focus-visible) { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+}
+.qz-letter {
+  flex: none; display: inline-grid; place-items: center; inline-size: 2rem; block-size: 2rem; border-radius: 50%;
+  background: var(--color-paper-2); color: var(--color-ink-2); font-size: 0.9375rem; font-weight: 600;
+}
+/* the text column: the option, then (after checking) why it is right or not */
+.qz-option-main { flex: 1 1 10rem; min-inline-size: 0; display: flex; flex-direction: column; gap: var(--space-2xs); padding-block: 0.1875rem; }
+.qz-option-text { overflow-wrap: anywhere; font-size: 1.0625rem; line-height: 1.45; }
+.qz-option-text .prose, .qz-option-why .prose, .qz-order-label .prose, .qz-correct .prose { max-inline-size: none; }
+.qz-option-text .prose p, .qz-option-why .prose p, .qz-order-label .prose p, .qz-correct .prose p { margin: 0; }
+.qz-option-why { display: block; color: var(--color-ink-2); font-size: 0.9375rem; line-height: 1.45; overflow-wrap: anywhere; animation: qz-reveal var(--dur-short) var(--ease-out); }
+.qz-option-why[hidden] { display: none; }
+.qz-option.is-selected { box-shadow: inset 0 0 0 2px var(--color-ink), 0 var(--edge) 0 0 var(--color-ink-2); }
+.qz-option.is-selected .qz-letter { background: var(--color-ink); color: var(--color-paper); }
+.qz-option.is-locked { cursor: default; --edge: 0px; }
+.qz-option.is-locked:hover, .qz-option.is-locked:active { translate: none; --edge: 0px; }
+.qz-option.is-locked.is-selected { box-shadow: inset 0 0 0 2px var(--color-ink); }
+.qz-option.is-right, .qz-option.is-right:hover { background: var(--color-mint-soft); box-shadow: inset 0 0 0 2px var(--color-mint-deep); }
+.qz-option.is-right .qz-letter { background: var(--color-mint); color: var(--color-ink); }
+.qz-option.is-wrong, .qz-option.is-wrong:hover { background: var(--color-error-soft); box-shadow: inset 0 0 0 2px var(--color-error); }
+.qz-option.is-wrong .qz-letter { background: var(--color-error); color: var(--color-paper); }
+.qz-tag { display: inline-flex; align-items: center; gap: var(--space-2xs); font-size: var(--text-sm); font-weight: 600; line-height: 1.3; }
+.qz-tag svg { flex: none; inline-size: 1.125rem; block-size: 1.125rem; }
+.qz-tag.is-right { color: var(--color-mint-ink); }
+.qz-tag.is-wrong { color: var(--color-error-ink); }
+.qz-others-toggle { align-self: flex-start; }
+.qz-others-toggle svg { transition: rotate var(--dur-short) var(--ease-out); }
+.qz-others-toggle[aria-expanded='true'] svg { rotate: 180deg; }
+
+/* ordering: rows in a well, moved with the arrow buttons or the keys */
+.qz-order { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+/* a row never shrinks below its words (a long item on a phone runs to several lines) */
+.qz-order-item { display: flex; flex: none; align-items: center; gap: var(--space-xs); padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-sm); border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.qz-order-item.is-right { background: var(--color-mint-soft); }
+.qz-order-item.is-wrong { background: var(--color-error-soft); }
+.qz-order-pos {
+  flex: none; display: inline-grid; place-items: center; inline-size: 2rem; block-size: 2rem; border-radius: 50%;
+  background: var(--color-card); font-size: var(--text-sm); font-weight: 600; font-variant-numeric: tabular-nums;
+}
+.qz-order-handle {
+  flex: 1 1 auto; min-inline-size: 0; display: flex; align-items: center; min-block-size: var(--cl-control-h);
+  padding: var(--space-2xs) var(--space-xs); border: 0; border-radius: var(--radius-small);
+  background: transparent; color: inherit; font: inherit; text-align: start;
+  transition: background-color var(--dur-micro) var(--ease-snap);
+}
+.qz-order-handle:hover { background: color-mix(in oklab, var(--color-ink) 6%, transparent); }
+.qz-order-handle:active { background: color-mix(in oklab, var(--color-ink) 10%, transparent); }
+.qz-order-handle:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
+.qz-order-item > .qz-order-label { flex: 1 1 auto; min-inline-size: 0; padding: var(--space-2xs) var(--space-xs); }
+.qz-order-label { overflow-wrap: anywhere; font-size: 1.0625rem; line-height: 1.4; }
+.qz-order-tools { display: flex; flex: none; gap: var(--space-2xs); }
+.qz-mark { flex: none; inline-size: 1.5rem; block-size: 1.5rem; }
+
+/* numeric */
+.qz-numeric-row { display: flex; align-items: center; gap: var(--space-sm); max-inline-size: 22rem; }
+.qz-numeric-input { flex: 1 1 auto; min-inline-size: 0; font-size: 1.125rem; font-variant-numeric: tabular-nums; }
+/* after checking the answer stays readable: locked, not greyed */
+.qz-numeric-input:disabled { opacity: 1; color: var(--color-ink); background: var(--color-paper-2); cursor: not-allowed; }
+.qz-unit { flex: none; max-inline-size: 10rem; overflow-wrap: anywhere; font-weight: 600; color: var(--color-muted); }
+
+/* the hint: asked for, never pushed; a well that fades in */
+.qz-hint {
+  display: flex; align-items: flex-start; gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); color: var(--color-ink);
+  animation: qz-reveal var(--dur-short) var(--ease-out);
+}
+.qz-hint[hidden] { display: none; }
+.qz-hint > svg { flex: none; inline-size: 1.25rem; block-size: 1.25rem; margin-block-start: 0.1875rem; color: var(--color-kraft-ink); }
+.qz-hint-text { flex: 1 1 auto; min-inline-size: 0; line-height: 1.5; }
+.qz-hint-text .prose { max-inline-size: 64ch; }
+.qz-hint-text .prose p { margin: 0 0 var(--space-2xs); }
+@keyframes qz-reveal { from { opacity: 0; } to { opacity: 1; } }
+
+/* feedback after checking: a well, mint when right; the verdict in its own colour, never a stripe */
+.qz-feedback { display: flex; flex-direction: column; gap: var(--space-xs); padding: var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.qz-feedback.is-right { background: var(--color-mint-soft); }
+.qz-feedback-title { display: flex; align-items: center; gap: var(--space-xs); margin: 0; font-size: 1.0625rem; font-weight: 600; }
+.qz-feedback-title svg { flex: none; inline-size: 1.25rem; block-size: 1.25rem; }
+.qz-feedback.is-right .qz-feedback-title { color: var(--color-mint-ink); }
+.qz-feedback.is-wrong .qz-feedback-title { color: var(--color-error-ink); }
+.qz-correct { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.qz-correct-lead { margin: 0; }
+.qz-correct-note { font-weight: 400; color: var(--color-muted); }
+.qz-answer-list { margin: var(--space-2xs) 0 0; padding-inline-start: var(--space-lg); display: grid; gap: var(--space-3xs); font-weight: 500; }
+.qz-explain { display: flex; flex-direction: column; gap: var(--space-2xs); }
+.qz-explain-title { margin: 0; font-size: var(--text-sm); font-weight: 600; color: var(--color-ink-2); }
+.qz-explain .prose { max-inline-size: 70ch; }
+.qz-explain .prose p { margin: 0 0 var(--space-2xs); }
+
+/* name and privacy before checking: under a hairline */
+.qz-submit { display: flex; flex-direction: column; gap: var(--space-xs); padding-block-start: var(--space-sm); border-block-start: 1px solid var(--color-rule); }
+.qz-submit .field { max-inline-size: 24rem; }
+.qz-privacy { display: flex; align-items: flex-start; gap: var(--space-xs); margin: 0; max-inline-size: 70ch; font-size: var(--text-sm); color: var(--color-muted); }
+.qz-privacy svg { flex: none; inline-size: 1.25rem; block-size: 1.25rem; margin-block-start: var(--space-3xs); color: var(--color-ink-2); }
+
+/* the buttons: the hint on its own, the steps together at the end; an open hint sits on its own
+   line above them (beside its button on a wide slide) */
+.qz-nav { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-sm); }
+.qz-nav > .qz-hint { order: -1; flex: 1 1 100%; }
+.qz-nav-steps { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-inline-start: auto; }
+.qz-hint-toggle svg { inline-size: 1.25rem; block-size: 1.25rem; color: var(--color-kraft-ink); }
+.qz-hint-toggle[aria-expanded='true'] { --btn-bg: var(--color-paper-2); --btn-edge: var(--color-paper-3); }
+.qz-alert-text { margin: 0 0 var(--space-xs); }
+.qz-alert-actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+
+/* the score: large, in mint ink; the next step beside it; the well turns mint when most were right */
+.qz-summary {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm) var(--space-xl);
+  padding: var(--space-md) var(--space-lg); border-radius: var(--radius-stock); background: var(--color-paper-2);
+}
+.qz-summary.is-perfect, .qz-summary.is-great { background: var(--color-mint-soft); }
+.qz-summary-title { flex: none; display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2xs); min-inline-size: 5rem; margin: 0; }
+.qz-score {
+  display: flex; align-items: baseline; color: var(--color-mint-ink);
+  font-weight: 600; line-height: 1; letter-spacing: var(--tracking-display); font-variant-numeric: tabular-nums;
+}
+.qz-score-value { font-size: 3.5rem; }
+.qz-score-total { font-size: 1.75rem; }
+.qz-score-label { font-size: var(--text-sm); font-weight: 600; line-height: 1.2; color: var(--color-ink-2); }
+.qz-summary-body { flex: 1 1 18rem; min-inline-size: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+.qz-summary-title:focus { outline: none; }
+.qz-summary-title:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; border-radius: var(--space-2xs); }
+.qz-summary-phase { margin: 0; font-size: var(--text-sm); font-weight: 600; color: var(--color-ink-2); }
+.qz-summary-msg { margin: 0; max-inline-size: 60ch; font-size: 1.0625rem; line-height: 1.5; color: var(--color-ink); text-wrap: pretty; }
+.qz-summary-note { margin: 0; max-inline-size: 70ch; font-size: var(--text-sm); color: var(--color-muted); }
+.qz-summary-short { display: none; }
+.qz-summary-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-sm); padding-block: var(--space-2xs); }
+
+/* a narrow quiz (phone, side panel): one row of buttons, the hint as its lightbulb */
+@container qz (max-width: 30rem) {
+  .qz-summary { padding: var(--space-md); gap: var(--space-sm) var(--space-md); }
+  .qz-score-value { font-size: 2.75rem; }
+  .qz-prompt { font-size: 1.125rem; }
+  /* the steps share the toggle's line (a zero basis never wraps); an open hint keeps its own line */
+  .qz-nav-steps { flex: 1 1 0; flex-wrap: nowrap; min-inline-size: 0; }
+  .qz-nav-steps > .btn { flex: 1 1 0; min-inline-size: 0; padding-inline: var(--space-sm); white-space: normal; }
+  .qz-nav-steps > .btn:not([aria-busy='true']) > svg { display: none; }
+  .qz-hint-toggle { inline-size: var(--cl-control-h); padding: 0; }
+  .qz-hint-label { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+
+/* ================================================================ in the lesson deck (C4) */
+/* The sheet is a stage with its own type scale (--deck-*, lessonDeck.css); the fallbacks keep the
+   quiz readable without it. A question is set like a slide: a short stem at the title size, the
+   answers as tall cards (short answers a size up), the buttons and the hint at the foot. An order
+   question puts its list beside the question. After checking, the score is one line and the verdict
+   stands beside the question, so a question, its feedback and the buttons share the sheet. */
+.lesson-deck .blk[data-block-type='quiz'] { display: flex; flex-direction: column; min-block-size: 100%; }
+.lesson-deck .qz {
+  --qz-gap: clamp(0.625rem, calc(var(--deck-gap, 1.5rem) * 0.5), 1.375rem);
+  /* an answer card: about 4.5rem on a laptop sheet, taller on a big screen */
+  --qz-answer-h: clamp(3.5rem, calc(var(--su, 7px) * 11), 6rem);
+  flex: 1 1 auto; container-name: qz qz-deck;
+}
+.lesson-deck .qz-intro-text { display: none; }
+.lesson-deck .qz-intro:not(:has(> :not(.qz-intro-text))) { display: none; }
+.lesson-deck .qz-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--qz-gap); }
+.lesson-deck .qz-top { flex: 1 1 auto; padding-block-start: 0; border-block-start: 0; scroll-margin-block-start: 0; }
+.lesson-deck .qz-qhead { font-size: var(--deck-body, 1.125rem); }
+.lesson-deck .qz-kind, .lesson-deck .qz-level, .lesson-deck .qz-dot { font-size: var(--deck-small, 0.875rem); }
+
+/* the question: a situation, then the stem (a short one at the title size) */
+.lesson-deck .qz-card, .lesson-deck .qz-card-main, .lesson-deck .qz-ask { display: flex; flex-direction: column; gap: var(--qz-gap); min-inline-size: 0; }
+.lesson-deck .qz-context { inline-size: fit-content; max-inline-size: 100%; padding: 0.55em 1em; font-size: var(--deck-body, 1.125rem); line-height: 1.5; }
+.lesson-deck .qz-context .prose { max-inline-size: 60em; }
+.lesson-deck .qz-prompt { font-size: var(--deck-lead, 1.25rem); line-height: 1.3; }
+/* a slide is wide: a long stem keeps one line where it can (about 80 characters at the lead size) */
+.lesson-deck .qz-prompt .prose { max-inline-size: 48em; }
+.lesson-deck .qz-card[data-stem='short'] .qz-prompt { font-size: var(--deck-title, 1.625rem); line-height: 1.15; letter-spacing: var(--tracking-display); }
+.lesson-deck .qz-card[data-stem='short'] .qz-prompt .prose { text-wrap: balance; }
+.lesson-deck .qz-how { margin-block-start: calc(-0.5 * var(--qz-gap)); font-size: var(--deck-small, 0.875rem); }
+/* the answers explain themselves on a slide; the sentence stays as their description */
+.lesson-deck .qz-how.is-choice, .lesson-deck .qz-card.is-order .qz-how, .lesson-deck .qz-card.is-numeric .qz-how { display: none; }
+
+/* answer cards: tall card stock, the letter and the text centred; short answers a size up */
+.lesson-deck .qz-options { gap: calc(var(--qz-gap) * 0.75); font-size: var(--deck-body, 1.125rem); }
+.lesson-deck .qz-card[data-answers='short'] .qz-options { font-size: var(--deck-lead, 1.25rem); }
+.lesson-deck .qz-option { min-block-size: var(--qz-answer-h); align-items: center; padding: 0.45em 1em 0.45em 0.6em; gap: 0.7em; }
+.lesson-deck .qz-letter { inline-size: 2.5em; block-size: 2.5em; font-size: var(--deck-small, 0.875rem); }
+/* true or false: two big cards side by side */
+.lesson-deck .qz-card.is-truefalse:not(.is-review):not(:has(.qz-submit)) .qz-option { min-block-size: calc(var(--qz-answer-h) * 1.5); }
+.lesson-deck .qz-option-main { padding-block: 0.15em; }
+.lesson-deck .qz-option-text { font-size: 1em; line-height: 1.35; }
+.lesson-deck .qz-card[data-answers='short'] .qz-option-text { font-weight: 500; }
+.lesson-deck .qz-tag { font-size: var(--deck-small, 0.875rem); }
+.lesson-deck .qz-option-why { font-size: var(--deck-small, 0.875rem); line-height: 1.4; }
+
+/* order rows: taller, moved with the arrows; short items a size up */
+.lesson-deck .qz-order { gap: calc(var(--qz-gap) * 0.6); }
+.lesson-deck .qz-order-item { min-block-size: calc(var(--qz-answer-h) * 0.85); padding: var(--space-2xs) var(--space-xs) var(--space-2xs) var(--space-sm); }
+.lesson-deck .qz-order-label { font-size: var(--deck-body, 1.125rem); }
+.lesson-deck .qz-card[data-answers='short'] .qz-order-label { font-size: var(--deck-lead, 1.25rem); font-weight: 500; }
+.lesson-deck .qz-order-pos { inline-size: 2.4em; block-size: 2.4em; font-size: var(--deck-small, 0.875rem); }
+/* five or more rows: as tall as their buttons, the items at the body size */
+.lesson-deck .qz-order:has(> :nth-child(5)) .qz-order-item { min-block-size: var(--cl-control-h); padding-block: 0; }
+.lesson-deck .qz-card .qz-order:has(> :nth-child(5)) .qz-order-label { font-size: var(--deck-body, 1.125rem); }
+
+/* a number: one big box and its unit; the label is the question itself */
+.lesson-deck .qz-numeric > .field-label { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.lesson-deck .qz-numeric-row { max-inline-size: 28rem; }
+.lesson-deck .qz-numeric-input { min-block-size: max(var(--cl-control-h), calc(var(--qz-answer-h) * 0.8)); padding-inline: 0.6em; font-size: var(--deck-lead, 1.25rem); font-weight: 500; }
+.lesson-deck .qz-unit { font-size: var(--deck-lead, 1.25rem); }
+.lesson-deck .qz-numeric .field-error { font-size: var(--deck-small, 0.875rem); }
+
+/* the hint and the verdict */
+.lesson-deck .qz-hint { font-size: var(--deck-small, 0.875rem); }
+.lesson-deck .qz-feedback { gap: 0.6em; padding: 0.85em 1em; font-size: var(--deck-body, 1.125rem); }
+.lesson-deck .qz-feedback-title { font-size: 1em; }
+.lesson-deck .qz-explain-title, .lesson-deck .qz-privacy { font-size: var(--deck-small, 0.875rem); }
+/* the slide's scroller keeps the button row's height free at its foot: what opens on request, and an
+   answer reached by Tab or the arrow keys, stops above the row instead of under it */
+.lesson-deck .deck-scroll:has(.qz-nav) { scroll-padding-block-end: 4.75rem; }
+@supports not selector(:has(*)) {
+  .lesson-deck .qz-option-why, .lesson-deck .qz-feedback { scroll-margin-block-end: 4.75rem; }
+}
+
+/* the buttons stay at the foot of the sheet, and in view when a review runs long */
+.lesson-deck .qz-nav {
+  position: sticky; inset-block-end: 0; z-index: 1; margin-block-start: auto;
+  padding-block: var(--space-xs) var(--space-3xs); background: var(--grain), var(--color-card);
+}
+/* a hairline over the buttons only while there is more to read beneath them */
+@supports (animation-timeline: scroll()) {
+  .lesson-deck .qz-nav { animation: qz-nav-edge linear both; animation-timeline: scroll(nearest block); }
+}
+@keyframes qz-nav-edge {
+  from, 96% { box-shadow: 0 -1px 0 0 var(--color-rule); }
+  to { box-shadow: none; }
+}
+.lesson-deck .qz-submit { display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; gap: var(--space-3xs) var(--space-lg); padding-block-start: calc(var(--qz-gap) * 0.6); }
+.lesson-deck .qz-submit:not(:has(.field)) { display: flex; }
+.lesson-deck .qz-submit .field-hint, .lesson-deck .qz-submit .field-label { font-size: var(--deck-small, 0.875rem); }
+
+/* after checking: the score is one line in a well (mint when most were right), sharing the line with
+   the beads; the current bead says which question is on screen, so the question's own line steps
+   back (it stays for screen readers and focus) */
+.lesson-deck .qz.is-review .qz-qhead-row { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.lesson-deck .qz.is-review .qz-top { flex: 0 1 auto; margin-inline-start: auto; }
+.lesson-deck .qz-summary { flex: 1 1 32rem; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--qz-gap); padding: var(--space-3xs) var(--space-3xs) var(--space-3xs) 1em; font-size: var(--deck-body, 1.125rem); }
+.lesson-deck .qz-summary-title { flex-direction: row; align-items: baseline; gap: 0.45em; min-inline-size: 0; }
+.lesson-deck .qz-score-value { font-size: var(--deck-lead, 1.5rem); }
+.lesson-deck .qz-score-total { font-size: var(--deck-body, 1.125rem); }
+.lesson-deck .qz-score-label { font-size: var(--deck-small, 0.875rem); white-space: nowrap; }
+.lesson-deck .qz-summary-body { flex: 1 1 auto; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--space-xs) var(--qz-gap); }
+.lesson-deck .qz-summary-msg, .lesson-deck .qz-summary-note, .lesson-deck .qz-summary-phase { display: none; }
+.lesson-deck .qz-summary-short { display: block; flex: 1 1 auto; margin: 0; font-size: var(--deck-small, 0.875rem); font-weight: 600; color: var(--color-ink-2); }
+.lesson-deck .qz-summary-actions { flex-wrap: wrap; padding: 0; }
+/* the question as answered, a step quieter: the situation small, the answers as tall as their words */
+.lesson-deck .qz-card.is-review .qz-context { font-size: var(--deck-small, 0.875rem); padding: 0.5em 0.9em; }
+.lesson-deck .qz-card.is-review .qz-prompt { font-size: var(--deck-body, 1.125rem); line-height: 1.4; letter-spacing: normal; }
+.lesson-deck .qz-card.is-review[data-stem='short'] .qz-prompt { font-size: var(--deck-lead, 1.25rem); line-height: 1.3; }
+/* each answer as tall as its own words: a card without a note does not stretch to its neighbour */
+.lesson-deck .qz-card.is-review .qz-options { align-items: start; font-size: var(--deck-body, 1.125rem); }
+.lesson-deck .qz-card.is-review .qz-option { min-block-size: var(--cl-control-h); align-items: flex-start; padding-block: 0.4em; }
+.lesson-deck .qz-card.is-review .qz-letter { inline-size: 2.2em; block-size: 2.2em; }
+/* the verdict tag shares the option's line (it drops under a long option); the reason runs below */
+.lesson-deck .qz-card.is-review .qz-option-main { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: var(--space-3xs) var(--space-sm); }
+.lesson-deck .qz-card.is-review .qz-option-text { flex: 1 1 10rem; }
+.lesson-deck .qz-card.is-review .qz-tag { flex: none; }
+.lesson-deck .qz-card.is-review .qz-option-why { flex: 1 1 100%; }
+.lesson-deck .qz-card.is-review .qz-order-item { min-block-size: var(--cl-control-h); }
+/* an order checked: the task and the rows say enough; the right order sits in the verdict, close set */
+.lesson-deck .qz-card.is-review.is-order .qz-context { display: none; }
+.lesson-deck .qz-answer-list { gap: 0; line-height: 1.35; }
+.lesson-deck .qz-card.is-review .qz-order-label { font-size: var(--deck-body, 1.125rem); }
+.lesson-deck .qz-card.is-review .qz-numeric-input, .lesson-deck .qz-card.is-review .qz-unit { font-size: var(--deck-body, 1.125rem); }
+.lesson-deck .qz-card.is-review .qz-numeric-input { min-block-size: var(--cl-control-h); }
+/* the right option is marked in place: the verdict does not spell it out again (screen readers still hear it) */
+.lesson-deck .qz-card.is-review:is(.is-mcq, .is-truefalse) .qz-correct { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@container qz-deck (min-width: 40rem) {
+  .qz-options:not(.is-tf) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* the name field and its two notes side by side: the label over the box, the advice and the
+     privacy note beside them */
+  .qz-submit:has(.field) { grid-template-columns: minmax(0, 24rem) minmax(0, 1fr); grid-template-areas: 'label hint' 'input privacy'; }
+  .qz-submit .field { display: contents; }
+  .qz-submit .field-label { grid-area: label; }
+  .qz-submit .field .input { grid-area: input; }
+  .qz-submit .field-hint { grid-area: hint; }
+  .qz-submit .qz-privacy { grid-area: privacy; }
+  /* the hint opens beside its button, in the row it was asked from */
+  .qz-nav > .qz-hint { order: 0; flex: 1 1 14rem; align-self: stretch; align-items: center; padding-block: 0.35em; }
+  .qz-nav > .qz-hint > svg { display: none; }
+}
+@container qz-deck (min-width: 48rem) {
+  /* an order question: the question on the left, its list on the right */
+  .qz-card.is-order:not(.is-review) .qz-card-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); align-items: start; gap: var(--qz-gap) calc(var(--qz-gap) * 2); }
+  .qz-card.is-order:not(.is-review) .qz-order { grid-column: 2; grid-row: 1; }
+  /* the last one: the name field across both, under the question and its list; the stem a size
+     down so the question stays shorter than its list */
+  .qz-card.is-order:not(.is-review) .qz-submit { grid-column: 1 / -1; grid-row: 2; }
+  .qz-card.is-order:not(.is-review):has(.qz-submit) .qz-prompt { font-size: var(--deck-lead, 1.25rem); line-height: 1.3; letter-spacing: normal; }
+  /* checked: the question on the left, its verdict beside it (pinned while the left side scrolls) */
+  .qz-card.is-review { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(15rem, 1fr); align-items: start; gap: var(--qz-gap) calc(var(--qz-gap) * 1.5); }
+  .qz-card.is-review > .qz-feedback, .qz-card.is-review > .alert { position: sticky; inset-block-start: 0; }
+  /* an order or a number leaves the question side light: the verdict (with the right order) gets half */
+  .qz-card.is-review:is(.is-order, .is-numeric) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@container qz-deck (max-width: 39.99rem) {
+  .qz-submit { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ================================================================ editor */
+.qz-gate-count { margin: var(--space-xs) 0 0; font-weight: 600; }
+.qz-kind-field { max-inline-size: 22rem; }
+.qz-meta-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 22rem)); gap: var(--space-sm) var(--space-md); }
+.qz-list-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-xs); }
+.qz-list-head .lk-section-title:focus { outline: none; }
+.qz-list-head .lk-section-title:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; border-radius: var(--space-2xs); }
+.qz-fieldset { border: 0; margin: 0; padding: 0; min-inline-size: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+.qz-fieldset > legend { padding: 0; margin-block-end: var(--space-2xs); }
+.qz-opt-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2xs); }
+.qz-opt-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); padding: var(--space-2xs); border-radius: var(--radius-small); background: var(--color-card); }
+.qz-opt-row.is-correct { background: var(--color-mint-soft); }
+/* a multiple-choice row: the answer key, the option, delete; its feedback line under the option */
+.qz-opt-row.has-feedback { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; row-gap: var(--space-2xs); }
+.qz-opt-row.has-feedback > .qz-opt-feedback { grid-column: 2 / -1; }
+.qz-opt-feedback-mark { justify-self: center; inline-size: 1rem; block-size: 1rem; color: var(--color-muted); }
+.qz-opt-feedback { min-inline-size: 0; font-size: 0.9375rem; color: var(--color-ink-2); background: var(--color-paper); }
+.qz-opt-row.is-correct .qz-opt-feedback { background: var(--color-card); }
+.qz-opt-key { position: relative; flex: none; display: inline-grid; place-items: center; inline-size: var(--cl-control-h); block-size: var(--cl-control-h); cursor: pointer; }
+.qz-opt-key input { position: absolute; opacity: 0; inline-size: 1px; block-size: 1px; margin: 0; pointer-events: none; }
+.qz-opt-key-mark {
+  display: inline-grid; place-items: center; inline-size: 2rem; block-size: 2rem; border-radius: 50%;
+  background: var(--color-card); box-shadow: inset 0 0 0 1px var(--color-control); font-size: var(--text-sm); font-weight: 600;
+  transition: background-color var(--dur-micro) var(--ease-snap);
+}
+.qz-opt-key:hover .qz-opt-key-mark { background: var(--color-mint-soft); }
+.qz-opt-key:active .qz-opt-key-mark { background: var(--color-mint); }
+.qz-opt-key input:checked + .qz-opt-key-mark { background: var(--color-mint); box-shadow: inset 0 0 0 1px var(--color-mint-deep); color: var(--color-ink); }
+.qz-opt-key input:focus-visible + .qz-opt-key-mark { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.qz-opt-letter {
+  flex: none; display: inline-grid; place-items: center; inline-size: 2rem; block-size: 2rem; border-radius: 50%;
+  background: var(--color-paper-2); font-size: var(--text-sm); font-weight: 600; font-variant-numeric: tabular-nums;
+}
+.qz-opt-input { flex: 1 1 7rem; min-inline-size: 0; }
+.qz-opt-tools { display: flex; flex: none; gap: var(--space-3xs); margin-inline-start: auto; }
+.qz-tf-edit { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+.qz-tf-choice {
+  display: inline-flex; align-items: center; gap: var(--space-xs); min-block-size: var(--cl-control-h);
+  padding: var(--space-2xs) var(--space-md) var(--space-2xs) var(--space-sm); border-radius: var(--radius-stock);
+  background: var(--color-card); box-shadow: inset 0 0 0 1px var(--color-rule-2); font-weight: 600; cursor: pointer;
+}
+.qz-tf-choice:hover { background: var(--color-paper-2); }
+.qz-tf-choice:has(input:focus-visible) { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.qz-tf-choice input { inline-size: 1.25rem; block-size: 1.25rem; margin: 0; accent-color: var(--color-mint-deep); }
+.qz-tf-choice.is-correct { background: var(--color-mint-soft); box-shadow: inset 0 0 0 1px var(--color-mint-deep); }
+.qz-tf-feedback { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: var(--space-sm) var(--space-md); }
+.qz-sources { display: flex; flex-direction: column; gap: var(--space-xs); }
+.qz-sources-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-xs); }
+.qz-approve { display: flex; flex-direction: column; gap: var(--space-xs); padding-block-start: var(--space-sm); border-block-start: 1px solid var(--color-rule-2); }
+.qz-approve.is-on .qz-approve-row { color: var(--color-mint-ink); }
+.qz-approve-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); font-weight: 600; }
+.qz-approve .switch.is-disabled { opacity: 0.55; cursor: not-allowed; }
+.qz-approve .switch.is-disabled input { cursor: not-allowed; }
+.qz-issues { margin: 0; padding-inline-start: var(--space-md); display: grid; gap: var(--space-3xs); }
+.qz-ai-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--space-sm); align-items: start; }
+.qz-check-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--space-xs) var(--space-md); }
+
+@media (prefers-reduced-motion: reduce) {
+  .qz-dot, .qz-option, .qz-order-handle, .qz-opt-key-mark, .qz-others-toggle svg { transition: none; }
+  .qz-dot:hover, .qz-dot:active, .qz-option:hover, .qz-option:active { translate: none; }
+  .qz-dot.is-done, .qz-dot.is-done:hover { translate: none; }
+  .qz-hint, .qz-option-why { animation: none; }
+  .lesson-deck .qz-nav { animation: none; box-shadow: 0 -1px 0 0 var(--color-rule); }
+}

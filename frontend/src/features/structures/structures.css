@@ -1,0 +1,35 @@
+.structures-page { max-width: 1050px; }
+.structures-page h1 { font-size: var(--app-h1); }
+.structures-section { margin-block: var(--space-xl); padding-block-start: var(--space-lg); border-block-start: 1px solid var(--color-rule); }
+.structures-section h2 { font-size: var(--app-h2); }
+.structures-mode, .structures-controls { display: flex; flex-wrap: wrap; align-items: end; gap: var(--space-sm); margin-block: var(--space-md); }
+.structures-controls label, .structures-order { display: grid; gap: var(--space-xs); }
+.structures-controls input, .structures-order select { min-height: 44px; padding: var(--space-xs) var(--space-sm); border: 1px solid var(--color-control); border-radius: var(--radius-input); color: var(--color-ink); background: var(--color-card); max-width: 100%; }
+.structures-linear-demo { display: flex; gap: var(--space-md); align-items: center; flex-wrap: wrap; }
+.structures-items { display: flex; flex-wrap: wrap; list-style: none; padding: 0; gap: var(--space-xs); }
+.structures-items li { display: grid; place-items: center; min-width: 44px; min-height: 44px; border: 1px solid var(--color-control); border-radius: var(--radius-input); background: var(--color-paper-2); font-weight: 600; }
+.structures-chain { display: flex; flex-wrap: wrap; list-style: none; gap: var(--space-xs); padding: 0; }
+.structures-chain li { display: flex; align-items: center; gap: var(--space-xs); }
+.structures-chain li span { display: grid; place-items: center; min-width: 44px; min-height: 44px; border: 1px solid var(--color-control); border-radius: var(--radius-input); background: var(--color-paper-2); font-weight: 600; }
+.structures-chain li small { color: var(--color-ink-2); }
+.structures-tree-small { max-height: 18rem; }
+.structures-tree { display: block; width: 100%; max-height: 26rem; background: var(--color-paper-2); border-radius: var(--radius-stock); }
+.structures-tree line { stroke: var(--color-ink-2); stroke-width: 2; }
+.structures-tree circle { fill: var(--color-card); stroke: var(--color-ink); stroke-width: 2; }
+.structures-tree .tree-active circle { fill: var(--color-accent); }
+.structures-tree .tree-visited circle { fill: var(--color-mint); }
+.structures-tree text { font-size: 24px; fill: var(--color-ink); font-weight: 600; }
+.structures-table { border-collapse: collapse; margin-block: var(--space-sm); }
+.structures-table th, .structures-table td { padding: var(--space-xs) var(--space-sm); border: 1px solid var(--color-rule); text-align: left; }
+/* the 3D tree stands in a studio well (styles/stage3d.css): 16:10, tools bottom right */
+.structures-3d.stage3d:not(.stage3d-fill) { inline-size: min(100%, 48rem); margin-block: var(--space-sm) var(--space-md); }
+.structures-3d-canvas { position: absolute; inset: 0; }
+.structures-3d canvas { width: 100%; height: 100%; display: block; }
+/* the legend matches the 2D tree and the 3D nodes: current pear, visited mint, the rest card */
+.structures-3d-legend { display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-md); margin-block-start: var(--space-md); font-size: var(--text-sm); color: var(--color-ink-2); }
+.structures-3d-legend span { display: inline-flex; align-items: center; gap: var(--space-2xs); }
+.structures-3d-legend i { display: inline-block; width: .875rem; height: .875rem; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--color-ink); }
+.tree-key-current { background: var(--color-accent); } .tree-key-visited { background: var(--color-mint); } .tree-key-pending { background: var(--color-card); }
+/* an embedded example sits in the lesson's flow: a hairline above, no card */
+.structures-embedded { min-inline-size: 0; margin-block: var(--space-md); padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule); }
+.structures-embedded h4 { margin-block: 0 var(--space-2xs); }

@@ -1,0 +1,144 @@
+/* Hallmark · shape: Split Studio · genre: playful · theme: Hum (deal 3/3, seed education-platform-where-teachers-7a65·bc10f235·2026-10-28·r0) · redesign: full · job: sign up, the action in the hero and again at the close
+ * hero: Stage · nav: slab bar with rounded knobs · footer: mast · imagery: the product (a live 3D pendulum lab, captures of the sample labs) · signature: page 64 of a physics book swinging as a pendulum you can lengthen
+ * axes: light/geometric-sans/chromatic-yellow · posture: full-palette · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 · weakest: P, a friendly lab could still read as any edtech; the hero is the working pendulum from page 64, never a picture of one */
+/* Hallmark · dismissed F4 · the ink fill on .hm-switch is the chosen segment of a switcher (the theme's chosen pill), not a second primary button */
+/* Home: Split Studio in Hum. The hero is the pendulum lab from page 64, running; below it the
+   materials switcher, a rail of the sample labs, the provenance rows, the classroom split and a
+   torn ink close. Marketing sizes apply inside .mk only. */
+
+.mk h1 { font-size: var(--text-display); letter-spacing: var(--tracking-display); line-height: 1.03; max-inline-size: 13ch; margin: 0; }
+.mk h2 { font-size: var(--text-section); letter-spacing: var(--tracking-display); line-height: 1.06; max-inline-size: 18ch; margin: 0; }
+.mk h1, .mk h2, .hm-materials-text h3 { text-wrap: balance; }
+.hm-materials-text h3 { font-size: var(--text-title); letter-spacing: -0.02em; line-height: 1.2; max-inline-size: 26ch; margin: 0; }
+.mk .lead { font-size: var(--text-lead); line-height: 1.45; color: var(--color-ink-2); max-inline-size: 34ch; margin: 0; }
+.hm-link { font-weight: 600; color: var(--color-accent-2); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.22em; }
+.hm-link:hover { color: var(--color-accent-2-deep); }
+
+/* ---------------------------------------------------------------- hero: Stage */
+.hm-hero { min-block-size: calc(100dvh - var(--cl-header-h)); display: grid; align-items: center; padding-block: var(--space-xl) var(--space-2xl); }
+.hm-hero-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-3xl); align-items: center; }
+.hm-hero-copy { display: flex; flex-direction: column; gap: var(--space-lg); min-inline-size: 0; }
+.hm-hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); padding-block-start: var(--space-xs); }
+.hm-join { display: grid; gap: var(--space-2xs); padding-block-start: var(--space-lg); border-block-start: 1px solid var(--color-rule-2); max-inline-size: 26rem; }
+.hm-join .code-input { max-inline-size: none; }
+/* the format hint stays for screen readers (aria-describedby); the join page shows it in full */
+.hm-join .code-hint { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.hm-join-note { margin: 0; color: var(--color-muted); font-size: var(--text-sm); }
+
+/* the lab: a sheet of card stock lifted off the paper, lit from the top left */
+.hero-lab { min-inline-size: 0; }
+.hero-lab-sheet { position: relative; background: var(--grain), var(--color-card); border-radius: var(--radius-card); box-shadow: var(--shadow-lift); padding: var(--space-md) var(--space-lg) var(--space-lg); display: grid; gap: var(--space-sm); }
+.hero-lab-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-md); flex-wrap: wrap; }
+.hero-lab-name { margin: 0; font-weight: 600; font-size: 1.0625rem; }
+.hero-lab-open { font-weight: 500; font-size: 0.9375rem; }
+.hero-lab-stage { position: relative; block-size: clamp(20rem, 52dvh, 31rem); border-radius: calc(var(--radius-card) - var(--space-md)); background: radial-gradient(120% 80% at 30% 0%, var(--color-paper) 0%, var(--color-paper-2) 70%, var(--color-paper-3) 100%); overflow: hidden; }
+.hero-lab-stage > .lab3d { position: absolute; inset: 0; }
+.hero-lab-2d { display: block; inline-size: 100%; block-size: 100%; }
+.hero-lab-view { position: absolute; inset-block-start: var(--space-sm); inset-inline-end: var(--space-sm); background: var(--color-card); }
+.hero-lab-controls { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: end; gap: var(--space-md) var(--space-lg); }
+.hero-lab-slider { min-inline-size: 0; }
+.hero-lab-period { display: grid; justify-items: end; line-height: 1.1; }
+.hero-lab-period-label { font-size: var(--text-sm); color: var(--color-muted); }
+.hero-lab-period-value { font-family: var(--font-display); font-weight: 600; font-size: 2rem; letter-spacing: -0.03em; white-space: nowrap; }
+.hero-lab-caption { margin: 0; color: var(--color-muted); font-size: var(--text-sm); }
+
+/* the 2D stand shares the inks */
+.hero-lab-2d .s2-beam { fill: var(--color-ink-2); }
+.hero-lab-2d .s2-ruler { fill: var(--color-card); stroke: var(--color-rule-2); }
+.hero-lab-2d .s2-tick { stroke: var(--color-ink); stroke-width: 1.2; }
+.hero-lab-2d .s2-arc { fill: none; stroke: var(--color-ink); stroke-width: 1.5; stroke-dasharray: 2 6; stroke-linecap: round; opacity: 0.55; }
+.hero-lab-2d .s2-string { stroke: var(--color-ink); stroke-width: 2; }
+.hero-lab-2d .s2-pivot { fill: var(--color-ink); }
+.hero-lab-2d .s2-bob { fill: var(--color-accent-3); stroke: var(--color-ink); stroke-width: 2.5; }
+.hero-lab-2d .s2-tab { fill: var(--color-accent); stroke: var(--color-accent-deep); }
+
+/* ---------------------------------------------------------------- sections */
+.hm-section { padding-block: 0 var(--section-gap-s); }
+
+/* materials: a switcher, every state a real capture of a sample lab */
+.hm-materials { padding-block: var(--section-gap-s) var(--section-gap); }
+.hm-materials-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-lg); margin-block-end: var(--space-2xl); }
+.hm-switch { display: inline-flex; flex-wrap: wrap; gap: var(--space-xs); }
+.hm-switch button {
+  --edge: 3px;
+  border: 0; border-radius: var(--radius-pill); padding: 0 var(--space-md); min-block-size: 2.75rem;
+  background: var(--grain), var(--color-card); color: var(--color-ink-2); font-weight: 500; white-space: nowrap;
+  box-shadow: inset 0 0 0 1px var(--color-rule-2), 0 var(--edge) 0 0 var(--color-edge);
+  transition: translate var(--dur-micro) var(--ease-snap), box-shadow var(--dur-micro) var(--ease-snap), background-color var(--dur-micro) var(--ease-snap);
+}
+.hm-switch button:hover { --edge: 4px; translate: 0 -1px; color: var(--color-ink); }
+.hm-switch button:active { --edge: 1px; translate: 0 2px; }
+.hm-switch button[aria-selected='true'] { background: var(--color-ink); color: var(--color-paper); box-shadow: 0 var(--edge) 0 0 var(--color-ink-2); }
+.hm-switch button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.hm-switch button:disabled { opacity: 0.55; cursor: not-allowed; translate: none; }
+.hm-materials-body { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--gap-columns); align-items: center; }
+.hm-materials-body:focus-visible { outline-offset: 8px; border-radius: var(--radius-card); }
+.hm-materials-text { display: grid; gap: var(--space-md); align-content: center; }
+.hm-materials-text p { margin: 0; color: var(--color-ink-2); font-size: 1.0625rem; max-inline-size: 34ch; }
+.hm-shot { margin: 0; aspect-ratio: 4 / 3; border-radius: var(--radius-card); overflow: hidden; background: var(--color-paper-2); box-shadow: var(--shadow-card); }
+.hm-shot img { inline-size: 100%; block-size: 100%; object-fit: cover; object-position: top center; outline: 1px solid var(--color-keyline); outline-offset: -1px; border-radius: inherit; }
+
+/* samples: a rail past the container's right edge */
+.hm-samples { padding-block: 0 var(--section-gap-s); }
+.hm-samples-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-md); margin-block-end: var(--space-xl); }
+.hm-rail {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(17rem, 21rem); gap: var(--space-lg);
+  max-inline-size: none; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
+  padding-block: var(--space-xs) var(--space-lg);
+  padding-inline: max(var(--gutter), calc((100% - var(--container)) / 2 + var(--gutter)));
+  scrollbar-width: thin;
+}
+.hm-rail > * { scroll-snap-align: start; min-inline-size: 0; }
+.hm-samples-empty { display: grid; gap: var(--space-xs); justify-items: start; }
+.hm-samples-empty-title { margin: 0; font-weight: 600; }
+
+/* trust: rows parted by hairlines */
+.hm-trust { padding-block: 0 var(--section-gap); }
+.hm-trust-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-lg) var(--gap-columns); align-items: start; }
+.hm-trust-head { display: grid; gap: var(--space-md); }
+.hm-rows { margin: 0; border-block-start: 1px solid var(--color-ink); }
+.hm-row { display: grid; grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: var(--space-md); align-items: center; padding-block: var(--space-lg); border-block-end: 1px solid var(--color-rule-2); }
+.hm-row dt { margin: 0; }
+.hm-row dt .prov { font-size: var(--text-sm); padding: var(--space-2xs) var(--space-sm); }
+.hm-row dd { margin: 0; font-size: 1.0625rem; color: var(--color-ink); }
+.hm-trust-review { grid-column: 2; margin: 0; font-weight: 600; font-size: 1.0625rem; }
+
+/* classroom: facts beside the lab on a phone */
+.hm-classroom { padding-block: 0 var(--section-gap-l); }
+.hm-classroom-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gap-columns); align-items: center; }
+.hm-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-xl) var(--gap-columns); margin: var(--space-2xl) 0 0; }
+.hm-facts div { display: grid; gap: var(--space-xs); padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule-2); }
+.hm-facts dt { font-weight: 600; font-size: var(--text-title); letter-spacing: -0.02em; line-height: 1.2; }
+.hm-facts dd { margin: 0; color: var(--color-ink-2); }
+.hm-phone { margin: 0; justify-self: center; inline-size: min(100%, 22rem); aspect-ratio: 390 / 750; border-radius: 32px; overflow: hidden; background: var(--color-paper-2); box-shadow: var(--shadow-lift); }
+.hm-phone img { inline-size: 100%; block-size: 100%; object-fit: cover; object-position: top center; outline: 1px solid var(--color-keyline-strong); outline-offset: -1px; border-radius: inherit; }
+
+/* close: a torn ink sheet, the hero's action again */
+.hm-close { padding-block: var(--section-gap-s); }
+.hm-close-inner { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--space-xl) var(--gap-columns); align-items: end; }
+.hm-close h2 { color: var(--color-paper); font-size: var(--text-display-s); max-inline-size: 20ch; }
+.hm-close-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-md) var(--space-lg); justify-content: flex-end; }
+.hm-close-join { color: var(--color-paper); font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.22em; white-space: nowrap; }
+.hm-close-join:hover { color: var(--color-accent); }
+.hm-close :focus-visible { outline-color: var(--color-accent); }
+
+/* ---------------------------------------------------------------- narrow screens */
+@media (max-width: 60rem) {
+  .hm-hero { min-block-size: 0; padding-block: var(--space-xl); }
+  .hm-hero-grid, .hm-materials-body, .hm-trust-grid, .hm-classroom-grid, .hm-close-inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+  .hm-trust-review { grid-column: 1; }
+  .hm-close-actions { justify-content: flex-start; }
+  .hero-lab-stage { block-size: min(78vw, 26rem); }
+}
+@media (max-width: 40rem) {
+  .hero-lab-sheet { padding: var(--space-sm) var(--space-md) var(--space-md); }
+  .hero-lab-controls { grid-template-columns: minmax(0, 1fr) auto; }
+  .hero-lab-play { grid-column: 1 / -1; }
+  .hm-facts { grid-template-columns: minmax(0, 1fr); }
+  .hm-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-xs); }
+  .hm-switch { flex-wrap: nowrap; overflow-x: auto; padding-block-end: var(--space-xs); max-inline-size: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hm-switch button:hover, .hm-switch button:active { translate: none; }
+}

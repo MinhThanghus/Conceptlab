@@ -1,0 +1,56 @@
+{
+  "review_date": "2026-11-01",
+  "collection_url": "http://127.0.0.1:5300/learn/research",
+  "manifest": "shared/paper_study_batch.json",
+  "distribution": { "agriculture": 3, "physical_chemistry": 2, "semiconductors": 5 },
+  "published_lesson_codes": ["AGWATR", "AGFARM", "AGMAZE", "PCWAVS", "PCPARE", "CHNASH", "CHNWRE", "CHCMPS", "CHMSTE", "CHMEMS"],
+  "published_content": {
+    "language": "en",
+    "origin": "Editorial reading guides based on full-text primary papers; distinct from the raw AI-generated test drafts.",
+    "parts_per_lesson": 6,
+    "reading_steps_per_lesson": 4,
+    "flow_nodes_per_lesson": 4,
+    "questions_per_lesson": 3,
+    "original_paper_and_pdf_links": true,
+    "original_fulltext_sections_crosschecked": true,
+    "scientific_expert_review": false
+  },
+  "interactive_models": {
+    "semiconductor_chip": ["planar / nanosheet / vertical nanowire structures", "ideal CMOS input-prediction-output exercise", "exploded chip layers", "qualitative SET / READ / RESET memory states"],
+    "agriculture_field": ["water stage", "planting pattern", "crop structure", "root-zone microorganism symbols"],
+    "reaction_diffusion": ["dimensionless diffusion", "A+B to 2B autocatalysis", "B to C conversion", "conserved material and linked concentration plot"],
+    "porous_adsorption": ["manually allocated CO2 / H2O sites", "surface versus pore volume"]
+  },
+  "live_ai_validation": {
+    "completed_papers": 10,
+    "input": "Original complete PDFs, 7 to 24 pages, downloaded from the NIH PMC open-access bucket with recorded SHA-256 checksums.",
+    "steps": ["upload PDF", "real AI paper structure", "real AI generation", "test-only author confirmations", "validate", "publish in isolated database", "anonymous lesson and source access", "quiz submission"],
+    "isolation": ".build-check/paper-study-live",
+    "report": ".build-check/paper-study-live/report.json",
+    "pdf_manifest": ".build-check/paper-study-sources/pdf-download-report.json",
+    "post_fix_anonymous_checks": ".build-check/paper-study-live/post-repair-anonymous-check.json",
+    "original_ai_drafts_retained": true
+  },
+  "citation_correction": {
+    "problem": "A quote prefix found in a PDF was incorrectly classified as an exact match of the whole quoted sentence.",
+    "fix": "Full matches remain exact. Prefix matches become approximate, and generated citation text retains only the matching prefix. Unlocated citations retain their uncertainty.",
+    "regression_test": "backend/tests/test_quote_location.py",
+    "test_lab_repair_report": ".build-check/paper-study-live/locator-fix-report.json",
+    "post_fix_audit": ".build-check/paper-study-live/after-locator-fix-audit.json",
+    "existing_user_labs_rewritten": false
+  },
+  "verification": {
+    "frontend": { "passed": 771, "test_files": 109 },
+    "backend": { "passed": 429, "opt_in_live_tests_skipped_in_offline_suite": 14 },
+    "i18n": { "keys_per_language": 4410, "languages": ["vi", "en"] },
+    "production_build": "passed",
+    "browser": "Chromium at 1440px and 375px, WebGL with SwiftShader and interactive 2D fallbacks; software rendering, not a physical GPU benchmark.",
+    "collection_and_lesson_report": ".build-check/paper-study-collection/report.json",
+    "live_ai_chip_browser_report": ".build-check/paper-study-live/browser-chip-report.json"
+  },
+  "limits": [
+    "The models teach selected mechanisms and explicitly state their scope; they do not reproduce the papers' measured device dimensions, kinetic parameters, yield or adsorption capacities.",
+    "The live pipeline test validates application behavior and source matching, not independent scientific confirmation of AI-generated claims.",
+    "Public reading guides link original papers; the source note is not presented as a local full-text PDF."
+  ]
+}

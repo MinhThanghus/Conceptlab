@@ -1,0 +1,168 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · system: DESIGN.md (Hum, adapted)
+ * built: the project · redesign: full · shared controls of the interactive blocks (simulation, graph, algorithm):
+ * wells and hairlines inside the block's card, never a card in a card; a chosen thing is ink with paper type */
+
+/* Shared styles for interactive blocks (graph, simulation, algorithm). Tokens only. */
+
+.ix-root { container-type: inline-size; container-name: ix; }
+.ix-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); align-items: start; }
+@container ix (min-width: 52rem) {
+  .ix-layout { grid-template-columns: minmax(0, 1fr) minmax(17rem, 21rem); gap: var(--space-xl); }
+  .ix-layout.wide-side { grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem); }
+}
+.ix-main, .ix-side { display: flex; flex-direction: column; gap: var(--space-lg); min-inline-size: 0; }
+.ix-side { gap: var(--space-md); }
+
+/* Section heads inside a block: the body face, a step up, ink; an icon beside one stays quiet. */
+.ix-heading { display: flex; align-items: center; gap: var(--space-xs); margin: 0; font-size: var(--app-h4); font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; color: var(--color-ink); }
+.ix-heading svg { inline-size: 1.1rem; block-size: 1.1rem; color: var(--color-muted); flex: none; }
+.ix-sub { font-size: var(--text-sm); color: var(--color-muted); margin: 0; line-height: 1.5; }
+
+/* A well: the surface ladder's third rung, tinted, no border. `plain` is just grouped space. */
+.ix-panel { background: var(--color-paper-2); border-radius: var(--radius-stock); padding: var(--space-md); display: flex; flex-direction: column; gap: var(--space-sm); min-inline-size: 0; }
+.ix-panel.plain { background: transparent; padding: 0; }
+
+/* The model's formula: its name, then the formula at reading size, in a well. */
+.ix-formula { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-md); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); overflow-x: auto; }
+.ix-formula-name { font-size: var(--text-sm); color: var(--color-muted); }
+.ix-formula-tex { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-lg); min-inline-size: 0; }
+.ix-formula .formula { font-size: 1.25rem; }
+.ix-formula code { font-size: 1.05rem; white-space: pre-wrap; }
+
+.ix-params { display: flex; flex-direction: column; gap: var(--space-md); }
+.ix-params .field-label { font-size: 0.9375rem; }
+
+/* A scenario's name with its line: solid for B (the one being edited), dashed for A (kept). */
+.ix-scenario-tag { display: inline-flex; align-items: center; gap: var(--space-xs); font-size: var(--text-sm); font-weight: 600; color: var(--color-ink); white-space: nowrap; }
+.ix-scenario-tag .swatch { inline-size: 1.15rem; block-size: 0; border-block-start: 3px solid var(--tag, currentColor); border-radius: 2px; flex: none; }
+.ix-scenario-tag .swatch.dash { border-block-start-style: dashed; }
+
+.ix-toolbar { display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
+
+/* The challenge switch in a block's head: card stock at rest, ink with paper type once on. */
+.btn.ix-toggle[aria-pressed='true'] { --btn-bg: var(--color-ink); --btn-fg: var(--color-paper); --btn-line: transparent; --btn-edge: var(--color-ink-2); }
+
+/* Figures: each stat under a hairline, the label a step smaller, the figure tabular. The lead
+   result is set larger under an ink rule; no boxes, no coloured stripes. */
+.ix-readouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr)); gap: var(--space-sm) var(--space-lg); margin: 0; }
+.ix-readout { border-block-start: 1px solid var(--color-rule); padding-block-start: var(--space-xs); min-inline-size: 0; }
+.ix-readout dt { font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); line-height: 1.35; }
+.ix-readout dd { margin: var(--space-3xs) 0 0; display: flex; flex-direction: column; gap: var(--space-3xs); }
+.ix-readout-value { font-size: 1.5rem; font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; color: var(--color-ink); }
+.ix-readout-value .unit { font-size: var(--text-sm); font-weight: 500; letter-spacing: 0; color: var(--color-muted); margin-inline-start: var(--space-2xs); }
+.ix-readout-value .unit.tight { margin-inline-start: 0; }
+.ix-readout .note { font-size: var(--text-xs); color: var(--color-muted); line-height: 1.4; }
+.ix-readout.accent { border-block-start: 2px solid var(--color-ink); }
+.ix-readouts.has-lead .ix-readout.accent .ix-readout-value { font-size: 2rem; }
+.ix-novalue { font-size: var(--text-sm); font-weight: 500; letter-spacing: 0; color: var(--color-muted); }
+.ix-readout.b2 { border-block-start-color: var(--cl-series-2); }
+
+.ix-features { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-xs); }
+.ix-features li { display: flex; gap: var(--space-xs); align-items: flex-start; line-height: 1.5; }
+.ix-features li > svg { flex: none; inline-size: 1.1rem; block-size: 1.1rem; margin-block-start: 0.2rem; color: var(--color-muted); }
+
+.ix-ai-off { display: flex; gap: var(--space-xs); align-items: flex-start; font-size: var(--text-sm); color: var(--color-muted); margin: 0; }
+.ix-ai-off svg { flex: none; inline-size: 1.05rem; block-size: 1.05rem; margin-block-start: 0.15rem; }
+/* What the AI wrote: a well, labelled by its badge; never a stripe down the side. */
+.ix-ai-answer { background: var(--color-paper-2); border-radius: var(--radius-stock); padding: var(--space-md); display: flex; flex-direction: column; gap: var(--space-xs); }
+.ix-ai-answer > :last-child { margin-block-end: 0; }
+
+/* The honest note: a quiet line under the figures. */
+.ix-disclaimer { display: flex; gap: var(--space-xs); align-items: flex-start; font-size: var(--text-sm); line-height: 1.5; color: var(--color-ink-2); background: var(--color-sand-soft); border-radius: var(--radius-small); padding: var(--space-xs) var(--space-sm); margin: 0; }
+.ix-disclaimer svg { flex: none; inline-size: 1.05rem; block-size: 1.05rem; margin-block-start: 0.15rem; color: var(--color-kraft-ink); }
+
+.ix-check-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-xs); }
+.ix-check-list li { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs) var(--space-sm); font-variant-numeric: tabular-nums; }
+
+/* ---------------------------------------------------------------- active learning: predict, change, run, compare, explain */
+.ix-al { background: var(--color-paper-2); border-radius: var(--radius-stock); padding: clamp(var(--space-md), 3cqi, var(--space-lg)); display: flex; flex-direction: column; gap: var(--space-md); }
+.ix-al-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-xs); }
+.ix-al-head .ix-heading { min-inline-size: 0; }
+.ix-al-head .icon-btn { flex: none; margin-block: calc(-1 * var(--space-xs)); margin-inline-end: calc(-1 * var(--space-xs)); }
+.ix-al-head .icon-btn:hover:not(:disabled) { background: var(--color-paper-3); }
+/* The steps read like the studio's stepper: the current one ink with a pear number, done ones mint. */
+.ix-al-steps { display: flex; flex-wrap: wrap; gap: var(--space-2xs); list-style: none; margin: 0; padding: 0; }
+.ix-al-steps li { display: inline-flex; align-items: center; gap: var(--space-xs); padding: var(--space-2xs) var(--space-sm) var(--space-2xs) var(--space-2xs); border-radius: var(--radius-pill); font-size: var(--text-sm); font-weight: 500; color: var(--color-ink-2); white-space: nowrap; }
+.ix-al-steps li .n { display: inline-grid; place-items: center; inline-size: 1.5rem; block-size: 1.5rem; border-radius: 50%; background: var(--color-paper-3); color: var(--color-ink); font-size: var(--text-xs); font-weight: 600; font-variant-numeric: tabular-nums; }
+.ix-al-steps li .n svg { inline-size: 0.85rem; block-size: 0.85rem; }
+.ix-al-steps li[aria-current='step'] { background: var(--color-ink); color: var(--color-paper); }
+.ix-al-steps li[aria-current='step'] .n { background: var(--color-accent); color: var(--color-accent-ink); }
+.ix-al-steps li.done .n { background: var(--color-mint); color: var(--color-ink); }
+/* A narrow block keeps the steps on one line: the current step says its name, the others their number. */
+@container ix (max-width: 30rem) {
+  .ix-al-steps { flex-wrap: nowrap; }
+  .ix-al-steps li:not([aria-current='step']) { padding-inline-end: var(--space-2xs); }
+  .ix-al-steps li:not([aria-current='step']) .ix-al-step-name { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+.ix-al-body { display: flex; flex-direction: column; gap: var(--space-sm); }
+.ix-al-body h3 { font-size: var(--app-h3); margin: 0; }
+.ix-al-body h3:focus { outline: none; }
+.ix-al-body h3:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: var(--radius-small); }
+.ix-al-body .field .textarea, .ix-al-body .field .input { background: var(--color-card); }
+.ix-options { display: grid; gap: var(--space-xs); border: 0; margin: 0; padding: 0; min-inline-size: 0; }
+.ix-options legend { font-weight: 600; font-size: 0.9375rem; margin-block-end: var(--space-xs); padding: 0; }
+/* An answer is a control: card fill, a hairline edge, a 44px row; the chosen one gets an ink ring. */
+.ix-option { display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-input); background: var(--color-card); box-shadow: inset 0 0 0 1px var(--color-rule-2); cursor: pointer; min-block-size: var(--cl-control-h); line-height: 1.4; transition: box-shadow var(--dur-micro) var(--ease-snap), background-color var(--dur-micro) var(--ease-snap); }
+.ix-option:hover { box-shadow: inset 0 0 0 1px var(--color-ink-2); }
+.ix-option:has(input:checked) { box-shadow: inset 0 0 0 2px var(--color-ink); background: var(--color-fringe); font-weight: 500; }
+.ix-option:active { background: var(--color-paper-3); }
+.ix-option:has(input:focus-visible) { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.ix-option:has(input:disabled) { opacity: 0.55; cursor: not-allowed; }
+.ix-option input { inline-size: 1.15rem; block-size: 1.15rem; accent-color: var(--color-ink); flex: none; margin: 0; }
+.ix-change { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-sm); font-size: var(--text-md); margin: 0; }
+.ix-change .arrow { color: var(--color-muted); inline-size: 1.1rem; block-size: 1.1rem; flex: none; }
+.ix-pill { display: inline-flex; align-items: center; gap: var(--space-2xs); padding: var(--space-3xs) var(--space-sm); border-radius: var(--radius-pill); background: var(--color-card); box-shadow: inset 0 0 0 1px var(--color-rule-2); font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ix-observed { display: flex; flex-direction: column; gap: var(--space-xs); padding-block: var(--space-sm); border-block: 1px solid var(--color-rule-2); }
+.ix-observed > p { margin: 0; }
+/* The verdict: a soft tint of its meaning, ink type, the icon carries the colour. */
+.ix-verdict { display: flex; gap: var(--space-sm); align-items: flex-start; padding: var(--space-sm) var(--space-md); border-radius: var(--radius-stock); color: var(--color-ink); line-height: 1.5; }
+.ix-verdict svg { flex: none; inline-size: 1.35rem; block-size: 1.35rem; margin-block-start: 0.05rem; }
+.ix-verdict.good { background: var(--color-mint-soft); }
+.ix-verdict.good > svg { color: var(--color-mint-ink); }
+.ix-verdict.retry { background: var(--color-sand-soft); }
+.ix-verdict.retry > svg { color: var(--color-kraft-ink); }
+.ix-verdict.neutral { background: var(--color-accent-2-soft); }
+.ix-verdict.neutral > svg { color: var(--color-accent-2-deep); }
+.ix-verdict .rich-text > :last-child, .ix-verdict p:last-child { margin-block-end: 0; }
+/* A self-check answer the learner chose: ink with paper type. */
+.ix-al .btn[aria-pressed='true'] { --btn-bg: var(--color-ink); --btn-fg: var(--color-paper); --btn-line: transparent; --btn-edge: var(--color-ink-2); }
+
+/* ---------------------------------------------------------------- editors */
+.ix-editor { display: flex; flex-direction: column; gap: var(--space-xl); }
+.ix-editor-section { display: flex; flex-direction: column; gap: var(--space-sm); }
+.ix-editor-section > h3 { margin: 0; font-size: var(--app-h4); font-weight: 600; display: flex; align-items: center; gap: var(--space-xs); }
+.ix-editor-section > h3 svg { inline-size: 1.1rem; block-size: 1.1rem; color: var(--color-muted); }
+.ix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); gap: var(--space-sm); }
+.ix-grid.wide { grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
+/* A field whose options are long (e.g. provenance) takes its own row instead of a narrow cell. */
+.ix-grid > .ix-wide-field { grid-column: 1 / -1; max-inline-size: 22rem; }
+/* One parameter: a well of its fields; a parameter with a problem takes the error tint. */
+.ix-param-card { border: 0; border-radius: var(--radius-stock); background: var(--color-paper-2); padding: var(--space-sm) var(--space-md) var(--space-md); display: flex; flex-direction: column; gap: var(--space-sm); }
+.ix-param-card[data-invalid='true'] { background: var(--color-error-soft); }
+.ix-param-card header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-xs); }
+.ix-param-card .input, .ix-param-card .select, .ix-param-card .textarea { background: var(--color-card); }
+.ix-symbol { display: inline-grid; place-items: center; min-inline-size: 2.2rem; block-size: 2.2rem; padding-inline: var(--space-xs); border-radius: var(--radius-small); background: var(--color-card); box-shadow: inset 0 0 0 1px var(--color-rule-2); color: var(--color-ink); font-family: var(--font-mono); font-weight: 600; }
+.ix-chips { display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
+/* What students will see: the real view, under a plain caption, set off by a dashed edge. */
+.ix-preview { border: 2px dashed var(--color-rule-2); border-radius: var(--radius-card); padding: var(--space-md); background: var(--color-paper); }
+.ix-preview > .ix-preview-label { display: inline-flex; align-items: center; gap: var(--space-xs); font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); margin-block-end: var(--space-sm); }
+.ix-meta { display: flex; flex-direction: column; gap: var(--space-sm); padding-block-end: var(--space-md); border-block-end: 1px solid var(--color-rule); }
+.ix-option-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--space-xs); align-items: center; }
+.ix-option-row .correct { display: inline-flex; align-items: center; gap: var(--space-2xs); font-size: var(--text-sm); white-space: nowrap; }
+.ix-option-row .correct input { inline-size: 1.15rem; block-size: 1.15rem; accent-color: var(--color-mint-deep); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ix-option { transition: none; }
+}
+.ix-prediction { margin: 0; }
+
+/* ---------------------------------------------------------------- the challenge on a lesson slide
+   (the graph's Predict tab, the simulation's rail): each step's question leads at the deck's lead
+   size, the words at body size; with room, the options sit two by two as cards. */
+:is(.gr-slide, .sim-slide) .ix-al-body { font-size: var(--deck-body, 1rem); line-height: 1.5; }
+:is(.gr-slide, .sim-slide) .ix-al-body h3 { font-size: var(--deck-lead, var(--app-h3)); font-weight: 600; line-height: 1.25; text-wrap: balance; }
+:is(.gr-slide, .sim-slide) .ix-al-body .prose { max-inline-size: 40em; }
+:is(.gr-slide, .sim-slide) .ix-options legend { font-size: var(--deck-small, 0.9375rem); }
+:is(.gr-slide, .sim-slide) .ix-option { min-block-size: 3.25rem; padding: var(--space-sm) var(--space-md); font-size: var(--deck-body, 1rem); }
+:is(.gr-slide, .sim-slide) .ix-al-steps li { font-size: var(--deck-small, var(--text-sm)); }
+.gr-slide .ix-options { grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: var(--space-sm); }

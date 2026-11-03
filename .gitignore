@@ -1,0 +1,49 @@
+# Secrets & local config
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+backend/data/
+backend/storage/
+backend/test-output/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.log
+
+# Test artifacts
+e2e/output/
+e2e/.auth/
+playwright-report/
+test-results/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local tool working folders
+.build-check/
+.muse/
+
+# Private notes and files that are not part of the app
+thongtinai.txt
+specduan.txt
+*.pptx
+.hallmark/
+
+# Third-party repositories cloned for reference (each has its own upstream)
+baoyu-design/
+hallmark/
+img2threejs/
+mapbox-gl-js/
+typeui/
+ui-ux-pro-max-skill/

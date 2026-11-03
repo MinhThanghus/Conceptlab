@@ -1,0 +1,16 @@
+.advanced-stage { overflow-x: auto; padding: 1rem; border: 1px solid var(--color-rule); border-radius: var(--radius-stock); }
+.advanced-graph { width: min(100%, 20rem); height: auto; display: block; margin-inline: auto; }
+.advanced-graph line { stroke: var(--color-ink-2); stroke-width: 0.8; }
+.advanced-graph circle { fill: var(--color-paper); stroke: var(--color-ink); stroke-width: 0.8; }
+.advanced-graph .visited circle { fill: var(--color-mint); }
+.advanced-graph .frontier circle { fill: var(--color-accent); }
+.advanced-graph .current circle { fill: var(--color-accent-3); stroke-width: 1.5; }
+.advanced-graph text { fill: var(--color-ink); font-size: 5px; font-weight: 700; }
+.advanced-stage dl { display: grid; grid-template-columns: minmax(8rem, auto) 1fr; gap: 0.5rem 1rem; }
+.advanced-stage dd { margin: 0; }
+.advanced-board, .advanced-table { border-collapse: collapse; margin-inline: auto; }
+.advanced-board td { inline-size: 2.75rem; block-size: 2.75rem; text-align: center; border: 1px solid var(--color-ink); font-size: 1.5rem; }
+.advanced-board tr:nth-child(odd) td:nth-child(even), .advanced-board tr:nth-child(even) td:nth-child(odd) { background: var(--color-mint); }
+.advanced-board td.candidate { outline: 3px solid var(--color-accent-3); outline-offset: -3px; }
+.advanced-table td, .advanced-table th { padding: 0.4rem; border: 1px solid var(--color-ink-2); text-align: center; }
+.advanced-table td.candidate { outline: 3px solid var(--color-accent-3); outline-offset: -3px; }

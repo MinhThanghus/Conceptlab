@@ -1,0 +1,22 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · theme: Hum (DESIGN.md, locked) · posture: full-palette · built: the project · redesign: full · v2.0.0 */
+/* Hallmark · dismissed 28a · source thumbnails fill a list of many sources; none of them is the page's first large paint */
+/* Source thumbnail: fills its box (the parent decides the size and aspect ratio). Tokens only. */
+.src-thumb {
+  position: relative; display: grid; place-items: center; inline-size: 100%; block-size: 100%;
+  overflow: hidden; background: var(--cl-surface-2); color: var(--cl-text-muted);
+}
+.src-thumb > img { inline-size: 100%; block-size: 100%; object-fit: cover; display: block; }
+.src-thumb.is-pdf > img { object-fit: contain; object-position: top center; background: var(--cl-surface); }
+.src-thumb-fallback { display: grid; place-items: center; inline-size: 100%; block-size: 100%; }
+.src-thumb-fallback svg { inline-size: 1.75rem; block-size: 1.75rem; }
+.src-thumb-fallback.is-failed { color: var(--cl-danger); background: var(--cl-danger-soft); }
+.src-thumb-data {
+  display: flex; flex-direction: column; justify-content: center; gap: var(--space-3xs); inline-size: 100%; block-size: 100%;
+  padding: var(--space-xs) var(--space-sm); font-size: var(--text-sm); line-height: 1.35; color: var(--cl-text);
+  background: repeating-linear-gradient(0deg, var(--cl-surface) 0 1.35em, var(--cl-surface-2) 1.35em calc(1.35em + 1px));
+}
+.src-thumb-data > span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.src-thumb-note {
+  display: block; inline-size: 100%; block-size: 100%; padding: var(--space-xs) var(--space-sm); font-size: var(--text-xs); line-height: 1.45;
+  color: var(--cl-text-muted); background: var(--cl-surface-2); overflow: hidden; text-align: start; overflow-wrap: anywhere;
+}

@@ -1,0 +1,155 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · system: DESIGN.md (Hum, adapted)
+ * built: the project · redesign: full · graph block: the plot leads, the facts follow in a plain list */
+
+/* Graph block. The shared interactive layout (ix-root, ix-layout, ix-main, ix-side) lives in
+   features/sim/interactive.css; everything that only the graph draws is styled here. */
+
+/* the formula: a tinted well, no border (the surface ladder's third rung) */
+.ix-formula.gr-formula { background: var(--color-paper-2); border: 0; border-radius: var(--radius-stock); padding: var(--space-sm) var(--space-md); gap: var(--space-xs) var(--space-sm); }
+.gr-formula-label { font-size: var(--text-sm); color: var(--color-muted); }
+
+.ix-heading.gr-heading { font-size: var(--app-h4); font-weight: 600; }
+.ix-heading.gr-heading-sm { font-size: 0.9375rem; font-weight: 600; }
+
+/* the challenge toggle: card stock at rest, ink with paper type once it is on */
+.btn.gr-toggle[aria-pressed='true'] { --btn-bg: var(--color-ink); --btn-fg: var(--color-paper); --btn-line: transparent; --btn-edge: var(--color-ink-2); }
+.btn.gr-toggle:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.btn.gr-toggle:active:not(:disabled) { --edge: 1px; }
+.btn.gr-toggle:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* compare A and B: a well beside the sliders, never a bordered box inside the card */
+.gr-well { display: flex; flex-direction: column; gap: var(--space-sm); padding: var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); min-inline-size: 0; }
+.gr-frozen { font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+/* A against B: horizontal rules only, the quantity names in ink, figures tabular */
+.gr-diff .table tbody th { font-weight: 500; font-size: 0.9375rem; color: var(--color-ink); white-space: normal; border-block-end-color: var(--color-rule); }
+.gr-diff .table tr:last-child th { border-block-end: 0; }
+/* quantity names are mid-sentence phrases elsewhere; a row head starts with a capital */
+.gr-diff .table tbody th::first-letter { text-transform: uppercase; }
+
+/* what the graph says: a hairline above, then a plain list */
+.gr-features { display: flex; flex-direction: column; gap: var(--space-sm); padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule); min-inline-size: 0; }
+.gr-feature-list { margin: 0; padding-inline-start: 1.25rem; display: grid; gap: var(--space-xs); line-height: 1.55; }
+.gr-feature-list li::marker { color: var(--color-muted); }
+.gr-explain { padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule); }
+
+/* ---------------------------------------------------------------- editor */
+.gr-expr .input { font-family: var(--cl-font-mono); font-size: 1.0625rem; }
+.gr-syntax { display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
+.gr-syntax code { font-size: var(--text-sm); background: transparent; padding: 0; }
+.gr-syntax .chip:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.gr-missing { display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
+.gr-mini { border-radius: var(--radius-stock); padding: var(--space-sm) var(--space-md); background: var(--color-paper-2); }
+.gr-preview { display: flex; flex-direction: column; gap: var(--space-sm); padding-block-start: var(--space-md); }
+.gr-preview-label { margin: 0; font-size: var(--text-sm); color: var(--color-muted); }
+
+/* ---------------------------------------------------------------- the graph on a lesson slide
+   Three tabs over one live graph; every panel stays mounted so the sliders keep their values. The
+   plot takes the height the sheet leaves it (GraphView measures .gr-plot-host and draws to it),
+   its lines 3px and its axis words at the deck's small size; the parameters sit in a rail beside
+   it. The deck sizes come from the sheet (--deck-*, contract C1), with fallbacks. */
+.gr-slide {
+  /* the shared small sizes and compact controls, lifted to the deck's floor inside the slide */
+  --text-xs: var(--deck-small, 0.8125rem);
+  --text-sm: var(--deck-small, 0.875rem);
+  --cl-control-h-sm: var(--cl-control-h);
+  display: flex; flex: 1 1 auto; flex-direction: column; min-block-size: 0; gap: var(--space-sm);
+}
+/* the tabs: segments on a paper-2 track, the chosen one ink with paper type */
+.gr-slide-tabs {
+  display: flex; flex: none; align-self: flex-start; gap: var(--space-3xs);
+  max-inline-size: 100%; overflow-x: auto; scrollbar-width: none;
+  padding: var(--space-3xs); border-radius: var(--radius-pill); background: var(--color-paper-2);
+}
+.gr-slide-tabs button {
+  appearance: none; flex: none; min-block-size: var(--cl-control-h); padding: 0 var(--space-md);
+  border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--color-ink-2);
+  font: inherit; font-size: var(--deck-small, var(--text-sm)); font-weight: 600; white-space: nowrap; cursor: pointer;
+  transition: background-color var(--dur-micro) var(--ease-snap), color var(--dur-micro) var(--ease-snap);
+}
+.gr-slide-tabs button:hover { background: var(--color-paper-3); color: var(--color-ink); }
+.gr-slide-tabs button[aria-selected='true'] { background: var(--color-ink); color: var(--color-paper); }
+.gr-slide-tabs button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.gr-slide-panel { flex: 1 1 auto; min-block-size: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.gr-slide-panel[hidden] { display: none; }
+.gr-slide-panel:not(.gr-slide-explore) { font-size: var(--deck-body, 1rem); line-height: 1.5; }
+.gr-slide-panel:not(.gr-slide-explore) > * + * { margin-block-start: var(--space-md); }
+.gr-slide-panel:not(.gr-slide-explore) .ix-heading { font-size: var(--deck-body, var(--app-h4)); }
+.gr-slide-panel .small, .gr-slide-panel .ix-sub { font-size: var(--deck-small, var(--text-sm)); }
+.gr-slide-explore:not([hidden]) { display: flex; flex-direction: column; gap: var(--space-sm); }
+/* the formula: a slim well with its two tools at the end */
+.gr-slide .ix-main > .gr-formula { flex: none; }
+.gr-slide .ix-formula.gr-formula { padding: var(--space-3xs) var(--space-3xs) var(--space-3xs) var(--space-md); gap: var(--space-2xs) var(--space-sm); overflow-y: hidden; }
+.gr-slide .gr-formula-label { font-size: var(--deck-small, var(--text-sm)); }
+.gr-slide .gr-formula .formula { font-size: var(--deck-lead, 1.25rem); }
+.gr-slide .gr-formula .ix-toolbar { margin-inline-start: auto; gap: var(--space-3xs); }
+.gr-slide .gr-formula .btn { min-block-size: var(--cl-control-h); font-size: var(--deck-small, var(--text-sm)); }
+/* the plot and the rail fill what is left (beside each other); stacked on a phone, the panel scrolls */
+.gr-slide-explore > .ix-layout { flex: none; }
+.gr-slide .ix-layout { gap: var(--space-md) var(--space-lg); align-items: stretch; }
+.gr-slide .ix-main { gap: var(--space-xs); }
+.gr-plot-host { flex: none; }
+.gr-slide .ix-side { gap: var(--space-xs); }
+.gr-slide .ix-side > .ix-heading { font-size: var(--deck-body, var(--app-h4)); }
+.gr-slide .ix-side .ix-sub { font-size: var(--deck-small, var(--text-sm)); }
+.gr-slide .ix-params { gap: var(--space-sm); }
+.gr-slide .ix-params .field-label { font-size: var(--deck-small, 0.9375rem); line-height: 1.35; }
+.gr-slide .ix-params .field-hint, .gr-slide .ix-params .prov { font-size: var(--deck-small, var(--text-xs)); }
+.gr-slide .ix-params .input-sm { min-block-size: var(--cl-control-h); font-size: var(--deck-small, 0.9375rem); }
+/* on arrival, beside the plot (under it on narrow sheets): what the curve tells the learner and how
+   the teacher explains it (the results tab keeps the rest); it scrolls on its own, the plot keeps
+   its height */
+.gr-slide-read { display: flex; flex-direction: column; gap: var(--space-xs); min-inline-size: 0; }
+.gr-slide-read > .ix-heading { margin: 0; font-size: var(--deck-body, var(--app-h4)); }
+.gr-slide-read .gr-feature-list { gap: var(--space-3xs); font-size: var(--deck-small, var(--text-sm)); line-height: 1.45; }
+/* under the sliders (an explanation only): part of the rail, which scrolls as a whole */
+.gr-slide .ix-side > .gr-slide-read { flex: none; overflow: visible; padding-block-start: var(--space-sm); border-block-start: 1px solid var(--color-rule); }
+.gr-slide-read .gr-feature-list .formula { font-size: 1em; }
+.gr-slide-explain { max-inline-size: none; color: var(--color-ink); font-size: var(--deck-small, var(--text-sm)); line-height: 1.5; }
+.gr-slide-explain p { margin: 0; }
+@container ix (min-width: 40rem) {
+  .gr-slide-explore > .ix-layout { flex: 1 1 auto; min-block-size: 0; }
+  .gr-slide .ix-layout { grid-template-columns: minmax(0, 1fr) minmax(15rem, 21rem); grid-template-rows: minmax(0, 1fr); }
+  .gr-slide .ix-main, .gr-slide .ix-side { min-block-size: 0; }
+  /* a mid-size sheet: the reading goes under the plot, the sliders keep the full height beside both */
+  .gr-slide .ix-layout:has(> .gr-slide-read) { grid-template-rows: minmax(0, 1fr) auto; }
+  .gr-slide .ix-layout > .gr-slide-read { grid-column: 1; grid-row: 2; }
+  .gr-slide .ix-layout:has(> .gr-slide-read) > .ix-side { grid-column: 2; grid-row: 1 / span 2; }
+  .gr-slide-read { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; padding-inline-end: var(--space-2xs); }
+  .gr-plot-host { flex: 1 1 0; min-block-size: 0; }
+  .gr-slide .ix-side { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; padding: var(--space-3xs) var(--space-2xs) var(--space-3xs) 0; }
+}
+/* a wide sheet: plot, then the reading, then the sliders, each column the panel's full height */
+@container ix (min-width: 60rem) {
+  .gr-slide .ix-layout:has(> .gr-slide-read) { grid-template-columns: minmax(0, 1fr) minmax(12rem, 15rem) minmax(15rem, 19rem); grid-template-rows: minmax(0, 1fr); column-gap: var(--space-md); }
+  .gr-slide .ix-layout > .gr-slide-read { grid-column: 2; grid-row: 1; }
+  .gr-slide .ix-layout:has(> .gr-slide-read) > .ix-side { grid-column: 3; grid-row: 1; }
+}
+@container ix (max-width: 30rem) {
+  .gr-slide-tabs button { padding-inline: var(--space-sm); }
+}
+/* the plot on a slide: heavier lines, axis figures and names at the deck's small size (Plot reads
+   --cl-plot-tick and sizes its margins to it, so the corner figures never meet) */
+.gr-slide .cl-plot { --cl-plot-tick: var(--deck-small, 12px); }
+.gr-slide .cl-plot .series { stroke-width: 3; }
+.gr-slide .cl-plot .series.dash { stroke-dasharray: 9 6; }
+.gr-slide .cl-plot-ylabel, .gr-slide .cl-plot-xlabel, .gr-slide .cl-plot-legend, .gr-slide .cl-plot-tablebtn, .gr-slide .cl-plot-tip { font-size: var(--deck-small, var(--text-sm)); }
+.gr-slide .cl-plot-tablebtn { min-block-size: var(--cl-control-h); }
+/* compare two scenarios: a disclosure in the rail */
+.gr-slide-compare { background: var(--color-paper-2); border-radius: var(--radius-stock); }
+.gr-slide-compare summary {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-xs);
+  min-block-size: var(--cl-control-h); padding: 0 var(--space-md);
+  border-radius: var(--radius-stock); cursor: pointer; list-style: none; font-size: var(--deck-small, 0.9375rem); font-weight: 600;
+}
+.gr-slide-compare summary::-webkit-details-marker { display: none; }
+.gr-slide-compare summary::after { content: ''; flex: none; inline-size: 0.5rem; block-size: 0.5rem; border-inline-end: 2px solid var(--color-muted); border-block-end: 2px solid var(--color-muted); transform: rotate(45deg); transition: transform var(--dur-short) var(--ease-out); }
+.gr-slide-compare[open] > summary::after { transform: rotate(-135deg); }
+.gr-slide-compare summary:hover { background: var(--color-paper-3); }
+.gr-slide-compare summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.gr-slide-compare .gr-well { padding-block-start: 0; }
+.gr-slide-compare .gr-well > h4 { display: none; }
+.gr-slide-compare .gr-well .small, .gr-slide-compare .btn { font-size: var(--deck-small, var(--text-sm)); }
+@media (prefers-reduced-motion: reduce) {
+  .gr-slide-tabs button, .gr-slide-compare summary::after { transition: none; }
+}

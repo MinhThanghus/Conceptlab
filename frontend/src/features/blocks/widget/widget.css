@@ -1,0 +1,120 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · system: DESIGN.md (Hum, adapted)
+ * built: the project · redesign: full · widget block: four numbered steps on hairlines, the sandbox in a plain frame */
+
+/* AI-built interface block (spec §9.5). The editor is a real ordered sequence (describe, checks,
+   preview, approve), so its numerals are type, not coins; the steps part with hairlines. */
+.widget-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding-block: var(--space-md) 0;
+  border-block-start: 1px solid var(--color-rule);
+  min-inline-size: 0;
+}
+.widget-step-title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+  margin: 0;
+  font-size: var(--app-h4);
+}
+.widget-step-num {
+  flex: none;
+  min-inline-size: 1.25rem;
+  color: var(--color-muted);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.widget-examples { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+.widget-examples .chip { min-block-size: var(--cl-control-h); }
+.widget-examples .chip:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+/* checks: one tinted row each, the icon and the bold word say pass, warn or fail (never colour alone) */
+.widget-checks { display: grid; gap: var(--space-2xs); }
+.widget-check {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: flex-start;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-small);
+  background: var(--color-paper-2);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+.widget-check > svg { flex: none; inline-size: 1.125rem; block-size: 1.125rem; margin-block-start: var(--space-3xs); }
+.widget-check.is-pass { background: var(--color-mint-soft); }
+.widget-check.is-pass > svg { color: var(--color-mint-ink); }
+.widget-check.is-fail { background: var(--color-error-soft); }
+.widget-check.is-fail > svg { color: var(--color-error-ink); }
+.widget-check.is-warn { background: var(--color-sand-soft); }
+.widget-check.is-warn > svg { color: var(--color-kraft-ink); }
+.widget-check.is-pending > svg { color: var(--color-accent-2); }
+.widget-stored { display: block; margin-block-start: var(--space-3xs); }
+.widget-errors {
+  margin: var(--space-2xs) 0 0;
+  padding-inline-start: 1.125rem;
+  font-family: var(--cl-font-mono);
+  font-size: var(--text-xs);
+  overflow-wrap: anywhere;
+}
+
+/* the sandbox: a plain frame on the card, a hairline and nothing else */
+.widget-stage { position: relative; min-inline-size: 0; }
+.widget-frame {
+  display: block;
+  inline-size: 100%;
+  min-block-size: 200px;
+  border: 1px solid var(--color-rule-2);
+  border-radius: var(--radius-stock);
+  background: var(--color-card);
+}
+.widget-frame:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.widget-waiting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  min-block-size: 12rem;
+  padding: var(--space-md);
+  border-radius: var(--radius-stock);
+  background: var(--color-paper-2);
+  color: var(--color-muted);
+  text-align: center;
+}
+.widget-waiting svg { flex: none; inline-size: 1.25rem; block-size: 1.25rem; }
+
+.widget-details > summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  min-block-size: var(--cl-control-h);
+  padding-inline: var(--space-xs);
+  margin-inline: calc(-1 * var(--space-xs));
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  border-radius: var(--radius-small);
+  transition: background-color var(--dur-micro) var(--ease-snap);
+}
+.widget-details > summary:hover { background: var(--color-paper-2); }
+.widget-details > summary:active { background: var(--color-paper-3); }
+.widget-details > summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.widget-details > summary::-webkit-details-marker { display: none; }
+.widget-details-chevron { margin-inline-start: auto; transition: transform var(--dur-short) var(--ease-out); }
+.widget-details[open] .widget-details-chevron { transform: rotate(180deg); }
+.widget-code {
+  margin: 0;
+  max-block-size: 24rem;
+  overflow: auto;
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  white-space: pre;
+  tab-size: 2;
+}
+.widget-code:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.widget-editor .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) {
+  .widget-details-chevron, .widget-details > summary { transition: none; }
+}

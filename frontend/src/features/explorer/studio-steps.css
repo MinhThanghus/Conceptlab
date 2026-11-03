@@ -1,0 +1,103 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · theme: Hum (DESIGN.md, locked) · posture: full-palette · built: the project · redesign: full · v2.0.0 */
+/* Hallmark · dismissed 28a · the cover preview sits in a side card below the publish checks; the page's first paint is the checks, not this picture */
+/* The publish-step panels built in features/explorer (checks, sharing, translation, cover) and the
+   two hooks the studio steps share with them (.pub-card-title, .pub-side-card). The studio's own
+   layout lives in features/studio/studio.css. Tokens only. */
+
+.studio-step-preview .explorer { border-block-start: 1px solid var(--color-rule); }
+
+.pub-card-title { display: flex; align-items: center; gap: var(--space-xs); margin: 0; font-size: var(--app-h3); }
+.pub-card-title svg { flex: none; inline-size: 1.25rem; block-size: 1.25rem; color: var(--color-muted); }
+.pub-card-title:focus { outline: none; }
+.pub-card-title:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; border-radius: var(--space-2xs); }
+.pub-side-card .pub-card-title { font-size: var(--app-h4); }
+.pub-hint { margin: 0; font-size: var(--text-sm); color: var(--color-muted); }
+
+/* ---------------------------------------------------------------- checks before sharing */
+.pub-summary { display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-md); margin: 0; }
+.pub-count { display: inline-flex; align-items: center; gap: var(--space-2xs); font-size: 0.9375rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.pub-count-pass { color: var(--color-mint-ink); }
+.pub-count-warn { color: var(--color-kraft-ink); }
+.pub-count-fail { color: var(--color-error-ink); }
+.pub-verdict { padding: var(--space-xs) var(--space-md); border-radius: var(--radius-stock); font-weight: 600; }
+.pub-verdict.is-pass { background: var(--color-mint-soft); color: var(--color-mint-ink); }
+.pub-verdict.is-warn { background: var(--color-sand-soft); color: var(--color-kraft-ink); }
+.pub-verdict.is-fail { background: var(--color-error-soft); color: var(--color-error-ink); }
+.pub-check-list { display: grid; gap: var(--space-2xs); }
+.pub-check { display: flex; align-items: flex-start; gap: var(--space-sm); padding: var(--space-sm); border-radius: var(--radius-stock); }
+.pub-check-pass, .pub-check-skip { padding-block: var(--space-xs); }
+.pub-check-icon { flex: none; margin-block-start: var(--space-3xs); }
+.pub-check-pass .pub-check-icon { color: var(--color-mint-ink); }
+.pub-check-warn { background: var(--color-sand-soft); }
+.pub-check-warn .pub-check-icon { color: var(--color-kraft-ink); }
+.pub-check-fail { background: var(--color-error-soft); }
+.pub-check-fail .pub-check-icon { color: var(--color-error-ink); }
+.pub-check-skip .pub-check-icon { color: var(--color-subtle); }
+.pub-check-body { flex: 1; min-inline-size: 0; display: flex; flex-direction: column; gap: var(--space-2xs); }
+.pub-check-title { margin: 0; font-weight: 600; }
+.pub-check-fix, .pub-check-meta { margin: 0; font-size: var(--text-sm); color: var(--color-ink-2); }
+.pub-check-links { display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
+.pub-check-links:empty { display: none; }
+.pub-check-details { font-size: var(--text-sm); color: var(--color-muted); }
+.pub-check-details summary { inline-size: fit-content; cursor: pointer; }
+.pub-check-details p { margin: var(--space-2xs) 0 0; font-family: var(--font-mono); overflow-wrap: anywhere; }
+.pub-passed > summary { padding-block: var(--space-2xs); font-weight: 600; color: var(--color-muted); cursor: pointer; }
+.pub-passed[open] > summary { margin-block-end: var(--space-xs); }
+.pub-check-note { margin: 0; font-size: var(--text-sm); color: var(--color-muted); }
+
+/* ---------------------------------------------------------------- sharing: the code, the link, the QR */
+.pub-share { display: flex; flex-direction: column; gap: var(--space-md); }
+.pub-share-head { display: flex; flex-direction: column; gap: var(--space-xs); }
+.pub-share-meta { display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-md); font-size: var(--text-sm); color: var(--color-muted); }
+.pub-share-meta li { display: inline-flex; align-items: center; gap: var(--space-2xs); }
+.pub-share-body { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-lg); align-items: start; }
+.pub-label { margin: 0 0 var(--space-3xs); font-size: var(--text-sm); font-weight: 600; color: var(--color-ink-2); }
+.pub-code {
+  margin: 0 0 var(--space-xs); font-family: var(--font-mono); font-weight: 700; font-size: clamp(2.4rem, 7vw, 3.6rem);
+  letter-spacing: 0.02em; line-height: 1.05; color: var(--color-ink); overflow-wrap: anywhere;
+}
+.pub-url-row { display: flex; gap: var(--space-xs); }
+.pub-url-row .input { flex: 1; min-inline-size: 0; font-size: 0.9375rem; }
+.pub-copy-status { margin: 0; min-block-size: 1lh; font-size: var(--text-sm); }
+.pub-copy-status.is-ok { color: var(--color-mint-ink); }
+.pub-copy-status.is-fail { color: var(--color-error-ink); }
+.pub-share-actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+.pub-qr { display: flex; flex-direction: column; align-items: center; gap: var(--space-xs); }
+.pub-qr-hint { max-inline-size: 26ch; text-align: center; }
+.pub-uptodate { margin: 0; display: flex; align-items: center; gap: var(--space-xs); font-weight: 600; color: var(--color-mint-ink); }
+.pub-share-foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-md); padding-block-start: var(--space-sm); border-block-start: 1px solid var(--color-rule); }
+.pub-unpublish-hint { display: inline-flex; align-items: flex-start; gap: var(--space-2xs); }
+.pub-unpublish-hint svg { flex: none; margin-block-start: var(--space-3xs); }
+.pub-danger-ghost { color: var(--color-error-ink); }
+.pub-danger-ghost:hover:not(:disabled) { background: var(--color-error-soft); color: var(--color-error-ink); }
+
+/* ---------------------------------------------------------------- cover picture and translation review */
+/* the preview is the real card cover (LabCover): the 16:9 card crop, then the square thumbnail crop */
+.pub-cover { margin: 0; display: grid; gap: var(--space-sm); }
+.pub-cover-frame { position: relative; overflow: hidden; border-radius: var(--radius-stock); }
+.pub-cover-frame::after { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 var(--rule-hair) var(--color-keyline-strong); pointer-events: none; }
+.pub-cover-skeleton { display: block; inline-size: 100%; aspect-ratio: 16 / 9; border-radius: 0; }
+.pub-cover-skeleton.is-square { aspect-ratio: 1; border-radius: var(--radius-stock); }
+.pub-cover-caption { display: flex; align-items: center; gap: var(--space-sm); }
+.pub-cover-thumb { flex: none; inline-size: 3.5rem; }
+.pub-cover-note { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs) var(--space-xs); min-inline-size: 0; margin: 0; font-size: var(--text-sm); line-height: 1.4; color: var(--color-muted); }
+.pub-cover-busy { font-weight: 600; color: var(--color-ink-2); }
+/* the style picker: chips with a 44px target; the chosen one is ink with paper type */
+.pub-cover-style { display: grid; gap: var(--space-xs); }
+.pub-cover-style .field-label { margin: 0; }
+.pub-cover-styles { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+.pub-cover-styles .chip { min-block-size: var(--cl-control-h); padding-inline: var(--space-md); }
+.pub-cover-styles .chip[aria-checked='true'] { background: var(--color-ink); color: var(--color-paper); box-shadow: none; }
+.pub-cover-styles .chip:disabled { cursor: not-allowed; opacity: 0.6; }
+.pub-cover-styles .chip:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.pub-cover-style-hint { min-block-size: 2lh; }
+.pub-review-h { margin: 0; font-size: 0.9375rem; color: var(--color-ink-2); }
+.pub-review-list { margin: 0; padding-inline-start: var(--space-lg); display: grid; gap: var(--space-2xs); }
+.pub-review-blocks { margin: 0; padding-inline-start: var(--space-lg); display: grid; gap: var(--space-2xs); }
+.pub-review-blocks li { overflow-wrap: anywhere; }
+.pub-review-blocks svg { vertical-align: -3px; margin-inline: var(--space-2xs); color: var(--color-muted); }
+
+@media (max-width: 640px) {
+  .pub-share-body { grid-template-columns: minmax(0, 1fr); }
+  .pub-url-row { flex-direction: column; }
+}

@@ -1,0 +1,210 @@
+/* The 3D studio's paper (DESIGN.md: Hum, light from the top left). One recipe for every stage well:
+   a warm paper wash, brightest where the key light falls a little above and left of centre, a soft
+   floor band the model stands on, and the speck grain over it. The canvas is transparent, so the
+   2D fallbacks sit on the same paper. A tinted well: no border, no shadow. Tokens only.
+   Size (contract C3): 16:10 by default (4:3 on a phone), under a page ceiling; the lesson deck sets
+   --stage3d-block-size and every well takes exactly that block size. No min-block-size: with an
+   aspect ratio it would turn into a minimum width and push a narrow page sideways. */
+.stage3d {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--radius-stock);
+  background-color: var(--color-paper-2);
+  background-image:
+    var(--grain),
+    radial-gradient(60% 34% at 50% 84%, color-mix(in oklch, var(--color-paper-3) 70%, transparent) 0%, transparent 100%),
+    linear-gradient(to bottom, transparent 58%, color-mix(in oklch, var(--color-paper-3) 55%, transparent) 100%),
+    radial-gradient(125% 95% at 40% 22%, var(--color-card) 0%, var(--color-paper) 40%, var(--color-paper-2) 72%, var(--color-paper-3) 100%);
+}
+/* a well its parent sizes (the simulation stage, the home hero) takes the parent's corners */
+.stage3d.stage3d-fill { border-radius: inherit; }
+.stage3d:not(.stage3d-fill) {
+  inline-size: 100%;
+  aspect-ratio: 16 / 10;
+  block-size: var(--stage3d-block-size, auto);
+  max-block-size: var(--stage3d-block-size, 34rem);
+}
+@media (max-width: 40rem) {
+  .stage3d:not(.stage3d-fill) { aspect-ratio: 4 / 3; }
+}
+/* the globe and other space scenes: the same well in ink */
+.stage3d.is-night {
+  background-color: var(--color-ink);
+  background-image: var(--grain), radial-gradient(115% 95% at 46% 34%, var(--color-ink-2) 0%, var(--color-ink) 72%);
+}
+/* the canvas and the 2D fallback fill the well */
+.stage3d > canvas,
+.stage3d .lab3d-canvas { display: block; inline-size: 100%; block-size: 100%; touch-action: pan-y; }
+
+/* tools that sit on the stage, bottom right, never over the model's middle */
+.stage3d-tools {
+  position: absolute;
+  z-index: 2;
+  inset-block-end: var(--space-sm);
+  inset-inline-end: var(--space-sm);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-xs);
+}
+/* on a phone the tools on the stage keep their icon; the word stays for screen readers */
+@media (max-width: 40rem) {
+  .stage3d-tools .btn { inline-size: var(--cl-control-h); padding: 0; }
+  .stage3d-tool-label { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+/* a quiet line on the stage (what is stylised), bottom left */
+.stage3d-caption {
+  position: absolute;
+  z-index: 1;
+  inset-block-end: var(--space-sm);
+  inset-inline: var(--space-md);
+  margin: 0;
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  pointer-events: none;
+}
+/* loading and "no 3D here" lines inside a well */
+.stage3d-status {
+  position: absolute;
+  z-index: 1;
+  inset-block-end: var(--space-sm);
+  inset-inline-start: var(--space-md);
+  margin: 0;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+/* ---------------------------------------------------------------- the scene around a stage
+   A scene is not a card (it often sits in one, or on a deck sheet): whitespace and hairlines only.
+   Choices are pills that turn ink when chosen; view tools are card stock; notes are quiet. */
+.stage3d-scene { display: grid; gap: var(--space-md); min-inline-size: 0; color: var(--color-ink); }
+.stage3d-scene p { margin: 0; line-height: 1.55; }
+.stage3d-choices { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+.stage3d-choices > span { font-weight: 600; margin-inline-end: var(--space-2xs); }
+.stage3d-choices > .chip { min-block-size: var(--cl-control-h); padding-inline: var(--space-md); font-size: var(--text-md); }
+.stage3d-choices > .chip:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.stage3d-view { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+/* a chosen pill stays chosen under the pointer (the global chip hover would turn it paper) */
+.stage3d-scene .chip[aria-pressed='true']:hover { background: var(--color-ink-2); color: var(--color-paper); }
+.stage3d-detail { padding: var(--space-sm) var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); color: var(--color-ink); }
+.stage3d-note { color: var(--color-muted); font-size: var(--text-sm); }
+.stage3d-scene input[type='range'] { inline-size: 100%; min-block-size: 2.75rem; accent-color: var(--color-accent-2); }
+.stage3d-scene input[type='checkbox'] { inline-size: 1.25rem; block-size: 1.25rem; accent-color: var(--color-ink); }
+.stage3d-scene select { min-block-size: 2.75rem; padding-inline: var(--space-sm); border: 1px solid var(--color-control); border-radius: var(--radius-input); background: var(--color-card); color: var(--color-ink); font: inherit; }
+.stage3d-scene input:focus-visible, .stage3d-scene select:focus-visible, .stage3d-scene summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+/* the preview capture mode (/learn/3d?model=<id>&capture=1): a 16:9 well, the object only */
+:root[data-capture='stage'] .stage3d:not(.stage3d-fill) { aspect-ratio: 16 / 9; max-block-size: none; }
+:root[data-capture='stage'] .stage3d-tools,
+:root[data-capture='stage'] .stage3d-caption,
+:root[data-capture='stage'] .stage3d-status,
+:root[data-capture='stage'] .semiconductor-annotations,
+:root[data-capture='stage'] .molecule-formula,
+:root[data-capture='stage'] .molecule-angle { display: none; }
+
+/* in the lesson deck (contract C1): the scene is compact and nothing in it is smaller than --deck-small */
+.lesson-deck .stage3d-scene { gap: var(--space-sm); }
+.lesson-deck .stage3d-note,
+.lesson-deck .stage3d-caption,
+.lesson-deck .stage3d-status,
+.lesson-deck .stage3d-scene .semiconductor-annotations button { font-size: var(--deck-small, 0.875rem); }
+/* the slide's own heading names the part (contract C2: one heading a slide): a scene's banner
+   title steps back inside the deck, so the model rises into view */
+.lesson-deck .semiconductor-head,
+.lesson-deck .study-explorer > h3 { display: none; }
+
+/* ---------------------------------------------------------------- a scene on a lesson slide
+   GuidedVisual's deck layout (components/lab3d/sceneLayout.jsx): the stage fills the model column
+   and ONE control row sits under it; the current choice explained and the notes go to the slide's
+   caption column (.stage3d-aside), or follow the row on a narrow sheet. On a phone the column has
+   no height of its own: the stage then takes --stage3d-block-size and the page scrolls. */
+.guided-visual.is-deck { display: flex; flex-direction: column; block-size: 100%; min-block-size: 0; min-inline-size: 0; }
+/* a scene with a deck layout fills the column; any other scene keeps its height and the column scrolls */
+.guided-visual.is-deck > * { flex: none; }
+.guided-visual.is-deck > .is-deck { flex: 1 1 auto; min-block-size: 0; }
+.stage3d-scene.is-deck { display: flex; flex-direction: column; gap: var(--space-sm); block-size: 100%; min-block-size: 0; margin: 0; }
+.stage3d-scene.is-deck > .stage3d:not(.stage3d-fill),
+.stage3d-scene.is-deck > .stage3d-holder > .stage3d:not(.stage3d-fill) {
+  flex: 1 1 var(--stage3d-block-size, 16rem); inline-size: 100%; aspect-ratio: auto;
+  block-size: auto; max-block-size: none; min-block-size: 10rem; margin: 0;
+}
+/* a scene whose stage is a separate lazy part (the tree, the pixel relief) holds it in a column too */
+.stage3d-scene.is-deck > .stage3d-holder { flex: 1 1 var(--stage3d-block-size, 16rem); display: flex; flex-direction: column; min-block-size: 10rem; }
+.stage3d-scene.is-deck > .stage3d-holder > .stage3d:not(.stage3d-fill) { flex: 1 1 auto; }
+.stage3d-scene.is-deck > .stage3d-holder > [role='status'] { margin: auto; color: var(--color-muted); font-size: var(--deck-small, 0.875rem); }
+
+/* the view tools on the stage: icons, their words for screen readers and the tooltip */
+.stage3d-scene.is-deck .stage3d-tools { gap: var(--space-2xs); }
+.stage3d-scene.is-deck .stage3d-tools .btn { inline-size: var(--cl-control-h); padding: 0; }
+.stage3d-scene.is-deck .stage3d-tool-label { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* the same tools at the end of the row, for a narrow sheet (a phone): there the stage is short and
+   tools on it would cover the model */
+.stage3d-bar > .stage3d-bar-tools { display: none; position: static; margin-inline-start: auto; }
+@container deck-slide (aspect-ratio < 1.15) or (width < 40rem) {
+  .stage3d-scene.is-deck .stage3d > .stage3d-tools { display: none; }
+  .stage3d-bar > .stage3d-bar-tools { display: flex; }
+}
+
+/* ONE row of controls under the stage: the choices as pills, sliders and menus kept to one line */
+.stage3d-bar { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); min-inline-size: 0; }
+.stage3d-bar > .stage3d-choices { gap: var(--space-xs); }
+.stage3d-bar-sep { flex: none; align-self: center; inline-size: var(--rule-hair); block-size: 1.75rem; background: var(--color-rule); }
+.stage3d-scene.is-deck .stage3d-bar .chip,
+.stage3d-scene.is-deck .stage3d-bar .btn { min-block-size: var(--cl-control-h); padding-inline: var(--space-sm); font-size: var(--deck-small, 0.875rem); }
+.stage3d-scene.is-deck .stage3d-bar .chip:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+/* numbered stations: a round bead a number, the name is in its label and in the explanation */
+.stage3d-scene.is-deck .stage3d-bar .chip.stage3d-bead { inline-size: var(--cl-control-h); min-inline-size: 0; padding: 0; justify-content: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+.stage3d-range { flex: 1 1 11rem; display: flex; align-items: center; gap: var(--space-xs); min-inline-size: min(100%, 10rem); margin: 0; font-size: var(--deck-small, 0.875rem); color: var(--color-ink-2); }
+.stage3d-range > span { flex: none; white-space: nowrap; }
+.stage3d-range strong { color: var(--color-ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.stage3d-scene .stage3d-range input[type='range'] { flex: 1 1 6rem; inline-size: auto; min-inline-size: 5rem; }
+.stage3d-select { display: inline-flex; flex: 0 1 auto; min-inline-size: 0; margin: 0; }
+.stage3d-scene .stage3d-select select { max-inline-size: 100%; min-block-size: var(--cl-control-h); padding-inline: var(--space-sm) var(--space-md); font-size: var(--deck-small, 0.875rem); text-overflow: ellipsis; }
+.stage3d-bar-end { margin-inline-start: auto; }
+
+/* a 3D slide without words of its own (no caption column): the scene's words take that place */
+.deck-visual3d.is-bare .stage3d-scene.is-deck {
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4.6fr); grid-template-rows: minmax(0, 1fr) auto;
+  column-gap: var(--deck-gap, 1.5rem); row-gap: var(--space-sm);
+}
+.deck-visual3d.is-bare .stage3d-scene.is-deck > :not(.stage3d-aside) { grid-column: 1; }
+.deck-visual3d.is-bare .stage3d-scene.is-deck > .stage3d-aside { grid-column: 2; grid-row: 1 / span 2; align-self: start; max-block-size: 100%; overflow: auto; }
+@container deck-slide (aspect-ratio < 1.15) or (width < 40rem) {
+  .deck-visual3d.is-bare .stage3d-scene.is-deck { display: flex; }
+}
+
+/* the words beside the model: the current choice in a paper-2 well, readings, a key, the notes */
+.stage3d-aside { display: flex; flex-direction: column; gap: calc(var(--deck-gap, 1rem) * 0.5); min-inline-size: 0; color: var(--color-ink); }
+/* in the slide's caption column the scene's words follow the lesson's own a beat apart */
+.deck-visual3d-caption > .stage3d-aside { margin-block-start: calc(var(--deck-gap, 1rem) * 0.6); }
+.stage3d-aside p { margin: 0; }
+.stage3d-focus { display: grid; gap: var(--space-2xs); padding: calc(var(--deck-gap, 1rem) * 0.5) calc(var(--deck-gap, 1rem) * 0.65); border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.stage3d-focus-title { font-size: var(--deck-body, 1.125rem); font-weight: 600; line-height: 1.3; color: var(--color-ink); text-wrap: balance; }
+.stage3d-focus-text { font-size: var(--deck-body, 1.125rem); line-height: 1.45; color: var(--color-ink-2); text-wrap: pretty; }
+.stage3d-focus-text p + p { margin-block-start: 0.4em; }
+.stage3d-focus-text strong { color: var(--color-ink); font-weight: 600; }
+.stage3d-key { display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-md); font-size: var(--deck-small, 0.875rem); line-height: 1.4; color: var(--color-ink-2); }
+.stage3d-key > span { display: inline-flex; align-items: center; gap: var(--space-xs); }
+.stage3d-key i { flex: none; inline-size: 0.8em; block-size: 0.8em; border-radius: var(--radius-pill); box-shadow: inset 0 0 0 1.5px var(--color-ink); }
+.stage3d-legend { font-size: var(--deck-small, 0.875rem); line-height: 1.45; color: var(--color-ink-2); }
+.stage3d-readout { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: var(--space-xs); margin: 0; }
+.stage3d-readout > div { display: grid; gap: var(--space-3xs); padding: calc(var(--deck-gap, 1rem) * 0.45) calc(var(--deck-gap, 1rem) * 0.6); border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.stage3d-readout dt { font-size: var(--deck-small, 0.875rem); line-height: 1.35; color: var(--color-ink-2); }
+.stage3d-readout dd { margin: 0; font-size: var(--deck-body, 1.125rem); font-weight: 600; line-height: 1.3; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.stage3d-notes { font-size: var(--deck-small, 0.875rem); line-height: 1.45; color: var(--color-ink-2); }
+.stage3d-notes > summary {
+  display: inline-flex; align-items: center; gap: var(--space-xs); min-block-size: var(--cl-control-h);
+  padding-inline: var(--space-xs) var(--space-sm); margin-inline-start: calc(-1 * var(--space-xs));
+  border-radius: var(--radius-stock); color: var(--color-ink-2); font-weight: 600; cursor: pointer; list-style: none;
+  transition: background-color var(--dur-micro) var(--ease-snap);
+}
+.stage3d-notes > summary::-webkit-details-marker { display: none; }
+.stage3d-notes > summary:hover { background: var(--color-paper-2); color: var(--color-ink); }
+.stage3d-notes > summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
+.stage3d-notes[open] > summary { color: var(--color-ink); }
+.stage3d-notes-body { display: grid; gap: var(--space-xs); padding-block: var(--space-2xs) var(--space-xs); color: var(--color-muted); }
+.stage3d-notes-body a { color: var(--color-accent-2); text-decoration: underline; text-underline-offset: 0.15em; }
+.stage3d-notes-body svg { max-inline-size: 100%; block-size: auto; }
+@media (prefers-reduced-motion: reduce) { .stage3d-notes > summary { transition: none; } }

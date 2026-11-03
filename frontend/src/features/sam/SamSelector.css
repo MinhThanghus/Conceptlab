@@ -1,0 +1,86 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · theme: Hum (DESIGN.md, locked) · posture: full-palette
+ * built: the project · redesign: full · v2.0.0 */
+
+/* SAM 3.1 object selector (describe, click or drag a box). The picture sits in a tinted well;
+   found regions are numbered in ink, the chosen one in pear; points are ink (keep) or
+   error red (leave out), always with + or − on them, never colour alone. */
+.sam-modes { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+.sam-modes .segmented { max-inline-size: 100%; flex-wrap: wrap; }
+.sam-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); }
+.sam-grow { flex: 1 1 16rem; min-inline-size: 0; }
+
+.sam-stage-wrap { display: flex; justify-content: center; background: var(--color-paper-2); border-radius: var(--radius-stock); padding: var(--space-xs); }
+.sam-stage {
+  position: relative; display: inline-block; max-inline-size: 100%; line-height: 0;
+  border-radius: var(--radius-small); user-select: none; -webkit-user-select: none; touch-action: manipulation;
+}
+.sam-stage.mode-box { touch-action: none; cursor: crosshair; }
+.sam-stage.mode-point { cursor: crosshair; }
+.sam-stage:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.sam-stage > img {
+  display: block; max-inline-size: 100%; max-block-size: min(58dvh, 34rem); inline-size: auto; block-size: auto;
+  border-radius: var(--radius-small); background: var(--color-card);
+}
+.sam-stage > img:not(.is-ready) { position: absolute; opacity: 0; }
+.sam-skeleton { inline-size: min(100%, 34rem); min-inline-size: min(100%, 16rem); aspect-ratio: 4 / 3; max-block-size: min(58dvh, 34rem); }
+.sam-canvas { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; pointer-events: none; }
+
+.sam-point {
+  position: absolute; transform: translate(-50%, -50%); display: grid; place-items: center;
+  inline-size: 1.6rem; block-size: 1.6rem; border-radius: 50%; font-family: var(--font-body); font-weight: 600; font-size: 1.05rem; line-height: 1;
+  background: var(--color-ink); color: var(--color-paper); border: 2px solid var(--color-card);
+  box-shadow: var(--shadow-card); pointer-events: none;
+}
+.sam-point.is-negative { background: var(--color-error); }
+.sam-box {
+  position: absolute; border: 2px solid var(--color-accent-deep); pointer-events: none;
+  background: color-mix(in oklab, var(--color-accent) 18%, transparent); box-shadow: 0 0 0 1px var(--color-ink);
+}
+.sam-box.is-dragging { border-style: dashed; }
+.sam-anchor, .sam-cursor { position: absolute; transform: translate(-50%, -50%); pointer-events: none; }
+.sam-anchor { inline-size: 0.9rem; block-size: 0.9rem; border-radius: 2px; background: var(--color-accent); border: 2px solid var(--color-ink); }
+.sam-cursor { inline-size: 2rem; block-size: 2rem; }
+.sam-cursor::before, .sam-cursor::after { content: ''; position: absolute; background: var(--color-focus); box-shadow: 0 0 0 1px var(--color-card); }
+.sam-cursor::before { inset-inline-start: 50%; inset-block: 0; inline-size: 2px; transform: translateX(-50%); }
+.sam-cursor::after { inset-block-start: 50%; inset-inline: 0; block-size: 2px; transform: translateY(-50%); }
+.sam-tag {
+  position: absolute; transform: translate(-30%, -30%); min-inline-size: 1.5rem; block-size: 1.5rem; padding: 0 var(--space-2xs);
+  display: grid; place-items: center; border-radius: var(--radius-pill); font-family: var(--font-body); font-weight: 600; font-size: 0.8rem; line-height: 1;
+  background: var(--color-ink); color: var(--color-paper); border: 2px solid var(--color-card); pointer-events: none;
+}
+.sam-tag.is-selected { background: var(--color-accent); color: var(--color-accent-ink); }
+.sam-busy { position: absolute; inset: 0; display: grid; place-items: center; background: color-mix(in oklab, var(--color-card) 50%, transparent); border-radius: var(--radius-small); line-height: 1.4; }
+.sam-busy-pill { display: inline-flex; align-items: center; gap: var(--space-xs); padding: var(--space-xs) var(--space-md); border-radius: var(--radius-pill); background: var(--color-card); box-shadow: var(--shadow-card); font-weight: 600; }
+.sam-busy-pill svg { inline-size: 1.1rem; block-size: 1.1rem; color: var(--color-mint-ink); animation: sam-pulse 1.2s var(--ease-in-out) infinite; }
+@keyframes sam-pulse { 50% { opacity: 0.35; } }
+
+.sam-none { display: flex; gap: var(--space-sm); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-stock); background: var(--color-sand-soft); }
+.sam-none > svg { flex: none; inline-size: 1.25rem; block-size: 1.25rem; color: var(--color-kraft-ink); margin-block-start: 0.1rem; }
+.sam-none ul { margin: var(--space-2xs) 0 0; padding-inline-start: 1.1rem; }
+
+.sam-results { border: 0; padding: 0; margin: 0; display: grid; gap: var(--space-xs); min-inline-size: 0; }
+.sam-results legend { font-weight: 600; padding: 0; margin-block-end: var(--space-2xs); }
+.sam-result-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr)); gap: var(--space-xs); }
+.sam-result {
+  display: flex; align-items: center; gap: var(--space-xs); padding: var(--space-xs) var(--space-sm); min-block-size: var(--cl-control-h);
+  border-radius: var(--radius-stock); background: var(--color-card); box-shadow: inset 0 0 0 1px var(--color-rule-2); cursor: pointer;
+  transition: background-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+}
+.sam-result:hover { background: var(--color-paper-2); }
+.sam-result input { inline-size: 1.15rem; block-size: 1.15rem; accent-color: var(--color-ink); flex: none; margin: 0; }
+.sam-result.is-selected { box-shadow: inset 0 0 0 2px var(--color-ink); }
+.sam-result-num {
+  display: grid; place-items: center; inline-size: 1.5rem; block-size: 1.5rem; border-radius: 50%; flex: none;
+  font-weight: 600; font-size: 0.8rem; background: var(--color-ink); color: var(--color-paper);
+}
+.sam-result.is-selected .sam-result-num { background: var(--color-accent); color: var(--color-accent-ink); }
+.sam-result-text { display: flex; flex-direction: column; min-inline-size: 0; line-height: 1.3; }
+
+.sam-note { display: flex; gap: var(--space-xs); align-items: flex-start; color: var(--color-ink-2); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.sam-note > svg { flex: none; inline-size: 1.1rem; block-size: 1.1rem; color: var(--color-ink-2); margin-block-start: 0.15rem; }
+.sam-actions { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-xs); padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule); }
+.sam-page-input { inline-size: 6rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sam-busy-pill svg { animation: none; }
+}

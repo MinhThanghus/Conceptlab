@@ -1,0 +1,33 @@
+{
+  "description": "Shared reference cases for backend/app/services/simulations.py and the frontend simulation engine (frontend/src/features/sim). Each case runs one model output: expected values are computed analytically (closed forms; exact pendulum period 4·√(L/g)·K(sin(θ0/2)) for period_numeric) or, for the damped pendulum, by a reference RK4 run with a 25× smaller step. tolerance is relative (|actual − expected| / |expected|). Inputs use the model input names; omitted inputs take the model defaults (pendulum g = 9.81, theta0 = 10°, b = 0; projectile g = 9.81, h0 = 0; compound_interest n = 1). Angles are in degrees, r is a percent per year. period_numeric = time between the first two downward zero crossings of θ(t) from RK4 integration of θ'' = −(g/L)·sin θ − b·θ' with θ(0) = θ0, θ'(0) = 0 (step ≤ T0/1000).",
+  "cases": [
+    {"model": "pendulum", "inputs": {"L": 1, "g": 9.81}, "output": "period", "expected": 2.00606668071, "tolerance": 1e-09, "note": "T = 2π√(L/g) ≈ 2.01 s (spec §6.3)"},
+    {"model": "pendulum", "inputs": {"L": 0.25, "g": 9.81}, "output": "period", "expected": 1.00303334036, "tolerance": 1e-09, "note": "quarter length → half period ≈ 1.00 s (spec §6.3)"},
+    {"model": "pendulum", "inputs": {"L": 2, "g": 9.81}, "output": "period", "expected": 2.83700670689, "tolerance": 1e-09},
+    {"model": "pendulum", "inputs": {"L": 1, "g": 1.62}, "output": "period", "expected": 4.93653659795, "tolerance": 1e-09, "note": "on the Moon"},
+    {"model": "pendulum", "inputs": {"L": 1, "g": 9.81}, "output": "frequency", "expected": 0.498487916486, "tolerance": 1e-09, "note": "f = 1/T"},
+    {"model": "pendulum", "inputs": {"L": 1, "g": 9.81, "theta0": 5}, "output": "period_numeric", "expected": 2.00702191447, "tolerance": 0.0005, "note": "exact: 4√(L/g)·K(sin(θ0/2))"},
+    {"model": "pendulum", "inputs": {"L": 1, "g": 9.81, "theta0": 60}, "output": "period_numeric", "expected": 2.15287466688, "tolerance": 0.0005, "note": "large amplitude ≈ 2.1529 s (7% longer than 2π√(L/g))"},
+    {"model": "pendulum", "inputs": {"L": 1, "g": 9.81, "theta0": 90}, "output": "period_numeric", "expected": 2.36784194758, "tolerance": 0.0005, "note": "exact: 4√(L/g)·K(sin 45°)"},
+    {"model": "pendulum", "inputs": {"L": 1, "g": 9.81, "theta0": 5, "b": 2}, "output": "period_numeric", "expected": 2.11692964364, "tolerance": 0.001, "note": "damped θ'' = −(g/L)sin θ − bθ'; linear theory 2π/√(g/L − b²/4) ≈ 2.1169 s"},
+    {"model": "pendulum", "inputs": {"L": 0.5, "g": 9.81, "theta0": 30, "b": 0.5}, "output": "period_numeric", "expected": 1.43526185946, "tolerance": 0.001, "note": "damped, medium amplitude"},
+    {"model": "projectile", "inputs": {"v0": 20, "angle": 45, "g": 9.81, "h0": 0}, "output": "range", "expected": 40.7747196738, "tolerance": 1e-09, "note": "R = v0²·sin(2α)/g"},
+    {"model": "projectile", "inputs": {"v0": 20, "angle": 45, "g": 9.81, "h0": 0}, "output": "max_height", "expected": 10.1936799185, "tolerance": 1e-09, "note": "H = (v0·sin α)²/(2g)"},
+    {"model": "projectile", "inputs": {"v0": 20, "angle": 45, "g": 9.81, "h0": 0}, "output": "flight_time", "expected": 2.88320807823, "tolerance": 1e-09, "note": "T = 2·v0·sin α / g"},
+    {"model": "projectile", "inputs": {"v0": 20, "angle": 45, "g": 9.81, "h0": 10}, "output": "flight_time", "expected": 3.47063291749, "tolerance": 1e-09, "note": "launched 10 m above the ground"},
+    {"model": "projectile", "inputs": {"v0": 20, "angle": 45, "g": 9.81, "h0": 10}, "output": "range", "expected": 49.0821614194, "tolerance": 1e-09},
+    {"model": "projectile", "inputs": {"v0": 20, "angle": 45, "g": 9.81, "h0": 10}, "output": "max_height", "expected": 20.1936799185, "tolerance": 1e-09, "note": "height above the ground"},
+    {"model": "projectile", "inputs": {"v0": 15, "angle": 30, "g": 9.81}, "output": "range", "expected": 19.8629679767, "tolerance": 1e-09, "note": "h0 defaults to 0"},
+    {"model": "projectile", "inputs": {"v0": 10, "angle": 0, "g": 9.81, "h0": 5}, "output": "flight_time", "expected": 1.00963755469, "tolerance": 1e-09, "note": "horizontal launch: t = √(2h0/g)"},
+    {"model": "projectile", "inputs": {"v0": 10, "angle": 0, "g": 9.81, "h0": 5}, "output": "range", "expected": 10.0963755469, "tolerance": 1e-09},
+    {"model": "compound_interest", "inputs": {"P": 1000, "r": 5, "n": 12, "t": 10}, "output": "amount", "expected": 1647.00949769, "tolerance": 1e-09, "note": "monthly compounding, r in percent per year"},
+    {"model": "compound_interest", "inputs": {"P": 1000, "r": 5, "n": 1, "t": 10}, "output": "amount", "expected": 1628.89462678, "tolerance": 1e-09, "note": "yearly compounding"},
+    {"model": "compound_interest", "inputs": {"P": 1000, "r": 5, "n": 12, "t": 10}, "output": "interest", "expected": 647.00949769, "tolerance": 1e-09},
+    {"model": "compound_interest", "inputs": {"P": 1000, "r": 5, "n": 12, "t": 10}, "output": "simple_amount", "expected": 1500.0, "tolerance": 1e-09, "note": "simple interest for comparison"},
+    {"model": "compound_interest", "inputs": {"P": 2000000, "r": 6.5, "n": 4, "t": 3}, "output": "amount", "expected": 2426815.15792, "tolerance": 1e-09},
+    {"model": "spring_mass", "inputs": {"k": 100, "m": 1}, "output": "period", "expected": 0.628318530718, "tolerance": 1e-09, "note": "T = 2π√(m/k)"},
+    {"model": "spring_mass", "inputs": {"k": 100, "m": 1}, "output": "angular_frequency", "expected": 10.0, "tolerance": 1e-09, "note": "ω = √(k/m)"},
+    {"model": "spring_mass", "inputs": {"k": 50, "m": 0.5}, "output": "frequency", "expected": 1.59154943092, "tolerance": 1e-09, "note": "f = ω/(2π)"},
+    {"model": "spring_mass", "inputs": {"k": 20, "m": 0.5}, "output": "period", "expected": 0.99345882658, "tolerance": 1e-09, "note": "heavier mass → longer period"}
+  ]
+}

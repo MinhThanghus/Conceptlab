@@ -1,0 +1,37 @@
+/* Paper2Explorer models: the question to predict in a paper-2 well, the model in a studio well
+   (styles/stage3d.css), the controls on one line, the linked 2D diagram on a hairline, the limits
+   as a quiet note. Tokens only. */
+.study-explorer { min-inline-size: 0; }
+.study-explorer > h3, .study-explorer > h4 { margin: 0; }
+.study-predict, .study-observe { padding: var(--space-sm) var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); line-height: 1.6; }
+.study-predict p, .study-observe p { margin: var(--space-3xs) 0 0; }
+.study-stage[hidden] { display: none; }
+.study-host { position: absolute; inset: 0; }
+.study-host canvas { display: block; inline-size: 100%; block-size: 100%; touch-action: pan-y; }
+.study-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm) var(--space-md); }
+.study-controls label:not(.study-check) { display: grid; gap: var(--space-2xs); flex: 1 1 12rem; color: var(--color-ink-2); }
+.study-controls select { inline-size: 100%; }
+.study-check { display: flex; align-items: center; gap: var(--space-xs); min-block-size: var(--cl-control-h); }
+.study-readout { display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-md); color: var(--color-ink-2); font-variant-numeric: tabular-nums; }
+.study-linked { inline-size: 100%; block-size: auto; max-block-size: 17rem; display: block; padding-block-start: var(--space-sm); border-block-start: 1px solid var(--color-rule); }
+.study-linked text { font: 13px var(--font-body); fill: var(--color-ink-2); }
+.study-linked .sl-axis { stroke: var(--color-control); }
+.study-linked .sl-a { stroke: var(--color-accent-3-deep); }
+.study-linked .sl-b { stroke: var(--color-accent-2); }
+.study-linked .sl-c { stroke: var(--color-plum); }
+.study-linked .sl-a-text { fill: var(--color-accent-3-deep); }
+.study-linked .sl-b-text { fill: var(--color-accent-2); }
+.study-linked .sl-c-text { fill: var(--color-plum); }
+.study-linked .sl-pore { stroke: var(--color-ink-2); }
+.study-linked .sl-co2 { fill: var(--color-ink-2); stroke: var(--color-control); }
+.study-linked .sl-h2o { fill: var(--color-accent-3); stroke: var(--color-accent-3-deep); }
+.study-linked .sl-empty { fill: var(--color-card); stroke: var(--color-control); }
+.study-linked .sl-soil { fill: var(--color-kraft); }
+.study-linked .sl-water { fill: var(--color-accent-2); opacity: .45; }
+.study-linked .sl-plant { stroke: var(--color-mint-deep); }
+.study-linked .sl-root { stroke: var(--color-accent-soft); }
+.study-linked .sl-microbe { fill: var(--color-mint); }
+@media (max-width: 500px) { .study-controls { display: grid; } .study-controls > * { min-inline-size: 0; } }
+/* on a lesson slide without 3D: the linked drawing takes the stage's place */
+.study-deck-fallback { flex: 1 1 var(--stage3d-block-size, 16rem); display: grid; place-items: center; min-block-size: 10rem; padding: var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.study-deck-fallback .study-linked { max-block-size: 100%; padding: 0; border: 0; }

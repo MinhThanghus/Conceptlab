@@ -1,0 +1,209 @@
+/* Hallmark · shape: app screen · genre: playful · theme: Hum (locked in DESIGN.md) · redesign: full · screens: /admin, /admin/users, /admin/labs, /admin/ai, /admin/feedback
+ * signature: the AI call ledger, every Meta model call with its feature, model, latency and tokens · figures: a strip parted by hairlines, tabular numerals, no icons
+ * states: loading skeleton in the table's shape, empty with one action, error with retry, full · phones: rows restack with their name and action in view · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R5 V3 · weakest: V, an admin console keeps the category's familiar shape on purpose; the lead is a ledger strip of real figures, not a greeting over four stat cards */
+
+/* ---------------------------------------------------------------- page */
+.admin-page { container: admin / inline-size; }
+.admin-header { margin-block-end: var(--space-lg); }
+.admin-section { margin-block-start: var(--space-2xl); }
+.admin-section > h2 { font-size: var(--app-h3); margin: 0 0 var(--space-md); text-wrap: balance; }
+.admin-section-lead { max-inline-size: 70ch; margin: calc(-1 * var(--space-xs)) 0 var(--space-lg); font-size: var(--text-sm); color: var(--color-muted); }
+
+/* ---------------------------------------------------------------- notes, filters, the count */
+.admin-note { display: flex; gap: var(--space-xs); align-items: flex-start; max-inline-size: 75ch; margin: 0 0 var(--space-lg); font-size: var(--text-sm); color: var(--color-muted); }
+.admin-note svg { flex: none; inline-size: 1rem; block-size: 1rem; margin-block-start: 0.2em; color: var(--color-ink-2); }
+.admin-header + .admin-note { margin-block-start: calc(-1 * var(--space-xs)); }
+.admin-section .admin-note { margin-block: var(--space-md) 0; }
+
+.admin-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-sm) var(--space-md); margin-block-end: var(--space-lg); }
+.admin-filters > * { flex: 1 1 100%; min-inline-size: 0; }
+
+.admin-action-alert { margin-block-end: var(--space-md); }
+.admin-confirm p { margin: 0; }
+
+.admin-count { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-xs) var(--space-md); min-block-size: var(--cl-control-h-sm); margin-block-end: var(--space-xs); }
+.admin-count p { margin: 0; font-size: var(--text-sm); font-weight: 500; color: var(--color-ink-2); font-variant-numeric: tabular-nums; }
+
+/* ---------------------------------------------------------------- figures: a strip parted by hairlines
+   The grid runs one gutter (and the rule) past both edges and the frame clips it, so the first figure of
+   every row has no leading rule or padding and the last no trailing padding, at any column count. */
+.admin-figures { --fig-pad: var(--space-md); border-block: 1px solid var(--color-rule); overflow: clip; }
+.admin-figures-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: -1px calc(-1 * var(--fig-pad)) 0 calc(-1 * var(--fig-pad) - 1px);
+}
+.admin-figures-4 .admin-figures-grid { grid-template-columns: minmax(0, 1fr); }
+.admin-figure { display: flex; flex-direction: column; min-inline-size: 0; padding: var(--space-md) var(--fig-pad); border-block-start: 1px solid var(--color-rule); border-inline-start: 1px solid var(--color-rule); }
+.admin-figure dt { font-size: var(--text-sm); font-weight: 500; line-height: 1.35; color: var(--color-muted); }
+.admin-figure dd { margin: 0; }
+.admin-figure .admin-figure-value {
+  margin-block-start: var(--space-2xs);
+  font-size: var(--app-h1); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1;
+  color: var(--color-ink); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.admin-figure .admin-figure-value small { margin-inline-start: var(--space-2xs); font-size: var(--text-md); font-weight: 500; letter-spacing: 0; color: var(--color-muted); }
+/* "None yet" sits on the figure's line in words, the height of the figure kept. */
+.admin-figure .admin-figure-value.is-empty { font-size: var(--text-lg); font-weight: 500; letter-spacing: 0; line-height: 1.76; color: var(--color-muted); }
+.admin-figure .admin-figure-note { max-inline-size: 52ch; margin-block-start: var(--space-2xs); font-size: var(--text-xs); line-height: 1.45; color: var(--color-muted); }
+.admin-section > .alert + .admin-figures { margin-block-start: var(--space-lg); }
+
+/* ---------------------------------------------------------------- distributions: one series of ink bars */
+.admin-dist { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-xl) var(--space-2xl); }
+.admin-dist-side { display: grid; align-content: start; gap: var(--space-xl); min-inline-size: 0; }
+.admin-dist-group { min-inline-size: 0; }
+.admin-dist-group > h3 { margin: 0 0 var(--space-sm); font-size: var(--text-md); font-weight: 600; letter-spacing: -0.01em; }
+.admin-section > .admin-dist-group + .admin-dist-group { margin-block-start: var(--space-xl); }
+
+.admin-bars { display: grid; gap: var(--space-xs); }
+.admin-bars li { display: grid; grid-template-columns: minmax(6rem, 10rem) minmax(0, 1fr) 2.5rem 2.75rem; align-items: center; gap: var(--space-sm); min-block-size: 1.75rem; font-size: var(--text-sm); }
+.admin-bars li.is-zero { color: var(--color-muted); }
+.admin-bar-label { min-inline-size: 0; overflow-wrap: break-word; }
+.admin-bar-track { display: block; block-size: 0.625rem; }
+.admin-bar-fill { display: block; block-size: 100%; background: var(--color-ink-2); border-start-end-radius: 4px; border-end-end-radius: 4px; }
+.admin-bar-count { text-align: end; font-weight: 600; font-variant-numeric: tabular-nums; }
+.admin-bar-share { text-align: end; color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.admin-bars-zero, .admin-bars-empty { margin: var(--space-sm) 0 0; font-size: var(--text-sm); color: var(--color-muted); }
+.admin-bars-empty { margin: 0; }
+
+/* ---------------------------------------------------------------- tables: sentence-case heads, horizontal rules only */
+.admin-table-wrap { position: relative; transition: opacity var(--dur-short) var(--ease-out); }
+/* Cells sit on their first baseline, so a select, a badge or a button lines up with the words beside it. */
+.admin-table tbody > tr > * { vertical-align: baseline; }
+.admin-table tbody th { font-size: inherit; font-weight: 400; color: var(--color-ink); white-space: normal; border-block-end-color: var(--color-rule); }
+.admin-table tbody th[scope='row'] { min-inline-size: 11rem; }
+.admin-table tbody tr:last-child > * { border-block-end: 0; }
+.admin-table td.num, .admin-table th.num { white-space: nowrap; }
+.admin-table .cell-title { display: block; font-weight: 600; color: var(--color-ink); overflow-wrap: break-word; }
+.admin-table .cell-sub { display: block; font-size: var(--text-xs); color: var(--color-muted); overflow-wrap: break-word; }
+.admin-table .cell-line { display: block; }
+.admin-table .cell-label { display: none; }
+.admin-table .mono { font-size: var(--text-xs); }
+.admin-table .cell-title.mono { font-size: var(--text-sm); font-weight: 500; }
+.admin-table .nowrap, .admin-table code { white-space: nowrap; }
+.admin-table .cell-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs) var(--space-xs); margin-block-start: var(--space-2xs); font-size: var(--text-xs); color: var(--color-muted); }
+.admin-table .model-id { white-space: nowrap; }
+.admin-table .select { inline-size: auto; min-inline-size: 10rem; min-block-size: var(--cl-control-h-sm); padding-block: var(--space-3xs); font-size: var(--text-sm); }
+/* Your own role can't be changed: the value stays readable, the edge recedes. */
+.admin-table .select:disabled { border-color: var(--color-rule-2); }
+.admin-labs-table tbody th[scope='row'] { min-inline-size: 14rem; }
+.admin-labs-table thead th:first-child { inline-size: 30%; }
+.admin-table td.has-errors { color: var(--color-error-ink); font-weight: 600; }
+/* Links in dense cells: the ring hugs the text so the scroll box never clips it; a press inks the link. */
+.admin-table a:not(.btn):focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
+.admin-table a:not(.btn):active { color: var(--color-ink); text-decoration-thickness: 2px; }
+.admin-actions { display: flex; flex-wrap: nowrap; align-items: center; gap: var(--space-2xs); }
+.admin-actions .btn { flex: none; }
+.no-value { color: var(--color-muted); }
+.state-quiet { display: inline-flex; align-items: center; gap: var(--space-2xs); color: var(--color-ink-2); white-space: nowrap; }
+.self-tag { display: inline-block; margin-inline-start: var(--space-xs); padding: 0 var(--space-xs); border-radius: var(--radius-pill); box-shadow: inset 0 0 0 1px var(--color-rule-2); font-size: var(--text-xs); font-weight: 500; line-height: 1.6; color: var(--color-ink-2); vertical-align: 0.1em; }
+
+/* a refetch keeps the old rows, dimmed, instead of flashing a skeleton */
+.admin-table-wrap.is-stale, .is-refreshing .admin-figures, .is-refreshing .admin-dist, .is-refreshing .admin-table-wrap { opacity: 0.55; }
+.admin-figures, .admin-dist { transition: opacity var(--dur-short) var(--ease-out); }
+
+/* ---------------------------------------------------------------- stars (feedback): ink, the words carry the rating */
+.stars { display: inline-flex; align-items: center; gap: var(--space-xs); white-space: nowrap; }
+.stars-icons { display: inline-flex; gap: var(--space-3xs); }
+.stars-icons svg { inline-size: 1rem; block-size: 1rem; }
+.stars-icons svg.on { fill: var(--color-ink); color: var(--color-ink); }
+.stars-icons svg.off { color: var(--color-rule-2); }
+.stars-text { font-size: var(--text-xs); font-weight: 500; color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.feedback-comment { max-inline-size: 60ch; margin: 0; overflow-wrap: break-word; white-space: pre-line; }
+.feedback-empty { color: var(--color-muted); }
+
+/* ---------------------------------------------------------------- skeletons in the shape of what is coming */
+.admin-skeleton-head, .admin-skeleton-row { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); align-items: center; gap: var(--space-md); padding-block: var(--space-md); border-block-end: 1px solid var(--color-rule); }
+.admin-skeleton-head { padding-block: var(--space-sm); border-block-end-color: var(--color-ink-2); }
+.admin-skeleton .skeleton { display: block; block-size: 0.75rem; inline-size: 70%; }
+.admin-skeleton .skeleton:first-child { grid-column: span 2; }
+.admin-skeleton-head .skeleton { block-size: 0.625rem; inline-size: 45%; }
+.admin-skeleton-row .skeleton:first-child { block-size: 1rem; inline-size: 62%; }
+.admin-skeleton-row:nth-child(odd) .skeleton:first-child { inline-size: 78%; }
+.admin-skeleton-row .skeleton:nth-child(3n) { inline-size: 48%; }
+.admin-dash-skeleton .sk-label { display: block; block-size: 0.75rem; inline-size: 55%; }
+.admin-dash-skeleton .sk-value { display: block; block-size: 2rem; inline-size: 40%; margin-block-start: var(--space-xs); }
+.admin-dash-skeleton .sk-note { display: block; block-size: 0.625rem; inline-size: 78%; margin-block-start: var(--space-sm); }
+.admin-dash-skeleton .sk-head { display: block; block-size: 1rem; inline-size: 35%; margin-block-end: var(--space-md); }
+.admin-dash-skeleton .sk-bar { display: block; block-size: 0.625rem; inline-size: 90%; margin-block-end: var(--space-md); }
+.admin-dash-skeleton .sk-bar:nth-child(even) { inline-size: 64%; }
+.admin-dash-skeleton .sk-bar:nth-child(3n) { inline-size: 38%; }
+
+/* ---------------------------------------------------------------- wider boxes */
+@container admin (width >= 36rem) {
+  .admin-figures-4 .admin-figures-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@container admin (width >= 40rem) {
+  .admin-filters > * { flex: 0 1 13rem; }
+  .admin-filters > .search-field { flex: 1 1 16rem; max-inline-size: 26rem; }
+  .admin-filters > .admin-filter-wide { flex: 1 1 18rem; max-inline-size: 30rem; }
+}
+@container admin (width >= 46rem) {
+  .admin-figures { --fig-pad: var(--space-lg); }
+  .admin-figures-6 .admin-figures-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .admin-dist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* The two usage tables share their number columns, so a figure can be read across both. */
+@container admin (width >= 48rem) {
+  .admin-usage { table-layout: fixed; }
+  .admin-usage thead th:nth-child(2) { inline-size: 6.5rem; }
+  .admin-usage thead th:nth-child(3) { inline-size: 5.5rem; }
+  .admin-usage thead th:nth-child(4) { inline-size: 10.5rem; }
+  .admin-usage thead th:nth-child(5), .admin-usage thead th:nth-child(6) { inline-size: 8rem; }
+}
+@container admin (width >= 84rem) {
+  .admin-figures-6 .admin-figures-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .admin-figures-4 .admin-figures-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* ---------------------------------------------------------------- narrow boxes: rows restack, the name first, the action in view */
+@container admin (width < 48rem) {
+  .admin-table-stack, .admin-table-stack tbody { display: block; inline-size: 100%; }
+  .admin-table-stack thead { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .admin-table-stack tbody tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-sm) var(--space-md); padding-block: var(--space-md); border-block-end: 1px solid var(--color-rule); }
+  .admin-table-stack tbody tr:first-child { border-block-start: 1px solid var(--color-ink-2); }
+  .admin-table-stack tbody tr:last-child { border-block-end: 0; }
+  .admin-table-stack tbody tr > * { min-inline-size: 0; padding: 0; border: 0; }
+  .admin-table-stack tbody th[scope='row'] { grid-column: 1 / -1; order: -4; min-inline-size: 0; }
+  .admin-table-stack .cell-wide { grid-column: 1 / -1; }
+  .admin-table-stack .cell-first { order: -3; }
+  .admin-table-stack .cell-second { order: -2; }
+  .admin-table-stack .model-id { white-space: normal; overflow-wrap: break-word; }
+  .admin-table-stack .cell-empty { display: none; }
+  .admin-table-stack .cell-label { display: block; margin-block-end: var(--space-3xs); font-size: var(--text-xs); font-weight: 500; color: var(--color-muted); }
+  .admin-table-stack td.num { text-align: start; }
+  .admin-table-stack .select { inline-size: 100%; min-inline-size: 0; }
+  .admin-table-stack .admin-actions { flex-wrap: wrap; }
+  .admin-table-stack .feedback-comment { max-inline-size: none; }
+
+  /* The AI ledger on a phone: time beside latency, model beside result, tokens and the lab on one line. */
+  .admin-ai-table tbody tr { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .admin-ai-table .ai-time { order: 1; grid-column: span 2; }
+  .admin-ai-table .ai-latency { order: 2; }
+  .admin-ai-table .ai-model { order: 3; grid-column: span 2; }
+  .admin-ai-table .ai-result { order: 4; }
+  .admin-ai-table .ai-in { order: 5; }
+  .admin-ai-table .ai-out { order: 6; }
+  .admin-ai-table .ai-lab { order: 7; }
+  .admin-ai-table time .cell-line, .admin-ai-table time .cell-sub { display: inline; }
+
+  .admin-table-pin th:first-child { position: sticky; inset-inline-start: 0; z-index: var(--z-base); background: var(--grain), var(--fibre), var(--color-paper); box-shadow: inset -1px 0 0 var(--color-rule); }
+  .admin-table-pin tbody th[scope='row'] { min-inline-size: 9rem; max-inline-size: 11rem; }
+
+  .admin-skeleton-head { display: none; }
+  .admin-skeleton-row { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .admin-skeleton .admin-skeleton-row .skeleton:first-child { grid-column: 1 / -1; }
+}
+@container admin (width < 30rem) {
+  .admin-bars li { grid-template-columns: minmax(0, 1fr) auto auto; row-gap: var(--space-2xs); }
+  .admin-bar-track { grid-column: 1 / -1; grid-row: 2; }
+}
+
+/* Touch screens: compact admin controls and the links in cells still get a 44px target. */
+@media (pointer: coarse) {
+  .admin-table .btn, .admin-table .select, .admin-count .btn, .admin-header .btn { min-block-size: var(--cl-control-h); }
+  .admin-table a:not(.btn) { display: inline-flex; align-items: center; min-block-size: var(--cl-control-h); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .admin-table-wrap, .admin-figures, .admin-dist { transition: none; }
+}

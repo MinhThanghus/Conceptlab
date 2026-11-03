@@ -1,0 +1,31 @@
+.geo-page { max-width: 76rem; }
+.geo-intro { max-width: 48rem; font-size: var(--text-lead); }
+.geo-workspace { display: grid; grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.2fr); gap: var(--space-xl); align-items: start; margin-block: var(--space-xl); }
+.geo-controls { display: grid; gap: var(--space-xs); }
+.geo-controls h2 { margin-block: 0 var(--space-md); }
+.geo-controls label { margin-block-start: var(--space-sm); }
+.geo-controls input[type='range'] { width: 100%; min-height: 2.75rem; accent-color: var(--color-accent-2); }
+.geo-controls select, .geo-map-controls input { width: 100%; min-height: 2.75rem; padding: var(--space-xs); border: 1px solid var(--color-control); border-radius: var(--radius-input); background: var(--color-card); color: var(--color-ink); }
+.geo-results { margin: var(--space-md) 0 0; border-block-start: 1px solid var(--color-rule-2); }
+.geo-results > div { padding-block: var(--space-sm); border-block-end: 1px solid var(--color-rule); }
+.geo-results dt { color: var(--color-ink-2); }
+.geo-results dd { margin: var(--space-2xs) 0 0; font-weight: 700; font-size: var(--text-lg); }
+.geo-visuals { min-width: 0; }
+/* the globe's well is the studio's night paper (styles/stage3d.css: .stage3d.is-night) */
+.geo-globe { border-radius: var(--radius-card); }
+.geo-globe canvas { display: block; width: 100%; height: 100%; }
+.geo-attribution { font-size: var(--text-sm); color: var(--color-ink-2); }
+.geo-page-embedded .geo-workspace { margin-block: 0 var(--space-xl); }
+.geo-chart { margin: var(--space-lg) 0 0; }
+.geo-chart svg { width: 100%; height: auto; max-height: 19rem; color: var(--color-ink); }
+.geo-chart svg text { font: 12px var(--font-body); fill: var(--color-ink-2); }
+.geo-grid { stroke: var(--color-rule-2); stroke-width: 1; }
+.geo-curve { fill: none; stroke: var(--color-accent-2-deep); stroke-width: 3; }
+.geo-point { fill: var(--color-accent-3-deep); }
+.geo-chart figcaption { color: var(--color-ink-2); font-size: var(--text-sm); }
+.geo-notes { margin-block: var(--space-xl); max-width: 56rem; }
+.geo-water-section { margin-block: var(--space-xl); max-width: 56rem; }
+.geo-notes li { margin-block: var(--space-xs); }
+.geo-map-controls { display: grid; gap: var(--space-xs); max-width: 40rem; justify-items: start; }
+.geo-map { height: 27rem; width: min(100%, 56rem); margin-block-start: var(--space-md); overflow: hidden; border: 1px solid var(--color-rule-2); border-radius: var(--radius-stock); }
+@media (max-width: 760px) { .geo-workspace { grid-template-columns: 1fr; gap: var(--space-lg); } .geo-map { height: 20rem; } }

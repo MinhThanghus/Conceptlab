@@ -1,0 +1,39 @@
+{
+  "name": "conceptlab-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "ConceptLab AI web client (React + Vite)",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "check:i18n": "node scripts/check-i18n.mjs",
+    "lint:build": "npm run check:i18n && npm run build"
+  },
+  "dependencies": {
+    "@fontsource-variable/lexend": "5.3.0",
+    "@fontsource/be-vietnam-pro": "5.3.0",
+    "@meta-sam/parser": "0.1.0",
+    "katex": "0.19.1",
+    "lucide-react": "1.62.0",
+    "mapbox-gl": "3.33.0",
+    "qrcode": "1.5.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-router-dom": "7.18.4",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "10.4.2",
+    "@testing-library/react": "16.3.3",
+    "@vitejs/plugin-react": "6.1.2",
+    "jsdom": "30.1.3",
+    "vite": "8.3.5",
+    "vitest": "5.0.5"
+  }
+}

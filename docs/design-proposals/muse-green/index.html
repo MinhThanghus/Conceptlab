@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ConceptLab — Đề xuất giao diện xanh lá cây: khám phá khái niệm khoa học, địa lý, tuần hoàn, thuật toán và thị giác máy tính qua bài học mẫu.">
+<title>ConceptLab — Khám phá khái niệm</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main" data-i18n="skip">Bỏ qua tới nội dung chính</a>
+
+<div class="prototype-bar" role="note">
+  <span class="proto-dot" aria-hidden="true"></span>
+  <span data-i18n="protoBar">Bản mẫu thiết kế để duyệt — nội dung là bài học mẫu minh họa, chưa kết nối hệ thống thật.</span>
+  <span class="proto-tag" data-i18n="protoTag">BẢN MẪU</span>
+</div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#explore" aria-label="ConceptLab">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="38" height="38" viewBox="0 0 38 38" fill="none" aria-hidden="true"><rect x="1" y="1" width="36" height="36" rx="10" fill="#FFFFFF"/><path d="M19 29c0-6.2.4-10.8 3.8-15.2C24.6 11.4 27 9.6 30 9c-.4 3.2-1.6 6-3.8 8.2C23.6 19.8 20.6 20.6 19 29Z" fill="#177A5A"/><path d="M19 29c0-4.8-.3-8.4-2.8-11.8C14.9 15.4 13 14 10.6 13.4c.3 2.6 1.3 4.8 3 6.6 2 2.1 4.2 2.8 5.4 9Z" fill="#2F9E6E"/><path d="M19 29V16" stroke="#0E2E22" stroke-width="1.8" stroke-linecap="round"/><circle cx="19" cy="29" r="1.8" fill="#0E2E22"/></svg>
+      </span>
+      <span class="brand-text"><strong>ConceptLab</strong><small data-i18n="brandSub">Phòng thí nghiệm khái niệm</small></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Điều hướng chính" data-i18n-aria="navLabel">
+      <a href="#explore" class="is-active" data-i18n="navExplore">Khám phá</a>
+      <a href="#subjects" data-i18n="navSubjects">Môn học</a>
+      <a href="#lessons" data-i18n="navLessons">Bài học mẫu</a>
+      <a href="#class-code" data-i18n="navClass">Mã lớp</a>
+      <a href="#about" data-i18n="navAbout">Về bản mẫu</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language / Ngôn ngữ">
+        <button type="button" id="btn-vi" class="lang-btn is-active" aria-pressed="true">VI</button>
+        <button type="button" id="btn-en" class="lang-btn" aria-pressed="false">EN</button>
+      </div>
+      <a href="#lessons" class="btn btn-light header-cta" data-i18n="headerCta">Xem bài học mẫu</a>
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Mở menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav id="mobileNav" class="mobile-nav" aria-label="Menu di động" hidden>
+    <a href="#explore" data-i18n="navExplore">Khám phá</a>
+    <a href="#subjects" data-i18n="navSubjects">Môn học</a>
+    <a href="#lessons" data-i18n="navLessons">Bài học mẫu</a>
+    <a href="#class-code" data-i18n="navClass">Mã lớp</a>
+    <a href="#about" data-i18n="navAbout">Về bản mẫu</a>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="explore" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="hero-kicker"><span class="kicker-rule" aria-hidden="true"></span><span data-i18n="heroKicker">Đề xuất xanh lá · Học qua khám phá khái niệm</span></p>
+        <h1 id="hero-title" data-i18n="heroTitle">Một khái niệm, nhìn rõ từ nhiều phía.</h1>
+        <p class="hero-lead" data-i18n="heroLead">ConceptLab giúp học sinh đi từ quan sát tới hiểu sâu: tuần hoàn trong cơ thể, địa hình trên bản đồ, hiện tượng khoa học và cách thuật toán suy nghĩ — qua bài học ngắn, hình minh họa có chủ đích và câu hỏi tự kiểm tra.</p>
+        <div class="hero-actions">
+          <a href="#lessons" class="btn btn-primary" data-i18n="heroPrimary">Khám phá bài học mẫu</a>
+          <a href="#subjects" class="btn btn-outline" data-i18n="heroSecondary">Chọn môn học trước</a>
+        </div>
+        <ol class="hero-steps" aria-label="Nhịp học">
+          <li><span aria-hidden="true">01</span><div><strong data-i18n="step1t">Quan sát</strong><small data-i18n="step1">Nhìn hình, nêu điều bạn thấy</small></div></li>
+          <li><span aria-hidden="true">02</span><div><strong data-i18n="step2t">Dự đoán</strong><small data-i18n="step2">Đoán trước khi xem kết quả</small></div></li>
+          <li><span aria-hidden="true">03</span><div><strong data-i18n="step3t">Kiểm chứng</strong><small data-i18n="step3">Đối chiếu và giải thích lại</small></div></li>
+        </ol>
+        <p class="hero-note" data-i18n="heroNote">6 bài học mẫu · 5 hướng khám phá · Chạy ngoại tuyến, không thu thập dữ liệu</p>
+      </div>
+
+      <figure class="hero-figure">
+        <div class="figure-head">
+          <span data-i18n="figureLabel">Sổ tay khái niệm — minh họa gốc bằng vector</span>
+          <span class="figure-badge" data-i18n="sampleBadge">Mẫu minh họa</span>
+        </div>
+        <svg class="hero-svg" viewBox="0 0 560 380" role="img" aria-labelledby="heroSvgTitle heroSvgDesc">
+          <title id="heroSvgTitle" data-i18n="heroSvgTitle">Minh họa hệ tuần hoàn, đường đồng mức và quỹ đạo</title>
+          <desc id="heroSvgDesc" data-i18n="heroSvgDesc">Trái tim ở giữa với mạch máu tỏa ra, góc trên là đường đồng mức địa hình, góc dưới là quỹ đạo và các nút thuật toán.</desc>
+          <rect width="560" height="380" rx="18" fill="#EFF5EE"/>
+          <path d="M0 52 C90 30 170 62 260 44 C350 26 440 52 560 34 L560 0 L0 0Z" fill="#DCE8DD"/>
+          <g fill="none" stroke="#8FB09A" stroke-width="1.4" opacity=".7"><path d="M28 318 C120 290 200 322 290 296 C380 270 460 300 532 282"/><path d="M28 336 C120 308 210 340 300 314 C390 288 460 318 532 300"/></g>
+          <!-- contour inset -->
+          <g>
+            <rect x="28" y="28" width="168" height="118" rx="12" fill="#FFFFFF" stroke="#C9D8CB"/>
+            <g fill="none" stroke="#177A5A" stroke-width="1.7"><path d="M48 118 C70 78 96 96 112 66 C126 40 152 48 176 34"/><path d="M44 130 C72 84 104 108 124 72 C140 44 160 54 182 40" opacity=".55"/><path d="M58 106 C76 76 96 86 108 62" opacity=".8"/></g>
+            <circle cx="148" cy="58" r="4" fill="#C17A3A"/><text x="40" y="138" font-size="11" fill="#395344" font-weight="700" data-i18n="figContour">Địa hình · đường đồng mức</text>
+          </g>
+          <!-- circulation center -->
+          <g>
+            <circle cx="302" cy="188" r="86" fill="#FFFFFF" stroke="#C9D8CB"/>
+            <circle cx="302" cy="188" r="86" fill="none" stroke="#177A5A" stroke-width="1.2" stroke-dasharray="3 6" opacity=".5"/>
+            <path d="M302 148c-8-14-30-16-38 0-7 14 2 28 14 40l24 22 24-22c12-12 21-26 14-40-8-16-30-14-38 0Z" fill="#EAF3EC" stroke="#0E2E22" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M302 158v38M302 176c-8-4-14-4-20 0M302 176c8-4 14-4 20 0" fill="none" stroke="#177A5A" stroke-width="2" stroke-linecap="round"/>
+            <g fill="none" stroke="#177A5A" stroke-width="2" stroke-linecap="round"><path d="M272 168 C240 150 226 128 218 102"/><path d="M332 168 C364 150 378 128 386 102"/><path d="M278 224 C250 246 242 266 240 288"/><path d="M326 224 C354 246 362 266 364 288"/></g>
+            <g fill="#177A5A"><circle cx="218" cy="102" r="5"/><circle cx="386" cy="102" r="5"/><circle cx="240" cy="288" r="5"/><circle cx="364" cy="288" r="5"/></g>
+            <g font-size="10.5" fill="#395344" font-weight="700"><text x="168" y="96">phổi</text><text x="392" y="96">cơ thể</text><text x="196" y="306">vòng nhỏ</text><text x="368" y="306">vòng lớn</text></g>
+            <text x="302" y="128" text-anchor="middle" font-size="12" fill="#0E2E22" font-weight="800" data-i18n="figHeart">Tuần hoàn</text>
+          </g>
+          <!-- algorithm / orbit inset -->
+          <g>
+            <rect x="392" y="218" width="140" height="118" rx="12" fill="#0E2E22"/>
+            <g fill="none" stroke="#7FB69A" stroke-width="1.6"><circle cx="428" cy="252" r="7" fill="#2F9E6E"/><circle cx="470" cy="238" r="7" fill="#FFFFFF"/><circle cx="498" cy="268" r="7" fill="#2F9E6E"/><path d="M435 248 L463 242 M476 244 L492 262 M462 290 L492 274"/></g>
+            <g font-family="ui-monospace, monospace" font-size="10" fill="#B9CFC0"><text x="404" y="306">lo · mid · hi</text><text x="404" y="322">queue → BFS</text></g>
+            <text x="404" y="236" font-size="11" fill="#FFFFFF" font-weight="800" data-i18n="figAlgo">Thuật toán</text>
+          </g>
+          <g><rect x="28" y="218" width="132" height="72" rx="12" fill="#FFFFFF" stroke="#C9D8CB"/><path d="M40 272 C66 228 102 224 146 258" fill="none" stroke="#177A5A" stroke-width="2.2" stroke-dasharray="6 4"/><circle cx="40" cy="272" r="4" fill="#0E2E22"/><circle cx="146" cy="258" r="4" fill="#fff" stroke="#177A5A" stroke-width="2"/><text x="40" y="240" font-size="11" fill="#395344" font-weight="700" data-i18n="figMotion">Chuyển động</text></g>
+          <text x="28" y="364" font-size="11.5" fill="#5A6B5E" data-i18n="figCaption">Hình vẽ gốc cho bản mẫu — không phải ảnh chụp, dữ liệu thật hay mô phỏng 3D.</text>
+        </svg>
+        <figcaption class="figure-foot">
+          <span data-i18n="figFoot1">Cùng một ngôn ngữ hình: nét rừng đậm, mảng sage nhạt, điểm nhấn hổ phách chỉ cho nhãn mẫu.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- SUBJECT NAVIGATOR -->
+  <section class="subjects" id="subjects" aria-labelledby="subjects-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker" data-i18n="subjectsKicker">Điều hướng theo môn học</p>
+          <h2 id="subjects-title" data-i18n="subjectsTitle">Chọn môn học bạn muốn khám phá</h2>
+          <p data-i18n="subjectsSub">Mỗi hướng có câu hỏi trung tâm, khái niệm cốt lõi và một bài học mẫu tiêu biểu. Chọn ở danh sách bên trái để xem chi tiết ở khung bên phải.</p>
+        </div>
+        <span class="section-badge" data-i18n="subjectsBadge">5 hướng · đồng bộ với bộ lọc bài học</span>
+      </div>
+
+      <div class="navigator">
+        <div class="nav-list" id="subjectList" role="list" aria-label="Danh sách môn học"></div>
+        <article class="nav-detail" id="subjectDetail" aria-live="polite"></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSONS -->
+  <section class="lessons" id="lessons" aria-labelledby="lessons-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker" data-i18n="lessonsKicker">Khám phá</p>
+          <h2 id="lessons-title" data-i18n="lessonsTitle">Bài học mẫu để thử nhịp học</h2>
+          <p data-i18n="lessonsSub">Sáu bài mẫu minh họa cách trình bày khái niệm. Tất cả đều ghi nhãn mẫu — không phải bài báo, giáo trình chính thức hay dữ liệu thật.</p>
+        </div>
+      </div>
+
+      <div class="toolbar" role="search">
+        <label class="search-box">
+          <span class="sr-only" data-i18n="searchLabel">Tìm kiếm bài học</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="#395344" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="#395344" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="search" id="searchInput" data-i18n-ph="searchPh" placeholder="Tìm theo tên bài, khái niệm, từ khoá…" autocomplete="off">
+          <button type="button" id="clearSearch" class="clear-btn" hidden aria-label="Xoá tìm kiếm">✕</button>
+        </label>
+        <div class="filter-group" id="filterGroup" role="group" aria-label="Lọc theo hướng khám phá"></div>
+      </div>
+
+      <p class="result-count" id="resultCount" aria-live="polite"></p>
+      <div class="lesson-grid" id="lessonGrid"></div>
+      <div class="empty-state" id="emptyState" hidden>
+        <div class="empty-icon" aria-hidden="true">◎</div>
+        <h3 data-i18n="emptyTitle">Không tìm thấy bài học phù hợp</h3>
+        <p data-i18n="emptyText">Thử từ khoá khác hoặc xoá bộ lọc hướng khám phá.</p>
+        <button type="button" class="btn btn-primary" id="resetFilters" data-i18n="emptyBtn">Đặt lại bộ lọc</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLASS CODE -->
+  <section class="class-code" id="class-code" aria-labelledby="class-title">
+    <div class="wrap class-grid">
+      <div>
+        <p class="section-kicker light" data-i18n="classKicker">Dành cho lớp học — chỉ ở bản mẫu</p>
+        <h2 id="class-title" data-i18n="classTitle">Nhập mã lớp mẫu để xem cách kiểm tra hoạt động</h2>
+        <p data-i18n="classLead">Ô này chỉ minh họa kiểm tra định dạng ngay trên máy của bạn. Mã không được gửi đi, không tham gia lớp thật và không lưu lại sau khi tải lại trang.</p>
+        <ul class="class-points">
+          <li data-i18n="classPoint1">Mã mẫu đúng định dạng sẽ được báo rõ là “mã mẫu”.</li>
+          <li data-i18n="classPoint2">Mã sai định dạng sẽ có hướng dẫn sửa cụ thể.</li>
+          <li data-i18n="classPoint3">Không có tài khoản, máy chủ hay dữ liệu lớp thật ở bản mẫu này.</li>
+        </ul>
+      </div>
+      <form class="code-card" id="codeForm" novalidate>
+        <label for="codeInput" data-i18n="codeLabel">Mã lớp mẫu</label>
+        <div class="code-row">
+          <input id="codeInput" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" data-i18n-ph="codePh" placeholder="Ví dụ: CLAB-DEMO" aria-describedby="codeHint codeMsg">
+          <button type="submit" class="btn btn-primary" data-i18n="codeBtn">Kiểm tra mã</button>
+        </div>
+        <p class="code-hint" id="codeHint" data-i18n="codeHint">Thử một mã mẫu: CLAB-DEMO · XANH-01 · GREEN-01. Chấp nhận chữ, số và dấu gạch ngang, 4–12 ký tự.</p>
+        <p class="code-msg" id="codeMsg" aria-live="polite"></p>
+        <p class="code-privacy" data-i18n="codePrivacy">Kiểm tra diễn ra hoàn toàn trong trình duyệt. Không gửi, không lưu, không theo dõi.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="wrap about-grid">
+      <div>
+        <p class="section-kicker" data-i18n="aboutKicker">Về đề xuất này</p>
+        <h2 id="about-title" data-i18n="aboutTitle">Bản mẫu này cho thấy điều gì?</h2>
+        <p class="about-lead" data-i18n="aboutLead">Đây là đề xuất giao diện xanh lá độc lập cho ConceptLab, dùng để duyệt hướng thiết kế trước khi tích hợp. Không có máy chủ, không thu thập dữ liệu, không gọi API.</p>
+        <ul class="about-list">
+          <li><strong data-i18n="about1t">Hệ màu rừng sâu:</strong> <span data-i18n="about1">Rừng đậm làm khung tin cậy, emerald cho hành động, sage nhạt cho bề mặt phụ và trắng ấm cho vùng đọc — thay hẳn vai trò của xanh dương và vàng cũ.</span></li>
+          <li><strong data-i18n="about2t">Tương tác thật:</strong> <span data-i18n="about2">Chuyển VI/EN dịch toàn bộ giao diện và nội dung bài học, điều hướng môn học đồng bộ với bộ lọc, tìm kiếm kết hợp lọc, panel chi tiết và kiểm tra mã mẫu ngay trên máy.</span></li>
+          <li><strong data-i18n="about3t">Truy cập được:</strong> <span data-i18n="about3">Điều hướng bằng bàn phím, vòng focus rõ, nút tối thiểu 44px, tôn trọng giảm chuyển động và hiển thị tốt ở 320px.</span></li>
+        </ul>
+      </div>
+      <aside class="principles" aria-labelledby="principles-title">
+        <h3 id="principles-title" data-i18n="principlesTitle">Nguyên tắc thiết kế</h3>
+        <ol>
+          <li><span>01</span><div><strong data-i18n="p1t">Học trước, trang trí sau</strong><p data-i18n="p1">Câu hỏi trung tâm và nhịp Quan sát → Dự đoán → Kiểm chứng dẫn dắt bố cục; hình minh họa phục vụ khái niệm.</p></div></li>
+          <li><span>02</span><div><strong data-i18n="p2t">Điều hướng có thứ bậc</strong><p data-i18n="p2">Chọn hướng khám phá trước, rồi mới tới bài học — thay cho lưới thẻ đồng dạng khó quét.</p></div></li>
+          <li><span>03</span><div><strong data-i18n="p3t">Trung thực về dữ liệu</strong><p data-i18n="p3">Mọi bài học đều ghi nhãn mẫu; không thống kê, trích dẫn bài báo hay tài khoản giả.</p></div></li>
+        </ol>
+        <div class="color-swatches" aria-label="Bảng màu">
+          <span style="--c:#0E2E22">Forest<br><small>#0E2E22</small></span>
+          <span style="--c:#177A5A">Emerald<br><small>#177A5A</small></span>
+          <span style="--c:#2F9E6E">Leaf<br><small>#2F9E6E</small></span>
+          <span style="--c:#DCE8DD" class="light">Sage<br><small>#DCE8DD</small></span>
+          <span style="--c:#FFFEFB" class="light">Warm white<br><small>#FFFEFB</small></span>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand"><strong>ConceptLab</strong><span data-i18n="footerTag">Bản mẫu giao diện xanh lá — để duyệt thiết kế</span></div>
+    <p data-i18n="footerNote">Mở trực tiếp file index.html trên máy để xem. Không cần cài đặt, không cần mạng.</p>
+    <p class="footer-small">ConceptLab Prototype · <span data-i18n="footerSmall">Nội dung bài học là ví dụ minh họa phục vụ việc học khái niệm.</span></p>
+  </div>
+</footer>
+
+<!-- DETAIL DIALOG -->
+<dialog id="detailDialog" class="detail-dialog" aria-labelledby="dialogTitle">
+  <div class="dialog-inner">
+    <div class="dialog-visual" id="dialogVisual"></div>
+    <div class="dialog-body">
+      <div class="dialog-top">
+        <span class="pill pill-forest" id="dialogCategory"></span>
+        <span class="pill" id="dialogMeta"></span>
+        <span class="pill pill-sample" data-i18n="sampleBadge">Bài học mẫu</span>
+      </div>
+      <h2 id="dialogTitle"></h2>
+      <p class="dialog-desc" id="dialogDesc"></p>
+
+      <h3 data-i18n="dlgObjectives">Bạn sẽ học được gì</h3>
+      <ul id="dialogObjectives" class="check-list"></ul>
+
+      <h3 data-i18n="dlgConcepts">Khái niệm cốt lõi</h3>
+      <div class="concept-tags" id="dialogConcepts"></div>
+
+      <h3 data-i18n="dlgSteps">Khám phá từng bước</h3>
+      <ol id="dialogSteps" class="step-list"></ol>
+
+      <div class="checkpoint">
+        <strong data-i18n="dlgCheckpoint">Tự kiểm tra</strong>
+        <p id="dialogCheckpoint"></p>
+      </div>
+
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-primary" id="dialogCloseBtn" data-i18n="dlgClose">Đóng chi tiết</button>
+        <span class="dialog-note" data-i18n="dlgNote">Bản mẫu: nút này chỉ đóng panel, không lưu tiến độ.</span>
+      </div>
+    </div>
+    <button type="button" class="dialog-x" id="dialogX" aria-label="Đóng">✕</button>
+  </div>
+</dialog>
+
+<noscript><p style="padding:16px;text-align:center">Bản mẫu này cần JavaScript để lọc bài học và mở panel chi tiết. / This prototype needs JavaScript for filtering and the detail panel.</p></noscript>
+<script src="app.js"></script>
+</body>
+</html>

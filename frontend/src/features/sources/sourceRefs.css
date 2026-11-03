@@ -1,0 +1,11 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · theme: Hum (DESIGN.md, locked) · posture: full-palette · built: the project · redesign: full · v2.0.0 */
+/* Citation chips: what a source says is blue, the one place blue carries text. Tokens only. */
+.src-refs { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); min-inline-size: 0; }
+.src-refs-label { font-size: var(--text-sm); color: var(--color-muted); }
+.src-ref { max-inline-size: 100%; min-inline-size: 0; border-radius: var(--radius-small); font-size: var(--text-sm); text-align: start; color: var(--color-accent-2-deep); }
+.src-ref svg { flex: none; }
+.src-ref-text { min-inline-size: 0; overflow-wrap: anywhere; }
+button.src-ref:hover { background: var(--color-accent-2-soft); color: var(--color-accent-2-deep); }
+button.src-ref:active { background: color-mix(in oklab, var(--color-accent-2) 18%, var(--color-card)); }
+button.src-ref:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.src-ref.is-missing { color: var(--color-muted); }

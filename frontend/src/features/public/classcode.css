@@ -1,0 +1,28 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · theme: Hum (locked, DESIGN.md) · built: the project · redesign: full */
+/* Class-code entry (the home hero, inline; the join page, large). A code is a code: mono and
+   spaced so O/0 and I/1 never blur, the only place the system spaces letters. Typing uppercases. */
+
+.code-form { display: flex; flex-direction: column; gap: var(--space-xs); min-inline-size: 0; }
+.code-row { display: flex; flex-wrap: wrap; align-items: stretch; gap: var(--space-xs); }
+.code-row > .btn { flex: none; }
+.code-input {
+  flex: 1 1 9rem; min-inline-size: 0; max-inline-size: 15rem;
+  font-family: var(--font-mono); font-weight: 600; font-size: 1.0625rem; letter-spacing: 0.16em;
+}
+.code-input::placeholder { font-weight: 500; letter-spacing: 0.12em; }
+.code-hint, .code-error { margin: 0; }
+.code-error span { overflow-wrap: anywhere; }
+
+/* the join page: a field you can read from the back of the class */
+.code-form-large { gap: var(--space-sm); }
+.code-label-large { font-size: var(--text-lg); font-weight: 600; }
+.code-form-large .code-row { gap: var(--space-sm); }
+.code-input-large {
+  flex: 999 1 15rem; max-inline-size: none; min-block-size: 5.5rem;
+  padding-inline: var(--space-lg) var(--space-md);
+  border-width: 2px; border-color: var(--color-ink); border-radius: var(--radius-stock);
+  font-size: clamp(2.25rem, 1.5rem + 2.8vw, 3.75rem); line-height: 1; letter-spacing: 0.18em;
+}
+.code-input-large::placeholder { color: var(--color-subtle); }
+.code-form-large .code-row > .btn { flex: 1 1 10rem; min-block-size: 3.5rem; padding-inline: var(--space-lg); font-size: var(--text-lg); }
+.code-form-large .code-hint { font-size: 0.9375rem; }

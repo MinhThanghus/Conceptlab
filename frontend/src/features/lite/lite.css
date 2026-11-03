@@ -1,0 +1,124 @@
+/* ConceptLab Lite: single column, large type, ink on paper (16.6:1), 56px targets.
+   Tokens only (DESIGN.md). No heavy imagery, no animation beyond a press. */
+.lite {
+  --lite-size: 1.1875rem;
+  --lite-title: 2rem;
+  --lite-target: 3.5rem;
+  max-inline-size: 44rem;
+  margin-inline: auto;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  color: var(--color-ink);
+  font-size: var(--lite-size);
+  line-height: 1.6;
+}
+.lite-projector {
+  --lite-size: 1.5rem;
+  --lite-title: 2.75rem;
+  --lite-target: 4rem;
+  max-inline-size: 60rem;
+}
+.lite h1 { font-size: var(--lite-title); line-height: 1.15; margin: 0; letter-spacing: var(--tracking-display); }
+.lite h2 { font-size: 1.5em; line-height: 1.25; margin: 0; }
+.lite-projector h2 { font-size: 1.6em; }
+.lite h3 { font-size: 1.2em; line-height: 1.3; margin: 0; }
+.lite p { margin: 0; overflow-wrap: break-word; }
+.lite a { color: var(--color-accent-2-deep); text-underline-offset: 0.2em; }
+.lite a:focus-visible, .lite button:focus-visible, .lite input:focus-visible, .lite textarea:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.lite-top { display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: center; justify-content: space-between; }
+.lite-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs);
+  min-block-size: var(--lite-target); padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-stock); border: 1px solid var(--color-control);
+  background: var(--color-card); color: var(--color-ink); font: inherit; font-weight: 600; cursor: pointer;
+  text-decoration: none;
+}
+.lite-btn-primary { background: var(--color-accent); color: var(--color-accent-ink); border-color: transparent; box-shadow: 0 4px 0 0 var(--color-accent-deep); }
+.lite-btn-primary:active { box-shadow: 0 1px 0 0 var(--color-accent-deep); }
+.lite-btn[disabled] { opacity: 0.55; cursor: wait; }
+.lite-btn[aria-disabled='true'] { opacity: 0.55; cursor: not-allowed; }
+.lite-btn[aria-pressed='true'] { background: var(--color-ink); color: var(--color-paper); }
+.lite-well { background: var(--color-paper-2); border-radius: var(--radius-stock); padding: var(--space-md); display: flex; flex-direction: column; gap: var(--space-sm); }
+.lite-card { background: var(--color-card); border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: var(--space-md); display: flex; flex-direction: column; gap: var(--space-md); }
+.lite-list { margin: 0; padding-inline-start: 1.4em; display: flex; flex-direction: column; gap: var(--space-sm); }
+.lite-plain { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
+.lite-formula { font-family: var(--font-mono); font-size: 1.1em; background: var(--color-paper-2); border-radius: var(--radius-small); padding: var(--space-sm) var(--space-md); overflow-wrap: anywhere; }
+.lite-table { inline-size: 100%; border-collapse: collapse; font-size: 0.95em; }
+.lite-table th, .lite-table td { text-align: start; padding: var(--space-xs); border-block-end: 1px solid var(--color-rule); overflow-wrap: break-word; }
+.lite-img { display: block; inline-size: 100%; block-size: auto; border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.lite-figure { margin: 0; }
+.lite-image-frame { position: relative; }
+.lite-highlight { position: absolute; border: 3px solid var(--color-focus); background: transparent; pointer-events: none; }
+.lite-figure figcaption { font-size: .9em; }
+.lite-input, .lite-textarea {
+  inline-size: 100%; min-block-size: var(--lite-target); padding: var(--space-sm);
+  border: 1px solid var(--color-control); border-radius: var(--radius-input);
+  background: var(--color-card); color: var(--color-ink); font: inherit;
+}
+.lite-code-input { font-family: var(--font-mono); font-size: 1.6em; letter-spacing: 0.08em; text-transform: uppercase; }
+.lite-option {
+  display: flex; gap: var(--space-sm); align-items: flex-start; min-block-size: var(--lite-target);
+  padding: var(--space-sm); border: 1px solid var(--color-control); border-radius: var(--radius-stock);
+  background: var(--color-card); cursor: pointer;
+}
+.lite-option input { inline-size: 1.6rem; block-size: 1.6rem; margin-block-start: 0.2rem; flex: none; accent-color: var(--color-accent-2-deep); }
+.lite-option.is-right { border-color: var(--color-mint-deep); background: var(--color-mint-soft); }
+.lite-option.is-wrong { border-color: var(--color-error); background: var(--color-error-soft); }
+/* a quiz question: the situation in ink-2, the stem in ink and bold, the hint behind a tall summary */
+.lite-quiz { display: flex; flex-direction: column; gap: var(--space-md); }
+.lite-question { border: 0; margin: 0; min-inline-size: 0; }
+/* a floated legend is laid out as the well's first row instead of sitting on its edge */
+.lite-question > legend { float: left; inline-size: 100%; padding: 0; }
+.lite-context { display: flex; flex-direction: column; gap: var(--space-sm); color: var(--color-ink-2); }
+.lite-options { display: flex; flex-direction: column; gap: var(--space-xs); }
+.lite-prompt { display: flex; flex-direction: column; gap: var(--space-sm); font-weight: 600; }
+.lite-hint { border-radius: var(--radius-stock); background: var(--color-card); box-shadow: inset 0 0 0 1px var(--color-rule-2); }
+.lite-hint > summary {
+  display: flex; align-items: center; gap: var(--space-sm); min-block-size: var(--lite-target);
+  padding: var(--space-xs) var(--space-md); border-radius: var(--radius-stock); font-weight: 600; cursor: pointer; list-style: none;
+}
+.lite-hint > summary::-webkit-details-marker { display: none; }
+.lite-hint > summary > svg { flex: none; color: var(--color-kraft-ink); }
+.lite-hint > summary > span { flex: 1 1 auto; }
+.lite-hint > summary:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.lite-hint[open] .lite-hint-chevron { rotate: 180deg; }
+.lite-hint-body { display: flex; flex-direction: column; gap: var(--space-sm); padding: 0 var(--space-md) var(--space-md); }
+.lite-review { display: flex; flex-direction: column; gap: var(--space-sm); padding-block-start: var(--space-sm); border-block-start: 1px solid var(--color-rule-2); }
+.lite-verdict.is-right { color: var(--color-mint-ink); }
+.lite-verdict.is-wrong { color: var(--color-error-ink); }
+.lite-feedback { color: var(--color-ink); }
+.lite-margin { color: var(--color-ink-2); }
+.lite-banner { border-radius: var(--radius-stock); padding: var(--space-md); display: flex; flex-direction: column; gap: var(--space-xs); }
+.lite-banner-offline { background: var(--color-sand-soft); color: var(--color-ink); }
+.lite-banner-saved { background: var(--color-mint-soft); color: var(--color-ink); }
+.lite-nav { display: flex; flex-direction: column; gap: var(--space-xs); }
+.lite-nav a { display: flex; align-items: center; min-block-size: var(--lite-target); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-stock); background: var(--color-paper-2); color: var(--color-ink); text-decoration: none; font-weight: 600; }
+.lite-chat-log { display: flex; flex-direction: column; gap: var(--space-md); }
+.lite-msg { border-radius: var(--radius-stock); padding: var(--space-md); }
+.lite-msg-user { background: var(--color-accent-2-soft); }
+.lite-msg-ai { background: var(--color-paper-2); }
+.lite-msg p + p { margin-block-start: var(--space-sm); }
+.lite-small { font-size: 0.9em; color: var(--color-ink-2); }
+/* Board block: the handwriting as text (headings, lines, formulas, drawings described, notes) */
+.lite-board { display: flex; flex-direction: column; gap: var(--space-sm); }
+.lite-board-formula { display: flex; flex-direction: column; gap: var(--space-2xs); }
+.lite-board-note {
+  border-inline-start: 4px solid var(--color-accent-3);
+  border-radius: var(--radius-small);
+  background: var(--color-paper-2);
+  padding: var(--space-xs) var(--space-md);
+}
+.lite-error { color: var(--color-error-ink); font-weight: 600; }
+.lite-sr-only { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 40rem) {
+  .lite { padding: var(--space-sm); }
+  .lite-card, .lite-well { padding: var(--space-sm); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lite * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}

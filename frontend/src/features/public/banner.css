@@ -1,0 +1,14 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · theme: Hum (locked, DESIGN.md) · hero: Banner · built: the project · redesign: full */
+/* The Banner of the reference pages (gallery, guide): a sheet of paper-2 lying on the page, its
+   bottom edge torn (the seeded --torn-bottom), the pale fibre core showing, its shadow falling down
+   and right. One torn band here plus the footer's: two a page, never more. */
+
+.pb-banner { --pb-tear: 10px; position: relative; isolation: isolate; padding-block: var(--space-2xl) calc(var(--space-2xl) + var(--pb-tear)); }
+.pb-sheet { position: absolute; inset: 0; z-index: -1; pointer-events: none; filter: var(--shadow-paper); }
+.pb-sheet::before { content: ''; position: absolute; inset: 0; background: var(--color-fringe); clip-path: var(--torn-bottom); }
+.pb-sheet > i { position: absolute; inset: 0 0 3px; background: var(--grain), var(--fibre), var(--color-paper-2); clip-path: var(--torn-bottom); }
+.pb-lead { margin: 0; max-inline-size: 46ch; font-size: var(--text-lead); line-height: 1.45; color: var(--color-ink-2); }
+
+@media (max-width: 40rem) {
+  .pb-banner { --pb-tear: 8px; padding-block: var(--space-xl) calc(var(--space-xl) + var(--pb-tear)); }
+}

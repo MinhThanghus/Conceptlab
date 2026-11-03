@@ -1,0 +1,65 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · theme: Hum (DESIGN.md, locked) · posture: full-palette · built: the project · redesign: full · v2.0.0 */
+/* Source viewer: PDF pages, images, videos, measured data, notes. What the source says is blue:
+   the quote, the highlighted region. Tokens only. (The drawer sits above its backdrop in
+   components.css now, so no z-index lift is needed here.) */
+
+.sv-head { display: flex; align-items: flex-start; gap: var(--space-sm); flex-wrap: wrap; }
+.sv-head-text { flex: 1; min-inline-size: 0; display: flex; flex-direction: column; gap: var(--space-3xs); }
+.sv-title { margin: 0; font-weight: 600; line-height: 1.35; }
+.sv-meta { margin: 0; font-size: var(--text-sm); color: var(--color-muted); }
+.sv-hint { margin: 0; font-size: var(--text-sm); color: var(--color-muted); }
+.sv-error { font-size: var(--text-sm); color: var(--color-error-ink); }
+.sv-locate { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+.sv-data-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+
+.sv-quote {
+  margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-2xs) var(--space-sm);
+  padding: var(--space-sm) var(--space-md); border-radius: var(--radius-stock); background: var(--color-accent-2-soft);
+}
+.sv-quote > svg { inline-size: 1.25rem; block-size: 1.25rem; color: var(--color-accent-2-deep); margin-block-start: var(--space-3xs); }
+.sv-quote blockquote { margin: 0; overflow-wrap: anywhere; color: var(--color-ink); }
+.sv-quote figcaption { grid-column: 2; }
+.sv-exact { margin: 0; font-size: var(--text-sm); font-weight: 600; color: var(--color-mint-ink); }
+
+.sv-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-xs); }
+.sv-pager { display: flex; align-items: center; gap: var(--space-xs); }
+.sv-page-input { display: inline-flex; align-items: center; gap: var(--space-xs); font-weight: 500; font-size: 0.9375rem; }
+.sv-page-input .input { inline-size: 4.25rem; text-align: center; }
+
+.sv-stage {
+  position: relative; border: 1px solid var(--color-rule); border-radius: var(--radius-stock);
+  background: var(--color-paper-2); overflow: auto; max-block-size: 75vh;
+}
+.sv-stage.is-fit { overflow: hidden; max-block-size: none; }
+.sv-stage:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.sv-canvas { position: relative; margin-inline: auto; inline-size: 100%; }
+.sv-stage.is-zoomed .sv-canvas { margin-inline: 0; }
+.sv-canvas > img { display: block; inline-size: 100%; block-size: auto; max-inline-size: none; background: var(--color-card); }
+.sv-canvas > img:not(.is-ready) { min-block-size: 8rem; }
+.sv-skeleton { inline-size: 100%; aspect-ratio: 1 / 1.414; border-radius: 0; }
+.sv-skeleton.is-photo { aspect-ratio: 4 / 3; }
+.sv-loading {
+  position: absolute; inset-block-start: var(--space-xs); inset-inline-end: var(--space-xs); display: grid; place-items: center;
+  inline-size: 2rem; block-size: 2rem; border-radius: 50%; background: var(--color-card); box-shadow: var(--shadow-card);
+}
+.sv-loading svg { inline-size: 1.25rem; block-size: 1.25rem; color: var(--color-accent-2); }
+
+/* the cited region: a blue ring and a light blue tint, the rest of the page dimmed a touch */
+.sv-highlight {
+  position: absolute; pointer-events: none; border-radius: var(--space-2xs);
+  outline: 3px solid var(--color-accent-2); outline-offset: 1px;
+  background: color-mix(in oklab, var(--color-accent-2) 14%, transparent);
+  box-shadow: 0 0 0 9999px color-mix(in oklab, var(--color-ink) 8%, transparent);
+}
+.sv-highlight.is-approx { outline-style: dashed; background: color-mix(in oklab, var(--color-accent-2) 8%, transparent); }
+.sv-highlight + .sv-highlight { box-shadow: none; }
+
+.sv-video { inline-size: 100%; max-block-size: 60vh; border-radius: var(--radius-stock); background: var(--color-ink); }
+.sv-note {
+  margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-stock); background: var(--color-paper-2);
+}
+
+@media (forced-colors: active) {
+  .sv-highlight { outline-color: Highlight; background: transparent; }
+}

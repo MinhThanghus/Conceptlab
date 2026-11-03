@@ -1,0 +1,16 @@
+/* Research illustrations (enzyme, population grid): a studio well (styles/stage3d.css), the stage
+   choices as pills, the slider and the view tools on one line, a quiet note. Tokens only. */
+.research3d { margin-block: var(--space-md) var(--space-xs); }
+.research3d-host, .research3d-fallback { position: absolute; inset: 0; }
+.research3d-host canvas { inline-size: 100%; block-size: 100%; display: block; touch-action: pan-y; }
+.research3d-fallback { display: grid; place-items: center; padding: var(--space-md); }
+.research3d-fallback svg { inline-size: 100%; block-size: 100%; }
+.research3d-body { fill: var(--color-accent-2); }
+.research3d-site { fill: var(--color-mint); stroke: var(--color-mint-deep); stroke-width: 2; }
+.research3d-substrate { fill: var(--color-accent); stroke: var(--color-accent-deep); stroke-width: 2; }
+.research3d-dense { fill: var(--color-accent-2); }
+.research3d-sparse { fill: var(--color-sugar); stroke: var(--color-accent-2); stroke-width: 1; }
+.research3d-stages { display: grid; gap: var(--space-sm); }
+.research3d-controls { display: flex; align-items: end; justify-content: space-between; gap: var(--space-sm) var(--space-lg); flex-wrap: wrap; }
+.research3d-controls label { display: grid; flex: 1 1 14rem; gap: var(--space-2xs); font-size: var(--text-sm); color: var(--color-ink-2); }
+.research3d-controls label strong { color: var(--color-ink); }

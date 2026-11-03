@@ -1,0 +1,48 @@
+// Namespace gallery (en). Keys must match the other language file.
+export default {
+  meta: { title: 'Lab gallery' },
+  title: 'Lab gallery',
+  lead: 'Labs that have been shared publicly. Open any of them to explore it as a student would, no account needed.',
+  createOwn: 'Create your own lab',
+  browseBySubject: 'Explore by subject',
+  filters: {
+    label: 'Gallery filters',
+    space: 'Space',
+    allSpaces: 'All',
+    subject: 'Subject',
+    allSubjects: 'All subjects',
+    grade: 'Grade',
+    allGrades: 'All grades',
+    search: 'Search',
+    searchPlaceholder: 'Lesson title, topic…',
+    clearSearch: 'Clear search',
+    more: 'More filters',
+    active: 'active',
+  },
+  results_one: '{n} lab',
+  results_other: '{n} labs',
+  loadError: 'The gallery could not be loaded.',
+  noResults: {
+    title: 'No labs match',
+    body: 'Try removing a filter or searching for a different word.',
+  },
+  empty: {
+    title: 'The gallery has no public labs yet',
+    body: 'When teachers share a lab publicly, it appears here. You could be the first.',
+    create: 'Create the first lab',
+    join: 'Join with a class code',
+  },
+  card: {
+    demo: 'Example lab',
+    owner: 'Created by:',
+    published: 'Shared:',
+    language: 'Lab language',
+    blocks_one: '{count} interactive part',
+    blocks_other: '{count} interactive parts',
+  },
+  pagination: {
+    label: 'Pagination',
+    summary: 'Showing {from} to {to} of {total}',
+    page: 'Page {page}',
+  },
+}

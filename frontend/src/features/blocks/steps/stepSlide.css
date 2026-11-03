@@ -1,0 +1,260 @@
+/* One step on a lesson slide (StepSlide), plus the figure pieces it shares with the flow slides.
+   The deck (lessonDeck.css) owns the sheet, the heading (the step's title) and the type scale
+   (--deck-*, contract C1); this page fills the space under the heading and reads the scale with
+   fallbacks so it also stands alone. Split: the source figure fills a paper-2 well on the left,
+   zoomed on the step's region; the words column on the right is top-aligned and keeps its
+   actions at its foot (it never centres, so nothing hops from slide to slide). Tokens only. */
+
+/* ---------------------------------------------------------------- the page
+   An inline-size container (never a size container: outside a sized parent it keeps its content's
+   height); a tall sheet is read from the deck's own container (deck-slide). */
+.step-slide {
+  container: step-slide / inline-size;
+  flex: 1 1 auto;
+  inline-size: 100%;
+  block-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 0;
+}
+.step-slide-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: var(--deck-gap, 1.5rem);
+  block-size: 100%;
+  min-block-size: 0;
+}
+.step-slide.has-visual .step-slide-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.step-slide.has-visual.is-combined .step-slide-grid,
+.step-slide.has-visual.is-long .step-slide-grid { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); }
+/* a page that asks keeps the figure as a reference and gives the words the larger share; so does a
+   dense explanation (StepSlide DENSE_FROM) */
+.step-slide.has-visual.is-question .step-slide-grid,
+.step-slide.has-visual.is-long.is-dense .step-slide-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+
+/* ---------------------------------------------------------------- the figure well */
+.step-slide-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  min-block-size: 0;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--color-paper-2);
+}
+
+/* StepHighlight `fill`: the picture fills the well, the toggle sits in its corner */
+.steps-figure.is-fill { flex: 1 1 auto; display: flex; flex-direction: column; gap: 0; margin: 0; inline-size: 100%; min-block-size: 0; }
+.steps-figure.is-fill .steps-figure-frame {
+  position: relative;
+  container-type: size;
+  flex: 1 1 auto;
+  min-block-size: 0;
+  display: grid;
+  place-items: center;
+}
+.steps-figure.is-fill .steps-figure-cover { position: absolute; inset: 0; }
+/* the whole page lies on the well with a margin of well around it */
+.steps-figure.is-whole .steps-figure-frame { padding: clamp(0.75rem, 4cqmin, 1.5rem); }
+.steps-figure.is-whole .lk-crop { border-color: var(--color-rule-2); }
+.steps-figure.is-fill .steps-figure-tools {
+  position: absolute;
+  inset-block-end: clamp(0.5rem, 3cqmin, 1rem);
+  inset-inline-end: clamp(0.5rem, 3cqmin, 1rem);
+  z-index: 2;
+  display: flex;
+}
+.steps-figure.is-fill .steps-figure-tools .btn { font-size: var(--deck-small, var(--text-sm)); }
+.steps-figure.is-fill figcaption {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--deck-small, var(--text-sm)); color: var(--color-muted);
+}
+
+/* the topic render of a paper (first step only): fills the well, its honest caption beneath */
+.step-slide-topic { flex: 1 1 auto; display: flex; flex-direction: column; margin: 0; min-block-size: 0; }
+.step-slide-topic-frame { position: relative; flex: 1 1 auto; min-block-size: 0; overflow: hidden; }
+.step-slide-topic-frame img {
+  position: absolute; inset: 0; inline-size: 100%; block-size: 100%; max-inline-size: none;
+  object-fit: cover; object-position: 50% 50%;
+  /* a slight zoom keeps a hairline frame baked into older renders outside the well */
+  transform: scale(1.04);
+}
+.step-slide-topic figcaption {
+  padding: var(--space-xs) var(--space-md) var(--space-sm);
+  font-size: var(--deck-small, var(--text-sm)); line-height: 1.4; color: var(--color-muted);
+}
+
+/* ---------------------------------------------------------------- the words */
+.step-slide-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: var(--space-md);
+  min-inline-size: 0;
+  min-block-size: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  /* room for focus rings of the controls inside */
+  padding: var(--space-3xs) var(--space-2xs) var(--space-xs);
+}
+.step-slide-content:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; border-radius: var(--radius-small); }
+.step-slide-meta { display: flex; justify-content: space-between; gap: 1rem; inline-size: 100%; color: var(--color-muted); font-size: var(--text-sm); font-weight: 600; }
+.step-slide h3 { margin: 0; color: var(--color-ink); font-size: var(--deck-title, var(--app-h2)); font-weight: 600; line-height: 1.15; letter-spacing: var(--tracking-display); text-wrap: balance; overflow-wrap: anywhere; }
+.step-slide-body {
+  max-inline-size: 34em;
+  margin: 0;
+  color: var(--color-ink);
+  font-size: var(--deck-body, 1.125rem);
+  line-height: 1.5;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+.step-slide-body > :first-child { margin-block-start: 0; }
+.step-slide-body p { margin-block: 0 0.6em; }
+.step-slide-body ul, .step-slide-body ol { margin-block: 0 0.6em; padding-inline-start: 1.15em; }
+.step-slide-body li + li { margin-block-start: 0.3em; }
+.step-slide-body li::marker { color: var(--color-muted); }
+.step-slide-body .formula { font-size: 1.05em; }
+/* the body's first sentence when more follows: the page's one line at lead size (never a short
+   body set large to fill the sheet) */
+.step-slide-lead {
+  max-inline-size: 32em;
+  margin: 0;
+  color: var(--color-ink);
+  font-size: var(--deck-lead, 1.25rem);
+  font-weight: 500;
+  line-height: 1.35;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+.step-slide-lead p { margin: 0; }
+/* no figure and a long body: the words take the sheet in two columns rather than one narrow one */
+.step-slide.has-columns .step-slide-body { max-inline-size: none; columns: 2 18em; column-gap: var(--deck-gap, 1.5rem); }
+.step-slide.has-columns .step-slide-body :is(li, .formula, h4) { break-inside: avoid; }
+/* no figure but a question: the explanation takes the left of the sheet, the question the right */
+.step-slide.in-deck.no-visual.is-combined.has-check .step-slide-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-auto-rows: min-content;
+  align-content: start;
+  column-gap: var(--deck-gap, 1.5rem);
+  max-inline-size: none;
+}
+.step-slide.in-deck.no-visual.is-combined.has-check .step-slide-content > .step-slide-body { grid-column: 1; grid-row: 1 / span 3; }
+.step-slide.in-deck.no-visual.is-combined.has-check .step-slide-content > .steps-check { grid-column: 2; grid-row: 1; padding-block-start: 0; border-block-start: 0; }
+.step-slide.in-deck.no-visual.is-combined.has-check .step-slide-content > .step-slide-foot { grid-column: 1 / -1; }
+/* the foot: source chips and "ask the AI", pushed to the bottom of the column */
+.step-slide-foot { margin-block-start: auto; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); padding-block-start: var(--space-sm); }
+.step-slide-foot:empty { display: none; }
+.step-slide-foot .btn { font-size: var(--deck-small, var(--text-md)); }
+/* an order nobody has confirmed: a quiet sand line with its icon, never a banner */
+.step-slide-notice {
+  flex: 1 1 100%; display: flex; align-items: flex-start; gap: var(--space-xs); margin: 0;
+  padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-small);
+  background: var(--color-sand-soft); color: var(--color-ink-2);
+  font-size: var(--deck-small, var(--text-sm)); line-height: 1.4;
+}
+.step-slide-notice svg { flex: none; inline-size: 1.15em; block-size: 1.15em; margin-block-start: 0.1em; color: var(--color-kraft-ink); }
+
+/* ---------------------------------------------------------------- the question (CheckQuestion `slide`) */
+.steps-check.is-slide { gap: var(--space-sm); padding: 0; border-radius: 0; background: none; }
+.step-slide.is-combined .steps-check.is-slide { gap: var(--space-xs); padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule); }
+/* on a shared slide the question above names the field: its label stays for assistive technology only */
+.steps-check.is-slide.is-compact .field-label {
+  position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; margin: -1px; padding: 0;
+}
+.steps-check.is-slide .textarea::placeholder { color: var(--color-subtle); }
+.step-slide.is-combined .step-slide-content { gap: var(--space-sm); }
+.steps-check.is-slide .steps-check-q {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55em;
+  margin: 0;
+  max-inline-size: 30em;
+  color: var(--color-ink);
+  font-size: var(--deck-lead, 1.25rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+/* the slide's one loud mark: a coral bead on the question's first line */
+.steps-check-bead { flex: none; inline-size: 0.5em; block-size: 0.5em; margin-block-start: 0.4em; border-radius: 50%; background: var(--color-accent-3); }
+.steps-check.is-slide .field { gap: var(--space-2xs); }
+.steps-check.is-slide .field-label { font-size: var(--deck-small, 0.9375rem); }
+.steps-check.is-slide .field-hint { font-size: var(--deck-small, var(--text-sm)); }
+.steps-check.is-slide .textarea { min-block-size: 0; font-size: var(--deck-body, 1.125rem); line-height: 1.5; }
+.steps-check.is-slide .steps-check-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-md); }
+.steps-check.is-slide .steps-check-actions .btn { font-size: var(--deck-small, var(--text-md)); }
+.steps-check.is-slide .steps-check-hint, .steps-check.is-slide .steps-check-note { margin: 0; font-size: var(--deck-small, var(--text-sm)); }
+.steps-check.is-slide .lk-hint { font-size: var(--deck-small, var(--text-sm)); }
+
+/* ---------------------------------------------------------------- CoverCrop (MediaStage.jsx) */
+.lk-cover { position: relative; inline-size: 100%; block-size: 100%; min-block-size: 0; overflow: hidden; background: var(--color-paper-2); }
+.lk-cover > img {
+  position: absolute; top: 0; left: 0;
+  inline-size: 100%; block-size: auto; max-inline-size: none;
+  transform-origin: 0 0;
+  transition: transform var(--dur-long) var(--ease-in-out);
+  user-select: none; -webkit-user-drag: none;
+}
+.lk-cover-outline { animation: lk-cover-in var(--dur-short) var(--ease-out) both; }
+@keyframes lk-cover-in { from { opacity: 0; } }
+/* the item's number where the outline starts: ink with a pear figure, like the chosen list row */
+.lk-cover-badge {
+  position: absolute; inset-block-start: 0; inset-inline-start: 0;
+  display: inline-grid; place-items: center;
+  min-inline-size: 2em; block-size: 2em; padding-inline: 0.35em;
+  translate: -50% -50%;
+  border-radius: var(--radius-pill);
+  background: var(--color-ink); color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-card);
+  font-size: var(--deck-small, var(--text-sm)); font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------- one column: phones, tall sheets
+   (the picture band is a share of the sheet's height, cqh of the deck's size container) */
+@container step-slide (width < 40rem) {
+  .step-slide.has-visual .step-slide-grid,
+  .step-slide.has-visual.is-combined .step-slide-grid,
+  .step-slide.has-visual.is-long .step-slide-grid,
+  .step-slide.has-visual.is-long.is-dense .step-slide-grid,
+  .step-slide.has-visual.is-question .step-slide-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: clamp(7.5rem, 30cqh, 22rem) minmax(0, 1fr);
+    gap: var(--space-md);
+  }
+  .step-slide.has-visual.is-question .step-slide-grid,
+  .step-slide.has-visual.is-combined .step-slide-grid { grid-template-rows: clamp(6rem, 24cqh, 16rem) minmax(0, 1fr); }
+  .step-slide-visual { border-radius: var(--radius-stock); }
+  .step-slide-content { gap: var(--space-sm); }
+  .step-slide.in-deck.no-visual.is-combined.has-check .step-slide-content { display: flex; }
+  .step-slide.in-deck.no-visual.is-combined.has-check .step-slide-content > .steps-check { padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule); }
+}
+@container deck-slide (aspect-ratio < 1.15) {
+  .step-slide.has-visual .step-slide-grid,
+  .step-slide.has-visual.is-combined .step-slide-grid,
+  .step-slide.has-visual.is-long .step-slide-grid,
+  .step-slide.has-visual.is-long.is-dense .step-slide-grid,
+  .step-slide.has-visual.is-question .step-slide-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: clamp(7.5rem, 30cqh, 22rem) minmax(0, 1fr);
+    gap: var(--space-md);
+  }
+  .step-slide.has-visual.is-question .step-slide-grid,
+  .step-slide.has-visual.is-combined .step-slide-grid { grid-template-rows: clamp(6rem, 24cqh, 16rem) minmax(0, 1fr); }
+  .step-slide-visual { border-radius: var(--radius-stock); }
+  .step-slide-content { gap: var(--space-sm); }
+  .step-slide.in-deck.no-visual.is-combined.has-check .step-slide-content { display: flex; }
+  .step-slide.in-deck.no-visual.is-combined.has-check .step-slide-content > .steps-check { padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lk-cover > img { transition: none; }
+  .lk-cover-outline { animation: none; }
+}

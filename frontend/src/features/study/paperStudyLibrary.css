@@ -1,0 +1,36 @@
+/* Paper2Explorer library: the title and lead on the paper, the learning path on hairlines, the
+   fields as pills, the papers as picture cards (each preview fills a 16:9 box on paper-2).
+   Tokens only. The uppercase kicker over the title is an eyebrow (DESIGN.md): it is not shown. */
+.paper-study-library { max-width: 1200px; }
+.research-back { display: inline-flex; align-items: center; gap: var(--space-2xs); min-block-size: var(--cl-control-h); color: var(--color-ink-2); font-weight: 500; }
+.research-back:hover { color: var(--color-ink); }
+.research-intro { max-width: 800px; padding: var(--space-xl) 0 var(--space-lg); }
+.research-kicker { display: none; }
+.research-intro h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.12; letter-spacing: var(--tracking-display); margin: 0 0 var(--space-md); }
+.research-intro > p:not(.research-kicker) { font-size: var(--text-lead); line-height: 1.6; color: var(--color-ink-2); margin: 0 0 var(--space-sm); }
+.research-language { font-size: var(--text-sm); color: var(--color-muted); }
+.research-learning-path { list-style-position: inside; padding: 0; margin: var(--space-md) 0 var(--space-xl); display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); counter-reset: step; }
+.research-learning-path li { padding: var(--space-sm) 0 0; border-block-start: 2px solid var(--color-ink); font-size: var(--text-sm); line-height: 1.6; color: var(--color-ink-2); }
+.research-domains { display: flex; gap: var(--space-xs); flex-wrap: wrap; margin-block-end: var(--space-xl); }
+.research-domains a { display: inline-flex; align-items: center; min-block-size: var(--cl-control-h); padding: 0 var(--space-md); border-radius: var(--radius-pill); box-shadow: inset 0 0 0 1px var(--color-rule-2); background: var(--color-card); color: var(--color-ink); text-decoration: none; font-weight: 500; }
+.research-domains a:hover { background: var(--color-paper-2); }
+.research-domains a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.research-domains span { margin-inline-start: var(--space-xs); font-weight: 600; color: var(--color-muted); }
+.research-domain { scroll-margin-top: 6rem; margin-block-end: var(--space-2xl); }
+.research-domain > header { display: flex; justify-content: space-between; gap: var(--space-md); align-items: center; margin-block-end: var(--space-md); flex-wrap: wrap; }
+.research-domain h2 { margin: 0 0 var(--space-2xs); font-size: var(--app-h2); }
+.research-domain header p { color: var(--color-ink-2); max-width: 740px; margin: 0; line-height: 1.6; }
+.research-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-lg); }
+.research-paper-card { border-radius: var(--radius-card); background: var(--grain), var(--color-card); box-shadow: var(--shadow-card); overflow: hidden; display: flex; flex-direction: column; }
+.research-paper-card > a { display: block; aspect-ratio: 16 / 9; background: var(--color-paper-2); overflow: hidden; }
+.research-paper-card img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: 50% 50%; }
+.research-card-copy { padding: var(--space-md); display: flex; flex-direction: column; flex: 1; }
+.research-meta { font-size: var(--text-xs); color: var(--color-muted); margin: 0 0 var(--space-xs); }
+.research-paper-card h3 { font-size: var(--app-h4); margin: 0; line-height: 1.4; }
+.research-paper-card h3 a { color: var(--color-ink); }
+.research-original-title { font-size: var(--text-sm); line-height: 1.55; color: var(--color-muted); margin: var(--space-xs) 0 var(--space-md); }
+.research-card-links { margin-top: auto; display: flex; gap: var(--space-xs) var(--space-md); flex-wrap: wrap; font-size: var(--text-sm); }
+.research-card-links a { color: var(--color-accent-2); }
+.research-scope { padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule); color: var(--color-ink-2); font-size: var(--text-sm); line-height: 1.7; }
+@media (max-width: 900px) { .research-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .research-learning-path { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .research-card-grid { grid-template-columns: 1fr; } .research-learning-path { grid-template-columns: 1fr; } .research-intro { padding-block-start: var(--space-lg); } }

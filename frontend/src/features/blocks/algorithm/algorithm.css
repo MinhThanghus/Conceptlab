@@ -1,0 +1,239 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · system: DESIGN.md (Hum, adapted)
+ * built: the project · redesign: full · algorithm block: the stage leads, one pear Play, coral only for a swap */
+/* Hallmark · dismissed F4 · the ink step pill is the chosen step (a selected state, like a segment) and the round numerals are numbers, the one filled primary is Play (.btn-primary) */
+
+/* Algorithm block. Roles: the compared pair is pear (look here), a swap is coral (the loud moment),
+   a write is blue, a settled place is mint (progress); every state also carries a glyph or a word,
+   never colour alone. The shared layout (ix-root, ix-heading) lives in features/sim/interactive.css. */
+
+.alg-about { margin: 0; color: var(--color-muted); line-height: 1.55; }
+.alg-about strong { color: var(--color-ink); font-weight: 600; }
+.alg-lead { margin: 0; line-height: 1.6; max-inline-size: 68ch; }
+.alg-calc { font-size: var(--text-sm); overflow-x: auto; white-space: nowrap; padding-block: var(--space-3xs); font-variant-numeric: tabular-nums; }
+.ix-heading.alg-heading { font-size: var(--app-h4); font-weight: 600; }
+.ix-formula.alg-formula { background: var(--color-paper-2); border: 0; border-radius: var(--radius-stock); padding: var(--space-sm) var(--space-md); }
+
+/* ---------------------------------------------------------------- inputs */
+.alg-input-row { display: flex; flex-direction: column; gap: var(--space-xs); }
+.alg-list-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-xs); align-items: start; }
+.alg-list-form .field { min-inline-size: 0; }
+.alg-list-form.search { grid-template-columns: minmax(0, 1fr) minmax(6rem, 8rem) auto; }
+/* a hint or an error under a field would push the button down: line the button up with the input */
+.alg-list-form > .btn { margin-block-start: 1.7rem; }
+@container ix (max-width: 30rem) {
+  .alg-list-form, .alg-list-form.search { grid-template-columns: minmax(0, 1fr); }
+  .alg-list-form > .btn { justify-self: start; margin-block-start: 0; }
+}
+
+/* ---------------------------------------------------------------- stage: a tinted well, bars on paper */
+.alg-stage { border-radius: var(--radius-stock); background: var(--color-paper-2); padding: var(--space-md) var(--space-md) var(--space-sm); min-inline-size: 0; }
+.alg-stage:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.alg-key { margin: 0 0 var(--space-2xs); font-size: 0.9375rem; color: var(--color-ink-2); min-block-size: 1.5rem; font-variant-numeric: tabular-nums; }
+
+.alg-bars { --bar: color-mix(in oklab, var(--color-accent-2) 36%, var(--color-card)); display: grid; grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr)); gap: clamp(2px, 1cqi, 8px); align-items: end; }
+.alg-col { display: flex; flex-direction: column; align-items: center; min-inline-size: 0; }
+.alg-plot { position: relative; inline-size: 100%; block-size: clamp(8rem, 30cqi, 12rem); }
+.alg-zero { position: absolute; inset-inline: -2px; block-size: 0; border-block-start: 1px solid var(--color-control); }
+/* a bar is the full plot tall, moved and scaled: only transform animates (never height or bottom) */
+.alg-bar {
+  position: absolute; inset-inline: 16%; inset-block: 0; border-radius: 2px 2px 0 0; background: var(--bar);
+  transform-origin: 50% 100%;
+  transform: translateY(calc(var(--b, 0) * -1%)) scaleY(max(0.02, calc(var(--h, 0) / 100)));
+  transition: transform var(--dur-short) var(--ease-out), background-color var(--dur-micro) var(--ease-out);
+}
+.alg-value {
+  position: absolute; inset-inline: -4px; inset-block: 0; display: flex; align-items: flex-end; justify-content: center;
+  transform: translateY(calc(var(--lift, 0) * -1% - 0.125rem));
+  transition: transform var(--dur-short) var(--ease-out);
+  pointer-events: none;
+}
+.alg-value.neg { transform: translateY(calc(var(--lift, 0) * -1% + 1.35rem)); }
+.alg-value > span { font-weight: 600; font-size: clamp(0.6875rem, 2.7cqi, 0.9375rem); font-variant-numeric: tabular-nums; color: var(--color-ink); line-height: 1.3; white-space: nowrap; }
+.alg-mark { block-size: 1.3rem; font-weight: 700; font-size: 0.9375rem; line-height: 1.3rem; color: var(--color-ink-2); }
+.alg-index { font-size: var(--text-xs); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.alg-pointer { min-block-size: 1.2rem; font-size: var(--text-xs); font-weight: 600; color: var(--color-ink-2); white-space: nowrap; }
+
+.alg-col.is-compare .alg-bar { background: var(--color-accent); }
+.alg-col.is-swap .alg-bar { background: var(--color-accent-3); }
+.alg-col.is-write .alg-bar { background: var(--color-accent-2); }
+.alg-col.is-sorted .alg-bar { background: var(--color-mint); }
+.alg-col.is-sorted .alg-mark { color: var(--color-mint-ink); }
+
+/* binary search: cells are card stock slips; the middle one pear, the found one mint, the dropped half fades */
+.alg-target { margin: 0 0 var(--space-sm); font-size: var(--text-md); }
+.alg-target-value { font-size: 1.375rem; font-weight: 600; font-variant-numeric: tabular-nums; padding: 0 var(--space-xs); border-radius: var(--radius-small); background: var(--color-accent-soft); }
+.alg-cells-scroll { overflow-x: auto; padding-block-end: var(--space-2xs); scrollbar-width: thin; }
+.alg-cells { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n, 8), minmax(min-content, 1fr)); gap: var(--space-2xs); min-inline-size: min-content; }
+.alg-cells .alg-pointer { white-space: normal; text-align: center; line-height: 1.15; }
+.alg-cell-box { display: flex; flex-direction: column; align-items: center; gap: var(--space-3xs); }
+.alg-box {
+  display: grid; place-items: center; inline-size: 100%; min-inline-size: 1.75rem; padding-inline: var(--space-3xs); min-block-size: 2.75rem;
+  border-radius: var(--radius-small); background: var(--color-card); box-shadow: inset 0 0 0 1px var(--color-rule-2);
+  font-weight: 600; font-size: var(--text-md); font-variant-numeric: tabular-nums;
+  transition: background-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+}
+.alg-cell-box.is-out .alg-box { background: var(--color-paper-3); box-shadow: none; color: var(--color-muted); text-decoration: line-through; font-weight: 400; }
+.alg-cell-box.is-mid .alg-box { background: var(--color-accent); box-shadow: inset 0 0 0 2px var(--color-ink); color: var(--color-accent-ink); }
+.alg-cell-box.is-found .alg-box { background: var(--color-mint); box-shadow: inset 0 0 0 2px var(--color-ink); color: var(--color-ink); }
+
+/* legend: a swatch beside each word, the same fill as the mark it names */
+.alg-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-md); font-size: var(--text-sm); color: var(--color-ink-2); }
+.alg-legend li { display: inline-flex; align-items: center; gap: var(--space-xs); }
+.alg-legend .key { display: inline-grid; place-items: center; inline-size: 1.125rem; block-size: 1.125rem; border-radius: 3px; font-size: 0.6875rem; font-weight: 700; flex: none; color: var(--color-ink); background: var(--color-card); box-shadow: inset 0 0 0 1px var(--color-rule-2); }
+.alg-legend .key.compare { background: var(--color-accent); box-shadow: none; }
+.alg-legend .key.swap { background: var(--color-accent-3); box-shadow: none; }
+.alg-legend .key.write { background: var(--color-accent-2); box-shadow: none; color: var(--color-paper); }
+.alg-legend .key.sorted { background: var(--color-mint); box-shadow: none; }
+.alg-legend .key.mid { background: var(--color-accent); box-shadow: inset 0 0 0 1.5px var(--color-ink); }
+.alg-legend .key.out { background: var(--color-paper-3); box-shadow: none; }
+
+/* what happens in this step: a sentence, not a box (it is the live region) */
+.alg-msg { margin: 0; font-size: 1.0625rem; font-weight: 500; line-height: 1.5; color: var(--color-ink); min-block-size: 3.2rem; max-inline-size: 68ch; }
+
+/* transport and counters */
+.alg-transport { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+.alg-transport .icon-btn { inline-size: var(--cl-control-h); block-size: var(--cl-control-h); }
+.alg-transport .alg-play { min-inline-size: 7.5rem; }
+.alg-step-count { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--color-muted); font-size: 0.9375rem; }
+.alg-speed { margin-inline-start: auto; }
+.alg-speed .segmented button, .alg-dim .segmented button { min-block-size: var(--cl-control-h); min-inline-size: var(--cl-control-h); font-variant-numeric: tabular-nums; }
+@container ix (max-width: 26rem) {
+  .alg-speed { margin-inline-start: 0; }
+}
+/* sibling stats part with a hairline: no leading padding on the first */
+.alg-counters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; }
+.alg-counters > div { padding-inline: var(--space-md); border-inline-start: 1px solid var(--color-rule); min-inline-size: 0; }
+.alg-counters > div:first-child { padding-inline-start: 0; border-inline-start: 0; }
+.alg-counters dt { font-size: var(--text-sm); color: var(--color-muted); font-weight: 500; line-height: 1.35; }
+.alg-counters dd { margin: var(--space-3xs) 0 0; font-size: 1.5rem; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
+
+/* pseudo-code: a caption, then the code in a well; the running line gets a pear band and an ink edge */
+.alg-code { margin: 0; display: flex; flex-direction: column; gap: var(--space-xs); min-inline-size: 0; }
+.alg-code figcaption { font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); }
+.alg-code pre { margin: 0; padding: var(--space-xs) 0; overflow-x: auto; font-size: var(--text-sm); line-height: 1.6; background: var(--color-paper-2); border-radius: var(--radius-stock); }
+.alg-code code { font-family: var(--cl-font-mono); display: block; background: transparent; padding: 0; }
+.alg-line { display: block; padding-inline: var(--space-sm) var(--space-md); white-space: pre; }
+.alg-line .ln { display: inline-block; inline-size: 1.75rem; color: var(--color-subtle); user-select: none; }
+.alg-line.current { background: var(--color-accent-soft); box-shadow: inset 3px 0 0 var(--color-ink); font-weight: 600; }
+
+.alg-explain { padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule); }
+
+/* ---------------------------------------------------------------- attention */
+.alg-presets { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-sm); }
+.alg-presets-label { font-size: var(--text-sm); color: var(--color-muted); }
+.alg-presets .chip { min-block-size: var(--cl-control-h); }
+
+/* the five steps: card stock pills; the current one ink with a pear numeral, a finished one a mint numeral */
+.alg-steps { list-style: none; margin: 0; padding: var(--space-3xs) 0; display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+.alg-steps button {
+  display: inline-flex; align-items: center; gap: var(--space-xs); min-block-size: var(--cl-control-h); padding: var(--space-2xs) var(--space-md) var(--space-2xs) var(--space-2xs);
+  border: 0; border-radius: var(--radius-pill); background: var(--color-card); box-shadow: inset 0 0 0 1px var(--color-rule-2);
+  color: var(--color-ink-2); font-weight: 500; font-size: 0.9375rem; white-space: nowrap;
+  transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+}
+.alg-steps button:hover { background: var(--color-paper-2); color: var(--color-ink); }
+.alg-steps button:active { background: var(--color-paper-3); }
+.alg-steps button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.alg-steps button .n { display: inline-grid; place-items: center; inline-size: 1.75rem; block-size: 1.75rem; border-radius: 50%; background: var(--color-paper-3); color: var(--color-ink); font-size: var(--text-xs); font-weight: 600; font-variant-numeric: tabular-nums; }
+.alg-steps button.done .n { background: var(--color-mint); color: var(--color-ink); }
+.alg-steps button[aria-current='step'] { background: var(--color-ink); color: var(--color-paper); box-shadow: none; }
+.alg-steps button[aria-current='step'] .n { background: var(--color-accent); color: var(--color-accent-ink); }
+.alg-step-body { min-inline-size: 0; }
+.alg-step-nav { display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
+
+/* a worked number under a heatmap: a tinted well, never a bordered box inside the card */
+.alg-note { display: flex; flex-direction: column; gap: var(--space-sm); padding: var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); min-inline-size: 0; }
+.alg-note .select { max-inline-size: 20rem; }
+
+.alg-tokens { border: 0; margin: 0; padding: 0; min-inline-size: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+.alg-token-list { display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
+.alg-token-list .field { flex: 1 1 7rem; max-inline-size: 11rem; }
+.alg-token-buttons { display: inline-flex; gap: var(--space-xs); }
+.alg-token-buttons .icon-btn { inline-size: var(--cl-control-h); block-size: var(--cl-control-h); }
+.alg-dim { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); }
+
+.alg-matrices { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr)); gap: var(--space-md); }
+.alg-matrices.two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); }
+.alg-matrix { overflow-x: auto; min-inline-size: 0; }
+.alg-matrix table { border-collapse: separate; border-spacing: var(--space-2xs); }
+.alg-matrix caption { text-align: start; font-weight: 600; font-size: 0.9375rem; padding-block-end: var(--space-2xs); caption-side: top; }
+.alg-matrix th { font-size: var(--text-xs); font-weight: 500; color: var(--color-muted); padding: 0 var(--space-2xs); text-align: center; white-space: nowrap; max-inline-size: 7rem; overflow: hidden; text-overflow: ellipsis; }
+.alg-matrix tbody th { text-align: end; color: var(--color-ink-2); }
+.alg-matrix td { padding: 0; }
+.alg-cell {
+  inline-size: 3.5rem; min-block-size: var(--cl-control-h); padding: var(--space-3xs) var(--space-2xs); text-align: center; font-variant-numeric: tabular-nums; font-size: var(--text-md);
+  border: 1px solid var(--color-control); border-radius: var(--radius-small); background: var(--color-card); color: var(--color-ink);
+  transition: border-color var(--dur-micro) var(--ease-out);
+}
+.alg-cell:hover { border-color: var(--color-ink-2); }
+.alg-cell:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -1px; border-color: var(--color-focus); }
+.alg-cell:disabled { opacity: 0.55; cursor: not-allowed; }
+.alg-cell[aria-invalid='true'] { border-color: var(--color-error); background: var(--color-error-soft); }
+.alg-val { display: inline-block; min-inline-size: 2.75rem; padding: var(--space-2xs) var(--space-xs); text-align: center; border-radius: var(--radius-small); background: var(--color-paper-2); font-variant-numeric: tabular-nums; font-size: 0.9375rem; }
+.alg-matrix tr.hl th { color: var(--color-ink); font-weight: 600; }
+.alg-matrix tr.hl .alg-val, .alg-matrix tr.hl .alg-cell { background: var(--color-accent-soft); box-shadow: inset 0 0 0 1.5px var(--color-ink); }
+
+/* Phones: up to about ten cells fit without scrolling; longer lists scroll inside the stage. */
+@container ix (max-width: 30rem) {
+  .alg-box { font-size: 0.875rem; min-block-size: 2.625rem; }
+  .alg-cells .alg-pointer { font-size: 0.6875rem; }
+  .alg-counters > div { padding-inline: var(--space-sm); }
+  .alg-counters dd { font-size: 1.25rem; }
+}
+
+/* ---------------------------------------------------------------- compare two inputs (spec §10.3) */
+.alg-cmp { display: flex; flex-direction: column; gap: var(--space-sm); padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule); min-inline-size: 0; }
+.alg-cmp-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-xs); }
+.alg-cmp-inputs { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
+@container ix (min-width: 44rem) {
+  .alg-cmp-inputs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .alg-cmp-inputs .alg-list-form, .alg-cmp-inputs .alg-list-form.search { grid-template-columns: minmax(0, 1fr); }
+  .alg-cmp-inputs .alg-list-form > .btn { justify-self: start; margin-block-start: 0; }
+}
+.alg-cmp-input { margin: 0; min-inline-size: 0; border: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+.alg-cmp-input legend { display: inline-flex; align-items: center; gap: var(--space-xs); padding: 0; margin-block-end: var(--space-xs); font-weight: 600; }
+/* lane tags: A is ink, B is an ink outline; shape and letter carry the lane, never colour alone */
+.alg-cmp-tag { display: inline-grid; place-items: center; inline-size: 1.625rem; block-size: 1.625rem; border-radius: 6px; font-weight: 600; font-size: 0.875rem; flex: none; }
+.alg-cmp-tag[data-lane='A'] { background: var(--color-ink); color: var(--color-paper); }
+.alg-cmp-tag[data-lane='B'] { background: var(--color-card); color: var(--color-ink); box-shadow: inset 0 0 0 1.5px var(--color-ink); }
+
+/* The two lanes stay side by side even on phones, so both runs are visible at once. */
+.alg-cmp-stage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-xs); border-radius: var(--radius-stock); }
+.alg-cmp-stage:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.alg-cmp-lane { min-inline-size: 0; display: flex; flex-direction: column; gap: var(--space-xs); padding: var(--space-sm); border-radius: var(--radius-stock); background: var(--color-paper-2); transition: background-color var(--dur-short) var(--ease-out); }
+.alg-cmp-lane.is-done { background: var(--color-mint-soft); }
+.alg-cmp-lane-title { display: flex; align-items: center; gap: var(--space-xs); min-inline-size: 0; }
+.alg-cmp-lane-head { margin: 0; font-size: var(--text-xs); font-weight: 500; color: var(--color-muted); font-variant-numeric: tabular-nums; line-height: 1.3; }
+.alg-cmp-done { color: var(--color-mint-ink); font-weight: 600; }
+.alg-cmp-done::before { content: '✓ '; }
+.alg-cmp-lane .alg-bars { gap: var(--space-3xs); }
+.alg-cmp-lane .alg-plot { block-size: 5.5rem; }
+.alg-cmp-lane .alg-bar { inset-inline: 8%; }
+.alg-cmp-lane .alg-mark { block-size: 1.1rem; line-height: 1.1rem; font-size: 0.75rem; }
+.alg-cmp-list { margin: 0; font-size: var(--text-xs); line-height: 1.6; color: var(--color-muted); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.alg-cmp-list .is-compare, .alg-cmp-list .is-swap, .alg-cmp-list .is-write { color: var(--color-ink); font-weight: 700; border-radius: 3px; padding-inline: var(--space-3xs); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.alg-cmp-list .is-compare { background: var(--color-accent-soft); }
+.alg-cmp-list .is-swap { background: var(--color-accent-3-soft); }
+.alg-cmp-list .is-write { background: var(--color-accent-2-soft); }
+.alg-cmp-counts { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.alg-cmp-counts > div { padding-inline: var(--space-xs); border-inline-start: 1px solid var(--color-rule-2); min-inline-size: 0; }
+.alg-cmp-counts > div:first-child { padding-inline-start: 0; border-inline-start: 0; }
+.alg-cmp-counts dt { font-size: var(--text-xs); font-weight: 500; color: var(--color-muted); line-height: 1.25; }
+.alg-cmp-counts dd { margin: 0; font-size: 1.25rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.alg-cmp-target { margin: 0; font-size: var(--text-sm); }
+.alg-cmp-target .alg-target-value { font-size: 1.0625rem; }
+.alg-cmp-cells { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
+.alg-cmp-cells .alg-box { min-inline-size: 2.125rem; min-block-size: 2.125rem; font-size: 0.8125rem; }
+.alg-cmp-result { margin: 0; font-size: var(--text-sm); font-weight: 600; }
+
+/* ---------------------------------------------------------------- editor preview */
+.alg-preview { display: flex; flex-direction: column; gap: var(--space-sm); padding-block-start: var(--space-md); }
+.alg-preview-label { margin: 0; font-size: var(--text-sm); color: var(--color-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .alg-bar, .alg-value, .alg-box, .alg-steps button, .alg-cmp-lane, .alg-cell { transition: none; }
+}
+@media (forced-colors: active) {
+  .alg-bar { forced-color-adjust: none; outline: 1px solid CanvasText; }
+  .alg-line.current { outline: 2px solid Highlight; }
+}

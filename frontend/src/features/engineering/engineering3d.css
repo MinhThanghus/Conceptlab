@@ -1,0 +1,28 @@
+/* Engineering models (quadrotor, solar panel): a studio well (styles/stage3d.css), the sliders and
+   their readings on hairlines, the view tools as ghost buttons, the legend and limits as quiet notes. */
+.engineering3d-host, .engineering3d-fallback { position: absolute; inset: 0; }
+.engineering3d-host canvas { inline-size: 100%; block-size: 100%; display: block; touch-action: pan-y; }
+.engineering3d-fallback { display: grid; place-items: center; padding: var(--space-md); }
+.engineering3d-fallback svg { inline-size: 100%; max-block-size: 100%; }
+.engineering3d-content { display: grid; gap: var(--space-xs); }
+.engineering3d-content label { display: flex; justify-content: space-between; gap: var(--space-xs); color: var(--color-ink-2); }
+.engineering3d-content label strong { color: var(--color-ink); }
+.engineering3d-content .engineering3d-check { justify-content: start; align-items: center; min-block-size: var(--cl-control-h); color: var(--color-ink); }
+.engineering3d-results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-xs); margin: var(--space-2xs) 0; }
+.engineering3d-results > div { padding: var(--space-sm); border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.engineering3d-results dt { color: var(--color-ink-2); font-size: var(--text-sm); }
+.engineering3d-results dd { margin: var(--space-3xs) 0 0; font-weight: 600; font-size: var(--text-lg); font-variant-numeric: tabular-nums; }
+/* the 2D drawings in the model's inks */
+.engineering3d-drawing .ed-craft { fill: var(--color-ink-2); stroke: var(--color-ink); }
+.engineering3d-drawing .ed-rotor { stroke: var(--color-sugar); }
+.engineering3d-drawing .ed-thrust { stroke: var(--color-accent-deep); }
+.engineering3d-drawing .ed-thrust-head { fill: var(--color-accent-deep); }
+.engineering3d-drawing .ed-vertical { stroke: var(--color-accent-2); }
+.engineering3d-drawing .ed-horizontal { stroke: var(--color-accent-3); }
+.engineering3d-drawing .ed-glass { fill: var(--color-sugar); fill-opacity: .65; stroke: var(--color-accent-2); }
+.engineering3d-drawing .ed-film { fill: var(--color-accent-soft); stroke: var(--color-rule-2); }
+.engineering3d-drawing .ed-cells { fill: var(--color-accent-2-deep); stroke: var(--color-sugar); }
+.engineering3d-drawing .ed-fingers { stroke: var(--color-sugar); }
+.engineering3d-drawing .ed-crack { stroke: var(--color-accent-3); }
+.engineering3d-drawing .ed-back { fill: var(--color-paper-3); stroke: var(--color-control); }
+.engineering3d-drawing .ed-rays { stroke: var(--color-accent); }

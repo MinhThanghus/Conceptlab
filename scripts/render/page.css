@@ -1,0 +1,64 @@
+/* Shared typesetting for the two demo textbook pages (A4 at 150 dpi: 1240 x 1754 px).
+   Original layout made for ConceptLab, in the manner of a modern Vietnamese textbook:
+   Lexend for heads, Be Vietnam Pro for reading text, italic variables, numbered figures. */
+/* Faces: linked from @fontsource in each page (Lexend Variable, Be Vietnam Pro 400/500/600/700 + italic). */
+
+:root {
+  --paper: #fffdf8;
+  --ink: #1e2228;
+  --ink-2: #3a4049;
+  --muted: #5f6772;
+  --hair: #d9dde3;
+  --head: 'Lexend Variable', 'Be Vietnam Pro', sans-serif;
+  --body: 'Be Vietnam Pro', 'Segoe UI', sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--paper); }
+body { width: 1240px; height: 1754px; overflow: hidden; }
+.page {
+  position: relative; width: 1240px; height: 1754px; background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 24px; line-height: 1.52; font-kerning: normal;
+  text-rendering: geometricPrecision; -webkit-font-smoothing: antialiased; hyphens: none;
+}
+.page p { margin: 0 0 12px; text-align: left; }
+.page i, .page .v { font-style: italic; }
+.page b { font-weight: 600; }
+
+/* running head (even page: folio and head on the left) */
+.run { position: absolute; left: 0; right: 0; top: 0; height: 86px; display: flex; align-items: flex-end; padding: 0 80px 14px 110px;
+  font-family: var(--head); font-size: 19px; font-weight: 500; color: var(--muted); gap: 18px; }
+.run .tab { align-self: stretch; display: flex; align-items: flex-end; padding: 0 22px 14px; margin-bottom: -14px;
+  background: var(--brand); color: #fff; font-weight: 600; letter-spacing: 0.01em; border-radius: 0 0 10px 10px; }
+.run .rule { flex: 1; height: 2px; background: var(--brand-soft); margin-bottom: 9px; }
+.folio { position: absolute; bottom: 52px; left: 110px; font-family: var(--head); font-size: 22px; font-weight: 600; color: var(--brand);
+  display: flex; align-items: center; gap: 16px; }
+.folio::after { content: ''; width: 56px; height: 2px; background: var(--brand-soft); }
+
+.main { position: absolute; left: 110px; top: 122px; width: 1050px; }
+
+/* lesson head */
+.lesson { display: flex; align-items: stretch; gap: 22px; margin-bottom: 10px; }
+.lesson .no { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 96px; border-radius: 14px;
+  background: var(--brand); color: #fff; font-family: var(--head); line-height: 1; padding: 10px 0 12px; }
+.lesson .no small { font-size: 19px; font-weight: 500; opacity: 0.92; }
+.lesson .no span { font-size: 46px; font-weight: 700; margin-top: 4px; }
+.lesson h1 { margin: 0; align-self: center; font-family: var(--head); font-weight: 700; font-size: 50px; line-height: 1.12; color: var(--brand-ink); letter-spacing: 0.005em; }
+.lesson h1 small { display: block; font-size: 22px; font-weight: 500; color: var(--muted); margin-bottom: 6px; letter-spacing: 0; }
+
+h2 { font-family: var(--head); font-size: 30px; line-height: 1.25; font-weight: 600; color: var(--brand-ink); margin: 18px 0 8px;
+  display: flex; align-items: baseline; gap: 14px; }
+h2 .n { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 40px; border-radius: 10px;
+  background: var(--brand-soft); color: var(--brand-ink); font-size: 24px; font-weight: 700; transform: translateY(-3px); }
+h3 { font-family: var(--head); font-size: 25px; font-weight: 600; margin: 0 0 6px; color: var(--brand-ink); }
+
+.box { border-radius: 16px; padding: 14px 24px 4px; margin: 12px 0 14px; background: var(--brand-tint); }
+.box.line { background: transparent; border: 2px solid var(--brand-soft); }
+.box h3 { display: flex; align-items: center; gap: 12px; }
+.box h3 .mark { width: 30px; height: 30px; border-radius: 8px; background: var(--brand); color: #fff; font-size: 19px;
+  display: inline-flex; align-items: center; justify-content: center; font-weight: 700; }
+
+figure { margin: 0; }
+figcaption { font-family: var(--body); font-style: italic; font-size: 21px; line-height: 1.4; color: var(--ink-2); margin-top: 8px; }
+figcaption b { font-style: normal; font-weight: 600; color: var(--brand-ink); }
+.side { font-size: 21px; line-height: 1.5; }
+.side p { text-align: left; }

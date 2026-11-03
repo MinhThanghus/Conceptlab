@@ -1,0 +1,70 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · theme: Hum (locked, DESIGN.md) · hero: Banner · built: the project · redesign: full */
+/* Gallery: a Banner on the torn sheet of paper-2 (banner.css: the head, one line, the filters), then
+   the labs as card stock on the paper below, three across. Filters live in the URL. */
+
+.gl-banner-inner {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'head create' 'filters filters';
+  gap: var(--space-xl) var(--gap-columns); align-items: end;
+}
+.gl-head { grid-area: head; display: grid; gap: var(--space-md); min-inline-size: 0; }
+.gl-head h1 {
+  margin: 0; max-inline-size: 14ch;
+  font-size: var(--text-display); letter-spacing: var(--tracking-display); line-height: 1.02; text-wrap: balance;
+}
+.gl-create { grid-area: create; }
+
+/* the filters: one row on a wide screen, the search taking what is left */
+.gl-filters { grid-area: filters; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-md) var(--space-lg); align-items: end; }
+.gl-filters > * { min-inline-size: 0; }
+.gl-search { max-inline-size: 44rem; }
+.gl-advanced { max-inline-size: 55rem; }
+.gl-advanced summary { cursor: pointer; font-weight: 600; padding-block: .5rem; }
+.gl-advanced-fields { display: flex; flex-wrap: wrap; align-items: end; gap: var(--space-md) var(--space-lg); padding-block: var(--space-sm); }
+.gl-advanced-fields .gl-select { min-inline-size: 12rem; }
+.gl-space .segmented { align-self: flex-start; flex-wrap: wrap; max-inline-size: 100%; background: var(--color-card); box-shadow: inset 0 0 0 var(--rule-hair) var(--color-rule-2); }
+.gl-space .segmented button { flex: 1 1 auto; min-block-size: 2.25rem; }
+
+/* ---------------------------------------------------------------- results */
+.gl-results { padding-block: var(--space-xl) var(--section-gap-s); }
+.gl-results-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-sm); min-block-size: var(--cl-control-h); margin-block-end: var(--space-lg); }
+.gl-count { margin: 0; font-size: var(--text-lg); font-weight: 600; letter-spacing: -0.015em; font-variant-numeric: tabular-nums; }
+.gl-count:focus { outline: none; }
+.gl-count:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 4px; border-radius: var(--radius-small); }
+
+.gl-subjects { margin-block-end: var(--space-xl); }
+.gl-subjects-label { margin: 0 0 var(--space-sm); font-size: var(--text-lg); font-weight: 700; }
+.gl-subject-list { display: flex; gap: .5rem; flex-wrap: wrap; }
+.gl-subject-list button { display: inline-flex; align-items: center; gap: .4rem; min-height: 2.65rem; padding: .5rem .9rem; border: 1px solid var(--color-rule-2); border-radius: 999px; background: var(--color-card); color: var(--color-ink); font: inherit; font-weight: 600; cursor: pointer; }
+.gl-subject-list button:hover { border-color: currentColor; }
+.gl-subject-list button.is-selected { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-card); }
+.gl-subject-list button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.gl-groups { display: grid; gap: var(--space-2xl); }
+.gl-groups.is-stale { opacity: .55; transition: opacity var(--dur-short) var(--ease-out); }
+.gl-group-head { display: flex; align-items: center; gap: .65rem; margin-block-end: var(--space-md); border-bottom: 1px solid var(--color-rule-2); padding-block-end: .75rem; }
+.gl-group-head h3 { margin: 0; font-size: var(--text-xl); }
+
+.gl-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-xl) var(--gap-columns); }
+.gl-grid > * { min-inline-size: 0; }
+.gl-results .pager { margin-block-start: var(--space-2xl); }
+
+/* empty: what is empty, why, one action */
+.gl-empty { display: grid; justify-items: start; gap: var(--space-sm); max-inline-size: 40rem; padding-block: var(--space-xl) var(--space-2xl); }
+.gl-empty-title { margin: 0; font-size: var(--app-h2); }
+.gl-empty p { margin: 0 0 var(--space-xs); color: var(--color-ink-2); }
+.gl-empty-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm) var(--space-lg); }
+.gl-empty-link { font-weight: 600; text-decoration-thickness: 2px; text-underline-offset: 0.22em; }
+
+@media (max-width: 64rem) {
+  .gl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 40rem) {
+  .gl-banner-inner { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'head' 'create' 'filters'; gap: var(--space-lg); }
+  .gl-create { justify-self: start; }
+  .gl-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+}
+@media (pointer: coarse) {
+  .gl-space .segmented button { min-block-size: var(--cl-control-h); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gl-groups.is-stale { transition: none; }
+}

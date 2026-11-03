@@ -1,0 +1,48 @@
+// Namespace gallery (vi). Keys must match the other language file.
+export default {
+  meta: { title: 'Thư viện bài học' },
+  title: 'Thư viện bài học',
+  lead: 'Các bài học được chia sẻ công khai. Mở bất kỳ bài học nào để khám phá như một học sinh, không cần tài khoản.',
+  createOwn: 'Tạo bài học của bạn',
+  browseBySubject: 'Khám phá theo môn',
+  filters: {
+    label: 'Bộ lọc thư viện',
+    space: 'Không gian',
+    allSpaces: 'Tất cả',
+    subject: 'Môn học',
+    allSubjects: 'Mọi môn',
+    grade: 'Lớp',
+    allGrades: 'Mọi lớp',
+    search: 'Tìm kiếm',
+    searchPlaceholder: 'Tên bài học, chủ đề…',
+    clearSearch: 'Xóa nội dung tìm kiếm',
+    more: 'Bộ lọc khác',
+    active: 'đang áp dụng',
+  },
+  results_one: '{n} bài học',
+  results_other: '{n} bài học',
+  loadError: 'Chưa tải được thư viện.',
+  noResults: {
+    title: 'Không có bài học nào phù hợp',
+    body: 'Thử bỏ bớt bộ lọc hoặc tìm bằng từ khóa khác.',
+  },
+  empty: {
+    title: 'Thư viện chưa có bài học công khai nào',
+    body: 'Khi giáo viên chia sẻ bài học ở chế độ công khai, bài học sẽ xuất hiện tại đây. Bạn có thể là người đầu tiên.',
+    create: 'Tạo bài học đầu tiên',
+    join: 'Vào lớp bằng mã',
+  },
+  card: {
+    demo: 'Bài học mẫu',
+    owner: 'Người tạo:',
+    published: 'Chia sẻ:',
+    language: 'Ngôn ngữ của bài học',
+    blocks_one: '{count} phần tương tác',
+    blocks_other: '{count} phần tương tác',
+  },
+  pagination: {
+    label: 'Phân trang',
+    summary: 'Hiển thị {from} đến {to} trong số {total}',
+    page: 'Trang {page}',
+  },
+}

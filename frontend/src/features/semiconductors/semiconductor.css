@@ -1,0 +1,87 @@
+/* Semiconductors: one lab in four topics. The title and lead on the paper (no banner), the topics
+   and choices as pills, the scene in a studio well (styles/stage3d.css) with its part names as
+   card chips, the predictions and states in paper-2 wells, notes quiet. Tokens only. */
+.semiconductor { color: var(--color-ink); }
+.semiconductor-head { display: grid; gap: var(--space-2xs); }
+.semiconductor-head h3, .semiconductor-head p { margin: 0; }
+.semiconductor-head h3 { font-size: var(--app-h3); line-height: 1.25; }
+.semiconductor-head .semiconductor-byline { color: var(--color-muted); font-size: var(--text-sm); }
+.semiconductor-head p:last-child { color: var(--color-ink-2); }
+.semiconductor-main { display: grid; gap: var(--space-md); }
+.semiconductor-main p, .semiconductor-context h4 { margin: 0; line-height: 1.5; }
+.semiconductor-context { display: grid; gap: var(--space-3xs); }
+.semiconductor-context h4 { font-size: var(--app-h4); }
+.semiconductor-context p { color: var(--color-ink-2); }
+.semiconductor-input button.chip { min-inline-size: 3rem; justify-content: center; }
+.semiconductor-predict { display: grid; gap: var(--space-sm); padding: var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.semiconductor-predict p { font-size: var(--text-sm); }
+.semiconductor-host, .semiconductor-fallback { position: absolute; inset: 0; }
+.semiconductor-host canvas { inline-size: 100%; block-size: 100%; display: block; touch-action: pan-y; }
+.semiconductor-stage:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.semiconductor-fallback { display: grid; place-items: center; padding: var(--space-md); }
+.semiconductor-fallback svg { inline-size: 100%; max-block-size: 100%; }
+.semiconductor-slider { display: grid; gap: var(--space-2xs); color: var(--color-ink-2); }
+.semiconductor-slider input { inline-size: 100%; min-block-size: 2.75rem; accent-color: var(--color-accent-2); }
+.semiconductor-table { margin-block: var(--space-xs); border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.semiconductor-table th, .semiconductor-table td { min-inline-size: 4rem; border-block-end: 1px solid var(--color-rule); padding: var(--space-xs) var(--space-sm); text-align: center; }
+.semiconductor-table th { color: var(--color-ink-2); font-weight: 600; border-block-end-color: var(--color-rule-2); }
+.semiconductor details summary { font-weight: 600; cursor: pointer; min-block-size: var(--cl-control-h); display: flex; align-items: center; }
+.semiconductor-scope { padding-block-start: var(--space-sm); border-block-start: 1px solid var(--color-rule); }
+.semiconductor-sources ul { margin-block-end: 0; }
+.semiconductor-sources a { color: var(--color-accent-2); }
+.semiconductor-view-controls output { min-inline-size: 3.5rem; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+.semiconductor-view-controls .semiconductor-zoom { inline-size: var(--cl-control-h); padding: 0; }
+/* the CMOS part names: card chips over the stage, each one a control */
+.semiconductor-annotations { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.semiconductor .semiconductor-annotations button {
+  position: absolute; transform: translate(-50%, -50%); pointer-events: auto;
+  min-block-size: 2rem; padding: var(--space-3xs) var(--space-sm);
+  border: 0; border-radius: var(--radius-pill); box-shadow: inset 0 0 0 1px var(--color-rule-2);
+  background: var(--color-card); color: var(--color-ink); font: inherit; font-size: 0.875rem; font-weight: 600; line-height: 1.2; cursor: pointer;
+}
+.semiconductor .semiconductor-annotations button[aria-pressed='true'] { background: var(--color-ink); color: var(--color-paper); box-shadow: none; }
+.semiconductor .semiconductor-annotations button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+/* the linked 2D schematic */
+.semiconductor-circuit { padding: var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.semiconductor-circuit h5 { margin: 0 0 var(--space-sm); font-size: var(--text-md); }
+.semiconductor-circuit-layout { display: grid; grid-template-columns: minmax(5.5rem, 1fr) minmax(10rem, 1.4fr) minmax(1rem, 1fr); align-items: center; column-gap: var(--space-sm); }
+.semiconductor-circuit-side { display: grid; justify-items: center; gap: var(--space-2xs); font-size: var(--text-sm); }
+.semiconductor-circuit-side span { color: var(--color-plum); font-weight: 600; }
+.semiconductor-circuit-branch { display: flex; align-items: center; flex-direction: column; }
+.semiconductor .semiconductor-circuit-part {
+  min-inline-size: 8.5rem; min-block-size: var(--cl-control-h); padding: var(--space-2xs) var(--space-sm);
+  border: 0; border-radius: var(--radius-stock); box-shadow: inset 0 0 0 1px var(--color-rule-2);
+  background: var(--color-card); color: var(--color-ink); font: inherit; font-size: var(--text-sm); font-weight: 600; cursor: pointer;
+}
+.semiconductor .semiconductor-circuit-part[aria-pressed='true'] { background: var(--color-ink); color: var(--color-paper); box-shadow: none; }
+.semiconductor .semiconductor-circuit-part:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.semiconductor .semiconductor-circuit-side .semiconductor-circuit-part { min-inline-size: 0; inline-size: 100%; }
+.semiconductor-circuit-wire { block-size: 0.8rem; inline-size: 0.3rem; background: var(--color-rule-2); }
+.semiconductor-circuit-wire.is-p { background: var(--color-accent-deep); }
+.semiconductor-circuit-wire.is-n { background: var(--color-accent-2); }
+.semiconductor-circuit p { padding-block-start: var(--space-sm); font-size: var(--text-sm); }
+.semiconductor-truth-title { font-size: var(--text-md); margin: var(--space-2xs) 0; }
+/* the 2D drawings in the model's inks */
+.semiconductor-drawing .sd-substrate { fill: var(--color-accent-2-deep); }
+.semiconductor-drawing .sd-doped { fill: var(--color-mint); }
+.semiconductor-drawing .sd-channel { fill: var(--color-mint-soft); }
+.semiconductor-drawing .sd-oxide { fill: var(--color-accent); }
+.semiconductor-drawing .sd-gate { fill: var(--color-plum); }
+.semiconductor-drawing .sd-gate-ring { fill: none; stroke: var(--color-plum); }
+.semiconductor-drawing .sd-metal { fill: var(--color-sand); }
+.semiconductor-drawing .sd-dielectric { fill: var(--color-sugar); }
+.semiconductor-drawing .sd-off { fill: var(--color-rule-2); }
+.semiconductor-drawing .sd-p-on { fill: var(--color-accent-deep); }
+.semiconductor-drawing .sd-n-on { fill: var(--color-accent-2); }
+.semiconductor-drawing .sd-off-line { stroke: var(--color-rule-2); }
+.semiconductor-drawing .sd-p-on-line { stroke: var(--color-accent-deep); }
+.semiconductor-drawing .sd-n-on-line { stroke: var(--color-accent-2); }
+.semiconductor-drawing .sd-out-line { stroke: var(--color-sand); }
+.semiconductor-drawing .sd-in-line { stroke: var(--color-plum); }
+.semiconductor-drawing .sd-wire { stroke: var(--color-control); }
+.semiconductor-drawing .sd-text { fill: var(--color-ink); }
+.semiconductor-series { inline-size: 100%; max-inline-size: 35rem; display: block; }
+@media (max-width: 420px) {
+  .semiconductor-table th, .semiconductor-table td { min-inline-size: 3rem; }
+  .semiconductor-circuit-layout { grid-template-columns: minmax(5.5rem, 1fr) minmax(9rem, 1.3fr); }
+}

@@ -1,0 +1,7 @@
+/* The 3D court: a studio well (styles/stage3d.css), the focus toggle as card stock, the view tools
+   as ghost buttons, the note quiet. Tokens only. (.fb-3d-toggle is the 2D board's "Try in 3D".) */
+.sports3d-host { position: absolute; inset: 0; }
+.sports3d-host canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; }
+.sports3d-status { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; padding: var(--space-lg) var(--space-md); text-align: center; color: var(--color-ink-2); }
+.fb-3d-toggle { min-block-size: var(--cl-control-h); border: 0; border-radius: var(--radius-stock); box-shadow: inset 0 0 0 1px var(--color-rule-2), 0 3px 0 0 var(--color-edge); padding: 0 var(--space-md); background: var(--color-card); color: var(--color-ink); font: inherit; font-weight: 600; cursor: pointer; }
+.fb-3d-toggle:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }

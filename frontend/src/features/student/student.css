@@ -1,0 +1,38 @@
+.student-home { background: #f5f8f7; color: #18352f; min-height: calc(100dvh - var(--cl-header-h)); padding-block: clamp(1.5rem, 4vw, 3rem) 4rem; }
+.student-content { max-width: 75rem; display: grid; gap: 1.5rem; }
+.student-hero { background: #dcefe7; border: 1px solid #c9e3d6; border-radius: 1.4rem; padding: clamp(1.5rem, 4vw, 3rem); display: grid; grid-template-columns: minmax(0, 1fr) 14rem; gap: 2rem; align-items: center; overflow: hidden; }
+.student-hero h1 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1.13; letter-spacing: -.035em; max-width: 23ch; margin: .65rem 0 .8rem; }
+.student-hero p:not(.student-kicker) { color: #365950; line-height: 1.6; max-width: 56ch; margin: 0 0 1.35rem; }
+.student-kicker { color: #17664f; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 750; display: flex; gap: .4rem; align-items: center; margin: 0; }
+.student-primary { display: inline-flex; align-items: center; gap: .6rem; min-height: 3rem; padding: .7rem 1rem; color: white; background: #176a51; border-radius: .6rem; font-weight: 700; text-decoration: none; }
+.student-primary:hover { background: #11533e; }
+.student-hero-art { position: relative; width: 13rem; height: 13rem; display: grid; place-items: center; }
+.student-orbit { position: absolute; inset: 15%; border: 1px solid #87c7ac; border-radius: 50%; }
+.student-orbit.orbit-two { inset: 3%; border-color: #badfce; }
+.student-planet { width: 6.7rem; height: 6.7rem; display: grid; place-items: center; color: #fff; background: #278a6a; border-radius: 2rem; transform: rotate(-9deg); box-shadow: 0 12px 30px #43856838; }
+.student-planet svg { transform: rotate(9deg); }
+.student-star { position: absolute; right: 1rem; top: 1rem; font-size: 2.3rem; color: #d79c36; }
+.student-quick { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
+.student-quick a { display: flex; align-items: center; gap: .9rem; padding: 1rem 1.15rem; background: #fff; border: 1px solid #dce8e2; border-radius: .9rem; color: inherit; text-decoration: none; }
+.student-quick a:hover,.student-lesson:hover { border-color: #7fbba2; box-shadow: 0 6px 20px #1c514910; }
+.student-quick a > span:nth-child(2) { flex: 1; display: grid; gap: .15rem; }
+.student-quick small { color: #57736a; font-size: .875rem; }
+.student-quick-icon { background: #e4f3eb; color: #187357; border-radius: .65rem; padding: .7rem; display: grid; place-items: center; }
+.student-lessons { padding-block-start: .5rem; }
+.student-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 1rem; margin-bottom: 1rem; }
+.student-section-heading h2 { margin: 0; font-size: 1.45rem; }
+.student-section-heading p { margin: .3rem 0 0; color: #57736a; }
+.student-section-heading > a { color: #176a51; display: inline-flex; align-items: center; gap: .3rem; min-height: var(--cl-control-h); font-weight: 700; white-space: nowrap; }
+.student-lesson-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1rem; }
+.student-lesson { display: flex; flex-direction: column; background: white; border: 1px solid #dce8e2; border-radius: .9rem; overflow: hidden; color: inherit; text-decoration: none; }
+.student-lesson-cover { aspect-ratio: 16/10; overflow: hidden; background: #e8f2ec; }
+.student-lesson-cover .lab-cover { width: 100%; height: 100%; }
+.student-lesson-text { padding: 1rem; display: flex; flex-direction: column; gap: .55rem; flex: 1; }
+.student-lesson-text > span:first-child { color: #57736a; font-size: .8rem; }
+.student-lesson-text strong { line-height: 1.35; }
+.student-lesson-action { color: #176a51; display: flex; align-items: center; gap: .35rem; margin-top: auto; padding-top: .3rem; font-size: .85rem; font-weight: 700; }
+.student-manage { margin: 0; font-size: .875rem; color: #57736a; }
+.student-home a:focus-visible { outline: 3px solid #176a51; outline-offset: 3px; }
+@media (max-width: 850px) { .student-lesson-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 600px) { .student-hero { grid-template-columns: 1fr; } .student-hero-art { display: none; } .student-quick { grid-template-columns: 1fr; } .student-section-heading { align-items: start; flex-direction: column; } }
+@media (max-width: 360px) { .student-lesson-grid { grid-template-columns: 1fr; } }

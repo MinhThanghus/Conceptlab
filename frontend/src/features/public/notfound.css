@@ -1,0 +1,16 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · theme: Hum (locked, DESIGN.md) · built: the project · redesign: full */
+/* Not found: a plain head, one line, the address that missed, three ways on. No drawing, no "404". */
+
+.nf {
+  display: grid; align-content: center; justify-items: start; gap: var(--space-md);
+  min-block-size: calc(72dvh - var(--cl-header-h)); padding-block: var(--space-3xl) var(--space-4xl);
+}
+.nf h1 { margin: 0; max-inline-size: 16ch; font-size: var(--text-display-s); letter-spacing: var(--tracking-display); line-height: 1.04; text-wrap: balance; }
+.nf-body { margin: 0; max-inline-size: 44ch; font-size: var(--text-lead); line-height: 1.45; color: var(--color-ink-2); }
+.nf-path { margin: 0; max-inline-size: 100%; color: var(--color-muted); font-size: var(--text-sm); }
+.nf-path code { padding: var(--space-3xs) var(--space-xs); }
+.nf-actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-block-start: var(--space-md); }
+
+@media (max-width: 40rem) {
+  .nf { min-block-size: 0; padding-block: var(--space-2xl) var(--space-3xl); }
+}

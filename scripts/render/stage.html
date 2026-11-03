@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>ConceptLab render stage</title>
+<link rel="stylesheet" href="/frontend/node_modules/@fontsource-variable/lexend/wght.css">
+<link rel="stylesheet" href="/frontend/node_modules/@fontsource/be-vietnam-pro/400.css">
+<link rel="stylesheet" href="/frontend/node_modules/@fontsource/be-vietnam-pro/600.css">
+<style>
+  html, body { margin: 0; background: #fff; overflow: hidden; }
+  canvas { display: block; }
+</style>
+<script type="importmap">
+{ "imports": {
+    "three": "/frontend/node_modules/three/build/three.module.js",
+    "three/addons/": "/frontend/node_modules/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<script type="module">
+  const name = new URLSearchParams(location.search).get('job')
+  import(`./${name}.js`).catch((err) => {
+    console.error(err)
+    window.__job = { state: 'error', error: String(err && err.stack ? err.stack : err) }
+  })
+</script>
+</body>
+</html>

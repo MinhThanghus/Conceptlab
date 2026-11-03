@@ -1,0 +1,18 @@
+export default {
+  home: 'Góc học tập',
+  welcome: 'Chào {name}, hôm nay bạn muốn khám phá điều gì?',
+  lead: 'Chọn một bài học, thử thay đổi các yếu tố và tự tìm câu trả lời.',
+  browse: 'Khám phá bài học',
+  join: 'Nhập mã lớp',
+  joinHint: 'Vào bài học do giáo viên chia sẻ.',
+  visual: 'Trực quan theo chủ đề',
+  visualHint: 'Khám phá mô phỏng, bản đồ và thuật toán.',
+  featured: 'Bắt đầu với một bài học',
+  featuredHint: 'Chọn một bài để quan sát và thử nghiệm.',
+  allLessons: 'Xem tất cả bài học',
+  openLesson: 'Mở bài học',
+  unavailable: 'Chưa tải được bài học. Bạn vẫn có thể mở thư viện.',
+  manage: 'Quản lý bài học của tôi',
+  lesson: 'Không gian học tập',
+  resources: 'Trợ giúp và nguồn',
+}

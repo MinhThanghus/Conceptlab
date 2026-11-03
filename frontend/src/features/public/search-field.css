@@ -1,0 +1,15 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · theme: Hum (locked, DESIGN.md) · built: the project · redesign: full */
+/* Search box (gallery, My labs, admin): a leading glass, the field, a clear button with a 44px target. */
+.search-wrap { position: relative; display: flex; align-items: center; }
+.search-icon { position: absolute; inset-inline-start: var(--space-sm); inline-size: 1.125rem; block-size: 1.125rem; color: var(--color-muted); pointer-events: none; }
+.search-input { padding-inline: 2.5rem 2.75rem; }
+.search-input::-webkit-search-cancel-button { display: none; }
+.search-clear {
+  position: absolute; inset-block: var(--rule-hair); inset-inline-end: var(--rule-hair); display: grid; place-items: center;
+  inline-size: 2.625rem; border: 0; border-radius: calc(var(--radius-input) - var(--rule-hair)); background: transparent; color: var(--color-muted);
+  transition: background-color var(--dur-micro) var(--ease-snap), color var(--dur-micro) var(--ease-snap);
+}
+.search-clear:hover { background: var(--color-paper-2); color: var(--color-ink); }
+.search-clear:active { background: var(--color-paper-3); }
+.search-clear:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -3px; }
+.search-clear svg { inline-size: 1.125rem; block-size: 1.125rem; }

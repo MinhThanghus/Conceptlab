@@ -1,0 +1,123 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · theme: Hum (DESIGN.md, locked) · posture: full-palette
+ * built: the project · redesign: full · v2.0.0 */
+
+/* New lab: two short steps in one card. A chosen option is drawn in ink (a 2px ink edge, or
+   ink with paper type for small pills); pear stays on the one button that moves on. */
+
+.new-lab { max-inline-size: 64rem; display: flex; flex-direction: column; gap: var(--space-lg); }
+.new-lab-header h1 { margin: 0; }
+.new-lab-header p { margin: var(--space-xs) 0 0; color: var(--color-muted); max-inline-size: 60ch; }
+
+/* ------------------------------------------------------------ the two steps */
+.wizard-steps { display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
+.wizard-steps li { display: flex; }
+.wizard-step-btn {
+  display: inline-flex; align-items: center; gap: var(--space-xs); padding: var(--space-2xs) var(--space-md) var(--space-2xs) var(--space-2xs);
+  border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--color-muted);
+  font-weight: 500; font-size: 0.9375rem; min-block-size: var(--cl-control-h);
+}
+button.wizard-step-btn { color: var(--color-ink-2); transition: background-color var(--dur-micro) var(--ease-out); }
+button.wizard-step-btn:hover { background: var(--color-paper-2); color: var(--color-ink); }
+button.wizard-step-btn:active { background: var(--color-paper-3); }
+.wizard-steps li.current .wizard-step-btn { background: var(--color-ink); color: var(--color-paper); }
+.wizard-num {
+  display: inline-grid; place-items: center; inline-size: 1.75rem; block-size: 1.75rem; border-radius: 50%;
+  background: var(--color-paper-3); color: var(--color-ink); font-size: var(--text-xs); font-weight: 600; font-variant-numeric: tabular-nums;
+}
+.wizard-num svg { inline-size: 1rem; block-size: 1rem; }
+.wizard-steps li.current .wizard-num { background: var(--color-accent); color: var(--color-accent-ink); }
+.wizard-steps li.done .wizard-num { background: var(--color-mint); color: var(--color-ink); }
+
+.wizard-panel {
+  display: flex; flex-direction: column; gap: var(--space-lg); padding: clamp(var(--space-md), 3vw, var(--space-xl));
+  background: var(--grain), var(--color-card); border-radius: var(--radius-card); box-shadow: var(--shadow-card);
+}
+.wizard-title { margin: 0; }
+.wizard-title:focus { outline: none; }
+.wizard-title:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 4px; border-radius: var(--radius-small); }
+.wizard-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-xs); padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule); }
+.wizard-actions .btn:only-child { margin-inline-start: auto; }
+.wizard-form-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-xs) var(--space-md); }
+.wizard-space-chip {
+  display: inline-flex; align-items: center; gap: var(--space-xs); padding: var(--space-3xs) var(--space-3xs) var(--space-3xs) var(--space-sm);
+  border-radius: var(--radius-pill); background: var(--color-paper-2); color: var(--color-ink); font-weight: 600; font-size: 0.9375rem;
+}
+.wizard-change {
+  border: 0; background: var(--color-card); color: var(--color-ink); font-weight: 500; font-size: var(--text-sm);
+  padding: var(--space-2xs) var(--space-sm); border-radius: var(--radius-pill); min-block-size: 2.25rem;
+  box-shadow: inset 0 0 0 1px var(--color-rule-2); transition: background-color var(--dur-micro) var(--ease-out);
+}
+.wizard-change:hover { background: var(--color-paper-3); }
+.wizard-change:active { background: var(--color-rule); }
+.wizard-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-lg) var(--space-xl); }
+@media (min-width: 900px) { .wizard-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); } }
+.req { color: var(--color-error-ink); }
+.fixed-value { display: inline-flex; align-items: center; gap: var(--space-xs); margin: 0; padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-small); background: var(--color-paper-2); font-weight: 600; align-self: flex-start; }
+.fixed-value svg { inline-size: 1.05rem; block-size: 1.05rem; color: var(--color-ink-2); }
+
+/* ------------------------------------------------------------ radio choices */
+.choice-group { border: 0; margin: 0; padding: 0; min-inline-size: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+.choice-group legend { padding: 0; margin-block-end: var(--space-xs); }
+.choice { position: relative; display: block; cursor: pointer; min-inline-size: 0; }
+.choice-input { position: absolute; opacity: 0; inline-size: 1px; block-size: 1px; margin: 0; }
+.choice-body {
+  position: relative; display: flex; gap: var(--space-xs); align-items: center; block-size: 100%;
+  padding: var(--space-sm) var(--space-md); border-radius: var(--radius-stock);
+  background: var(--color-card); box-shadow: inset 0 0 0 1px var(--color-rule-2);
+  transition: background-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+}
+.choice:hover .choice-body { background: var(--color-paper-2); box-shadow: inset 0 0 0 1px var(--color-ink-2); }
+.choice:active .choice-body { background: var(--color-paper-3); }
+.choice-input:focus-visible + .choice-body { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.choice-input:checked + .choice-body { background: var(--color-card); box-shadow: inset 0 0 0 2px var(--color-ink); }
+.choice-check {
+  display: none; place-items: center; position: absolute; inset-block-start: calc(-1 * var(--space-xs)); inset-inline-end: calc(-1 * var(--space-xs));
+  inline-size: 1.5rem; block-size: 1.5rem; border-radius: 50%; background: var(--color-ink); color: var(--color-paper);
+  box-shadow: 0 0 0 2px var(--color-card);
+}
+.choice-check svg { inline-size: 0.875rem; block-size: 0.875rem; }
+.choice-input:checked + .choice-body .choice-check { display: grid; }
+
+/* space options (step 1) */
+.space-options { border: 0; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--space-md); }
+.space-option .choice-body { flex-direction: column; align-items: flex-start; gap: var(--space-xs); padding: var(--space-lg); border-radius: var(--radius-card); }
+.space-option-name { font-size: var(--app-h3); font-weight: 600; letter-spacing: -0.015em; }
+.space-option-audience { color: var(--color-muted); font-weight: 500; }
+.space-option-list { display: grid; margin-block-start: var(--space-xs); padding-block-start: var(--space-sm); border-block-start: 1px solid var(--color-rule); inline-size: 100%; font-size: 0.9375rem; }
+.space-option-list > span { padding-block: var(--space-2xs); }
+
+/* subjects and grades: pills; a chosen one is ink with paper type */
+.subject-choices { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.25rem), 1fr)); gap: var(--space-xs); }
+.subject-choice .choice-body, .grade-choice .choice-body { padding: var(--space-xs) var(--space-sm); min-block-size: var(--cl-control-h); border-radius: var(--radius-pill); }
+.subject-choice .choice-input:checked + .choice-body, .grade-choice .choice-input:checked + .choice-body { background: var(--color-ink); color: var(--color-paper); box-shadow: none; }
+.subject-choice .choice-input:checked + .choice-body .choice-check, .grade-choice .choice-input:checked + .choice-body .choice-check { display: none; }
+.subject-choice-icon { flex: none; inline-size: 1.1rem; block-size: 1.1rem; color: var(--color-ink-2); }
+.subject-choice .choice-input:checked + .choice-body .subject-choice-icon { color: var(--color-paper); }
+.subject-choice-name { font-weight: 500; font-size: 0.9375rem; line-height: 1.25; }
+.grade-group { display: flex; align-items: flex-start; gap: var(--space-sm); }
+.grade-group-label { flex: none; inline-size: 3.5rem; padding-block-start: var(--space-sm); font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); }
+.grade-choices { display: flex; flex-wrap: wrap; gap: var(--space-xs); flex: 1; min-inline-size: 0; }
+.grade-choice .choice-body { justify-content: center; padding-inline: var(--space-md); }
+.grade-choice-name { font-weight: 500; white-space: nowrap; }
+
+/* goals and the AI mode: rows with a line of help; a chosen one has an ink edge */
+.goal-choices, .mode-choices { display: grid; gap: var(--space-xs); }
+.goal-choice .choice-body { align-items: flex-start; }
+.goal-icon { flex: none; inline-size: 1.15rem; block-size: 1.15rem; color: var(--color-ink-2); margin-block-start: 0.2rem; }
+.goal-text { display: flex; flex-direction: column; min-inline-size: 0; }
+.goal-name { font-weight: 600; }
+.goal-desc { font-size: var(--text-sm); color: var(--color-muted); }
+.mode-choice .choice-body { flex-direction: column; align-items: flex-start; gap: var(--space-3xs); }
+.mode-head { display: inline-flex; align-items: center; gap: var(--space-xs); font-weight: 600; }
+.mode-head svg { inline-size: 1.1rem; block-size: 1.1rem; color: var(--color-ink-2); }
+.mode-desc { font-size: var(--text-sm); color: var(--color-muted); }
+
+/* what happens next: the studio's steps, in order */
+.wizard-next { padding: var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.wizard-next h3 { font-size: var(--app-h4); margin: 0 0 var(--space-xs); }
+.wizard-next ol { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-md); }
+.wizard-next li { display: inline-flex; align-items: center; gap: var(--space-xs); font-size: 0.9375rem; color: var(--color-ink-2); }
+.wizard-next-num {
+  display: inline-grid; place-items: center; inline-size: 1.5rem; block-size: 1.5rem; border-radius: 50%;
+  background: var(--color-card); color: var(--color-ink); font-size: var(--text-xs); font-weight: 600; font-variant-numeric: tabular-nums;
+}

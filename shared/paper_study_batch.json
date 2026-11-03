@@ -1,0 +1,1170 @@
+[
+  {
+    "id": "agwatr",
+    "share_code": "AGWATR",
+    "domain": "agriculture",
+    "title": "Optimal Water Level Management for Mitigating GHG Emissions through Water-Conserving Irrigation in An Giang Province, Vietnam",
+    "authors": [
+      "Satoshi Ogawa",
+      "Kyosuke Yamamoto",
+      "Kenichi Uno",
+      "Nguyen Cong Thuan",
+      "Takashi Togami",
+      "Soji Shindo",
+      "Yongwha Chung"
+    ],
+    "year": 2022,
+    "doi": "10.3390/s22218418",
+    "landing_url": "https://doi.org/10.3390/s22218418",
+    "fulltext_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9657519/",
+    "pdf_url": "https://pmc-oa-opendata.s3.amazonaws.com/PMC9657519.1/PMC9657519.1.pdf",
+    "local_fulltext": ".build-check/paper-study-sources/AGWATR.xml",
+    "access": "Open full text; CC BY 4.0",
+    "source_sections": [
+      "2.1. Data Source",
+      "3.4. Relationships between Specific Water Management Practices and CH4 Emissions",
+      "4.2. Effect of Multiple Drainage on Rice Yield"
+    ],
+    "key_claims": [
+      {
+        "text": "The researchers analyzed field datasets from six locations in An Giang, Vietnam, comparing continuous flooding with multiple drainage across seasons.",
+        "source_section": "2.1. Data Source"
+      },
+      {
+        "text": "Methane emissions varied with water-management indicators; observed associations depend on field and seasonal conditions.",
+        "source_section": "3.4. Relationships between Specific Water Management Practices and CH4 Emissions"
+      },
+      {
+        "text": "Field heterogeneity and limited sampling constrain how widely the yield findings can be generalized.",
+        "source_section": "4.2. Effect of Multiple Drainage on Rice Yield"
+      }
+    ],
+    "limitations": [
+      "Paired field experiments across locations and seasons do not isolate every management or site factor.",
+      "The 3D soil scene is hypothetical and does not calculate methane emissions or yield."
+    ],
+    "learning_objectives": [
+      "Describe the comparison and its geographic setting.",
+      "Explain how water management may affect root-zone conditions.",
+      "Distinguish an observed association from a universal causal prediction."
+    ],
+    "visual_kind": "agriculture_field",
+    "lesson_flow": [
+      {
+        "title": "Set the field question",
+        "body": "The study asks how irrigation management relates to rice yield and greenhouse-gas emissions in An Giang, Vietnam. Fields and seasons are not identical.",
+        "check_question": "Why record site and season as well as irrigation?",
+        "source_section": "2.1. Data Source"
+      },
+      {
+        "title": "Compare management",
+        "body": "The dataset includes continuous flooding and multiple-drainage management, with water levels monitored in farmers’ fields. This is a field comparison rather than a perfectly controlled laboratory experiment.",
+        "check_question": "Which other practices might also differ?",
+        "source_section": "2.1. Data Source"
+      },
+      {
+        "title": "Interpret methane",
+        "body": "The authors relate water-level indicators and non-flooded days to measured methane emissions. The relationships are evidence for those observed conditions, not a universal equation.",
+        "check_question": "Can an association alone establish the same effect at every farm?",
+        "source_section": "3.4. Relationships between Specific Water Management Practices and CH4 Emissions"
+      },
+      {
+        "title": "Evaluate the limits",
+        "body": "Yield and emissions vary with management, soil and season; restricted sampling and irrigation availability limit direct transfer to another field.",
+        "check_question": "What additional measurements would improve a local decision?",
+        "source_section": "4.2. Effect of Multiple Drainage on Rice Yield"
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "What was compared in the An Giang dataset?",
+        "options": [
+          "Rice grown in pots at three fixed temperatures",
+          "Rice fields under continuous flooding and multiple drainage",
+          "Two nitrogen fertilizer rates under identical irrigation"
+        ],
+        "answer_index": 1,
+        "explanation": "The paper compares water-management practices across field datasets.",
+        "source_section": "2.1. Data Source"
+      },
+      {
+        "prompt": "Why is a water-level association not automatically a universal causal law?",
+        "options": [
+          "Seasons, fields and management can also differ",
+          "Every measured water level uniquely determines emissions",
+          "An association is proof of a universal mechanism"
+        ],
+        "answer_index": 0,
+        "explanation": "Other varying conditions limit causal interpretation and generalization.",
+        "source_section": "4.2. Effect of Multiple Drainage on Rice Yield"
+      },
+      {
+        "prompt": "What can the teaching scene tell you about methane?",
+        "options": [
+          "The measured daily emissions of a selected farm",
+          "An exact methane emission calculated from water depth",
+          "How a changed water stage alters an illustrative soil scene, not actual emissions"
+        ],
+        "answer_index": 2,
+        "explanation": "The scene is a conceptual illustration and contains no fitted methane model.",
+        "source_section": "3.4. Relationships between Specific Water Management Practices and CH4 Emissions"
+      }
+    ],
+    "visual_task": "Compare the flooded, draining and drained views; then return to flooded to illustrate reflooding. Describe the visible water and roots. The diagram is fictional and does not predict yield or methane.",
+    "license": "CC BY 4.0",
+    "pmcid": "PMC9657519"
+  },
+  {
+    "id": "agfarm",
+    "share_code": "AGFARM",
+    "domain": "agriculture",
+    "title": "An assessment of irrigated rice cultivation with different crop establishment practices in Vietnam",
+    "authors": [
+      "Van-Hung Nguyen",
+      "Alexander M Stuart",
+      "Thi-My-Phung Nguyen",
+      "Thi-Minh-Hieu Pham",
+      "Ngoc-Phuong-Thanh Nguyen",
+      "Anny Ruth P Pame",
+      "Bjoern Ole Sander",
+      "Martin Gummert",
+      "Grant Robert Singleton"
+    ],
+    "year": 2022,
+    "doi": "10.1038/s41598-021-04362-w",
+    "landing_url": "https://doi.org/10.1038/s41598-021-04362-w",
+    "fulltext_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8748985/",
+    "pdf_url": "https://pmc-oa-opendata.s3.amazonaws.com/PMC8748985.1/PMC8748985.1.pdf",
+    "local_fulltext": ".build-check/paper-study-sources/AGFARM.xml",
+    "access": "Open full text; CC BY 4.0",
+    "source_sections": [
+      "Site and crop descriptions, experimental design and water management",
+      "Measuring planting uniformity",
+      "Conclusions",
+      "Quantification of grain yield"
+    ],
+    "key_claims": [
+      {
+        "text": "Four rice-establishment methods were compared in farmer fields in Can Tho over two growing seasons.",
+        "source_section": "Site and crop descriptions, experimental design and water management"
+      },
+      {
+        "text": "Researchers used quadrats after establishment to quantify planting uniformity.",
+        "source_section": "Measuring planting uniformity"
+      },
+      {
+        "text": "The paper reports differences in establishment, resource use and yield within its study conditions.",
+        "source_section": "Conclusions"
+      }
+    ],
+    "limitations": [
+      "Different seasons used different fields and varieties, so outcomes must be interpreted in context.",
+      "Rows and broadcast in the teaching scene are stylized layouts, not recorded plant locations or yield predictions."
+    ],
+    "learning_objectives": [
+      "Identify alternative establishment methods and the field design.",
+      "Explain how plant distribution can be measured.",
+      "Separate visual layout from evidence about yield and resource use."
+    ],
+    "visual_kind": "agriculture_field",
+    "lesson_flow": [
+      {
+        "title": "Compare methods",
+        "body": "Researchers compared manual broadcasting, blower broadcasting, drum seeding and mechanical transplanting in Can Tho rice fields.",
+        "check_question": "Which practices change seed placement?",
+        "source_section": "Site and crop descriptions, experimental design and water management"
+      },
+      {
+        "title": "Measure uniformity",
+        "body": "After establishment, the team counted plants in quadrats and compared variation in their distribution.",
+        "check_question": "Why use several quadrats rather than one plant?",
+        "source_section": "Measuring planting uniformity"
+      },
+      {
+        "title": "Read outcomes in context",
+        "body": "The study examined planting uniformity and measures including yield and resource use across two seasons. Different fields and varieties also varied by season.",
+        "check_question": "Why should the season and variety accompany a reported comparison?",
+        "source_section": "Site and crop descriptions, experimental design and water management"
+      },
+      {
+        "title": "Design a follow-up",
+        "body": "A new trial could repeat methods in multiple fields while recording seed rates, variety, water management and costs.",
+        "check_question": "What would replication add?",
+        "source_section": "Conclusions"
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "Why did the researchers use several quadrats?",
+        "options": [
+          "To estimate variation in plant distribution",
+          "To infer each plant’s eventual grain yield directly",
+          "To eliminate any difference among the fields"
+        ],
+        "answer_index": 0,
+        "explanation": "Multiple sampling areas provide information about spatial variation.",
+        "source_section": "Measuring planting uniformity"
+      },
+      {
+        "prompt": "Can a neat row in the scene prove higher yield?",
+        "options": [
+          "Yes, row spacing alone determines yield",
+          "Yes, the scene reproduces the authors’ harvested plots",
+          "No; yield must be measured under the study conditions"
+        ],
+        "answer_index": 2,
+        "explanation": "The diagram is invented and does not compute harvest.",
+        "source_section": "Quantification of grain yield"
+      },
+      {
+        "prompt": "Which factor matters when comparing the two seasons?",
+        "options": [
+          "Only the number of sampled quadrats",
+          "The fields and varieties differed between seasons",
+          "Only the time between sowing and the first quadrat count"
+        ],
+        "answer_index": 1,
+        "explanation": "Differences in conditions constrain direct comparisons.",
+        "source_section": "Site and crop descriptions, experimental design and water management"
+      }
+    ],
+    "visual_task": "Switch between rows and broadcast; compare spatial arrangement. These are invented layouts, not the paper’s plant counts or harvest results.",
+    "license": "CC BY 4.0",
+    "pmcid": "PMC8748985"
+  },
+  {
+    "id": "agmaze",
+    "share_code": "AGMAZE",
+    "domain": "agriculture",
+    "title": "Organic farming practices change the soil bacteria community, improving soil quality and maize crop yields",
+    "authors": [
+      "Ademir Durrer",
+      "Thiago Gumiere",
+      "Maurício Rumenos Guidetti Zagatto",
+      "Henrique Petry Feiler",
+      "Antonio Marcos Miranda Silva",
+      "Rodrigo Henriques Longaresi",
+      "Sérgio K Homma",
+      "Elke JBN Cardoso",
+      "Paula Baptista"
+    ],
+    "year": 2021,
+    "doi": "10.7717/peerj.11985",
+    "landing_url": "https://doi.org/10.7717/peerj.11985",
+    "fulltext_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8465994/",
+    "pdf_url": "https://pmc-oa-opendata.s3.amazonaws.com/PMC8465994.1/PMC8465994.1.pdf",
+    "local_fulltext": ".build-check/paper-study-sources/AGMAZE.xml",
+    "access": "Open full text; CC BY",
+    "source_sections": [
+      "Site description and experimental design",
+      "High-throughput sequencing of soil community bacteria",
+      "Yield, plant nutrients, and rainfall",
+      "Discussion"
+    ],
+    "key_claims": [
+      {
+        "text": "The researchers compared maize production practices at a site in Brazil over two crop years.",
+        "source_section": "Site description and experimental design"
+      },
+      {
+        "text": "They characterized soil bacterial communities using 16S rRNA amplicon sequencing.",
+        "source_section": "High-throughput sequencing of soil community bacteria"
+      },
+      {
+        "text": "Yield and soil properties differed among management treatments in the studied setting.",
+        "source_section": "Yield, plant nutrients, and rainfall"
+      }
+    ],
+    "limitations": [
+      "Management treatments differ in several practices, so bacterial differences do not by themselves prove a microbial cause of yield differences.",
+      "Microbes in the 3D scene are symbolic, not species abundances or sequencing observations."
+    ],
+    "learning_objectives": [
+      "Describe the comparison and sequencing measurement.",
+      "Distinguish microbial community composition from crop yield.",
+      "Explain why correlation is not enough to establish microbial causation."
+    ],
+    "visual_kind": "agriculture_field",
+    "lesson_flow": [
+      {
+        "title": "Study a farming system",
+        "body": "The researchers compared maize management practices at one Brazilian site across crop years, measuring soil and plants.",
+        "check_question": "Why is the site and management history relevant?",
+        "source_section": "Site description and experimental design"
+      },
+      {
+        "title": "Observe soil life",
+        "body": "They used bacterial 16S rRNA amplicon sequencing to compare community composition in soil samples. This measures sequence-based community patterns, not a direct crop-yield mechanism.",
+        "check_question": "Does finding a bacterial sequence prove what that organism caused?",
+        "source_section": "High-throughput sequencing of soil community bacteria"
+      },
+      {
+        "title": "Compare outcomes",
+        "body": "Soil properties, bacterial communities and yield differed across treatments. Weather and management also belong in the interpretation.",
+        "check_question": "Which measurements describe the soil and which describe the harvest?",
+        "source_section": "Yield, plant nutrients, and rainfall"
+      },
+      {
+        "title": "Reason about causality",
+        "body": "A controlled follow-up isolating microbial effects would be needed to establish whether particular microbes caused a yield change.",
+        "check_question": "What else changed between treatments?",
+        "source_section": "Discussion"
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "What does 16S rRNA amplicon sequencing help compare?",
+        "options": [
+          "Grain moisture in each maize kernel",
+          "Soil bacterial community patterns",
+          "The rate of every microbial reaction"
+        ],
+        "answer_index": 1,
+        "explanation": "It profiles bacterial community composition rather than measuring grain directly.",
+        "source_section": "High-throughput sequencing of soil community bacteria"
+      },
+      {
+        "prompt": "Why is a bacterial association not proof of causation?",
+        "options": [
+          "Every bacterial sequence has the same function",
+          "Sequencing directly measures each treatment’s yield",
+          "Management differences may affect both microbes and yield"
+        ],
+        "answer_index": 2,
+        "explanation": "Several changes can occur together across treatment systems.",
+        "source_section": "Discussion"
+      },
+      {
+        "prompt": "What do the scene’s microbe icons represent?",
+        "options": [
+          "Conceptual symbols, not identified measured species",
+          "Measured relative abundances of the paper’s bacteria",
+          "A verified representation of bacterial growth rates"
+        ],
+        "answer_index": 0,
+        "explanation": "The icons are invented teaching aids.",
+        "source_section": "High-throughput sequencing of soil community bacteria"
+      }
+    ],
+    "visual_task": "Choose maize, inspect the root-zone symbols and change the water stage or planting layout. Symbols are not measured bacteria, and the scene does not calculate crop yield.",
+    "license": "CC BY",
+    "pmcid": "PMC8465994"
+  },
+  {
+    "id": "pcwavs",
+    "share_code": "PCWAVS",
+    "domain": "physical_chemistry",
+    "title": "Chemical waves in reaction-diffusion networks of small organic molecules",
+    "authors": [
+      "Arpita Paikar",
+      "Xiuxiu Li",
+      "Liat Avram",
+      "Barbara S Smith",
+      "István Sütő",
+      "Dezső Horváth",
+      "Elisabeth Rennert",
+      "Yuqing Qiu",
+      "Ágota Tóth",
+      "Suriyanarayanan Vaikuntanathan",
+      "Sergey N Semenov"
+    ],
+    "year": 2024,
+    "doi": "10.1039/d4sc06351a",
+    "landing_url": "https://doi.org/10.1039/d4sc06351a",
+    "fulltext_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11626756/",
+    "pdf_url": "https://pmc-oa-opendata.s3.amazonaws.com/PMC11626756.1/PMC11626756.1.pdf",
+    "local_fulltext": ".build-check/paper-study-sources/PCWAVS.xml",
+    "access": "Open full text; CC BY-NC 3.0",
+    "source_sections": [
+      "Experimental design",
+      "Experiments with different reactor geometries",
+      "Numerical model"
+    ],
+    "key_claims": [
+      {
+        "text": "The authors studied reaction–diffusion waves involving autocatalytic thiol chemistry and negative feedback in a hydrogel reactor.",
+        "source_section": "Experimental design"
+      },
+      {
+        "text": "Changing reactor geometry affected the observed wave behavior.",
+        "source_section": "Experiments with different reactor geometries"
+      },
+      {
+        "text": "The authors used a reaction–diffusion model to analyze their chemical system.",
+        "source_section": "Numerical model"
+      }
+    ],
+    "limitations": [
+      "The teaching simulation is a different abstract 1D model, not the paper’s full chemical kinetic model.",
+      "Its visual pattern, speed and parameters are not a fit to the reported reactor measurements."
+    ],
+    "learning_objectives": [
+      "Explain why reaction and diffusion can produce a moving concentration pattern.",
+      "Identify the paper’s hydrogel and chemical feedback design.",
+      "Compare a conceptual simulation with an experimentally fitted model."
+    ],
+    "visual_kind": "reaction_diffusion",
+    "lesson_flow": [
+      {
+        "title": "Set up the experiment",
+        "body": "The researchers place a reaction network in a hydrogel with reagent supply and spatial transport. A concentration pattern can propagate without material moving as a solid object.",
+        "check_question": "What moves through the gel?",
+        "source_section": "Experimental design"
+      },
+      {
+        "title": "Add feedback",
+        "body": "The network combines autocatalytic thiol chemistry with a negative-feedback reaction, linking local chemistry to the spread of reactants.",
+        "check_question": "How might local feedback differ from transport?",
+        "source_section": "Experimental design"
+      },
+      {
+        "title": "Change geometry",
+        "body": "Experiments using different reactor geometries show that spatial arrangement matters to observed wave behavior.",
+        "check_question": "Why might geometry affect where a wave begins?",
+        "source_section": "Experiments with different reactor geometries"
+      },
+      {
+        "title": "Compare models",
+        "body": "The article uses a system-specific numerical model. The interactive scene uses a separate abstract 1D reaction–diffusion rule, so compare concepts rather than numerical wave speeds.",
+        "check_question": "Which assumptions would need checking before comparing speeds?",
+        "source_section": "Numerical model"
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "What can spread through a reaction–diffusion system?",
+        "options": [
+          "A concentration change coupled to reaction and transport",
+          "A fixed parcel of gel moving with the wavefront",
+          "A change in reactor shape traveling at the reaction speed"
+        ],
+        "answer_index": 0,
+        "explanation": "A wave can be a propagating pattern in concentrations.",
+        "source_section": "Experimental design"
+      },
+      {
+        "prompt": "What is the relation between the interactive model and the paper?",
+        "options": [
+          "It contains the full fitted thiol reaction network",
+          "It is a distinct teaching model, not the full paper model",
+          "It reproduces the measured concentrations in the gel"
+        ],
+        "answer_index": 1,
+        "explanation": "The toy model teaches the idea without claiming kinetic fidelity.",
+        "source_section": "Numerical model"
+      },
+      {
+        "prompt": "Why investigate reactor geometry?",
+        "options": [
+          "Geometry matters only when diffusion is absent",
+          "All reactor shapes have identical boundary conditions",
+          "Spatial boundaries and transport can change wave behavior"
+        ],
+        "answer_index": 2,
+        "explanation": "The paper examined how geometry affected the observations.",
+        "source_section": "Experiments with different reactor geometries"
+      }
+    ],
+    "visual_task": "Change diffusion and reaction controls in the 1D model and compare patterns. Its species and parameters are abstract; it neither reproduces the paper’s detailed thiol kinetics nor predicts measured wave speed.",
+    "license": "CC BY-NC 3.0",
+    "pmcid": "PMC11626756"
+  },
+  {
+    "id": "pcpare",
+    "share_code": "PCPARE",
+    "domain": "physical_chemistry",
+    "title": "Experimental Study on the Kinetics of CO2 and H2O Adsorption on Honeycomb Carbon Monoliths under Cement Flue Gas Conditions",
+    "authors": [
+      "Nausika Querejeta",
+      "Fernando Rubiera",
+      "Covadonga Pevida"
+    ],
+    "year": 2022,
+    "doi": "10.1021/acssuschemeng.1c07213",
+    "landing_url": "https://doi.org/10.1021/acssuschemeng.1c07213",
+    "fulltext_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8851587/",
+    "pdf_url": "https://pmc-oa-opendata.s3.amazonaws.com/PMC8851587.1/PMC8851587.1.pdf",
+    "local_fulltext": ".build-check/paper-study-sources/PCPARE.xml",
+    "access": "Open full text; CC BY 4.0",
+    "source_sections": [
+      "Adsorption studies",
+      "Adsorption Kinetics",
+      "Conclusions",
+      "Single and binary experiments (CO2, N2/H2O, and CO2/H2O)"
+    ],
+    "key_claims": [
+      {
+        "text": "The researchers studied CO2 and water-vapor adsorption on honeycomb carbon monoliths under selected gas conditions.",
+        "source_section": "Adsorption studies"
+      },
+      {
+        "text": "They examined uptake kinetics with fitted models and compared materials and conditions.",
+        "source_section": "Adsorption Kinetics"
+      },
+      {
+        "text": "Material and humidity affected results under the tested conditions, so no single ranking is guaranteed for all gas streams.",
+        "source_section": "Conclusions"
+      }
+    ],
+    "limitations": [
+      "A finite-site teaching illustration is not a fitted adsorption capacity or the article’s complete kinetic mechanism.",
+      "The study uses particular materials and gas conditions; do not generalize its material ranking to every situation."
+    ],
+    "learning_objectives": [
+      "Distinguish adsorption at a surface from bulk gas concentration.",
+      "Explain why humidity and adsorbent material are experimental variables.",
+      "Recognize that a toy site diagram does not establish the real microscopic mechanism."
+    ],
+    "visual_kind": "porous_adsorption",
+    "lesson_flow": [
+      {
+        "title": "Define adsorption",
+        "body": "Molecules can accumulate at an adsorbent surface. The study compares honeycomb carbon monoliths exposed to carbon dioxide and water vapor.",
+        "check_question": "How does surface accumulation differ from gas concentration?",
+        "source_section": "Adsorption studies"
+      },
+      {
+        "title": "Vary conditions",
+        "body": "The researchers tested gases individually and in mixtures under controlled conditions. Water vapor is relevant because a real flue-gas stream can contain moisture.",
+        "check_question": "Why compare a dry gas with a humid mixture?",
+        "source_section": "Single and binary experiments (CO2, N2/H2O, and CO2/H2O)"
+      },
+      {
+        "title": "Read uptake over time",
+        "body": "The article analyzes measured uptake kinetics and uses models to interpret them. Model parameters apply to the tested materials and conditions.",
+        "check_question": "What does a fitted curve need to be compared against?",
+        "source_section": "Adsorption Kinetics"
+      },
+      {
+        "title": "Limit the illustration",
+        "body": "A limited set of surface sites can help visualize shared occupancy, but it cannot establish exactly how these monoliths adsorb gas or predict their capacity.",
+        "check_question": "What experimental evidence would a numerical capacity require?",
+        "source_section": "Conclusions"
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "Why include water vapor in experiments?",
+        "options": [
+          "It fixes the same uptake rate in every carbon material",
+          "It can alter adsorption under the gas conditions studied",
+          "It replaces the need for single-gas experiments"
+        ],
+        "answer_index": 1,
+        "explanation": "Humidity is a relevant variable in the article’s mixture experiments.",
+        "source_section": "Adsorption studies"
+      },
+      {
+        "prompt": "Does an illustrative occupied-site count equal measured capacity?",
+        "options": [
+          "Yes, because every site has the same measured energy",
+          "Yes, if the diagram shows a saturated surface",
+          "No; the site diagram is not fitted to the measured material"
+        ],
+        "answer_index": 2,
+        "explanation": "Invented icons do not constitute an experimental adsorption measurement.",
+        "source_section": "Adsorption Kinetics"
+      },
+      {
+        "prompt": "What is adsorption here?",
+        "options": [
+          "Accumulation of gas molecules at an adsorbent surface",
+          "Bulk mixing of gases without surface uptake",
+          "Condensation of all gas into a liquid reservoir"
+        ],
+        "answer_index": 0,
+        "explanation": "The work studies uptake on carbon adsorbents.",
+        "source_section": "Adsorption studies"
+      }
+    ],
+    "visual_task": "Choose CO2 or H2O in the surface-site illustration and inspect occupancy. Sites and binding are schematic; no capacity, kinetic fit or complete mechanism is inferred.",
+    "license": "CC BY 4.0",
+    "pmcid": "PMC8851587"
+  },
+  {
+    "id": "chnash",
+    "share_code": "CHNASH",
+    "domain": "semiconductors",
+    "title": "A Novel Si Nanosheet Channel Release Process for the Fabrication of Gate-All-Around Transistors and Its Mechanism Investigation",
+    "authors": [
+      "Xin Sun",
+      "Dawei Wang",
+      "Lewen Qian",
+      "Tao Liu",
+      "Jingwen Yang",
+      "Kun Chen",
+      "Luyu Wang",
+      "Ziqiang Huang",
+      "Min Xu",
+      "Chen Wang",
+      "Chunlei Wu",
+      "Saisheng Xu",
+      "David Wei Zhang",
+      "In Hwan Jung",
+      "Filippo Giubileo"
+    ],
+    "year": 2023,
+    "doi": "10.3390/nano13030504",
+    "landing_url": "https://doi.org/10.3390/nano13030504",
+    "fulltext_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9920338/",
+    "pdf_url": "https://pmc-oa-opendata.s3.amazonaws.com/PMC9920338.1/PMC9920338.1.pdf",
+    "local_fulltext": ".build-check/paper-study-sources/CHNASH.xml",
+    "access": "Open full text; CC BY 4.0",
+    "source_sections": [
+      "2. Materials and Methods",
+      "3. Results and Discussion",
+      "4. Conclusions"
+    ],
+    "key_claims": [
+      {
+        "text": "The authors fabricated silicon and silicon–germanium multilayers and studied release of silicon nanosheets by removing the sacrificial material.",
+        "source_section": "2. Materials and Methods"
+      },
+      {
+        "text": "The authors compared release processes and investigated deformation using structural observations and simulation.",
+        "source_section": "3. Results and Discussion"
+      },
+      {
+        "text": "A multistep process improved the release in the reported experimental setting.",
+        "source_section": "4. Conclusions"
+      }
+    ],
+    "limitations": [
+      "The teaching transistor is a generic conceptual model, not the paper’s multilayer fabrication process or TEM image.",
+      "Process measurements and simulated stress are different evidence types."
+    ],
+    "learning_objectives": [
+      "Explain why a sacrificial layer can release a nanosheet.",
+      "Distinguish a gate-all-around architecture from an ordinary planar sketch.",
+      "Compare experimental structural observations with stress simulations."
+    ],
+    "visual_kind": "semiconductor_chip",
+    "lesson_flow": [
+      {
+        "title": "Build a stack",
+        "body": "The paper starts with alternating silicon and silicon–germanium layers. Removing the sacrificial material releases silicon sheets for a gate-all-around architecture.",
+        "check_question": "Which layer is intended to remain?",
+        "source_section": "2. Materials and Methods"
+      },
+      {
+        "title": "Release carefully",
+        "body": "Etching and oxidation steps are organized to improve selective release. The problem is not merely to draw a channel but to preserve its shape and spacing.",
+        "check_question": "What could go wrong if sheets deform?",
+        "source_section": "3. Results and Discussion"
+      },
+      {
+        "title": "Check the structure",
+        "body": "The article compares structural observations with simulation of stress during the process. Experimental imaging and simulated stress answer related but distinct questions.",
+        "check_question": "What does each source of evidence contribute?",
+        "source_section": "3. Results and Discussion"
+      },
+      {
+        "title": "Connect to a basic transistor",
+        "body": "Use the generic transistor view to identify source, gate, channel and drain. It does not recreate the paper’s nanosheet fabrication or validate release quality.",
+        "check_question": "Which aspects of the nanosheet stack are absent from a generic transistor?",
+        "source_section": "4. Conclusions"
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "Why remove a sacrificial SiGe layer?",
+        "options": [
+          "To release silicon nanosheets",
+          "To remove the silicon sheets and retain SiGe",
+          "To convert the stack into a single bulk silicon layer"
+        ],
+        "answer_index": 0,
+        "explanation": "Selective removal leaves the intended silicon sheets.",
+        "source_section": "2. Materials and Methods"
+      },
+      {
+        "prompt": "What distinguishes experimental imaging from a stress simulation?",
+        "options": [
+          "Both directly measure the stress field in the same way",
+          "Imaging observes structures while simulation estimates behavior under a model",
+          "Simulation replaces the need to inspect the fabricated stack"
+        ],
+        "answer_index": 1,
+        "explanation": "These are complementary but different types of evidence.",
+        "source_section": "3. Results and Discussion"
+      },
+      {
+        "prompt": "Does a generic transistor model reconstruct the paper’s etching process?",
+        "options": [
+          "Yes, it implements the reported etching steps",
+          "Yes, its geometry was taken from the paper’s TEM scan",
+          "No; it illustrates a related device concept only"
+        ],
+        "answer_index": 2,
+        "explanation": "The model is not a process simulation or a structural reconstruction.",
+        "source_section": "4. Conclusions"
+      }
+    ],
+    "visual_task": "In the device view select nanosheet and identify gate and channels. The GAA diagram is conceptual, not a reconstruction of etching, deformation or measured nanosheet dimensions.",
+    "license": "CC BY 4.0",
+    "pmcid": "PMC9920338"
+  },
+  {
+    "id": "chnwre",
+    "share_code": "CHNWRE",
+    "domain": "semiconductors",
+    "title": "Vertical Silicon Nanowire Field Effect Transistors with Nanoscale Gate-All-Around",
+    "authors": [
+      "Youssouf Guerfi",
+      "Guilhem Larrieu"
+    ],
+    "year": 2016,
+    "doi": "10.1186/s11671-016-1396-7",
+    "landing_url": "https://doi.org/10.1186/s11671-016-1396-7",
+    "fulltext_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4837198/",
+    "pdf_url": "https://pmc-oa-opendata.s3.amazonaws.com/PMC4837198.1/PMC4837198.1.pdf",
+    "local_fulltext": ".build-check/paper-study-sources/CHNWRE.xml",
+    "access": "Open full text; CC BY 4.0",
+    "source_sections": [
+      "Methods",
+      "Results and discussions",
+      "Conclusions"
+    ],
+    "key_claims": [
+      {
+        "text": "The authors fabricated vertical silicon nanowire field-effect transistors with a nanoscale gate-all-around configuration.",
+        "source_section": "Methods"
+      },
+      {
+        "text": "They reported n-type and p-type devices and demonstrated a complementary inverter.",
+        "source_section": "Results and discussions"
+      },
+      {
+        "text": "The device and inverter results are evidence for the particular demonstrated fabrication and measurements.",
+        "source_section": "Conclusions"
+      }
+    ],
+    "limitations": [
+      "A planar educational transistor is not a geometrically accurate vertical nanowire.",
+      "The inverter view illustrates logic behavior, not the device’s measured switching curves."
+    ],
+    "learning_objectives": [
+      "Identify a vertical nanowire and gate-all-around configuration.",
+      "Explain how complementary transistors can implement inversion.",
+      "Separate a logic truth table from measured device characteristics."
+    ],
+    "visual_kind": "semiconductor_chip",
+    "lesson_flow": [
+      {
+        "title": "Make the channel",
+        "body": "The article describes a vertical silicon nanowire transistor in which a surrounding gate controls a nanoscale channel.",
+        "check_question": "What is the geometric distinction from a flat channel?",
+        "source_section": "Methods"
+      },
+      {
+        "title": "Compare devices",
+        "body": "The authors investigate both n-type and p-type devices and use complementary behavior to construct an inverter.",
+        "check_question": "Why do complementary devices provide useful switching paths?",
+        "source_section": "Results and discussions"
+      },
+      {
+        "title": "Trace a logic state",
+        "body": "In an idealized inverter, a low input corresponds to a high output, while a high input corresponds to a low output. Real devices also have nonideal transitions.",
+        "check_question": "What would a measured transfer curve add to this truth table?",
+        "source_section": "Results and discussions"
+      },
+      {
+        "title": "Check the model",
+        "body": "The interactive circuit is a conceptual inverter and does not reproduce the actual nanowire shape or measured transfer curve.",
+        "check_question": "Which device details would be needed for a physical reproduction?",
+        "source_section": "Conclusions"
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "What surrounds the channel in the reported architecture?",
+        "options": [
+          "Only the source contact",
+          "A gate in a gate-all-around arrangement",
+          "Only the drain contact"
+        ],
+        "answer_index": 1,
+        "explanation": "The gate surrounds the nanowire channel.",
+        "source_section": "Methods"
+      },
+      {
+        "prompt": "What is the output of an ideal inverter when the input is high?",
+        "options": [
+          "High",
+          "Equal to the supply midpoint for both input states",
+          "Low"
+        ],
+        "answer_index": 2,
+        "explanation": "An inverter reverses the logical state.",
+        "source_section": "Results and discussions"
+      },
+      {
+        "prompt": "What does the generic circuit not provide?",
+        "options": [
+          "The article’s measured transfer curve",
+          "The conceptual relationship between input and output states",
+          "An illustration of complementary switching"
+        ],
+        "answer_index": 0,
+        "explanation": "Its states are educational, not measured nanowire data.",
+        "source_section": "Conclusions"
+      }
+    ],
+    "visual_task": "Select the nanowire device, then the inverter view; switch input 0/1 and compare the output. These diagrams are conceptual, not the paper’s measured nanowire or transfer curve.",
+    "license": "CC BY 4.0",
+    "pmcid": "PMC4837198"
+  },
+  {
+    "id": "chcmps",
+    "share_code": "CHCMPS",
+    "domain": "semiconductors",
+    "title": "A steep switching WSe2 impact ionization field-effect transistor",
+    "authors": [
+      "Haeju Choi",
+      "Jinshu Li",
+      "Taeho Kang",
+      "Chanwoo Kang",
+      "Hyeonje Son",
+      "Jongwook Jeon",
+      "Euyheon Hwang",
+      "Sungjoo Lee"
+    ],
+    "year": 2022,
+    "doi": "10.1038/s41467-022-33770-3",
+    "landing_url": "https://doi.org/10.1038/s41467-022-33770-3",
+    "fulltext_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9568662/",
+    "pdf_url": "https://pmc-oa-opendata.s3.amazonaws.com/PMC9568662.1/PMC9568662.1.pdf",
+    "local_fulltext": ".build-check/paper-study-sources/CHCMPS.xml",
+    "access": "Open full text; CC BY 4.0",
+    "source_sections": [
+      "Fabrication and working principle of WSe2 I2FET",
+      "Complementary inverter fabricated with WSe2 I2FET",
+      "Theoretical study of impact ionization characteristics",
+      "Electrical characteristics of WSe2 I2FET"
+    ],
+    "key_claims": [
+      {
+        "text": "The device uses WSe2 and an impact-ionization switching mechanism.",
+        "source_section": "Fabrication and working principle of WSe2 I2FET"
+      },
+      {
+        "text": "The paper demonstrates a complementary inverter using a p-type WSe2 impact-ionization device and an n-type MoS2 transistor.",
+        "source_section": "Complementary inverter fabricated with WSe2 I2FET"
+      },
+      {
+        "text": "The paper uses theoretical analysis to investigate its impact-ionization mechanism.",
+        "source_section": "Theoretical study of impact ionization characteristics"
+      }
+    ],
+    "limitations": [
+      "The generic CMOS inverter is prerequisite logic only, not a representation of the WSe2/MoS2 device or its avalanche mechanism.",
+      "It does not reproduce the article’s switching curves, materials or reported device performance."
+    ],
+    "learning_objectives": [
+      "Identify the role of the two device types in a complementary inverter.",
+      "Explain inversion using input and output states.",
+      "Distinguish ideal logic from the paper’s physical switching mechanism."
+    ],
+    "visual_kind": "semiconductor_chip",
+    "lesson_flow": [
+      {
+        "title": "Study a different switch",
+        "body": "This study investigates an impact-ionization field-effect device based on WSe2. The authors describe a high-field ungated region in which energetic carriers create electron–hole pairs, multiplying carriers. This is not the generic silicon MOSFET mechanism.",
+        "check_question": "Which material and carrier process distinguish this device?",
+        "source_section": "Fabrication and working principle of WSe2 I2FET"
+      },
+      {
+        "title": "Build complementary logic",
+        "body": "The demonstrated inverter combines a p-type WSe2 impact-ionization device with an n-type MoS2 transistor. The paper’s Fig. 5 analyzes its measured inverting response.",
+        "check_question": "What is the functional role of an inverter?",
+        "source_section": "Complementary inverter fabricated with WSe2 I2FET"
+      },
+      {
+        "title": "Follow input and output",
+        "body": "In an ideal inverter a low input gives a high output and vice versa. Actual measurements describe the transition between states, not just the endpoints.",
+        "check_question": "What detail is absent from a two-state truth table?",
+        "source_section": "Complementary inverter fabricated with WSe2 I2FET"
+      },
+      {
+        "title": "Keep mechanisms distinct",
+        "body": "The generic CMOS inverter animation teaches prerequisite logic only; it does not simulate the paper’s WSe2 avalanche, MoS2, device characteristics or measured voltage response.",
+        "check_question": "What additional model would be needed to analyze the physical switching mechanism?",
+        "source_section": "Theoretical study of impact ionization characteristics"
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "Which pair appears in the reported complementary inverter?",
+        "options": [
+          "Two p-type WSe2 impact-ionization devices",
+          "A conventional silicon CMOS pair only",
+          "A p-type WSe2 impact-ionization device and an n-type MoS2 transistor"
+        ],
+        "answer_index": 2,
+        "explanation": "The paper combines devices of different materials and switching roles.",
+        "source_section": "Complementary inverter fabricated with WSe2 I2FET"
+      },
+      {
+        "prompt": "What can the simple circuit demonstrate reliably?",
+        "options": [
+          "The ideal logical inversion relationship",
+          "The paper’s measured impact-ionization gain",
+          "The precise carrier distribution inside WSe2"
+        ],
+        "answer_index": 0,
+        "explanation": "The generic view is intended for logic, not a materials simulation.",
+        "source_section": "Complementary inverter fabricated with WSe2 I2FET"
+      },
+      {
+        "prompt": "Why is a truth table incomplete device evidence?",
+        "options": [
+          "It captures the complete transfer curve",
+          "It omits the measured transition and physical switching details",
+          "It measures the impact-ionization rate"
+        ],
+        "answer_index": 1,
+        "explanation": "Real transfer characteristics contain more information than the ideal endpoints.",
+        "source_section": "Electrical characteristics of WSe2 I2FET"
+      }
+    ],
+    "visual_task": "Use the generic CMOS inverter as a prerequisite for understanding complementary logic: switch input 0/1 and compare the output. It is not the paper’s WSe2/MoS2 inverter, and it does not model carrier avalanche, its materials or the measured transfer curve.",
+    "license": "CC BY 4.0",
+    "pmcid": "PMC9568662"
+  },
+  {
+    "id": "chmste",
+    "share_code": "CHMSTE",
+    "domain": "semiconductors",
+    "title": "Wafer-scale 2D MoS2 transistors with self-aligned angstrom gate length and nanometer channel length",
+    "authors": [
+      "Ziming Wang",
+      "Anhan Liu",
+      "Hengbin Ding",
+      "Fan Wu",
+      "Caifang Gao",
+      "Yizhe Guo",
+      "Ruifang Xue",
+      "Peigen Zhang",
+      "Yanming Liu",
+      "Tao Deng",
+      "Tian-Ling Ren",
+      "He Tian"
+    ],
+    "year": 2026,
+    "doi": "10.1038/s41467-026-75409-7",
+    "landing_url": "https://doi.org/10.1038/s41467-026-75409-7",
+    "fulltext_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13483455/",
+    "pdf_url": "https://pmc-oa-opendata.s3.amazonaws.com/PMC13483455.1/PMC13483455.1.pdf",
+    "local_fulltext": ".build-check/paper-study-sources/CHMSTE.xml",
+    "access": "Open full text; CC BY-NC-ND 4.0",
+    "source_sections": [
+      "Fabrication of dual-self-aligned vertical transistors",
+      "Structural and electrical characterization",
+      "Wafer-scale logic circuit integration",
+      "Discussion"
+    ],
+    "key_claims": [
+      {
+        "text": "The authors report a vertical MoS2 device using a graphene edge as a very short gate electrode.",
+        "source_section": "Fabrication of dual-self-aligned vertical transistors"
+      },
+      {
+        "text": "The article reports structural and electrical characterization of its fabricated devices.",
+        "source_section": "Structural and electrical characterization"
+      },
+      {
+        "text": "The paper demonstrates transistor arrays and logic circuits at wafer scale in a research setting.",
+        "source_section": "Wafer-scale logic circuit integration"
+      }
+    ],
+    "limitations": [
+      "The generic transistor scene is not the paper’s vertical graphene-edge/MoS2 structure.",
+      "Demonstrated research arrays are not by themselves proof of commercial manufacturing readiness."
+    ],
+    "learning_objectives": [
+      "Explain the basic role of gate and channel.",
+      "Identify the paper’s distinctive vertical material architecture.",
+      "Distinguish research demonstration from production-scale deployment."
+    ],
+    "visual_kind": "semiconductor_chip",
+    "lesson_flow": [
+      {
+        "title": "Identify the architecture",
+        "body": "The reported design uses a graphene edge as a very short gate electrode with a vertical MoS2 channel.",
+        "check_question": "How does this differ from a conventional planar sketch?",
+        "source_section": "Fabrication of dual-self-aligned vertical transistors"
+      },
+      {
+        "title": "Connect structure and evidence",
+        "body": "The authors characterize fabricated structures and electrical behavior; separate device simulation helps analyze mechanisms.",
+        "check_question": "Why do physical characterization and electrical measurements complement each other?",
+        "source_section": "Structural and electrical characterization"
+      },
+      {
+        "title": "Move beyond a single device",
+        "body": "The work reports wafer-scale arrays and logic circuit demonstrations, extending the evidence beyond an isolated transistor.",
+        "check_question": "What new integration questions arise in an array?",
+        "source_section": "Wafer-scale logic circuit integration"
+      },
+      {
+        "title": "Interpret cautiously",
+        "body": "A research demonstration does not alone establish manufacturing yield, reliability and commercial cost for all future products.",
+        "check_question": "Which additional evidence would commercialization require?",
+        "source_section": "Discussion"
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "What distinctive gate is used in the study?",
+        "options": [
+          "The edge of graphene",
+          "A conventional polysilicon gate with a planar silicon channel",
+          "A metal gate around a silicon nanowire"
+        ],
+        "answer_index": 0,
+        "explanation": "The vertical architecture uses a graphene edge as its gate electrode.",
+        "source_section": "Fabrication of dual-self-aligned vertical transistors"
+      },
+      {
+        "prompt": "Does a generic MOSFET scene reproduce that atomic geometry?",
+        "options": [
+          "Yes, with the paper’s exact measured dimensions",
+          "No; it illustrates general gate and channel roles",
+          "Yes, it directly visualizes the graphene-edge TEM data"
+        ],
+        "answer_index": 1,
+        "explanation": "The educational model is a general transistor diagram.",
+        "source_section": "Structural and electrical characterization"
+      },
+      {
+        "prompt": "What follows from a wafer-scale research demonstration?",
+        "options": [
+          "Guaranteed commercial yield and long-term reliability",
+          "No further process validation is required",
+          "Evidence of demonstrated integration, with further validation needed"
+        ],
+        "answer_index": 2,
+        "explanation": "Research integration and commercial readiness are different claims.",
+        "source_section": "Wafer-scale logic circuit integration"
+      }
+    ],
+    "visual_task": "Select the inverter view and switch input 0/1 to trace logic, or inspect the generic device. Neither view reproduces the paper’s materials, switching physics or measured devices.",
+    "license": "CC BY-NC-ND 4.0",
+    "pmcid": "PMC13483455"
+  },
+  {
+    "id": "chmems",
+    "share_code": "CHMEMS",
+    "domain": "semiconductors",
+    "title": "Heterogeneous integration of 2D memristor arrays and silicon selectors for compute-in-memory hardware in convolutional neural networks",
+    "authors": [
+      "Samarth Jain",
+      "Sifan Li",
+      "Haofei Zheng",
+      "Lingqi Li",
+      "Xuanyao Fong",
+      "Kah-Wee Ang"
+    ],
+    "year": 2025,
+    "doi": "10.1038/s41467-025-58039-3",
+    "landing_url": "https://doi.org/10.1038/s41467-025-58039-3",
+    "fulltext_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11923061/",
+    "pdf_url": "https://pmc-oa-opendata.s3.amazonaws.com/PMC11923061.1/PMC11923061.1.pdf",
+    "local_fulltext": ".build-check/paper-study-sources/CHMEMS.xml",
+    "access": "Open full text; CC BY-NC-ND 4.0",
+    "source_sections": [
+      "System architecture and device heterogeneous integration",
+      "Device characteristics of 1S1R CBA",
+      "Hardware implementation of CNN",
+      "Ex-situ training of CNN"
+    ],
+    "key_claims": [
+      {
+        "text": "The authors integrate two-dimensional HfSe2 memristors with silicon selectors in an array.",
+        "source_section": "System architecture and device heterogeneous integration"
+      },
+      {
+        "text": "The selector and memristor form one-selector-one-resistor cells; the selector helps address unwanted current paths.",
+        "source_section": "Device characteristics of 1S1R CBA"
+      },
+      {
+        "text": "The demonstrated neural-network workflow uses ex-situ training and array-based hardware evaluation.",
+        "source_section": "Hardware implementation of CNN"
+      }
+    ],
+    "limitations": [
+      "A generic chip-stack illustration does not simulate the HfSe2 switching medium, selector or measured memory state.",
+      "The paper’s ex-situ training should not be described as training entirely on the chip."
+    ],
+    "learning_objectives": [
+      "Distinguish a memory element from its selector in an array.",
+      "Explain why unintended current paths matter.",
+      "Describe the difference between ex-situ training and hardware inference."
+    ],
+    "visual_kind": "semiconductor_chip",
+    "lesson_flow": [
+      {
+        "title": "Combine technologies",
+        "body": "The paper combines HfSe2 memristor devices and silicon selectors in a heterogeneous array. Each component has a distinct role.",
+        "check_question": "Which component stores a resistance state?",
+        "source_section": "System architecture and device heterogeneous integration"
+      },
+      {
+        "title": "Understand the cell",
+        "body": "A one-selector-one-resistor cell combines a selector with a resistive memory element; the selector helps limit unwanted current paths in an array.",
+        "check_question": "Why might neighboring cells affect a read?",
+        "source_section": "Device characteristics of 1S1R CBA"
+      },
+      {
+        "title": "Trace the workflow",
+        "body": "The neural-network weights are trained ex situ and evaluated through the reported hardware workflow. This does not mean all training happens on the device array.",
+        "check_question": "Where did training take place relative to the array?",
+        "source_section": "Hardware implementation of CNN"
+      },
+      {
+        "title": "Use a schematic carefully",
+        "body": "A generic stack makes layered integration easier to picture but does not reproduce the paper’s selector physics, memristor states or array measurements.",
+        "check_question": "What evidence would be needed to model the actual cell?",
+        "source_section": "System architecture and device heterogeneous integration"
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "What is combined in the reported cell?",
+        "options": [
+          "A silicon transistor and a floating-gate flash cell",
+          "A silicon selector and an HfSe2 memristor",
+          "A CMOS inverter and a volatile SRAM cell"
+        ],
+        "answer_index": 1,
+        "explanation": "The study integrates a selector with a resistive memory element.",
+        "source_section": "System architecture and device heterogeneous integration"
+      },
+      {
+        "prompt": "What does ex-situ training mean in this workflow?",
+        "options": [
+          "All gradient updates occurred inside each array cell",
+          "Training and inference were both omitted",
+          "Training occurred outside the hardware array"
+        ],
+        "answer_index": 2,
+        "explanation": "The paper describes ex-situ training before hardware evaluation.",
+        "source_section": "Ex-situ training of CNN"
+      },
+      {
+        "prompt": "What can the generic chip-stack view establish?",
+        "options": [
+          "The conceptual idea of layered integration, not measured switching",
+          "The measured HfSe2 resistance of every paper device",
+          "The paper’s precise switching yield and voltage"
+        ],
+        "answer_index": 0,
+        "explanation": "The stack is an illustrative model rather than measured device data.",
+        "source_section": "Device characteristics of 1S1R CBA"
+      }
+    ],
+    "visual_task": "Choose the memristor view and compare SET, READ and RESET qualitatively. This fictional model does not reproduce the paper’s HfSe2/Ti device or measured voltages, selector physics or training.",
+    "license": "CC BY-NC-ND 4.0",
+    "pmcid": "PMC11923061"
+  }
+]

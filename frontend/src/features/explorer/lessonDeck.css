@@ -1,0 +1,418 @@
+/* Hallmark · checked: 2026-11-02 · genre: playful · shape: app screen (the deck sheet is a stage) · theme: Hum (DESIGN.md, locked) · posture: full-palette · built: the project · redesign: full */
+/* The learner deck. A desk of paper-2 with its fibre, one sheet of card stock lit from the top left,
+   a quiet bar above the sheet and the page controls below it. The sheet is a size container and every
+   slide takes its type from the --deck-* scale below (contract C1): the sheet is a stage, so its type
+   grows with it, while the bar, the controls and the dialogs keep the fixed app scale. Tokens only. */
+
+/* 1% of a virtual 16:9 slide's height, frozen to px where it is declared so nested containers
+   (.ix-root, .steps, .dg) never re-base it. --deck-cqh/--deck-cqi do the same for the sheet's own
+   height and width (used by the 3D stage size, contract C3). */
+@property --su { syntax: '<length>'; inherits: true; initial-value: 7px; }
+@property --deck-cqh { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --deck-cqi { syntax: '<length>'; inherits: true; initial-value: 0px; }
+
+/* ---------------------------------------------------------------- the page around the deck */
+.xp.xp-slide-view { display: block; min-block-size: 0; background: var(--grain), var(--fibre), var(--color-paper-2); }
+.xp-slide-view > .xp-side { display: none; }
+.xp-slide-view > .xp-side.open { display: flex; position: fixed; inset: var(--cl-header-h) 0 0 auto; inline-size: min(100%, 28rem); block-size: auto; z-index: calc(var(--z-sticky-nav) + 30); box-shadow: var(--shadow-lift); }
+.xp-slide-view:has(.lesson-deck.is-expanded) > .xp-side.open { inset-block-start: 0; }
+.xp-slide-view .xp-side-close { display: inline-grid; }
+.xp-slide-view > .xp-backdrop { z-index: calc(var(--z-sticky-nav) + 25); }
+
+/* The studio's "view as a learner" notes fold into one slim bar above the deck. */
+.st-preview-notes { background: var(--grain), var(--color-card); border-block-end: var(--rule-hair) solid var(--color-rule); }
+.st-preview-notes > summary {
+  display: flex; align-items: center; gap: var(--space-sm); min-block-size: var(--cl-control-h);
+  padding-inline: max(var(--gutter), calc((100% - var(--container)) / 2 + var(--gutter)));
+  cursor: pointer; font-size: var(--text-sm); font-weight: 600; color: var(--color-ink-2);
+}
+.st-preview-notes > summary::-webkit-details-marker { display: none; }
+.st-preview-notes > summary:hover { color: var(--color-ink); background: var(--color-paper-2); }
+.st-preview-chevron { flex: none; color: var(--color-muted); transition: transform var(--dur-short) var(--ease-out); }
+.st-preview-notes[open] .st-preview-chevron { transform: rotate(180deg); }
+.st-preview-notes > summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
+.st-preview-count { padding: 0.1rem 0.6rem; border-radius: var(--radius-pill); background: var(--color-sand-soft); color: var(--color-kraft-ink); font-weight: 500; }
+
+/* ---------------------------------------------------------------- the desk */
+.lesson-deck {
+  --deck-bar: 3rem;     /* 44px tools on a 48px row */
+  --deck-foot: 3.75rem; /* 44px controls with their pressed edge, the position and its track */
+  --deck-chrome: calc(var(--deck-bar) + var(--deck-foot) + var(--space-xs));
+  /* the sheet keeps close to a projected slide (1.9:1 at most), the bar and the controls line up with it */
+  --deck-sheet-max: min(1480px, calc((var(--deck-height, 100dvh) - var(--deck-chrome)) * 1.9));
+  block-size: calc(100dvh - var(--cl-header-h)); min-block-size: 280px;
+  display: flex; flex-direction: column;
+  padding: 0 clamp(var(--space-xs), 2vw, var(--space-lg)) var(--space-xs);
+  color: var(--color-ink);
+  background: var(--grain), var(--fibre), var(--color-paper-2);
+  overflow: hidden;
+}
+.lesson-deck.is-expanded { position: fixed; inset: 0; z-index: calc(var(--z-sticky-nav) + 20); --deck-sheet-max: calc((var(--deck-height, 100dvh) - var(--deck-chrome)) * 1.9); }
+
+/* ---------------------------------------------------------------- the bar: ghost tools and where you are */
+.deck-toolbar {
+  flex: none; display: flex; align-items: center; gap: var(--space-2xs);
+  inline-size: 100%; max-inline-size: var(--deck-sheet-max); align-self: center; min-block-size: var(--deck-bar);
+}
+.deck-tool {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); flex: none;
+  min-block-size: var(--cl-control-h); min-inline-size: var(--cl-control-h); padding: 0 var(--space-sm);
+  border: 0; border-radius: var(--radius-stock); background: transparent; color: var(--color-ink-2);
+  font-size: var(--text-sm); font-weight: 600; line-height: 1.2; white-space: nowrap;
+  transition: background-color var(--dur-micro) var(--ease-snap), color var(--dur-micro) var(--ease-snap);
+}
+.deck-tool:hover { background: var(--color-paper-3); color: var(--color-ink); }
+.deck-tool:active { background: var(--color-rule); }
+.deck-tool:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
+.deck-tool svg { flex: none; }
+.deck-tool-contents { margin-inline-start: calc(-1 * var(--space-sm)); }
+.deck-toolbar-end { flex: none; display: flex; align-items: center; gap: var(--space-3xs); margin-inline-end: calc(-1 * var(--space-xs)); }
+.deck-crumbs {
+  flex: 1; min-inline-size: 0; margin: 0; display: flex; align-items: center; gap: var(--space-2xs);
+  padding-inline: var(--space-xs); font-size: var(--text-sm); line-height: 1.3; color: var(--color-muted); white-space: nowrap;
+}
+.deck-crumb-lesson, .deck-crumb-part { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; }
+.deck-crumb-lesson { flex: 0 1 auto; color: var(--color-ink-2); font-weight: 500; }
+.deck-crumb-lesson.has-part { color: var(--color-muted); font-weight: 400; }
+/* the part you are in wins the room: the lesson's name gives way first */
+.deck-crumb-part { flex: 0 0 auto; max-inline-size: 55%; color: var(--color-ink-2); font-weight: 500; }
+.deck-crumb-sep { flex: none; color: var(--color-subtle); }
+
+/* ---------------------------------------------------------------- the sheet (a stage: contract C1) */
+.deck-paper {
+  position: relative; flex: 1 1 auto; min-block-size: 0; min-inline-size: 0;
+  inline-size: 100%; max-inline-size: var(--deck-sheet-max); align-self: center;
+  display: flex; flex-direction: column; padding: 0; overflow: hidden;
+  container: deck-slide / size;
+  background: var(--grain), var(--color-card); border: 0; border-radius: var(--radius-card); box-shadow: var(--shadow-card);
+}
+.deck-paper:focus { outline: none; }
+/* cq units resolve on a child of the container: every deck token is declared here, next to --su */
+.deck-paper > * {
+  --su: min(1cqh, 0.5625cqi);
+  --deck-cqh: 1cqh;
+  --deck-cqi: 1cqi;
+  --deck-display: clamp(2.25rem, calc(var(--su) * 11), 6.5rem);
+  --deck-title:   clamp(1.625rem, calc(var(--su) * 6.7), 4rem);
+  --deck-lead:    clamp(1.25rem, calc(var(--su) * 4.1), 2.5rem);
+  --deck-body:    clamp(1.125rem, calc(var(--su) * 3), 1.75rem);
+  --deck-small:   clamp(0.875rem, calc(var(--su) * 2.2), 1.25rem);
+  --deck-margin:  clamp(1rem, calc(var(--su) * 7), 4.5rem);
+  --deck-gap:     clamp(0.75rem, calc(var(--su) * 4), 2.5rem);
+}
+
+/* the one heading of a slide, on the top margin at the same height on every sheet (contract C2) */
+.deck-heading {
+  flex: none; display: flex; flex-direction: column; gap: calc(var(--deck-gap) * 0.4);
+  padding: var(--deck-margin) var(--deck-margin) 0; margin-block-end: var(--deck-gap);
+  animation: deck-enter var(--dur-short) var(--ease-out) both;
+}
+.deck-heading > h2 {
+  margin: 0; max-inline-size: 30em; font-size: var(--deck-title); font-weight: 600; line-height: 1.15;
+  letter-spacing: var(--tracking-display); text-wrap: balance; overflow-wrap: break-word; color: var(--color-ink);
+}
+.deck-byline {
+  margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs) var(--space-sm);
+  font-size: var(--deck-small); line-height: 1.4; color: var(--color-muted);
+}
+.deck-byline-count { font-weight: 600; color: var(--color-ink-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.deck-byline-text { max-inline-size: 60em; text-wrap: pretty; }
+/* the AI label of a part made with AI: the same small size as the words beside it */
+.deck-byline-ai { display: inline-flex; }
+.deck-byline-ai .badge { font-size: var(--deck-small); }
+.deck-beads { display: inline-flex; align-items: center; gap: 6px; }
+.deck-beads > span { inline-size: 8px; block-size: 8px; border-radius: var(--radius-pill); background: var(--color-rule-2); }
+.deck-beads > .is-visited { background: var(--color-mint-deep); }
+.deck-beads > .is-current { inline-size: 22px; background: var(--color-ink); }
+
+.deck-stage { flex: 1 1 auto; min-block-size: 0; min-inline-size: 0; display: flex; flex-direction: column; padding: 0 var(--deck-margin) var(--deck-margin); }
+.deck-paper:is([data-deck-kind='intro'], [data-deck-kind='end']) > .deck-stage { padding: 0; }
+.deck-page { flex: 1 1 auto; min-block-size: 0; min-inline-size: 0; display: flex; flex-direction: column; overflow: hidden; }
+.deck-page:not([hidden]) { animation: deck-enter var(--dur-short) var(--ease-out) both; }
+.deck-page[hidden] { display: none; }
+.deck-page > * { flex: 1 1 auto; min-block-size: 0; min-inline-size: 0; }
+.deck-scroll { min-block-size: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.deck-scroll:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; border-radius: var(--radius-small); }
+.deck-empty { margin: 0; font-size: var(--deck-body); color: var(--color-muted); }
+@keyframes deck-enter { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: none; } }
+
+/* ---------------------------------------------------------------- the cover (A1): words left, the lesson's picture right */
+.deck-cover { --cover-gap: var(--deck-gap); block-size: 100%; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); min-block-size: 0; }
+.deck-cover-text { display: flex; flex-direction: column; gap: var(--cover-gap); padding: var(--deck-margin); min-inline-size: 0; }
+.deck-cover-main { flex: none; min-inline-size: 0; }
+.deck-cover-start { flex: none; display: flex; }
+.deck-cover-start .btn { min-block-size: 3.25rem; padding-inline: var(--space-lg); font-size: 1.0625rem; }
+.deck-cover-foot {
+  flex: none; margin-block-start: auto; display: flex; flex-direction: column; gap: var(--space-2xs);
+  padding-block-start: calc(var(--cover-gap) * 0.5); border-block-start: var(--rule-hair) solid var(--color-rule);
+}
+.deck-cover-aside { display: flex; flex-direction: column; min-block-size: 0; min-inline-size: 0; }
+.deck-cover-media { position: relative; flex: 1 1 auto; min-block-size: 34%; overflow: hidden; background: var(--color-paper-2); }
+.deck-cover .deck-cover-media .lab-cover { aspect-ratio: auto; inline-size: 100%; block-size: 100%; border: 0; border-radius: 0; box-shadow: none; }
+/* under the picture: the sources, who shared the lesson and the notes, like a book's colophon */
+.deck-cover-colophon {
+  flex: 0 1 auto; min-block-size: 0; overflow: auto; scrollbar-width: thin; display: flex; flex-direction: column; gap: calc(var(--deck-gap) * 0.6);
+  padding: calc(var(--deck-gap) * 0.8) var(--deck-margin) var(--deck-margin) var(--deck-gap);
+}
+
+/* the intro block from the reading view, set as a title page */
+.lesson-deck .deck-cover .xp-cover { display: flex; flex-direction: column; gap: calc(var(--cover-gap) * 0.7); padding: 0; border: 0; border-radius: 0; background: none; }
+.lesson-deck .deck-cover .xp-cover-head { gap: calc(var(--cover-gap) * 0.6); }
+.lesson-deck .deck-cover .xp-title {
+  margin: 0; font-size: var(--deck-display); font-weight: 600; line-height: 1.15;
+  letter-spacing: var(--tracking-display); text-wrap: balance; color: var(--color-ink);
+}
+.lesson-deck .deck-cover:is([data-title='title'], [data-title='long']) .xp-title { font-size: var(--deck-title); line-height: 1.15; }
+/* when the words would not fit the sheet, LessonDeck steps them down: tighter spacing first,
+   then the title one step down the deck scale, then two (never a size outside the scale) */
+.deck-cover[data-compact] { --cover-gap: calc(var(--deck-gap) * 0.6); }
+.lesson-deck .deck-cover[data-step='1'] .xp-title { font-size: var(--deck-title); line-height: 1.15; }
+.lesson-deck .deck-cover:is([data-title='title'], [data-title='long'])[data-step='1'] .xp-title,
+.lesson-deck .deck-cover[data-step='2'] .xp-title { font-size: var(--deck-lead); line-height: 1.3; }
+.lesson-deck .deck-cover[data-step='2'] .xp-summary { font-size: var(--deck-body); line-height: 1.5; font-weight: 400; }
+/* .xp-byline keeps its clipping: the row starts one hairline early so no line opens on a rule */
+.lesson-deck .deck-cover .xp-byline { display: flex; flex-direction: column; gap: var(--space-xs); }
+.lesson-deck .deck-cover .xp-byline-row { margin-block: 0; font-size: var(--deck-small); }
+.lesson-deck .deck-cover .xp-chips { margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-xs); font-size: var(--deck-small); }
+/* nothing on the sheet is set below --deck-small: the preview badge, the actions and the notes follow it */
+.lesson-deck .deck-cover .xp-chips .badge { font-size: inherit; }
+.lesson-deck .deck-cover .xp-summary { max-inline-size: 34em; font-size: var(--deck-body); line-height: 1.5; color: var(--color-ink-2); }
+.deck-cover[data-summary='short'] .xp-summary { font-size: var(--deck-lead); line-height: 1.3; font-weight: 500; }
+.lesson-deck .deck-cover .xp-summary p { margin-block-end: 0.5em; }
+.lesson-deck .deck-cover .xp-summary > :last-child { margin-block-end: 0; }
+/* class code, feedback, the legend: quiet ghost tools under a hairline, the pear stays with Start */
+.lesson-deck .deck-cover .xp-cover-actions { gap: var(--space-3xs) var(--space-2xs); margin-inline-start: calc(-1 * var(--space-sm)); }
+.lesson-deck .deck-cover .xp-cover-actions .btn {
+  --btn-bg: transparent; --btn-line: transparent; --btn-edge: transparent; --btn-fg: var(--color-ink-2);
+  background: transparent; min-block-size: var(--cl-control-h); padding-inline: var(--space-sm); border-radius: var(--radius-stock);
+  font-size: var(--deck-small); font-weight: 500;
+}
+.lesson-deck .deck-cover .xp-cover-actions .btn:hover:not(:disabled) { background: var(--color-paper-2); translate: none; --btn-fg: var(--color-ink); }
+.lesson-deck .deck-cover .xp-cover-actions .btn:active:not(:disabled) { background: var(--color-paper-3); translate: none; }
+.lesson-deck .deck-cover .xp-cover-actions .stack-sm { gap: var(--space-3xs); }
+.lesson-deck .deck-cover .xp-cover-actions .small { font-size: var(--deck-small); }
+.deck-cover-colophon .xp-colophon { display: flex; flex-direction: column; gap: var(--space-2xs); font-size: var(--deck-small); line-height: 1.45; color: var(--color-muted); }
+.deck-cover-colophon .xp-colophon p { margin: 0; }
+.deck-cover-colophon .xp-language-info, .deck-cover-colophon .small { font-size: inherit; }
+
+/* the lesson's sources under its picture: one row a source, each opens it in the side panel */
+.deck-cover-colophon .xp-lesson-sources { display: flex; flex-direction: column; gap: var(--space-3xs); margin: 0; padding: 0; border: 0; background: none; }
+.deck-cover-colophon .xp-lesson-sources h2 { margin: 0; font-size: var(--deck-small); font-weight: 600; letter-spacing: 0; color: var(--color-ink-2); }
+.deck-cover-colophon .xp-lesson-sources ol { display: grid; }
+.deck-cover-colophon .xp-lesson-sources li + li { border-block-start: var(--rule-hair) solid var(--color-rule); }
+.deck-cover-colophon .xp-lesson-sources button { min-block-size: var(--cl-control-h); padding-block: var(--space-2xs); font-size: var(--deck-small); line-height: 1.35; align-items: center; }
+.deck-cover-colophon .xp-source-name { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.deck-cover-colophon .xp-source-index { inline-size: 1.75em; block-size: 1.75em; font-size: var(--deck-small); }
+
+/* ---------------------------------------------------------------- learning goals (A2): numbered cards in one row */
+/* As many columns as goals on the sheet, so the row spans it; each card is one unit, the numeral
+   with its goal right under it, at the height its words need (never a tower). The row, and the
+   assumptions well under it when there is one, sit in the upper middle of the body: a third of
+   the spare room above them, two thirds below. */
+.deck-goals { display: flex; flex-direction: column; }
+.deck-goals::before, .deck-goals::after { content: ''; flex: 1 1 0; min-block-size: 0; }
+.deck-goals::after { flex-grow: 2; }
+.deck-goal-list {
+  --cols: 3; flex: none; margin: 0; padding: 0; list-style: none;
+  display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: var(--deck-gap);
+}
+.deck-goals[data-count='1'] .deck-goal-list { --cols: 1; max-inline-size: 40em; }
+.deck-goals[data-count='2'] .deck-goal-list { --cols: 2; }
+.deck-goals[data-count='4'] .deck-goal-list { --cols: 4; }
+.deck-goal {
+  display: flex; flex-direction: column; justify-content: flex-start; gap: var(--deck-gap); min-inline-size: 0;
+  padding: var(--deck-gap) var(--deck-gap) calc(var(--deck-gap) * 1.2); border-radius: var(--radius-card); background: var(--color-paper-2);
+}
+.deck-goal-n { font-size: var(--deck-display); font-weight: 600; line-height: 1; letter-spacing: var(--tracking-display); color: var(--color-ink-2); font-variant-numeric: tabular-nums; }
+.deck-goal-text { max-inline-size: 24em; font-size: var(--deck-lead); font-weight: 500; line-height: 1.3; color: var(--color-ink); text-wrap: pretty; }
+.deck-goal-text p { margin: 0; }
+/* one or two assumptions under the cards: a quiet well, the provenance word and the text at body size,
+   two notes side by side when the sheet is wide enough. Under two notes the cards give up some
+   height: the numeral a step down the scale, the card's padding tighter. */
+.deck-goals[data-notes='2'] .deck-goal { gap: calc(var(--deck-gap) * 0.5); padding: calc(var(--deck-gap) * 0.75) var(--deck-gap) var(--deck-gap); }
+.deck-goals[data-notes='2'] .deck-goal-n { font-size: var(--deck-title); }
+.deck-goal-notes { flex: none; margin-block-start: var(--deck-gap); padding: calc(var(--deck-gap) * 0.6) var(--deck-gap); border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.deck-goal-notes ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20em), 1fr)); gap: calc(var(--deck-gap) * 0.5) var(--deck-gap); }
+.deck-goal-note { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; column-gap: var(--space-sm); }
+.deck-goal-note .prov { font-size: var(--deck-small); padding: 0.15em 0.75em; }
+.deck-goal-note-text { max-inline-size: 48em; font-size: var(--deck-body); line-height: 1.5; color: var(--color-ink-2); text-wrap: pretty; }
+.deck-goal-note-text p { margin: 0; }
+
+/* ---------------------------------------------------------------- model assumptions (A3): a ruled list */
+/* hairlines across the sheet; the rows share about 70% of the body, so three or more read as a page */
+.deck-assumptions { display: flex; flex-direction: column; }
+.deck-assumption-list {
+  flex: none; min-block-size: 70%; margin: 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; border-block-start: var(--rule-hair) solid var(--color-rule);
+}
+.deck-assumption {
+  flex: 1 1 auto; display: grid; grid-template-columns: minmax(7.5em, auto) minmax(0, 1fr); align-items: center; column-gap: var(--deck-gap);
+  padding-block: calc(var(--deck-gap) * 0.7); border-block-end: var(--rule-hair) solid var(--color-rule);
+}
+.deck-assumption .prov { justify-self: start; font-size: var(--deck-small); padding: 0.2em 0.8em; }
+.deck-assumption-text { max-inline-size: 34em; font-size: var(--deck-lead); font-weight: 500; line-height: 1.3; color: var(--color-ink); }
+.deck-assumption-text p { margin: 0; }
+
+/* ---------------------------------------------------------------- a teacher's note (A11): one left edge with the heading */
+.deck-text .prose { max-inline-size: 34em; font-size: var(--deck-body); line-height: 1.5; color: var(--color-ink); }
+.deck-text .prose p { margin-block-end: 0.75em; }
+.deck-text .prose h4 { margin: 1em 0 0.35em; font-size: var(--deck-lead); line-height: 1.3; }
+.deck-text .prose ul, .deck-text .prose ol { padding-inline-start: 1.2em; }
+.deck-text .prose li + li { margin-block-start: 0.35em; }
+.deck-text.is-short .prose { max-inline-size: 26em; font-size: var(--deck-lead); font-weight: 500; line-height: 1.3; }
+
+/* ---------------------------------------------------------------- a 3D model with its note: the model leads (8/4) */
+.deck-visual3d {
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4.6fr); gap: var(--deck-gap); align-items: start;
+  /* contract C3: every stage well in here sizes its block axis from the sheet, not the viewport */
+  --stage3d-block-size: min(calc(var(--deck-cqh) * 46), calc(var(--deck-cqi) * 34));
+}
+.deck-visual3d.is-bare { grid-template-columns: minmax(0, 1fr); }
+.deck-visual3d-stage { block-size: 100%; min-block-size: 0; min-inline-size: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.deck-visual3d-stage:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
+.deck-visual3d-caption { block-size: 100%; }
+.deck-visual3d-caption .prose { max-inline-size: 34em; font-size: var(--deck-body); line-height: 1.5; color: var(--color-ink-2); }
+.deck-visual3d-caption .prose p { margin-block-end: 0.75em; }
+.deck-visual3d-caption .prose > :last-child { margin-block-end: 0; }
+
+/* ---------------------------------------------------------------- interactive parts (A9): the part fills the sheet */
+.deck-interactive { block-size: 100%; --stage3d-block-size: min(calc(var(--deck-cqh) * 50), calc(var(--deck-cqi) * 40)); }
+.lesson-deck .deck-interactive > .blk { display: flex; flex-direction: column; gap: var(--space-sm); min-block-size: 100%; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.lesson-deck .deck-interactive > .blk:has(.gr-slide), .lesson-deck .deck-interactive > .blk:has(.dg-slide) { block-size: 100%; min-block-size: 0; }
+/* the slide's own heading says what the part is; "Ask AI" lives in the bar; the AI label of a part
+   made with AI rides in the byline under the heading on every slide, so the frame's foot note goes */
+.lesson-deck .deck-interactive > .blk > .blk-head, .lesson-deck .deck-interactive > .blk > .blk-desc,
+.lesson-deck .deck-interactive > .blk > .blk-deck-note { display: none; }
+/* a part's own tool that still lives in its head (a simulation's challenge) stays reachable */
+.lesson-deck .deck-interactive > .blk > .blk-head:has(.blk-actions > :not(.blk-ask)) { display: flex; margin: 0; }
+.lesson-deck .deck-interactive > .blk > .blk-head :is(.blk-title, .blk-meta, .blk-ask) { display: none; }
+.lesson-deck .deck-interactive > .blk > .blk-head .blk-bar { justify-content: flex-end; }
+
+/* ---------------------------------------------------------------- the end (A12): an ink sheet */
+.deck-paper[data-deck-kind='end'] { background: var(--color-ink); color: var(--color-paper); }
+.deck-paper[data-deck-kind='end'] :focus-visible { outline-color: var(--color-paper); }
+.deck-end { block-size: 100%; display: flex; flex-direction: column; gap: var(--deck-gap); padding: var(--deck-margin); overflow: auto; scrollbar-width: thin; }
+.deck-end-title { margin: 0; max-inline-size: 18em; font-size: var(--deck-title); font-weight: 600; line-height: 1.15; letter-spacing: var(--tracking-display); text-wrap: balance; color: var(--color-paper); }
+/* the heading and the recap travel together, centred in the sheet; the actions sit at its foot */
+.deck-end-main { margin-block: auto; display: flex; flex-direction: column; gap: calc(var(--deck-gap) * 1.6); }
+.deck-end-body { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: center; gap: var(--deck-gap) calc(var(--deck-gap) * 2); }
+.deck-end-label { margin: 0 0 calc(var(--deck-gap) * 0.5); font-size: var(--deck-small); font-weight: 600; letter-spacing: 0; color: var(--color-paper-muted); }
+.deck-end-goals { margin: 0; padding: 0; list-style: none; display: grid; gap: calc(var(--deck-gap) * 0.6); }
+.deck-end-goals li { display: flex; align-items: flex-start; gap: var(--space-sm); font-size: var(--deck-body); line-height: 1.45; color: var(--color-paper); }
+.deck-end-goals li > svg { flex: none; inline-size: 1.15em; block-size: 1.15em; margin-block-start: 0.15em; color: var(--color-mint); }
+.deck-end-goals .prose { max-inline-size: 30em; }
+.deck-end-goals .prose p { margin: 0; }
+.deck-end-goals .katex { color: inherit; }
+.deck-end-lead { margin: 0; max-inline-size: 30em; font-size: var(--deck-lead); line-height: 1.3; color: var(--color-paper); }
+.deck-end-score { margin: 0; display: flex; flex-direction: column; gap: var(--space-xs); justify-self: start; padding-inline-start: calc(var(--deck-gap) * 1.5); border-inline-start: var(--rule-hair) solid color-mix(in oklab, var(--color-paper) 18%, transparent); }
+.deck-end-count { display: flex; align-items: baseline; gap: 0.08em; font-size: var(--deck-display); font-weight: 600; line-height: 1; letter-spacing: var(--tracking-display); font-variant-numeric: tabular-nums; color: var(--color-paper-muted); }
+.deck-end-count > strong { font-weight: 600; color: var(--color-mint); }
+.deck-end-count-label { font-size: var(--deck-body); line-height: 1.4; color: var(--color-paper-muted); }
+.deck-end-actions { flex: none; display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.deck-end .btn:not(.btn-primary) {
+  --btn-bg: transparent; --btn-fg: var(--color-paper); --btn-line: color-mix(in oklab, var(--color-paper) 30%, transparent); --btn-edge: transparent;
+  background: transparent;
+}
+.deck-end .btn:not(.btn-primary):hover:not(:disabled) { background: color-mix(in oklab, var(--color-paper) 9%, transparent); translate: none; }
+.deck-end .btn:not(.btn-primary):active:not(:disabled) { background: color-mix(in oklab, var(--color-paper) 14%, transparent); translate: none; }
+
+/* ---------------------------------------------------------------- the page controls */
+.deck-footer {
+  flex: none; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-md);
+  inline-size: 100%; max-inline-size: var(--deck-sheet-max); align-self: center; min-block-size: var(--deck-foot); padding-block: var(--space-xs) var(--space-2xs);
+}
+.deck-nav { min-inline-size: 7.5rem; }
+.deck-nav.is-prev { padding-inline: var(--space-md) var(--space-lg); }
+.deck-nav.is-next { padding-inline: var(--space-lg) var(--space-md); }
+/* Next is ink card stock: pear stays for each slide's own primary action */
+.deck-nav.is-next { --btn-bg: var(--color-ink); --btn-fg: var(--color-paper); --btn-line: transparent; --btn-edge: var(--color-ink-deep); }
+.deck-nav.is-next:hover:not(:disabled) { --btn-bg: var(--color-ink-2); }
+.deck-position { display: flex; flex-direction: column; align-items: center; gap: var(--space-xs); min-inline-size: 0; font-size: var(--text-sm); line-height: 1.2; color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.deck-position strong { font-weight: 600; color: var(--color-ink); }
+.deck-progress { display: block; inline-size: min(100%, 15rem); block-size: 4px; border-radius: var(--radius-pill); background: var(--color-paper-3); overflow: hidden; }
+.deck-progress > span { display: block; inline-size: 100%; block-size: 100%; border-radius: inherit; background: var(--color-mint-deep); transform-origin: left center; transition: transform var(--dur-short) var(--ease-out); }
+
+/* ---------------------------------------------------------------- Mục lục: parts with their slides */
+.deck-contents-list, .deck-contents-list ol { margin: 0; padding: 0; list-style: none; }
+.deck-contents-list { display: grid; gap: var(--space-3xs); }
+.deck-contents-list ol { display: grid; gap: var(--space-3xs); }
+.deck-contents-part { margin-block: var(--space-xs); padding-block-start: var(--space-sm); border-block-start: var(--rule-hair) solid var(--color-rule); }
+.deck-contents-part + li:not(.deck-contents-part) { margin-block-start: var(--space-xs); padding-block-start: var(--space-xs); border-block-start: var(--rule-hair) solid var(--color-rule); }
+.deck-contents-head { margin: 0 0 var(--space-2xs); padding-inline: var(--space-sm); font-size: var(--text-sm); font-weight: 600; letter-spacing: 0; line-height: 1.35; color: var(--color-muted); }
+.deck-contents button {
+  display: flex; align-items: center; gap: var(--space-sm); inline-size: 100%; min-block-size: var(--cl-control-h);
+  padding: var(--space-xs) var(--space-sm); border: 0; border-radius: var(--radius-stock); background: transparent;
+  color: var(--color-ink); font-size: var(--text-md); line-height: 1.35; text-align: start;
+  transition: background-color var(--dur-micro) var(--ease-snap);
+}
+.deck-contents button:hover { background: var(--color-paper-2); }
+.deck-contents button:active { background: var(--color-paper-3); }
+.deck-contents button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
+.deck-contents button[aria-current] { background: var(--color-ink); color: var(--color-paper); }
+.deck-contents-n { flex: none; inline-size: 2rem; font-size: var(--text-sm); font-weight: 600; color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.deck-contents button[aria-current] .deck-contents-n { color: var(--color-accent); }
+.deck-contents-title { flex: 1; min-inline-size: 0; overflow-wrap: break-word; }
+.deck-contents-check { flex: none; color: var(--color-mint-deep); }
+
+/* the language notice and the Lite link (shared lessons) */
+.xp-language-info { margin: 0; font-size: var(--text-sm); line-height: 1.5; color: var(--color-muted); }
+.xp-language-info p { margin: 0 0 var(--space-3xs); }
+
+/* ---------------------------------------------------------------- narrower sheets: one column, the picture or the model first */
+@container deck-slide (width < 56rem) {
+  .deck-goals[data-count='4'] .deck-goal-list { --cols: 2; grid-auto-rows: auto; }
+}
+@container deck-slide (aspect-ratio < 1.15) or (width < 40rem) {
+  .deck-cover { display: flex; flex-direction: column; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+  .deck-cover-aside { display: contents; }
+  .deck-cover-media { order: -1; flex: none; block-size: 34cqh; min-block-size: 0; }
+  .deck-cover-text { flex: none; overflow: visible; }
+  .deck-cover-foot { margin-block-start: 0; }
+  .deck-cover-colophon { order: 2; max-block-size: none; overflow: visible; padding: 0 var(--deck-margin) var(--deck-margin); }
+
+  .deck-goals .deck-goal-list, .deck-goals[data-count] .deck-goal-list { --cols: 1; flex: none; grid-auto-rows: auto; min-block-size: 0; max-inline-size: none; }
+  .deck-goal { flex-direction: row; align-items: baseline; justify-content: flex-start; gap: var(--space-sm); padding: var(--deck-gap); border-radius: var(--radius-stock); }
+  .deck-goal-n { flex: none; min-inline-size: 1.2em; font-size: var(--deck-lead); }
+  .deck-assumption { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-xs); min-block-size: 0; }
+  .deck-goal-note { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-2xs); justify-items: start; }
+
+  /* one scrolling column, the model first: each part keeps its own height */
+  .deck-visual3d { display: flex; flex-direction: column; overflow: auto; overscroll-behavior: contain; --stage3d-block-size: min(calc(var(--deck-cqi) * 76), calc(var(--deck-cqh) * 52)); }
+  .deck-visual3d-stage, .deck-visual3d-caption { flex: none; block-size: auto; min-block-size: auto; overflow: visible; }
+  .deck-interactive { --stage3d-block-size: min(calc(var(--deck-cqi) * 62), calc(var(--deck-cqh) * 48)); }
+  /* a diagram stacks its picture over its parts and the slide scrolls */
+  .lesson-deck .deck-interactive > .blk:has(.dg-slide) { block-size: auto; min-block-size: 100%; }
+
+  .deck-end-main { margin-block: 0 auto; gap: var(--deck-gap); }
+  .deck-end-body { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .deck-end-score { order: -1; flex-direction: row; align-items: baseline; flex-wrap: wrap; gap: var(--space-xs) var(--space-sm); padding-inline-start: 0; border: 0; }
+}
+
+/* ---------------------------------------------------------------- the bar and the controls on small screens */
+@media (max-width: 63.99rem) {
+  .deck-tool-ask > span { display: none; }
+}
+@media (max-width: 47.99rem) {
+  .lesson-deck { padding-inline: var(--space-xs); }
+  .deck-tool-contents > span { display: none; }
+  .deck-tool-contents { margin-inline-start: 0; }
+  .deck-crumb-lesson.has-part, .deck-crumb-sep { display: none; }
+  .deck-paper { border-radius: var(--radius-stock); }
+  .deck-footer { gap: var(--space-xs); }
+  .deck-nav { min-inline-size: 0; }
+  .deck-nav.is-prev, .deck-nav.is-next { padding-inline: var(--space-sm); }
+  .deck-progress { inline-size: min(100%, 8rem); }
+}
+@media (max-width: 22rem) {
+  .deck-nav > span { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck-heading, .deck-page:not([hidden]) { animation: none; }
+  .deck-progress > span, .deck-tool, .deck-contents button, .st-preview-chevron { transition: none; }
+  .lesson-deck * { scroll-behavior: auto !important; }
+}
+@media (forced-colors: active) {
+  .deck-paper { border: 1px solid CanvasText; }
+  .deck-beads > span, .deck-progress > span { forced-color-adjust: none; }
+}

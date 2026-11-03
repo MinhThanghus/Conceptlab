@@ -1,0 +1,146 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · system: DESIGN.md (Hum, adapted)
+ * built: the project · redesign: full · field block: a printed coaching board on the paper, tokens readable from the back row */
+/* Hallmark · dismissed F4 · the ink frame key is the frame on show (a selected state), the card frame keys are quiet; the one filled primary is Replay (.btn-primary) */
+
+/* Interactive sports field (spec §8.4). The court is a pale print on the paper with lines in a deep
+   ink of its own hue; team A is a blue disc, team B a coral square (shape and colour both say the
+   team), the ball is paper with an ink ring. Every sport sets four variables. */
+
+.fb-svg {
+  --fb-surround: var(--color-paper-2);
+  --fb-surface: var(--color-hill-2);
+  --fb-ink: var(--color-mint-ink);
+  --fb-zone: var(--color-mint-ink);
+  --fb-free: var(--color-sugar);
+  display: block; block-size: auto; max-inline-size: none; flex: none;
+  user-select: none; -webkit-user-select: none; touch-action: pan-x pan-y;
+  border-radius: var(--radius-stock); font-family: var(--font-body);
+}
+.fb-svg:focus { outline: none; }
+.fb-svg:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.fb-svg.fb-drawing { touch-action: none; cursor: crosshair; }
+.fb-sport-football { --fb-surface: var(--color-hill-2); --fb-ink: var(--color-mint-ink); --fb-zone: var(--color-mint-ink); }
+.fb-sport-badminton { --fb-surface: var(--color-hill-1); --fb-ink: var(--color-mint-ink); --fb-zone: var(--color-mint-ink); }
+.fb-sport-futsal { --fb-surface: var(--color-sugar); --fb-ink: var(--color-accent-2-deep); --fb-zone: var(--color-accent-2-deep); --fb-free: var(--color-accent-2-soft); }
+.fb-sport-volleyball { --fb-surface: var(--color-sand-soft); --fb-ink: var(--color-kraft-ink); --fb-zone: var(--color-kraft); --fb-free: var(--color-sugar); }
+.fb-sport-basketball { --fb-surface: var(--color-sand-soft); --fb-ink: var(--color-kraft-ink); --fb-zone: var(--color-accent-3-deep); }
+
+/* court */
+.fb-surround { fill: var(--fb-surround); }
+.fb-freezone { fill: var(--fb-free); }
+.fb-surface { fill: var(--fb-surface); }
+.fb-stripe { fill: var(--fb-ink); fill-opacity: 0.05; }
+.fb-zone { fill: var(--fb-zone); fill-opacity: 0.1; stroke: none; }
+.fb-line, .fb-line-dash { fill: none; stroke: var(--fb-ink); stroke-linecap: round; }
+.fb-mark { fill: var(--fb-ink); stroke: none; }
+.fb-goal { fill: var(--color-card); stroke: var(--fb-ink); }
+.fb-net { stroke: var(--color-ink); stroke-linecap: round; }
+.fb-post { fill: var(--color-ink); stroke: none; }
+.fb-hoop { fill: none; stroke: var(--color-accent-3-deep); }
+.fb-board { stroke: var(--color-ink); stroke-linecap: round; }
+
+/* tokens: light from the top left, so every token casts a short shadow down and right */
+.fb-player, .fb-ball, .fb-arrow { touch-action: none; }
+.fb-svg:not(.fb-readonly) .fb-player, .fb-svg:not(.fb-readonly) .fb-ball { cursor: grab; }
+.fb-svg:not(.fb-readonly) .fb-player:active, .fb-svg:not(.fb-readonly) .fb-ball:active { cursor: grabbing; }
+.fb-svg:not(.fb-readonly) .fb-arrow { cursor: move; }
+.fb-svg.fb-drawing .fb-player, .fb-svg.fb-drawing .fb-ball, .fb-svg.fb-drawing .fb-arrow { cursor: crosshair; }
+.fb-player:focus, .fb-ball:focus, .fb-arrow:focus { outline: none; }
+.fb-hit { fill: transparent; }
+.fb-shadow { fill: var(--color-ink); fill-opacity: 0.2; }
+.fb-token { stroke: var(--color-card); }
+.fb-team-a { fill: var(--color-accent-2); }
+.fb-team-b { fill: var(--color-accent-3-deep); }
+.fb-label { fill: var(--color-paper); font-weight: 600; pointer-events: none; }
+.fb-ball-body { fill: var(--color-card); stroke: var(--color-ink); }
+.fb-ball-mark { fill: var(--color-ink); }
+.fb-sel-ring { fill: none; stroke: var(--color-focus); }
+.fb-handle { fill: var(--color-card); stroke: var(--color-focus); cursor: grab; touch-action: none; }
+
+/* arrows: runs dashed in ink, passes solid in deep blue; the dash, not only the colour, tells them apart */
+.fb-arrow-hit { stroke: transparent; fill: none; }
+.fb-arrow-sel { stroke: var(--color-focus); stroke-opacity: 0.25; stroke-linecap: round; fill: none; }
+.fb-arrow-line { fill: none; stroke-linecap: round; }
+.fb-arrow-run { stroke: var(--color-ink); }
+.fb-arrow-pass { stroke: var(--color-accent-2-deep); }
+.fb-head-run { fill: var(--color-ink); }
+.fb-head-pass { fill: var(--color-accent-2-deep); }
+.fb-preview { opacity: 0.75; }
+
+/* the teacher's solution as a ghost overlay */
+.fb-ghost { pointer-events: none; opacity: 0.6; }
+.fb-ghost .fb-token { fill: var(--color-card); fill-opacity: 0.35; }
+.fb-ghost .fb-team-a { stroke: var(--color-accent-2); }
+.fb-ghost .fb-team-b { stroke: var(--color-accent-3-deep); }
+.fb-ghost .fb-label { fill: var(--color-ink); }
+.fb-ghost .fb-ball-body { fill: none; }
+
+/* ---------------------------------------------------------------- around the board */
+.fb-workspace { display: flex; flex-direction: column; gap: var(--space-sm); min-inline-size: 0; }
+.fb-3d-toggle { min-height: 2.75rem; border: 1px solid #aac4d4; border-radius: .55rem; padding: .45rem .8rem; background: #fff; color: #164360; font: inherit; cursor: pointer; }
+.fb-3d-toggle:focus-visible { outline: 3px solid #1968b8; outline-offset: 2px; }
+.fb-scroll { overflow: auto; max-inline-size: 100%; border-radius: var(--radius-stock); background: var(--color-paper-2); -webkit-overflow-scrolling: touch; }
+.fb-boards { display: grid; gap: var(--space-sm); grid-template-columns: minmax(0, 1fr); }
+.fb-boards.side { grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+.fb-board-title { font-weight: 600; font-size: 0.9375rem; margin: 0 0 var(--space-xs); }
+
+/* tools: card stock; the tool in hand is ink with paper type */
+.fb-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+.fb-toolbar .btn { min-block-size: var(--cl-control-h); }
+.btn.fb-tool[aria-pressed='true'] { --btn-bg: var(--color-ink); --btn-fg: var(--color-paper); --btn-line: transparent; --btn-edge: var(--color-ink-2); }
+.btn.fb-tool:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.btn.fb-tool:disabled { opacity: 0.55; cursor: not-allowed; }
+.fb-sep { inline-size: 1px; align-self: stretch; background: var(--color-rule-2); margin-inline: var(--space-3xs); }
+.fb-tool-label { white-space: nowrap; }
+
+/* what is selected and what it can do: a tinted well that keeps its height */
+.fb-inspector { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-sm); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-stock); background: var(--color-paper-2); min-block-size: 3.25rem; font-size: 0.9375rem; }
+.fb-inspector .input, .fb-inspector .select { inline-size: auto; }
+.fb-inspector .fb-label-input { inline-size: 4.5rem; text-align: center; font-weight: 600; }
+.fb-inspector-title { font-weight: 600; display: inline-flex; align-items: center; gap: var(--space-xs); }
+
+.fb-legend { display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-md); font-size: var(--text-sm); color: var(--color-ink-2); margin: 0; padding: 0; list-style: none; }
+.fb-legend li { display: inline-flex; align-items: center; gap: var(--space-xs); }
+.fb-legend svg { inline-size: 1.625rem; block-size: 1rem; flex: none; overflow: visible; }
+
+/* frames: numbered card stock keys, the frame on show is ink */
+.fb-timeline { display: flex; flex-direction: column; gap: var(--space-xs); }
+.fb-frames { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+.fb-frame-btn {
+  min-inline-size: var(--cl-control-h); min-block-size: var(--cl-control-h); padding: 0 var(--space-sm);
+  border: 0; border-radius: var(--radius-small); background: var(--color-card); color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-rule-2), 0 3px 0 0 var(--color-edge);
+  font-weight: 600; font-variant-numeric: tabular-nums;
+  transition: translate var(--dur-micro) var(--ease-snap), box-shadow var(--dur-micro) var(--ease-snap), background-color var(--dur-micro) var(--ease-snap);
+}
+.fb-frame-btn:hover { background: var(--color-paper-2); }
+.fb-frame-btn:active { translate: 0 2px; box-shadow: inset 0 0 0 1px var(--color-rule-2), 0 1px 0 0 var(--color-edge); }
+.fb-frame-btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.fb-frame-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.fb-frame-btn[aria-current='step'] { background: var(--color-ink); color: var(--color-paper); box-shadow: 0 3px 0 0 var(--color-ink-2); }
+/* the note of the frame on show: a line of text under the timeline, never a striped box */
+.fb-note { margin: 0; max-inline-size: 68ch; overflow-wrap: anywhere; line-height: 1.55; }
+.fb-note strong { font-weight: 600; }
+
+/* the task: the one pear field on the screen, a tinted sheet with no stripe */
+.fb-task { display: flex; gap: var(--space-sm); align-items: flex-start; background: var(--color-accent-soft); border-radius: var(--radius-stock); padding: var(--space-md); }
+.fb-task > svg { flex: none; color: var(--color-ink-2); inline-size: 1.25rem; block-size: 1.25rem; margin-block-start: var(--space-3xs); }
+.fb-task p { margin: var(--space-3xs) 0 0; overflow-wrap: anywhere; }
+.fb-task strong { color: var(--color-ink); font-weight: 600; }
+
+.fb-section { display: flex; flex-direction: column; gap: var(--space-sm); }
+.fb-section > h3, .fb-section > h4 { margin: 0; }
+
+@media (max-width: 520px) {
+  .fb-tool .fb-tool-label { position: absolute !important; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .fb-tool { padding-inline: var(--space-sm); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fb-frame-btn { transition: none; }
+  .fb-frame-btn:active { translate: none; }
+}
+@media (forced-colors: active) {
+  .fb-token, .fb-ball-body { forced-color-adjust: none; }
+  .fb-sel-ring, .fb-handle { stroke: Highlight; }
+  .fb-frame-btn[aria-current='step'] { outline: 2px solid Highlight; }
+}

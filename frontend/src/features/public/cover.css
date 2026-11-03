@@ -1,0 +1,100 @@
+/* Hallmark · checked: 2026-11-02 · genre: playful · theme: Hum (locked, DESIGN.md) · built: the project · redesign: full */
+/* Lab cover (gallery cards, the home rail, the student home, My labs thumbnails, the lesson deck's
+   first page): the lab's own picture, the capture of a sample lab's learner view, or its booklet
+   cover (BookletCover.jsx). The root .lab-cover is a box a parent may size freely; its child
+   fills it in both directions. Never an icon tile, never a wash. */
+
+.lab-cover.cv {
+  position: relative; overflow: hidden; inline-size: 100%; aspect-ratio: 16 / 9;
+  background: var(--grain), var(--color-paper-2);
+}
+.lab-cover.cv img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
+/* a cover picture keeps its hero, which sits a little above the centre; a capture keeps its top */
+.lab-cover.cv img.cv-photo { object-position: 50% 40%; }
+.lab-cover.cv img.cv-capture { object-position: 50% 0; }
+/* on a card the picture meets the card's text at a hairline */
+.pc > .lab-cover.cv, .student-lesson-cover > .lab-cover.cv { border-block-end: var(--rule-hair) solid var(--color-rule); }
+
+/* a thumbnail: the picture, or the booklet's first letter */
+.lab-cover.cv-compact { aspect-ratio: 1; border: 0; border-radius: var(--radius-stock); box-shadow: inset 0 0 0 var(--rule-hair) var(--color-keyline-strong); }
+.lab-cover.cv-compact img { border-radius: inherit; }
+
+/* ---------------------------------------------------------------- the booklet cover */
+/* A subject colour field (soft tokens), the pattern printed in the subject's deep ink at
+   14-24% opacity, the title in ink (above 12:1 on every field) and a series line in the deep
+   ink (above 4.5:1). The fibre wash lies under everything; the speck grain over everything,
+   at the 0.05 that text allows, so the pattern reads as printed. */
+.cv-booklet {
+  --cv-field: var(--color-paper-2); --cv-ink: var(--color-ink-2);
+  position: absolute; inset: 0; overflow: hidden;
+  container: booklet / size;
+  background: var(--fibre), var(--cv-field);
+  color: var(--color-ink); font-family: var(--font-display);
+}
+.cv-booklet::after { content: ''; position: absolute; inset: 0; background: var(--grain); pointer-events: none; }
+.cv-booklet[data-subject='math'] { --cv-field: var(--color-accent-2-soft); --cv-ink: var(--color-accent-2-deep); }
+.cv-booklet[data-subject='physics'] { --cv-field: var(--color-sand-soft); --cv-ink: var(--color-kraft-ink); }
+.cv-booklet[data-subject='engineering'] { --cv-field: var(--color-paper-3); --cv-ink: var(--color-accent-2-deep); }
+.cv-booklet[data-subject='chemistry'] { --cv-field: var(--color-mint-soft); --cv-ink: var(--color-mint-ink); }
+.cv-booklet[data-subject='biology'] { --cv-field: var(--color-mint-soft); --cv-ink: var(--color-mint-deep); }
+.cv-booklet[data-subject='agriculture'] { --cv-field: var(--color-hill-2); --cv-ink: var(--color-mint-deep); }
+.cv-booklet[data-subject='environment'] { --cv-field: var(--color-hill-1); --cv-ink: var(--color-mint-deep); }
+.cv-booklet[data-subject='geography'] { --cv-field: var(--color-sugar); --cv-ink: var(--color-accent-2-deep); }
+.cv-booklet[data-subject='informatics'], .cv-booklet[data-subject='computer_science'] { --cv-field: var(--color-plum-soft); --cv-ink: var(--color-plum); }
+.cv-booklet[data-subject='economics'] { --cv-field: var(--color-sand-soft); --cv-ink: var(--color-kraft-deep); }
+.cv-booklet[data-subject='pe'] { --cv-field: var(--color-accent-3-soft); --cv-ink: var(--color-accent-3-deep); }
+
+/* Wide by default (cards, the student tiles, the deck's phone band): words left, the pattern a
+   panel on the right; the squarish and tall shapes follow. Container units resolve on these
+   children of the booklet (the booklet itself is the container). */
+.cv-booklet-art { position: absolute; inset-block: 0; inset-inline-end: 0; inline-size: 44%; color: var(--cv-ink); }
+.cv-booklet-art svg { display: block; inline-size: 100%; block-size: 100%; }
+/* the words end where the pattern's shapes may begin (about 61% across a card) */
+.cv-booklet-words {
+  --cv-pad: clamp(0.75rem, 5.2cqi, 2.5rem);
+  position: absolute; inset: 0; inline-size: 61%; display: flex; flex-direction: column; justify-content: space-between;
+  gap: var(--space-xs); padding: var(--cv-pad);
+}
+.cv-booklet-series {
+  display: flex; align-items: center; gap: 0.55em; min-inline-size: 0; margin: 0; margin-inline-end: calc(-1 * var(--cv-pad));
+  color: var(--cv-ink); font-size: clamp(0.6875rem, 2.9cqi, 1rem); font-weight: 500; line-height: 1.3; white-space: nowrap;
+}
+.cv-booklet-series svg { flex: none; inline-size: 16px; block-size: 16px; }
+.cv-booklet-subject { flex: none; }
+/* the grade after the subject, parted by a hairline (never a middle dot); it gives way first */
+.cv-booklet-grade { position: relative; min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; padding-inline-start: 0.6em; font-weight: 400; }
+.cv-booklet-grade::before { content: ''; position: absolute; inset-inline-start: 0; inset-block: 0.22em; inline-size: var(--rule-hair); background: currentColor; opacity: 0.45; }
+/* --cv-scale (set from the title's length) keeps the title block about the same area: a short
+   title is set big, a long research title smaller, four lines at most */
+.cv-booklet-title {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden;
+  margin: 0; color: var(--color-ink);
+  font-size: 1.5rem; font-size: calc(var(--cv-scale, 1) * min(8.4cqi, 14.6cqb));
+  font-weight: 600; line-height: 1.06; letter-spacing: -0.025em;
+  overflow-wrap: break-word; hyphens: auto; text-wrap: balance;
+}
+
+/* squarish: the pattern in the upper right corner, the title across the foot */
+@container booklet (0.8 <= aspect-ratio < 1.25) {
+  .cv-booklet-art { inset-block: 0 auto; inline-size: 62%; block-size: 62%; }
+  .cv-booklet-words { inline-size: auto; }
+  .cv-booklet-title { max-inline-size: 92%; font-size: calc(var(--cv-scale, 1) * 12cqi); }
+}
+/* tall: the pattern on top, the words below */
+@container booklet (aspect-ratio < 0.8) {
+  .cv-booklet-art { inset-block: 0 auto; inset-inline: 0; inline-size: auto; block-size: 54%; }
+  .cv-booklet-words { inline-size: auto; }
+  .cv-booklet-title { font-size: calc(var(--cv-scale, 1) * min(12.5cqi, 9cqb)); }
+}
+
+/* a thumbnail: the pattern's corner and the title's first letter */
+.cv-booklet.is-compact .cv-booklet-art { inset-block-start: -8%; inset-inline-end: -8%; inline-size: 78%; block-size: 78%; }
+.cv-booklet-letter {
+  position: absolute; inset-block-end: 10cqb; inset-inline-start: 13cqi;
+  color: var(--color-ink); font-size: 50cqi; font-weight: 600; line-height: 0.8; letter-spacing: -0.03em;
+}
+
+/* the lesson deck's first page sets the title beside its cover: there the booklet is the field
+   and its pattern alone, filling the panel */
+.deck-cover-media .cv-booklet-words { display: none; }
+.deck-cover-media .cv-booklet:not(.is-compact) .cv-booklet-art { inset: 0; inline-size: auto; block-size: auto; }

@@ -1,0 +1,282 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · system: DESIGN.md (Hum, adapted)
+ * built: the project · redesign: full · simulation block: the stage leads (3D where it helps, 2D always there),
+ * the figures follow under hairlines, the sliders and the A/B compare sit in wells, the checks in a table of lines */
+
+/* Simulation block. Shared interactive styles live in features/sim/interactive.css. Tokens only. */
+
+/* ---------------------------------------------------------------- stage: the 2D or 3D scene on its paper */
+.sim-stage-wrap { min-inline-size: 0; }
+/* a tinted well with the speck grain; the 3D lab lays the studio paper (styles/stage3d.css) over it */
+.sim-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-stock);
+  background: var(--grain), var(--color-paper-2);
+}
+.sim-scene { display: block; inline-size: 100%; block-size: auto; max-block-size: 26rem; }
+/* The 3D view needs a box of its own; the 2D one keeps its drawing's proportions.
+   Contract C3: the lesson deck may set the block size of every 3D well (--stage3d-block-size). */
+.sim-stage[data-view='3d'] { aspect-ratio: 4 / 3; block-size: var(--stage3d-block-size, auto); }
+.sim-stage-pendulum[data-view='3d'] { aspect-ratio: 5 / 4; max-block-size: 34rem; }
+.sim-stage-pendulum[data-view='3d'][data-lanes='2'] { aspect-ratio: 4 / 3; }
+.sim-stage-projectile[data-view='3d'] { aspect-ratio: 16 / 9; }
+.sim-stage-spring_mass[data-view='3d'] { aspect-ratio: 16 / 9; }
+.sim-stage-spring_mass[data-view='3d'][data-lanes='2'] { aspect-ratio: 16 / 10; }
+.sim-stage[data-view='3d'] > .lab3d { position: absolute; inset: 0; min-block-size: 0; }
+@container ix (max-width: 30rem) {
+  .sim-stage-projectile[data-view='3d'], .sim-stage-spring_mass[data-view='3d'] { aspect-ratio: 4 / 3; }
+  .sim-stage-pendulum[data-view='3d'] { aspect-ratio: 1 / 1; }
+}
+/* 2D or 3D, and the view reset: a small toolbar above the stage, so it never covers the scene. */
+.sim-stage-tools { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-2xs); }
+.sim-stage-tools .segmented button { min-inline-size: 2.75rem; font-weight: 600; }
+.sim-stage-note { margin: 0; font-size: var(--text-sm); line-height: 1.5; color: var(--color-muted); }
+
+.sim-compare-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-xs); padding: var(--space-xs); }
+@container ix (min-width: 34rem) {
+  .sim-compare-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.sim-compare-cell { margin: 0; display: flex; flex-direction: column; gap: var(--space-2xs); min-inline-size: 0; }
+.sim-compare-cell figcaption { padding: var(--space-2xs) var(--space-xs) 0; }
+
+/* the 2D drawings: ink lines on the stage's paper, labels haloed in the paper they sit on */
+.sim-ceiling { fill: var(--color-ink-2); }
+.sim-hatch { stroke: var(--color-rule-2); stroke-width: 1.2; }
+.sim-guide { stroke: var(--color-control); stroke-width: 1; stroke-dasharray: 3 5; fill: none; opacity: 0.8; }
+.sim-trail { fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; opacity: 0.28; }
+.sim-angle { fill: none; stroke: var(--color-muted); stroke-width: 1.4; }
+.sim-label { fill: var(--color-ink); font-family: var(--font-body); font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; paint-order: stroke; stroke: var(--color-paper-2); stroke-width: 5px; stroke-linejoin: round; }
+.sim-label.small { font-size: 12.5px; font-weight: 500; fill: var(--color-ink-2); }
+.sim-big { fill: var(--color-ink); font-family: var(--font-display); font-size: 26px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.sim-rod { stroke: var(--color-ink); stroke-width: 2.2; stroke-linecap: round; }
+.sim-pivot { fill: var(--color-ink); }
+.sim-body { stroke: var(--color-ink); stroke-width: 2; }
+.sim-ground { stroke: var(--color-ink-2); stroke-width: 2; }
+.sim-platform { fill: var(--color-kraft); stroke: var(--color-kraft-deep); stroke-width: 1; }
+.sim-path-full { fill: none; stroke-width: 1.8; stroke-dasharray: 1.5 6; stroke-linecap: round; opacity: 0.75; }
+.sim-path { fill: none; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+.sim-arrow { stroke: var(--color-ink); stroke-width: 2; fill: none; }
+.sim-arrowhead { fill: var(--color-ink); }
+.sim-wall { fill: var(--color-kraft); stroke: var(--color-kraft-deep); stroke-width: 1; }
+.sim-spring { fill: none; stroke: var(--color-ink-2); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+.sim-mass-text { fill: var(--color-paper); font-family: var(--font-body); font-size: 17px; font-weight: 600; font-style: italic; }
+.sim-tag { fill: var(--color-card); stroke-width: 2.5; }
+.sim-tag-text { fill: var(--color-ink); font-family: var(--font-body); font-size: 13px; font-weight: 700; }
+.sim-bar-ghost { fill: var(--color-paper-3); }
+.sim-bar-principal { fill: var(--color-accent-2-soft); stroke: var(--color-accent-2); stroke-width: 1; }
+.sim-bar-interest { fill: var(--color-accent-2); }
+.sim-simple-line { fill: none; stroke: var(--cl-series-4); stroke-width: 2.4; stroke-dasharray: 7 4; stroke-linecap: round; }
+
+/* Phones: the scene SVG is drawn about 0.65× smaller, so its text gets larger user units to stay legible. */
+@container ix (max-width: 30rem) {
+  .sim-label { font-size: 18px; }
+  .sim-label.small { font-size: 16px; }
+  .sim-big { font-size: 30px; }
+}
+
+.sim-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-md); font-size: var(--text-sm); color: var(--color-ink); }
+.sim-legend li { display: inline-flex; align-items: center; gap: var(--space-xs); }
+.sim-legend .key { display: inline-block; inline-size: 0.95rem; block-size: 0.95rem; border-radius: 3px; flex: none; }
+.sim-legend .key.principal { background: var(--color-accent-2-soft); box-shadow: inset 0 0 0 1px var(--color-accent-2); }
+.sim-legend .key.interest { background: var(--color-accent-2); }
+.sim-legend .key.simple { block-size: 0; inline-size: 1.25rem; border-radius: 0; border-block-start: 3px dashed var(--cl-series-4); }
+
+/* The object from the photo: its cut-out, small, beside the line that says where it came from. */
+.sim-caption { display: flex; align-items: center; gap: var(--space-sm); margin: 0; font-size: var(--text-sm); line-height: 1.45; color: var(--color-muted); }
+.sim-caption-thumb { inline-size: 2.5rem; block-size: 2.5rem; object-fit: contain; border-radius: var(--radius-small); background: var(--color-paper-2); flex: none; }
+
+/* ---------------------------------------------------------------- transport */
+.sim-transport { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+.sim-transport .sim-play { min-inline-size: 8.5rem; }
+.sim-transport .icon-btn { inline-size: var(--cl-control-h); block-size: var(--cl-control-h); }
+.sim-speed { display: inline-flex; align-items: center; margin-inline-start: auto; }
+.sim-speed .segmented button { min-block-size: 2.25rem; min-inline-size: 2.75rem; padding-inline: var(--space-xs); font-variant-numeric: tabular-nums; }
+.sim-time { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-sm); }
+.sim-time label { font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); }
+.sim-time .range { min-block-size: var(--cl-control-h); }
+.sim-time-value { font-variant-numeric: tabular-nums; font-weight: 600; min-inline-size: 5.5rem; text-align: end; }
+@container ix (max-width: 26rem) {
+  .sim-speed { margin-inline-start: 0; }
+  .sim-transport .sim-play { flex: 1 1 100%; }
+}
+@media (pointer: coarse) {
+  .sim-speed .segmented button { min-block-size: var(--cl-control-h); }
+}
+
+.sim-sym { font-style: italic; font-weight: 500; color: var(--color-ink-2); }
+.sim-issues { margin: 0; padding-inline-start: var(--space-lg); }
+
+/* ---------------------------------------------------------------- figures, compare, tables */
+.sim-section { display: flex; flex-direction: column; gap: var(--space-xs); min-inline-size: 0; }
+.sim-compare .btn { align-self: flex-start; }
+.sim-kept { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2xs) var(--space-sm); margin: 0; font-size: var(--text-sm); }
+.sim-kept-values { font-variant-numeric: tabular-nums; color: var(--color-ink-2); overflow-wrap: anywhere; }
+.sim-diff .table tbody th { font-weight: 500; font-size: 0.9375rem; color: var(--color-ink); white-space: normal; border-block-end-color: var(--color-rule); }
+.sim-diff .table tr:last-child th { border-block-end: 0; }
+.table th.sim-row-head { font-weight: 500; text-transform: none; letter-spacing: 0; background: transparent; color: var(--color-ink); }
+
+/* ---------------------------------------------------------------- what the model assumes and how it was checked */
+.sim-info-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); align-items: start; }
+@container ix (min-width: 44rem) {
+  .sim-info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-xl); }
+}
+.sim-info { display: flex; flex-direction: column; gap: var(--space-sm); padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule); min-inline-size: 0; }
+.sim-subhead { margin: 0; font-size: var(--text-sm); font-weight: 600; color: var(--color-ink-2); }
+.sim-bullets { margin: 0; padding-inline-start: var(--space-lg); display: grid; gap: var(--space-2xs); line-height: 1.5; font-size: 0.9375rem; }
+.sim-bullets li::marker { color: var(--color-muted); }
+.sim-inline-badge { margin-inline-start: var(--space-2xs); vertical-align: middle; }
+
+.sim-checks li { align-items: flex-start; flex-wrap: nowrap; padding-block: var(--space-xs); border-block-end: 1px solid var(--color-rule); }
+.sim-checks li:last-child { border-block-end: 0; }
+/* The status is a word with its icon; the type stays ink for contrast, the icon carries the colour. */
+.sim-check-status { display: inline-flex; align-items: center; gap: var(--space-2xs); font-weight: 600; font-size: var(--text-xs); padding: var(--space-3xs) var(--space-xs); border-radius: var(--radius-pill); white-space: nowrap; flex: none; color: var(--color-ink); }
+.sim-check-status svg { inline-size: 1rem; block-size: 1rem; }
+.sim-check.pass .sim-check-status { background: var(--color-mint-soft); }
+.sim-check.pass .sim-check-status svg { color: var(--color-mint-ink); }
+.sim-check.fail .sim-check-status { background: var(--color-error-soft); }
+.sim-check.fail .sim-check-status svg { color: var(--color-error-ink); }
+.sim-check.error .sim-check-status { background: var(--color-sand-soft); }
+.sim-check.error .sim-check-status svg { color: var(--color-kraft-ink); }
+.sim-check-body { display: flex; flex-direction: column; gap: var(--space-3xs); min-inline-size: 0; overflow-wrap: anywhere; font-size: 0.9375rem; }
+.sim-check-detail { font-size: var(--text-sm); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+
+/* Reference checks as a disclosure: the summary is the 44px tap target. */
+.sim-ref details > *:not(summary) { margin-block-start: var(--space-sm); }
+.sim-ref summary { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-sm); min-block-size: var(--cl-control-h); cursor: pointer; list-style: none; border-radius: var(--radius-small); }
+.sim-ref summary::-webkit-details-marker { display: none; }
+.sim-ref summary::after { content: ''; inline-size: 0.55rem; block-size: 0.55rem; border-inline-end: 2px solid var(--color-muted); border-block-end: 2px solid var(--color-muted); transform: rotate(45deg); margin-inline-start: auto; transition: transform var(--dur-short) var(--ease-out); }
+.sim-ref details[open] > summary::after { transform: rotate(-135deg); }
+.sim-ref summary:hover::after { border-color: var(--color-ink); }
+.sim-ref summary:active { background: var(--color-paper-2); }
+.sim-ref summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+.sim-notes { display: flex; flex-direction: column; gap: var(--space-xs); padding-block-start: var(--space-md); border-block-start: 1px solid var(--color-rule); }
+.sim-notes > :last-child { margin-block-end: 0; }
+
+/* ---------------------------------------------------------------- editor */
+.sim-asset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); gap: var(--space-xs); }
+.sim-asset { position: relative; display: flex; flex-direction: column; align-items: center; gap: var(--space-2xs); padding: var(--space-xs); border-radius: var(--radius-stock); background: var(--color-card); box-shadow: inset 0 0 0 1px var(--color-rule-2); cursor: pointer; text-align: center; font-size: var(--text-sm); min-block-size: var(--cl-control-h); transition: box-shadow var(--dur-micro) var(--ease-snap), background-color var(--dur-micro) var(--ease-snap); }
+.sim-asset:hover { box-shadow: inset 0 0 0 1px var(--color-ink-2); }
+.sim-asset:has(input:checked) { box-shadow: inset 0 0 0 2px var(--color-ink); background: var(--color-fringe); font-weight: 500; }
+.sim-asset:has(input:focus-visible) { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.sim-asset:active { background: var(--color-paper-2); }
+.sim-asset:has(input:disabled) { opacity: 0.55; cursor: not-allowed; }
+.sim-asset input { position: absolute; inset-block-start: var(--space-xs); inset-inline-start: var(--space-xs); inline-size: 1.1rem; block-size: 1.1rem; accent-color: var(--color-ink); margin: 0; }
+.sim-asset img, .sim-asset .none { inline-size: 4.5rem; block-size: 4.5rem; object-fit: contain; border-radius: var(--radius-small); background: repeating-conic-gradient(var(--color-paper-2) 0% 25%, var(--color-card) 0% 50%) 50% / 14px 14px; }
+.sim-asset .none { display: grid; place-items: center; color: var(--color-muted); background: var(--color-paper-2); }
+.sim-asset .name { overflow-wrap: anywhere; line-height: 1.3; }
+
+/* A reference case: a well of its fields, the result line at its foot. */
+.sim-case { border: 0; border-radius: var(--radius-stock); background: var(--color-paper-2); padding: var(--space-sm) var(--space-md) var(--space-md); display: flex; flex-direction: column; gap: var(--space-sm); margin: 0; min-inline-size: 0; }
+.sim-case header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-xs); }
+.sim-case .input, .sim-case .select { background: var(--color-card); }
+.sim-case-result { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs) var(--space-sm); font-size: var(--text-sm); }
+.sim-unit-fix { display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
+
+/* ---------------------------------------------------------------- the simulation on a lesson slide (A9)
+   The stage comes first and large, sized so the stage and its play controls are in view on arrival
+   (--sim-screen: the slide body's height, measured; capped by the deck's --stage3d-block-size,
+   contract C3), its view tools on its top corner. The rail beside the stage opens with the model's
+   formula in a well and the challenge button, then holds the parameters, the key results and the
+   comparison, or the challenge once opened (the run it asks for stays in view). The rest follows
+   below and the slide scrolls. The deck's sizes come from the sheet (--deck-*, contract C1); inside
+   the slide the shared small sizes and compact controls are lifted to the deck's floor. */
+.sim-slide {
+  --text-xs: var(--deck-small, 0.8125rem);
+  --text-sm: var(--deck-small, 0.875rem);
+  --cl-control-h-sm: var(--cl-control-h);
+  /* what the first screen keeps under the stage: the notes, the play controls and their gaps */
+  --sim-below-stage: 9.25rem;
+  gap: var(--space-lg);
+}
+.sim-slide .btn { font-size: var(--deck-small, var(--text-md)); }
+.sim-slide .ix-layout { gap: var(--space-md) var(--space-xl); }
+/* the main column: the stage, then the play controls and the time on one line when they fit */
+.sim-slide .ix-main { position: relative; flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--space-sm) var(--space-md); }
+.sim-slide .ix-main > * { flex: 1 1 100%; min-inline-size: 0; }
+.sim-slide .ix-main > .sim-transport { flex: 0 1 auto; }
+.sim-slide .ix-main > .sim-time { flex: 1 1 15rem; }
+.sim-slide .ix-main > .sim-section, .sim-slide .ix-main > .cl-plot { margin-block-start: var(--space-md); }
+/* the formula: a compact well at the head of the rail, the model's name over its formula */
+.sim-slide .sim-rail-head .ix-formula {
+  flex-direction: column; align-items: flex-start; gap: var(--space-3xs);
+  padding: var(--space-xs) var(--space-md); overflow-x: auto; scrollbar-width: thin;
+}
+.sim-slide .ix-formula-name { font-size: var(--deck-small, var(--text-sm)); }
+.sim-slide .ix-formula-tex { gap: var(--space-2xs) var(--space-md); }
+.sim-slide .ix-formula .formula { font-size: var(--deck-body, 1.25rem); }
+/* the stage at the size the slide leaves it, its view tools on its top-right corner */
+.sim-slide .sim-stage-wrap { position: relative; gap: var(--space-xs); }
+.sim-slide .sim-stage {
+  block-size: clamp(13rem, calc(var(--sim-screen, 40rem) - var(--sim-below-stage)), var(--stage3d-block-size, 38rem));
+  aspect-ratio: auto;
+  max-block-size: none;
+  border-radius: var(--radius-card);
+}
+.sim-slide .sim-stage[data-view='2d'] { display: grid; place-items: center; }
+.sim-slide .sim-stage[data-view='2d'] .sim-scene { inline-size: 100%; block-size: 100%; max-block-size: none; }
+.sim-slide .sim-stage[data-view='2d'] .sim-compare-grid { block-size: 100%; }
+.sim-slide .sim-stage-tools { position: absolute; z-index: 3; inset-block-start: var(--space-sm); inset-inline-end: var(--space-sm); }
+.sim-slide .sim-stage-tools .segmented { background: var(--color-card); }
+.sim-slide .sim-stage-tools .icon-btn { background: var(--grain), var(--color-card); box-shadow: inset 0 0 0 1px var(--color-rule-2); }
+.sim-slide .sim-stage-note, .sim-slide .sim-caption { font-size: var(--deck-small, var(--text-sm)); line-height: 1.35; }
+.sim-slide .sim-caption-thumb { inline-size: 1.75rem; block-size: 1.75rem; }
+.sim-slide .sim-time { gap: var(--space-sm); }
+.sim-slide .sim-time label, .sim-slide .sim-time-value { font-size: var(--deck-small, var(--text-sm)); }
+.sim-slide .sim-time-value { min-inline-size: 4.5rem; }
+/* figures: names at the deck's small size, values at lead size, the lead result larger */
+.sim-slide .ix-heading { font-size: var(--deck-body, var(--app-h4)); }
+.sim-slide .ix-readout dt { font-size: var(--deck-small, var(--text-sm)); }
+.sim-slide .ix-readout-value { font-size: var(--deck-lead, 1.5rem); }
+.sim-slide .ix-readouts.has-lead .ix-readout.accent .ix-readout-value { font-size: var(--deck-title, 2rem); }
+.sim-slide .ix-readout-value .unit { font-size: var(--deck-small, var(--text-sm)); }
+/* the rail: the challenge button first, then the parameters and what they give */
+.sim-slide .sim-rail { gap: var(--space-md); align-self: start; }
+.sim-rail-head { display: flex; flex-direction: column; align-items: stretch; gap: var(--space-sm); }
+.sim-rail-head .btn { align-self: flex-start; }
+.sim-slide .ix-params .field-label { font-size: var(--deck-small, 0.9375rem); line-height: 1.35; }
+.sim-slide .ix-params .input-sm { font-size: var(--deck-small, 0.9375rem); }
+.sim-slide .sim-results { padding-block-start: var(--space-sm); border-block-start: 1px solid var(--color-rule); }
+.sim-slide .sim-results .ix-readouts { grid-template-columns: minmax(0, 1fr); gap: var(--space-sm); }
+.sim-slide-compare { border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.sim-slide-compare summary {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-xs);
+  min-block-size: var(--cl-control-h); padding: 0 var(--space-md);
+  border-radius: var(--radius-stock); cursor: pointer; list-style: none;
+  font-size: var(--deck-small, 0.9375rem); font-weight: 600;
+}
+.sim-slide-compare summary::-webkit-details-marker { display: none; }
+.sim-slide-compare summary::after { content: ''; flex: none; inline-size: 0.5rem; block-size: 0.5rem; border-inline-end: 2px solid var(--color-muted); border-block-end: 2px solid var(--color-muted); transform: rotate(45deg); transition: transform var(--dur-short) var(--ease-out); }
+.sim-slide-compare[open] > summary::after { transform: rotate(-135deg); }
+.sim-slide-compare summary:hover { background: var(--color-paper-3); }
+.sim-slide-compare summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.sim-slide-compare-body { display: flex; flex-direction: column; gap: var(--space-sm); padding: 0 var(--space-md) var(--space-md); }
+.sim-slide-compare .btn { align-self: flex-start; }
+/* the challenge in the rail: the well fills it, its options one under another; the pressed button
+   above already names it and closes it, so the panel's own head is not repeated */
+.sim-slide .sim-rail.is-challenge > .ix-al { padding: var(--space-md); }
+.sim-slide .sim-rail.is-challenge .ix-al-head { display: none; }
+.sim-slide .ix-al .ix-heading { font-size: var(--deck-body, var(--app-h4)); }
+.sim-slide .ix-al-steps { flex-wrap: wrap; }
+/* below the stage: the reading parts at the deck's sizes */
+.sim-slide .sim-bullets, .sim-slide .sim-check-body, .sim-slide .ix-disclaimer, .sim-slide .sim-notes, .sim-slide .sim-diff .table { font-size: var(--deck-small, 0.9375rem); }
+.sim-slide .sim-diff .table tbody th { font-size: var(--deck-small, 0.9375rem); }
+.sim-slide .cl-plot { --cl-plot-tick: var(--deck-small, 12px); }
+.sim-slide .cl-plot .series { stroke-width: 3; }
+@container ix (min-width: 52rem) {
+  .sim-slide .ix-layout { grid-template-columns: minmax(0, 2fr) minmax(17rem, 1fr); }
+}
+/* a stage column too narrow for the play controls and the time on one line (a 1366x768 laptop):
+   the time takes a second row and the stage leaves room for it, so both stay on the first screen */
+@container ix (min-width: 52rem) and (max-width: 75rem) {
+  .sim-slide .sim-stage { --sim-below-stage: 11.5rem; }
+  .sim-slide .sim-caption-thumb { inline-size: 1.5rem; block-size: 1.5rem; }
+}
+/* a narrow slide: one column, the stage at a steady shape */
+@container ix (max-width: 52rem) {
+  .sim-slide .sim-stage { block-size: auto; aspect-ratio: 4 / 3; max-block-size: min(60vh, 26rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sim-ref summary::after, .sim-asset, .sim-slide-compare summary::after { transition: none; }
+}

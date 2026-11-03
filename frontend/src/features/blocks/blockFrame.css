@@ -1,0 +1,29 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · theme: Hum (DESIGN.md, locked) · posture: full-palette · built: the project · redesign: full · v2.0.0 */
+/* The part frame (BlockFrame): one card per part, the only containment layer. Inside it sit
+   controls, tinted wells and hairlines, never a second card. Tokens only. */
+
+.card.blk { display: flex; flex-direction: column; gap: var(--space-md); min-inline-size: 0; padding: clamp(var(--space-md), 2.6vw, var(--space-xl)); }
+.blk-head { display: flex; flex-direction: column; gap: var(--space-2xs); min-inline-size: 0; }
+.blk-title { margin: 0; font-size: var(--app-h2); line-height: 1.2; letter-spacing: -0.02em; max-inline-size: 36ch; overflow-wrap: break-word; }
+/* the byline under the title: the kind of part and the AI label left, the part's tools right */
+.blk-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2xs) var(--space-md); }
+.blk-meta { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs) var(--space-sm); font-size: var(--text-sm); line-height: 1.4; color: var(--color-muted); }
+.blk-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); margin-inline-start: auto; }
+.blk-actions .blk-ask { margin-inline-end: calc(-1 * var(--space-sm)); }
+.blk-desc { margin: 0; max-inline-size: 70ch; color: var(--color-ink-2); line-height: 1.6; }
+.blk-sources { padding-block-start: var(--space-sm); border-block-start: 1px solid var(--color-rule); }
+
+/* lesson reading: 17px, at most 70 characters a line */
+.lesson-text { font-size: 1.0625rem; line-height: 1.7; max-inline-size: 70ch; }
+.lesson-text p { margin-block-end: 0.8em; }
+.lesson-text ul, .lesson-text ol { padding-inline-start: 1.25em; }
+.lesson-text li + li { margin-block-start: 0.3em; }
+
+/* On a lesson slide (.blk-in-deck) the deck owns the sheet, the heading and the part's size
+   (lessonDeck.css may hide .blk-head); the AI label that the head would carry sits at the foot. */
+.blk-deck-note { flex: none; margin: 0; display: flex; justify-content: flex-end; }
+.blk-deck-note .badge { font-size: var(--deck-small, var(--text-xs)); }
+
+@media (max-width: 40rem) {
+  .blk-title { font-size: var(--app-h3); }
+}

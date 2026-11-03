@@ -1,0 +1,17 @@
+/* Hallmark · checked: 2026-11-02 · genre: playful · shape: app screen · system: DESIGN.md (Hum, adapted)
+ * built: the project · redesign: full · 3D labs: the canvas sits on the studio paper (styles/stage3d.css), fades in once, never under reduced motion */
+/* A 3D lab fills the box its parent gives it; the studio paper shows through the canvas. */
+.lab3d { position: relative; inline-size: 100%; block-size: 100%; min-block-size: 16rem; }
+.lab3d .lab3d-canvas { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; display: block; touch-action: pan-y; opacity: 0; transition: opacity var(--dur-long) var(--ease-out); }
+.lab3d.is-ready .lab3d-canvas { opacity: 1; }
+/* while Three.js loads, the 2D drawing holds the place, dimmed */
+.lab3d-placeholder { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0.5; pointer-events: none; }
+.lab3d-placeholder > * { max-block-size: 100%; }
+.lab3d .lab3d-canvas.over-bob { cursor: grab; }
+.lab3d .lab3d-canvas.is-dragging { cursor: grabbing; }
+@media (pointer: fine) {
+  .lab3d .lab3d-canvas { cursor: ew-resize; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lab3d .lab3d-canvas { transition: none; }
+}

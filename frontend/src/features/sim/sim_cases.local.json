@@ -1,0 +1,250 @@
+{
+  "description": "Analytic test vectors for frontend/src/features/sim/models.js (closed forms; the large-angle pendulum period uses the exact T = 4*sqrt(L/g)*K(sin(theta0/2))). Keys are display outputs (a superset of the reference outputs). tolerance is relative. Kept in addition to shared/sim_cases.json.",
+  "cases": [
+    {
+      "model": "pendulum",
+      "inputs": {
+        "L": 1,
+        "g": 9.81,
+        "theta0": 10,
+        "b": 0
+      },
+      "expected": {
+        "period": 2.0060666807106475,
+        "frequency": 0.4984879164862809,
+        "angular_frequency": 3.132091952673165
+      },
+      "tolerance": 1e-09
+    },
+    {
+      "model": "pendulum",
+      "inputs": {
+        "L": 0.25,
+        "g": 9.81,
+        "theta0": 10,
+        "b": 0
+      },
+      "expected": {
+        "period": 1.0030333403553238,
+        "frequency": 0.9969758329725618
+      },
+      "tolerance": 1e-09
+    },
+    {
+      "model": "pendulum",
+      "inputs": {
+        "L": 1,
+        "g": 9.81,
+        "theta0": 10,
+        "b": 0
+      },
+      "expected": {
+        "period_numeric": 2.009892627298601
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "model": "pendulum",
+      "inputs": {
+        "L": 1,
+        "g": 9.81,
+        "theta0": 60,
+        "b": 0
+      },
+      "expected": {
+        "period_numeric": 2.152874666880516
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "model": "pendulum",
+      "inputs": {
+        "L": 2,
+        "g": 9.81,
+        "theta0": 30,
+        "b": 0
+      },
+      "expected": {
+        "period": 2.837006706885775,
+        "period_numeric": 2.8863955824243193
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "model": "pendulum",
+      "inputs": {
+        "L": 1,
+        "g": 1.62,
+        "theta0": 20,
+        "b": 0
+      },
+      "expected": {
+        "period": 4.93653659795374,
+        "period_numeric": 4.9743950244443536
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "model": "projectile",
+      "inputs": {
+        "v0": 20,
+        "angle": 45,
+        "g": 9.81,
+        "h0": 0
+      },
+      "expected": {
+        "flight_time": 2.8832080782326095,
+        "range": 40.77471967380224,
+        "max_height": 10.193679918450561
+      },
+      "tolerance": 1e-09
+    },
+    {
+      "model": "projectile",
+      "inputs": {
+        "v0": 10,
+        "angle": 0,
+        "g": 9.81,
+        "h0": 5
+      },
+      "expected": {
+        "flight_time": 1.0096375546923044,
+        "range": 10.096375546923044,
+        "max_height": 5
+      },
+      "tolerance": 1e-09
+    },
+    {
+      "model": "projectile",
+      "inputs": {
+        "v0": 15,
+        "angle": 30,
+        "g": 9.81,
+        "h0": 2
+      },
+      "expected": {
+        "flight_time": 1.7606420473946376,
+        "range": 22.871411100222026,
+        "max_height": 4.86697247706422
+      },
+      "tolerance": 1e-09
+    },
+    {
+      "model": "projectile",
+      "inputs": {
+        "v0": 30,
+        "angle": 60,
+        "g": 9.81,
+        "h0": 0
+      },
+      "expected": {
+        "flight_time": 5.296791460455282,
+        "range": 79.45187190682924,
+        "max_height": 34.40366972477064
+      },
+      "tolerance": 1e-09
+    },
+    {
+      "model": "compound_interest",
+      "inputs": {
+        "P": 1000,
+        "r": 5,
+        "n": 12,
+        "t": 10
+      },
+      "expected": {
+        "amount": 1647.00949769028,
+        "interest": 647.0094976902801,
+        "simple_amount": 1500
+      },
+      "tolerance": 1e-09
+    },
+    {
+      "model": "compound_interest",
+      "inputs": {
+        "P": 10000000,
+        "r": 6,
+        "n": 1,
+        "t": 10
+      },
+      "expected": {
+        "amount": 17908476.965428546,
+        "interest": 7908476.965428546,
+        "simple_amount": 16000000
+      },
+      "tolerance": 1e-09
+    },
+    {
+      "model": "compound_interest",
+      "inputs": {
+        "P": 100,
+        "r": 10,
+        "n": 1,
+        "t": 2
+      },
+      "expected": {
+        "amount": 121,
+        "interest": 21,
+        "simple_amount": 120
+      },
+      "tolerance": 1e-09
+    },
+    {
+      "model": "compound_interest",
+      "inputs": {
+        "P": 5000000,
+        "r": 7.5,
+        "n": 4,
+        "t": 15
+      },
+      "expected": {
+        "amount": 15241485.919883182,
+        "simple_amount": 10625000
+      },
+      "tolerance": 1e-09
+    },
+    {
+      "model": "spring_mass",
+      "inputs": {
+        "k": 20,
+        "m": 0.5,
+        "x0": 0.1,
+        "b": 0
+      },
+      "expected": {
+        "period": 0.99345882657961,
+        "frequency": 1.0065842420897408,
+        "angular_frequency": 6.324555320336759
+      },
+      "tolerance": 1e-09
+    },
+    {
+      "model": "spring_mass",
+      "inputs": {
+        "k": 100,
+        "m": 1,
+        "x0": 0.2,
+        "b": 0
+      },
+      "expected": {
+        "period": 0.6283185307179586,
+        "frequency": 1.5915494309189535,
+        "angular_frequency": 10
+      },
+      "tolerance": 1e-09
+    },
+    {
+      "model": "spring_mass",
+      "inputs": {
+        "k": 20,
+        "m": 0.5,
+        "x0": 0.1,
+        "b": 1
+      },
+      "expected": {
+        "damping_ratio": 0.15811388300841897
+      },
+      "tolerance": 1e-09
+    }
+  ]
+}

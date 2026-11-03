@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Vật lý 10, Bài 12: Con lắc đơn (trang 64, trang minh họa cho bản demo)</title>
+<link rel="stylesheet" href="/frontend/node_modules/@fontsource-variable/lexend/wght.css">
+<link rel="stylesheet" href="/frontend/node_modules/@fontsource/be-vietnam-pro/400.css">
+<link rel="stylesheet" href="/frontend/node_modules/@fontsource/be-vietnam-pro/400-italic.css">
+<link rel="stylesheet" href="/frontend/node_modules/@fontsource/be-vietnam-pro/500.css">
+<link rel="stylesheet" href="/frontend/node_modules/@fontsource/be-vietnam-pro/600.css">
+<link rel="stylesheet" href="/frontend/node_modules/@fontsource/be-vietnam-pro/600-italic.css">
+<link rel="stylesheet" href="/frontend/node_modules/@fontsource/be-vietnam-pro/700.css">
+<link rel="stylesheet" href="/frontend/node_modules/katex/dist/katex.min.css">
+<link rel="stylesheet" href="./page.css">
+<style>
+  .page { --brand: #1f5aa6; --brand-ink: #173f78; --brand-soft: #cfdcf0; --brand-tint: #eef3fa; --accent: #c8372d; }
+  .cols { display: grid; grid-template-columns: 668px 340px; column-gap: 42px; align-items: start; }
+  .warm { margin: 4px 0 2px; padding: 12px 22px; border-left: 0; border-radius: 14px; background: var(--brand-tint);
+    font-style: italic; color: var(--ink-2); font-size: 22px; line-height: 1.48; }
+  .warm p { margin: 0; text-align: left; }
+  .formula { position: relative; display: flex; align-items: center; justify-content: center; margin: 12px 0 14px; padding: 12px 26px;
+    border: 2px solid var(--brand); border-radius: 16px; background: #fff; }
+  .formula .katex { font-size: 40px; color: var(--brand-ink); }
+  .formula .eqno { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); font-size: 25px; color: var(--ink-2); }
+  .fig { position: relative; width: 340px; margin-top: 30px; }
+  .fig .stage { position: relative; width: 340px; height: 560px; border-radius: 16px; background: linear-gradient(#f3f6fb, #fbfaf6 70%); }
+  .fig img { position: absolute; inset: 0; width: 340px; height: 560px; }
+  .fig svg { position: absolute; inset: 0; width: 340px; height: 560px; overflow: visible; }
+  .fig svg text { font-family: 'Be Vietnam Pro', sans-serif; font-style: italic; font-size: 24px; fill: var(--ink); }
+  .fig svg text.up { font-style: normal; font-weight: 600; }
+  .know { margin-top: 22px; padding: 16px 20px 6px; border-radius: 16px; border: 2px solid var(--brand-soft); }
+  .know h3 { font-size: 22px; }
+  .ex { display: grid; grid-template-columns: 1fr; }
+  .q h3 .mark { background: var(--accent); }
+  .apply { background: #fdf1e7; }
+  .side-q { margin-top: 22px; }
+  .side-q p { font-size: 22px; }
+  .apply h3 { color: #8a3a12; }
+  .apply h3 .mark { background: #d9661f; }
+</style>
+<script type="importmap">
+{ "imports": {
+    "three": "/frontend/node_modules/three/build/three.module.js",
+    "three/addons/": "/frontend/node_modules/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div class="page" id="page">
+  <div class="run"><span class="tab">VẬT LÝ 10</span><span>Chương 3. Dao động</span><span class="rule"></span></div>
+
+  <div class="main">
+    <div class="lesson">
+      <div class="no"><small>Bài</small><span>12</span></div>
+      <h1>CON LẮC ĐƠN</h1>
+    </div>
+    <div class="warm" data-quote-skip><p>Quả lắc của chiếc đồng hồ treo tường đung đưa rất đều đặn. Thời gian của mỗi lần đung đưa phụ thuộc vào những yếu tố nào?</p></div>
+
+    <div class="cols">
+      <div class="col-main">
+        <h2><span class="n">1</span>Cấu tạo</h2>
+        <p>Con lắc đơn gồm một vật nhỏ khối lượng <i>m</i> treo vào đầu một sợi dây không dãn, khối lượng không đáng kể, có chiều dài <i>L</i>. Đầu còn lại của dây được giữ cố định tại điểm treo <i>O</i> (Hình 12.1).</p>
+        <p>Vị trí cân bằng của con lắc là vị trí dây treo có phương thẳng đứng.</p>
+
+        <h2><span class="n">2</span>Dao động với góc nhỏ</h2>
+        <p>Kéo vật lệch khỏi vị trí cân bằng một góc nhỏ (dưới 10°) rồi thả nhẹ. Bỏ qua lực cản của không khí, con lắc dao động điều hòa với chu kỳ:</p>
+        <div class="formula" data-quote-key="formula" data-quote-formula="1"><span id="formula"></span><span class="eqno">(12.1)</span></div>
+        <p>Trong đó: <i>T</i> là chu kỳ dao động (s); <i>L</i> là chiều dài dây (m); <i>g</i> là gia tốc trọng trường (m/s²). Ở gần mặt đất lấy <i>g</i> = 9,81 m/s².</p>
+
+        <h2><span class="n">3</span>Nhận xét</h2>
+        <p>Chu kỳ không phụ thuộc vào khối lượng <i>m</i> của vật. Khi góc lệch nhỏ, chu kỳ gần như không phụ thuộc biên độ. Chiều dài dây càng lớn thì chu kỳ càng lớn.</p>
+
+        <div class="box ex">
+          <h3>Ví dụ</h3>
+          <p>Với <i>g</i> = 9,81 m/s²: <i>L</i> = 1 m thì <i>T</i> ≈ 2,01 s; <i>L</i> = 0,25 m thì <i>T</i> ≈ 1,00 s.</p>
+        </div>
+        <div class="box apply" data-quote-skip>
+          <h3><span class="mark">!</span>Vận dụng</h3>
+          <p>Nhóm em đo được 10 dao động của một con lắc dài 0,80 m hết 18,1 s. Tính chu kỳ <i>T</i> từ số đo này rồi so sánh với giá trị tính theo công thức (12.1).</p>
+        </div>
+      </div>
+
+      <aside class="side">
+        <figure class="fig">
+          <div class="stage"><img id="fig-img" alt=""><svg id="fig-svg" viewBox="0 0 340 560"></svg></div>
+          <figcaption><b>Hình 12.1.</b> Con lắc đơn</figcaption>
+        </figure>
+        <div class="know" data-quote-skip>
+          <h3>Em có biết?</h3>
+          <p>Khi quan sát chiếc đèn treo đung đưa trong nhà thờ ở Pisa, Galileo Galilei nhận thấy mỗi lần đung đưa kéo dài gần như cùng một khoảng thời gian. Năm 1656, Christiaan Huygens dựa vào tính chất này để chế tạo chiếc đồng hồ quả lắc đầu tiên.</p>
+        </div>
+        <div class="box line q side-q">
+          <h3><span class="mark">?</span>Câu hỏi</h3>
+          <p>Nếu tăng chiều dài dây lên 4 lần thì chu kỳ dao động thay đổi thế nào?</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="folio">64</div>
+</div>
+<script type="module" src="./page-pendulum.js"></script>
+</body>
+</html>

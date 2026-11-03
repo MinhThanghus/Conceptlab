@@ -1,0 +1,125 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · shape: app screen · theme: Hum (DESIGN.md, locked) · posture: full-palette · built: the project · redesign: full · v2.0.0 */
+/* Hallmark · answered F7 · the tinted well is the one inner rung a lesson part may climb (DESIGN.md surfaces); each well holds a different job: a check question, an answer, a part's detail, an editor group */
+/* Shared styles for the lesson blocks (steps, flow, diagram, quiz) and their editors.
+   A region the source points at is blue; boxes inside a part are wells or hairlines. Tokens only. */
+
+/* ---------------------------------------------------------------- picture stage */
+.lk-stage-scroll { max-inline-size: 100%; overflow: auto; border-radius: var(--radius-stock); overscroll-behavior: contain; }
+.lk-stage {
+  position: relative;
+  inline-size: calc(min(100%, var(--lk-max-block, 70vh) * var(--lk-ratio, 0.75)) * var(--lk-zoom, 1));
+  aspect-ratio: var(--lk-ratio, 0.75);
+  margin-inline: auto;
+  border-radius: var(--radius-stock);
+  overflow: hidden;
+  background: var(--color-paper-2);
+  border: 1px solid var(--color-rule);
+}
+.lk-stage > img {
+  position: absolute; inset: 0; inline-size: 100%; block-size: 100%; max-inline-size: none;
+  object-fit: fill; user-select: none; -webkit-user-drag: none;
+}
+.lk-stage-fill { position: absolute; inset: 0; border-radius: 0; }
+.lk-stage-error {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-xs);
+  padding: var(--space-md); text-align: center; color: var(--color-muted); background: var(--color-paper-2); font-size: var(--text-sm);
+}
+.lk-stage-error svg { inline-size: 1.5rem; block-size: 1.5rem; }
+
+/* ---------------------------------------------------------------- zoomed highlight */
+.lk-crop {
+  position: relative;
+  inline-size: min(100%, var(--lk-max-block, 20rem) * var(--lk-ratio, 1.33));
+  aspect-ratio: var(--lk-ratio, 1.33);
+  overflow: hidden;
+  border-radius: var(--radius-stock);
+  border: 1px solid var(--color-rule);
+  background: var(--color-paper-2);
+}
+.lk-crop > img { position: absolute; max-inline-size: none; block-size: auto; user-select: none; }
+.lk-outline {
+  position: absolute; pointer-events: none; border-radius: var(--space-2xs);
+  border: 3px solid var(--color-accent-2);
+  box-shadow: 0 0 0 1px var(--color-card), inset 0 0 0 1px var(--color-card);
+  background: color-mix(in oklab, var(--color-accent-2) 12%, transparent);
+}
+
+/* ---------------------------------------------------------------- drawing layer (editors) */
+.lk-draw { position: absolute; inset: 0; cursor: crosshair; touch-action: none; z-index: 3; }
+.lk-draw:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; border-radius: var(--radius-stock); }
+.lk-draw-box {
+  position: absolute; border-radius: var(--space-2xs); cursor: move;
+  border: 2px solid var(--color-accent-2);
+  box-shadow: 0 0 0 1px var(--color-card), inset 0 0 0 1px var(--color-card);
+  background: color-mix(in oklab, var(--color-accent-2) 16%, transparent);
+}
+.lk-draw-box.is-dragging { background: color-mix(in oklab, var(--color-accent-2) 26%, transparent); }
+.lk-draw-handle {
+  position: absolute; inset-inline-end: -9px; inset-block-end: -9px; inline-size: 18px; block-size: 18px;
+  border-radius: var(--space-2xs); background: var(--color-card); border: 2px solid var(--color-accent-2-deep); cursor: nwse-resize;
+}
+/* on touch the knob keeps its look; a clear 44px square centred on it takes the finger (presses land on the handle) */
+@media (pointer: coarse) {
+  .lk-draw-handle::after {
+    content: ''; position: absolute; top: 50%; left: 50%; inline-size: var(--cl-control-h); block-size: var(--cl-control-h);
+    translate: -50% -50%;
+  }
+}
+
+/* ---------------------------------------------------------------- editor kit: sections parted by hairlines, items as wells */
+.lk-editor { display: flex; flex-direction: column; gap: var(--space-lg); }
+.lk-section { display: flex; flex-direction: column; gap: var(--space-sm); }
+.lk-section-title { display: flex; align-items: center; gap: var(--space-xs); margin: 0; font-size: var(--app-h4); font-weight: 600; }
+.lk-section-title svg { inline-size: 1.25rem; block-size: 1.25rem; color: var(--color-muted); flex: none; }
+.lk-meta { display: grid; gap: var(--space-sm); padding: var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.lk-item { border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.lk-item.is-open { background: var(--color-paper-2); box-shadow: inset 0 0 0 1px var(--color-rule-2); }
+.lk-item-head { display: flex; align-items: center; gap: var(--space-xs); min-block-size: 3.25rem; padding: var(--space-2xs) var(--space-xs) var(--space-2xs) var(--space-sm); }
+.lk-item-toggle {
+  flex: 1 1 auto; min-inline-size: 0; display: flex; align-items: center; gap: var(--space-xs);
+  min-block-size: var(--cl-control-h); padding: var(--space-2xs); border: 0; border-radius: var(--radius-small);
+  background: transparent; text-align: start; color: var(--color-ink);
+  transition: background-color var(--dur-micro) var(--ease-snap);
+}
+.lk-item-toggle:hover { background: var(--color-paper-3); }
+.lk-item-toggle:active { background: var(--color-rule); }
+.lk-item-toggle:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
+.lk-item-toggle .lk-item-title { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+.lk-item-toggle .lk-item-title.is-empty { color: var(--color-subtle); font-weight: 500; }
+.lk-item-toggle > svg { flex: none; transition: transform var(--dur-short) var(--ease-out); }
+.lk-item.is-open .lk-item-toggle > svg { transform: rotate(180deg); }
+.lk-item-tools { display: flex; align-items: center; gap: var(--space-3xs); flex: none; }
+.lk-item-body { display: flex; flex-direction: column; gap: var(--space-md); padding: 0 var(--space-md) var(--space-md); }
+.lk-num {
+  display: inline-grid; place-items: center; flex: none; inline-size: 1.75rem; block-size: 1.75rem; border-radius: 50%;
+  background: var(--color-card); color: var(--color-ink-2); box-shadow: inset 0 0 0 1px var(--color-rule-2);
+  font-size: var(--text-sm); font-weight: 600; font-variant-numeric: tabular-nums;
+}
+.lk-flags { display: flex; flex-wrap: wrap; gap: var(--space-2xs); flex: 0 1 auto; min-inline-size: 0; }
+.lk-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: var(--space-sm); }
+.lk-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: var(--space-sm); }
+.lk-subcard { display: flex; flex-direction: column; gap: var(--space-sm); padding-block-start: var(--space-sm); border-block-start: 1px solid var(--color-rule-2); }
+.lk-subcard-title { display: flex; align-items: center; gap: var(--space-xs); margin: 0; font-size: 0.9375rem; font-weight: 600; }
+.lk-subcard-title svg { inline-size: 1.25rem; block-size: 1.25rem; color: var(--color-muted); flex: none; }
+.lk-ref-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.lk-ref-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); padding-block: var(--space-2xs); }
+.lk-ref-row + .lk-ref-row { border-block-start: 1px solid var(--color-rule-2); }
+.lk-ref-text { flex: 1 1 12rem; min-inline-size: 0; font-size: var(--text-sm); overflow-wrap: anywhere; }
+.lk-ref-quote { display: block; color: var(--color-muted); font-size: var(--text-sm); }
+.lk-add { align-self: flex-start; }
+.lk-limit { margin: 0; font-size: var(--text-sm); color: var(--color-muted); }
+.lk-ai-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); }
+.lk-hint { margin: 0; font-size: var(--text-sm); color: var(--color-muted); }
+
+/* ---------------------------------------------------------------- learner bits */
+/* a label set in the body face, a step smaller: never capitals, never tracked */
+.lk-kicker { margin: 0; font-size: var(--text-sm); font-weight: 600; color: var(--color-muted); }
+.lk-panel { display: flex; flex-direction: column; gap: var(--space-sm); min-inline-size: 0; padding: var(--space-md); border-radius: var(--radius-stock); background: var(--color-paper-2); }
+.lk-panel h3 { margin: 0; font-size: var(--app-h4); }
+.lk-live { min-block-size: 1lh; }
+.lk-good { color: var(--color-mint-ink); }
+.lk-bad { color: var(--color-error-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lk-item-toggle, .lk-item-toggle > svg { transition: none; }
+}

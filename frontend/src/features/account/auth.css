@@ -1,0 +1,91 @@
+/* Hallmark · checked: 2026-10-28 · genre: playful · theme: Hum (locked, DESIGN.md) · shape: app screen · built: the project · redesign: full */
+/* Sign in, sign up and the password field they share with Account. The form sits on one sheet of
+   card stock; the reasons beside it are plain rows; one pear button per screen. */
+
+/* ---------------------------------------------------------------- password field */
+.pw-wrap { position: relative; display: flex; align-items: center; }
+.pw-input { padding-inline-end: 3rem; }
+.pw-toggle {
+  position: absolute; inset-block: var(--rule-hair); inset-inline-end: var(--rule-hair); display: grid; place-items: center;
+  inline-size: 2.75rem; border: 0; border-radius: calc(var(--radius-input) - var(--rule-hair)); background: transparent; color: var(--color-muted);
+  transition: background-color var(--dur-micro) var(--ease-snap), color var(--dur-micro) var(--ease-snap);
+}
+.pw-toggle:hover { background: var(--color-paper-2); color: var(--color-ink); }
+.pw-toggle:active { background: var(--color-paper-3); }
+.pw-toggle:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -3px; }
+.pw-toggle[aria-pressed='true'] { color: var(--color-ink); }
+.pw-toggle:disabled { opacity: 0.55; cursor: not-allowed; }
+.pw-toggle svg { inline-size: 1.25rem; block-size: 1.25rem; }
+/* strength: segments and a word, never colour alone; mint is growth */
+.pw-strength { display: flex; align-items: center; gap: var(--space-sm); color: var(--color-muted); }
+.pw-meter { display: inline-flex; gap: var(--space-2xs); }
+.pw-meter span { inline-size: 1.75rem; block-size: 0.375rem; border-radius: var(--radius-pill); background: var(--color-paper-3); }
+.pw-meter.s1 span:nth-child(-n + 1) { background: var(--color-sand); }
+.pw-meter.s2 span:nth-child(-n + 2) { background: var(--color-mint); }
+.pw-meter.s3 span { background: var(--color-mint-deep); }
+
+/* ---------------------------------------------------------------- the frame */
+.auth-page { padding-block: var(--space-2xl) var(--space-3xl); }
+.auth-grid { display: grid; grid-template-columns: minmax(0, 30rem) minmax(0, 23rem); justify-content: center; align-items: start; gap: var(--space-3xl); }
+.auth-main { min-inline-size: 0; }
+.auth-card {
+  display: flex; flex-direction: column; gap: var(--space-md); padding: var(--space-xl);
+  border-radius: var(--radius-card); background: var(--grain), var(--color-card); box-shadow: var(--shadow-card);
+}
+.auth-card h1 { margin: 0; font-size: var(--app-h1); text-wrap: balance; }
+.auth-lead { margin: 0; color: var(--color-ink-2); }
+.auth-form { display: flex; flex-direction: column; gap: var(--space-md); margin-block-start: var(--space-xs); }
+.auth-form .btn-block { margin-block-start: var(--space-xs); }
+.auth-switch { margin: 0; padding-block-start: var(--space-md); border-block-start: var(--rule-hair) solid var(--color-rule); color: var(--color-ink-2); text-align: center; }
+.auth-switch a { font-weight: 600; }
+.auth-note { margin: 0; font-size: var(--text-sm); line-height: 1.5; color: var(--color-muted); }
+
+/* the student's way in: on the paper, under the sheet */
+.auth-after { display: grid; gap: var(--space-md); margin-block-start: var(--space-lg); }
+.auth-divider { display: flex; align-items: center; gap: var(--space-sm); color: var(--color-muted); font-size: var(--text-sm); }
+.auth-divider::before, .auth-divider::after { content: ''; flex: 1; border-block-start: var(--rule-hair) solid var(--color-rule-2); }
+.auth-student { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-sm) var(--space-md); }
+.auth-student p { margin: 0; font-weight: 500; color: var(--color-ink); }
+
+/* the reasons: plain rows */
+.auth-aside { display: grid; gap: var(--space-md); padding-block-start: var(--space-xl); min-inline-size: 0; }
+.auth-aside h2 { margin: 0; font-size: var(--app-h2); }
+.auth-points { border-block-start: var(--rule-hair) solid var(--color-ink); }
+.auth-points li { padding-block: var(--space-md); border-block-end: var(--rule-hair) solid var(--color-rule-2); color: var(--color-ink-2); line-height: 1.55; }
+.auth-aside-note { font-size: var(--text-sm); color: var(--color-muted); }
+@media (min-width: 60.0625rem) {
+  .auth-aside { position: sticky; inset-block-start: calc(var(--cl-header-h) + var(--space-lg)); }
+}
+
+/* ---------------------------------------------------------------- role choice: a radio list, the chosen one ink */
+.role-fieldset { display: grid; gap: var(--space-xs); min-inline-size: 0; margin: 0; padding: 0; border: 0; }
+.role-fieldset legend { margin-block-end: var(--space-xs); padding: 0; font-weight: 600; font-size: 0.9375rem; }
+.role-cards { display: grid; gap: var(--space-xs); }
+.role-card {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--space-sm); align-items: start;
+  min-block-size: var(--cl-control-h); padding: var(--space-sm) var(--space-md); cursor: pointer;
+  border-radius: var(--radius-stock); background: var(--color-card); box-shadow: inset 0 0 0 var(--rule-hair) var(--color-control);
+  transition: background-color var(--dur-micro) var(--ease-snap), color var(--dur-micro) var(--ease-snap);
+}
+.role-card input { grid-row: 1 / span 2; inline-size: 1.125rem; block-size: 1.125rem; margin: 0.2rem 0 0; accent-color: var(--color-ink); }
+.role-card:hover { background: var(--color-paper-2); }
+.role-card:active { background: var(--color-paper-3); }
+.role-name { font-weight: 600; line-height: 1.35; }
+.role-hint { font-size: var(--text-sm); line-height: 1.45; color: var(--color-muted); }
+.role-card:has(input:checked) { background: var(--color-ink); color: var(--color-paper); box-shadow: none; }
+.role-card:has(input:checked) .role-hint { color: var(--color-paper-3); }
+.role-card:has(input:checked) input { accent-color: var(--color-accent); }
+.role-card:has(input:focus-visible) { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.role-fieldset:has(.field-error) .role-card:not(:has(input:checked)) { box-shadow: inset 0 0 0 var(--rule-hair) var(--color-error); }
+@supports selector(:has(*)) {
+  .role-card input:focus-visible { outline: none; }
+}
+
+@media (max-width: 60rem) {
+  .auth-grid { grid-template-columns: minmax(0, 32rem); gap: var(--space-2xl); }
+  .auth-aside { padding-block-start: 0; }
+}
+@media (max-width: 40rem) {
+  .auth-page { padding-block: var(--space-lg) var(--space-2xl); }
+  .auth-card { padding: var(--space-lg) var(--space-md); }
+}

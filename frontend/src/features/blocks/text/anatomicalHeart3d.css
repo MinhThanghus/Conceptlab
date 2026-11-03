@@ -1,0 +1,7 @@
+/* The 3D heart: a studio well (styles/stage3d.css), the parts to inspect as pills, what is on show
+   in a paper-2 well, the view tools as ghost buttons, the limits and the credit as quiet notes. */
+.anatomical-heart-host, .anatomical-heart-placeholder { position: absolute; inset: 0; }
+.anatomical-heart-host canvas { inline-size: 100%; block-size: 100%; display: block; touch-action: pan-y; }
+.anatomical-heart-placeholder { display: grid; place-items: center; padding: var(--space-md); margin: 0; text-align: center; color: var(--color-ink-2); }
+.anatomical-heart-content { display: grid; gap: var(--space-sm); }
+.anatomical-heart-credit a { color: var(--color-accent-2); text-decoration: underline; text-underline-offset: 0.15em; }
